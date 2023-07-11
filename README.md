@@ -1,6 +1,6 @@
 # DataCamp Notes 
 
-Welcome to my `datacamp-notes` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI on DataCamp. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses. 
+Welcome to my `datacamp-notes` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI on DataCamp\*. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses. 
 
 ## Repository Structure
 
@@ -50,4 +50,4 @@ While these notes are primarily for my own reference, others who are learning to
 This project is licensed under the MIT License.
 
 ---
-*Disclaimer:* I did my best to not infringe on Datacamp's rights by mostly only outlining the functions themselves, you can always reach me at `georgedreemer@proton.me`.*
+\* **Disclaimer:** I did my best to not infringe on Datacamp's rights by mostly only outlining the functions themselves, you can always reach me at `georgedreemer@proton.me`.
