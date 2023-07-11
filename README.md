@@ -1,6 +1,6 @@
 # DataCamp Notes 
 
-Welcome to my `datacamp-notes` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI on DataCamp\*. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses. test
+Welcome to my `datacamp-notes` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI on DataCamp\*. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses.
 
 ## Repository Structure
 
