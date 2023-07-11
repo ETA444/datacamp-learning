@@ -58,7 +58,7 @@ To start a quiz, follow these steps:
 - Run the `quizdata_generator.py` script. This will generate or update the `quiz_data.json` file with the latest function names and descriptions from your markdown files. Here is the command to run the script:
 
   ```
-  python quizdata_generator.py
+  python quizdata_generator.py "path/to/directory/with/mdfiles"
   ```
 
 - Once the JSON file is ready, you can start the quiz by running `start-quiz.py`:
