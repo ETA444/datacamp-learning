@@ -220,8 +220,6 @@ This function is useful for applying complex conditional logic to arrays and ass
 ***
 ## sns.countplot
 
-*Used to show the count of observations in each category of a categorical variable.*
-
 The `sns.countplot` function in the seaborn library is used to display a count plot, which shows the count of observations in each category of a categorical variable. It is a useful tool for visualizing the distribution and frequency of different categories within a single variable.
 
 **Function signature:**
@@ -258,7 +256,7 @@ sns.countplot(x='Category', data=df)
 
 
 ***
-## Exercises
+### Exercises
 
 First we select only non_numeric columns and save it in non_numeric. Then we loop over all columns in non_numeric and f-print the number of unique values in each column with .nunique.
 
@@ -595,7 +593,8 @@ Histograms are commonly used to analyze the distribution of numerical data, unde
 ***
 ## sns.histplot()
 
-The `.histplot()` function is used to create histograms, which represent the distribution of a numerical variable in the form of bins and their corresponding frequencies. It is part of the seaborn library and provides enhanced functionality compared to the basic histogram function in matplotlib.
+**Description:**
+The `sns.histplot()` function is used to create histograms, which represent the distribution of a numerical variable in the form of bins and their corresponding frequencies. It is part of the seaborn library and provides enhanced functionality compared to the basic histogram function in matplotlib.
 
 **Function signature:**
 ```python
@@ -677,7 +676,7 @@ In the example, the `.histplot()` function is used to create a histogram plot of
 
 The `.histplot()` function in seaborn provides a high-level interface to create visually appealing and informative histograms. It offers various customization options and can handle complex plotting scenarios, making it a versatile tool for exploratory data analysis and visualization.
 ***
-## Exercises
+### Exercises
 
 ![Pasted image 20230710203014](/images/Pasted%20image%2020230710203014.png)
 ![Pasted image 20230710203055](/images/Pasted%20image%2020230710203055.png)
