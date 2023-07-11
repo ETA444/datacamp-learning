@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "b510355911759268",
+        "id": "c535340fb468002d",
         "type": "tabs",
         "children": [
           {
-            "id": "54d941c6997daf95",
+            "id": "a8647fcc6b1fbb3b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md"
               }
             }
           }
@@ -146,19 +146,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5d950ae2fcc809e3",
+  "active": "a8647fcc6b1fbb3b",
   "lastOpenFiles": [
+    "images/Pasted image 20230710164636.png.md",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710205338.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710204641.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710204536.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710203055.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710203014.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710191541.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710191426.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710191217.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710191155.png",
-    "Data Scientist Professional with Python/Pasted Images/Pasted image 20230710173017.png",
+    "images",
+    "README.md",
+    "Data Scientist Professional with Python/obsidian_filelink_converter.py",
+    "Data Scientist Professional with Python/obsidian_filelink_converter.txt",
+    "Data Scientist Professional with Python/obsidian_link_converter.txt",
+    "Data Scientist Professional with Python/New Text Document.txt",
+    "Data Scientist Professional with Python/images/Pasted image 20230710205338.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710204641.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710204536.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710203055.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710203014.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710191541.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710191426.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710191217.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710191155.png",
+    "Data Scientist Professional with Python/images/Pasted image 20230710173017.png",
+    "Data Scientist Professional with Python/images",
     "Data Scientist Professional with Python/Pasted Images",
     "Data Scientist Professional with Python"
   ]

@@ -45,10 +45,10 @@ In the example, we have a DataFrame `df` with columns of different data types. T
 This function is helpful when you want to focus on specific data types in your analysis or when you need to separate columns based on their data types for further processing.
 
 ***Datacamp Example***
-![[Pasted image 20230710164636.png]]
+![Pasted image 20230710164636](/images/Pasted%20image%2020230710164636.png)
 
 ### All dtypes
-![[Pasted image 20230710164146.png]]
+![Pasted image 20230710164146](/images/Pasted%20image%2020230710164146.png)
 
 ---
 ## .value_counts()
@@ -92,7 +92,7 @@ In the example, the `.value_counts()` function is used to count the frequency of
 This function is particularly useful for obtaining insights into the distribution of values in a Series and identifying the most common or least common values present.
 
 ***Datacamp Example***
-![[Pasted image 20230710164544.png]]
+![Pasted image 20230710164544](/images/Pasted%20image%2020230710164544.png)
 
 
 * * *
@@ -210,12 +210,12 @@ In the example, the `np.select()` function is used to apply conditions to the el
 This function is useful for applying complex conditional logic to arrays and assigning different values based on specified conditions. It allows for efficient and vectorized operations on large arrays.
 
 **Datacamp example**
-![[Pasted image 20230710171000.png]]
-![[Pasted image 20230710171042.png]]
-![[Pasted image 20230710171059.png]]
-![[Pasted image 20230710171114.png]]
-![[Pasted image 20230710171125.png]]
-![[Pasted image 20230710171151.png]]
+![Pasted image 20230710171000](/images/Pasted%20image%2020230710171000.png)
+![Pasted image 20230710171042](/images/Pasted%20image%2020230710171042.png)
+![Pasted image 20230710171059](/images/Pasted%20image%2020230710171059.png)
+![Pasted image 20230710171114](/images/Pasted%20image%2020230710171114.png)
+![Pasted image 20230710171125](/images/Pasted%20image%2020230710171125.png)
+![Pasted image 20230710171151](/images/Pasted%20image%2020230710171151.png)
 
 ***
 ## sns.countplot
@@ -273,10 +273,10 @@ for col in non_numeric.columns:
 print(f"Number of unique values in {col} column: ", non_numeric[col].nunique())
   
 ```
-![[Pasted image 20230710173017.png]]
+![Pasted image 20230710173017](/images/Pasted%20image%2020230710173017.png)
 
-![[Pasted image 20230710191155.png]]
-![[Pasted image 20230710191217.png]]
+![Pasted image 20230710191155](/images/Pasted%20image%2020230710191155.png)
+![Pasted image 20230710191217](/images/Pasted%20image%2020230710191217.png)
 ```python
 # Create a list of categories
 flight_categories = ["Short-haul", "Medium", "Long-haul"]
@@ -290,7 +290,7 @@ medium_flights = "5h|6h|7h|8h|9h"
 # Create long-haul values
 long_flights = "10h|11h|12h|13h|14h|15h|16h"
 ```
-![[Pasted image 20230710191426.png]]
+![Pasted image 20230710191426](/images/Pasted%20image%2020230710191426.png)
 ```python
 # Create conditions for values in flight_categories to be created
 
@@ -323,7 +323,7 @@ sns.countplot(data=planes, x="Duration_Category")
 plt.show()
 ```
 
-![[Pasted image 20230710191541.png]]
+![Pasted image 20230710191541](/images/Pasted%20image%2020230710191541.png)
 
 ***
 ## .info()
@@ -679,10 +679,10 @@ The `.histplot()` function in seaborn provides a high-level interface to create 
 ***
 ## Exercises
 
-![[Pasted image 20230710203014.png]]
-![[Pasted image 20230710203055.png]]
-![[Pasted image 20230710204536.png]]
-![[Pasted image 20230710204641.png]]
+![Pasted image 20230710203014](/images/Pasted%20image%2020230710203014.png)
+![Pasted image 20230710203055](/images/Pasted%20image%2020230710203055.png)
+![Pasted image 20230710204536](/images/Pasted%20image%2020230710204536.png)
+![Pasted image 20230710204641](/images/Pasted%20image%2020230710204641.png)
 ```python
 # Preview the column
 print(planes["Duration"].head())
@@ -700,6 +700,6 @@ planes["Duration"] = planes["Duration"].astype(float)
 sns.histplot(x='Duration', data=planes)
 plt.show()
 ```
-![[Pasted image 20230710205338.png]]
+![Pasted image 20230710205338](/images/Pasted%20image%2020230710205338.png)
 
 
