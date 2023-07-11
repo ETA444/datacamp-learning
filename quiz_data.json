@@ -1,0 +1,13 @@
+{
+    ".select_dtypes()": "Function in pandas is used to select columns from a DataFrame based on their data types.",
+    ".value_counts()": "Function in pandas is used to obtain the frequency count of unique values in a pandas Series.",
+    ".nunique()": "Function in pandas is used to count the number of unique values in a pandas Series.",
+    ".str.contains()": "Function in pandas is used to check whether each element of a Series contains a specified substring or pattern.",
+    "sns.countplot": "Function in the seaborn library is used to display a count plot, which shows the count of observations in each category of a categorical variable. It is a useful tool for visualizing the distribution and frequency of different categories within a single variable.",
+    "pd.Series.str.replace()": "Function is used to replace a substring or pattern in the elements of a Series with a specified value.",
+    ".astype()": "Function is used to change the data type of a pandas Series or DataFrame to a specified type.",
+    ".groupby()": "Function in pandas is used to group data in a DataFrame based on one or more columns. It is often followed by an aggregation function to compute summary statistics or perform operations on the grouped data.",
+    ".transform()": "Function is commonly used in scenarios where you want to apply group-wise operations while maintaining the shape and alignment of the original data. It allows you to perform calculations based on group characteristics and incorporate those transformed values back into the original DataFrame or Series.",
+    ".hist()": "Function is used to create histograms, which represent the distribution of a numerical variable in the form of bins and their corresponding frequencies.",
+    "sns.histplot()": "Function is used to create histograms, which represent the distribution of a numerical variable in the form of bins and their corresponding frequencies. It is part of the seaborn library and provides enhanced functionality compared to the basic histogram function in matplotlib."
+}
