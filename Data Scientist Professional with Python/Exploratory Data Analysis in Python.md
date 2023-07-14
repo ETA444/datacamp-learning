@@ -218,9 +218,9 @@ This function is useful for applying complex conditional logic to arrays and ass
 ![Pasted image 20230710171151](/images/Pasted%20image%2020230710171151.png)
 
 ***
-## sns.countplot
+## .countplot()
 
-The `sns.countplot` function in the seaborn library is used to display a count plot, which shows the count of observations in each category of a categorical variable. It is a useful tool for visualizing the distribution and frequency of different categories within a single variable.
+The `.countplot()` function in the seaborn library is used to display a count plot, which shows the count of observations in each category of a categorical variable. It is a useful tool for visualizing the distribution and frequency of different categories within a single variable.
 
 **Function signature:**
 ```python
@@ -326,30 +326,59 @@ plt.show()
 ***
 ## .info()
 
-*Used to display a concise summary of a DataFrame, including its column names, data types, and the count of non-null values.
+The `.info()` function in pandas is used to display a concise summary of a DataFrame, including information about the column names, data types, and the number of non-null values.
 
 **Function signature:**
 ```python
-df.info(verbose=None, buf=None, max_cols=None, memory_usage=None, null_counts=None)
+DataFrame.info(verbose=True, buf=None, max_cols=None, memory_usage=None, null_counts=None)
 ```
 
 **Parameters:**
-
 - `verbose` (optional): Controls the amount of information displayed. If `verbose=True`, all the column names and the count of non-null values are shown. If `verbose=False`, a concise summary is displayed. By default, `verbose=None` displays the summary based on the DataFrame's size.
-
 - `buf` (optional): Specifies the buffer where the output is redirected. If `buf=None`, the output is printed to the console. If `buf` is a writable buffer, the output is stored in that buffer.
-
 - `max_cols` (optional): Sets the maximum number of columns to be displayed in the summary. If `max_cols=None`, all columns are displayed.
-
 - `memory_usage` (optional): Specifies whether to include memory usage information in the summary. By default, it's set to `None`, and memory usage is only included if the DataFrame has numeric columns.
-
 - `null_counts` (optional): Specifies whether to include the count of null values in the summary. By default, it's set to `None`, and the count of null values is included if the DataFrame has null values.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'Name': ['John', 'Alice', 'Bob'],
+    'Age': [25, 30, 35],
+    'City': ['New York', 'London', 'Paris']
+}
+df = pd.DataFrame(data)
+
+# Display the summary information
+df.info()
+```
+
+The resulting output will be:
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   Name    3 non-null      object
+ 1   Age     3 non-null      int64 
+ 2   City    3 non-null      object
+dtypes: int64(1), object(2)
+memory usage: 200.0+ bytes
+```
+
+In the example, the `.info()` function is used to display a summary of the DataFrame `df`. The summary includes information about the data types (`Dtype`) of each column, the number of non-null values (`Non-Null Count`), and memory usage (`memory usage`).
+
+The `.info()` function is helpful for quickly understanding the structure and properties of a DataFrame. It provides an overview of the column names, data types, and presence of missing values, allowing you to assess the quality and integrity of the data. Additionally, it provides memory usage information, which can be useful when working with large datasets.
 
 
 ***
-## pd.Series.str.replace()
+## .str.replace()
 
-The `pd.Series.str.replace()` function is used to replace a substring or pattern in the elements of a Series with a specified value.
+The `.str.replace()` function is used to replace a substring or pattern in the elements of a Series with a specified value.
 
 **Function signature:**
 ```python
@@ -881,6 +910,9 @@ df = pd.read_csv('data.csv')
 
 # Print the first few rows of the DataFrame
 print(df.head())
+
+# Parsing dates in specific column
+df = pd.read_csv("data.csv", parse_dates=["start_date", "end_date"])
 ```
 
 In the example, the `.read_csv()` function is used to read a CSV file named `'data.csv'` into a pandas DataFrame. The resulting DataFrame is stored in the variable `df`. The `.head()` function is then used to display the first few rows of the DataFrame.
@@ -888,3 +920,326 @@ In the example, the `.read_csv()` function is used to read a CSV file named `'da
 The `.read_csv()` function provides a convenient way to read CSV files and import them into pandas for further data analysis and manipulation. It allows you to handle various file formats, specify custom delimiters, handle missing values, and perform various data reading configurations.
 
 ***
+## to_datetime()
+
+The `.to_datetime()` function in pandas is used to convert a column or Series of data into a pandas DateTime format. It allows for the transformation of date and time data into a standardized format that can be easily manipulated and analyzed.
+
+**Function signature:**
+```python
+pandas.to_datetime(arg, format=None, errors='raise', dayfirst=False, yearfirst=False, utc=None, box=True, exact=True, unit=None, infer_datetime_format=False, origin='unix', cache=False)
+```
+
+**Parameters:**
+- `arg`: Specifies the input data to be converted to DateTime format. It can be a single value, an array-like object, a Series, or a column of a DataFrame.
+- `format` (optional): Specifies the format of the input data as a string. The format string uses the same directives as the `strftime()` function from the datetime module.
+- `errors` (optional): Specifies how errors should be handled during the conversion. It can be set to `'raise'` to raise an exception, `'coerce'` to set invalid values to `NaT`, or `'ignore'` to pass through invalid values as-is.
+- `dayfirst` (optional): If `dayfirst=True`, it indicates that the day should be the first element when ambiguous.
+- `yearfirst` (optional): If `yearfirst=True`, it indicates that the year should be the first element when ambiguous.
+- `utc` (optional): Specifies whether to treat the input data as UTC (Coordinated Universal Time). It can be set to `True` or `False`.
+- Many more parameters are available to handle various datetime-related operations and configurations.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series with date strings
+dates = pd.Series(['2021-01-01', '2021-01-02', '2021-01-03'])
+
+# Convert the strings to DateTime format
+date_times = pd.to_datetime(dates)
+
+# Print the resulting DateTime Series
+print(date_times)
+```
+
+The resulting `date_times` Series will be:
+```
+0   2021-01-01
+1   2021-01-02
+2   2021-01-03
+dtype: datetime64[ns]
+```
+
+In the example, the `.to_datetime()` function is used to convert a Series of date strings into DateTime format. The resulting `date_times` Series contains the same dates but in the standardized DateTime format.
+
+The `.to_datetime()` function is useful for converting string representations of dates or times into a pandas DateTime format. Once in this format, pandas provides a range of powerful functionalities for working with dates and times, such as date arithmetic, resampling, indexing, and more.
+
+![[Pasted image 20230714155654.png]]
+
+### Using dt.month, dt.day, dt.year
+![[Pasted image 20230714155757.png]]
+
+***
+## .lineplot()
+
+The `.lineplot()` function is used to create a line plot, also known as a line chart or a line graph, in order to visualize the relationship between two numeric variables over a continuous interval.
+
+**Function signature:**
+```python
+seaborn.lineplot(
+    *,
+    x=None,
+    y=None,
+    hue=None,
+    size=None,
+    style=None,
+    data=None,
+    palette=None,
+    hue_order=None,
+    hue_norm=None,
+    sizes=None,
+    size_order=None,
+    size_norm=None,
+    dashes=True,
+    markers=None,
+    style_order=None,
+    units=None,
+    estimator='mean',
+    ci=95,
+    n_boot=1000,
+    seed=None,
+    sort=True,
+    err_style='band',
+    err_kws=None,
+    legend='auto',
+    ax=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `x` and `y` (optional): The variables to be plotted on the x and y axes, respectively. They can be column names from the DataFrame or arrays-like objects.
+- `hue` (optional): An additional categorical variable used for grouping the data and creating separate lines with different colors.
+- `size` (optional): An additional categorical variable used for grouping the data and creating separate lines with different sizes.
+- `style` (optional): An additional categorical variable used for grouping the data and creating separate lines with different styles.
+- `data` (optional): Specifies the DataFrame or long-form data object that contains the data to be plotted.
+- Many more parameters are available to customize the appearance and behavior of the line plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'Year': [2010, 2011, 2012, 2013, 2014],
+    'Sales': [100, 150, 120, 200, 180],
+    'Profit': [10, 20, 15, 30, 25]
+}
+df = pd.DataFrame(data)
+
+# Create a line plot
+sns.lineplot(x='Year', y='Sales', data=df)
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.lineplot()` function is used to create a line plot of the 'Sales' variable against the 'Year' variable in the DataFrame `df`. The resulting line plot visualizes the trend and changes in sales over the years.
+
+Line plots are useful for displaying the relationship between two continuous variables. They can show trends, patterns, or fluctuations in the data over time or any continuous scale. Additionally, line plots can incorporate categorical variables by using hue, size, or style parameters to represent different groups or dimensions in the data.
+
+***
+### Exercises
+![[Pasted image 20230714160629.png]]
+```python
+# Import divorce.csv, parsing the appropriate columns as dates in the import
+divorce = pd.read_csv('divorce.csv', parse_dates = ["divorce_date", "dob_man", "dob_woman", "marriage_date"])
+
+print(divorce.dtypes)
+```
+![[Pasted image 20230714160858.png]]
+![[Pasted image 20230714160928.png]]
+![[Pasted image 20230714160943.png]]
+```python
+# Convert the marriage_date column to DateTime values
+divorce["marriage_date"] = pd.to_datetime(divorce["marriage_date"])
+```
+![[Pasted image 20230714162114.png]]
+![[Pasted image 20230714162409.png]]
+```python
+# Define the marriage_year column
+divorce["marriage_year"] = divorce["marriage_date"].dt.year
+
+# Create a line plot showing the average number of kids by year
+sns.lineplot(data=divorce, x="marriage_year", y="num_kids")
+plt.show()
+```
+![[Pasted image 20230714162545.png]]
+
+***
+## .corr()
+
+The `.corr()` function in pandas is used to compute the correlation between columns of a DataFrame or a Series. It calculates the pairwise correlation coefficients, which measure the statistical relationship between two variables.
+
+**Function signature:**
+```python
+DataFrame.corr(method='pearson', min_periods=1)
+```
+
+**Parameters:**
+- `method` (optional): Specifies the correlation method to use. It can be `'pearson'` (default), `'kendall'`, or `'spearman'`.
+- `min_periods` (optional): Specifies the minimum number of valid pairs required to compute the correlation. If there are fewer valid pairs, the result will be NaN.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'A': [1, 2, 3, 4, 5],
+    'B': [2, 4, 6, 8, 10],
+    'C': [3, 6, 9, 12, 15]
+}
+df = pd.DataFrame(data)
+
+# Compute the correlation matrix
+correlation_matrix = df.corr()
+```
+
+The resulting `correlation_matrix` DataFrame will be:
+```
+     A    B    C
+A  1.0  1.0  1.0
+B  1.0  1.0  1.0
+C  1.0  1.0  1.0
+```
+
+In the example, the `.corr()` function is used to compute the correlation matrix of the DataFrame `df`. The resulting `correlation_matrix` DataFrame contains the correlation coefficients between each pair of columns. Since the data in each column is perfectly positively correlated, all correlation coefficients are 1.0.
+
+The `.corr()` function is useful for analyzing the relationship between variables in a dataset. It helps identify whether variables are positively correlated, negatively correlated, or uncorrelated. The correlation coefficients range between -1 and 1, where -1 indicates a perfect negative correlation, 1 indicates a perfect positive correlation, and 0 indicates no correlation.
+
+***
+## .heatmap()
+
+The `.heatmap()` function in seaborn is used to plot a heatmap, which visualizes the matrix-like data in the form of a colored grid. It provides a visual representation of the data using different colors to indicate the values.
+
+**Function signature:**
+```python
+seaborn.heatmap(
+    data,
+    vmin=None,
+    vmax=None,
+    cmap=None,
+    center=None,
+    robust=False,
+    annot=None,
+    fmt='.2g',
+    annot_kws=None,
+    linewidths=0,
+    linecolor='white',
+    cbar=True,
+    cbar_kws=None,
+    cbar_ax=None,
+    square=False,
+    xticklabels='auto',
+    yticklabels='auto',
+    mask=None,
+    ax=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `data`: Specifies the input data for the heatmap. It can be a 2D array, a DataFrame, or a rectangular NumPy array.
+- `vmin` and `vmax` (optional): Specifies the minimum and maximum values of the colormap. If not provided, the minimum and maximum values of the input data will be used.
+- `cmap` (optional): Specifies the colormap to be used. It can be a string referring to a named colormap or a matplotlib colormap object.
+- `annot` (optional): Specifies whether to annotate the heatmap cells with the data values. If `True`, the data values will be displayed. If a rectangular dataset, boolean array, or DataFrame is passed, the corresponding cells will be annotated.
+- `fmt` (optional): Specifies the format string for the annotations. It controls the number of decimal places and other formatting options.
+- Many more parameters are available to customize the appearance and behavior of the heatmap.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+}
+df = pd.DataFrame(data)
+
+# Create a heatmap
+sns.heatmap(data=df, annot=True, cmap='YlGnBu')
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.heatmap()` function is used to create a heatmap of the DataFrame `df`. The resulting heatmap visualizes the values in the DataFrame using different colors, and annotations are added to each cell to display the data values.
+
+Heatmaps are useful for displaying and exploring patterns or relationships in matrix-like data. They are commonly used to visualize correlation matrices, confusion matrices, and other forms of tabular data. Heatmaps allow for quick identification of high and low values, patterns, clusters, or trends within the data.
+
+![[Pasted image 20230714164209.png]]
+***
+## .scatterplot()
+
+The `.scatterplot()` function in seaborn is used to create a scatter plot, which visualizes the relationship between two continuous variables. It displays data points as individual markers on a 2D coordinate system, where the x-axis represents one variable and the y-axis represents the other variable.
+
+**Function signature:**
+```python
+seaborn.scatterplot(
+    *,
+    x=None,
+    y=None,
+    hue=None,
+    style=None,
+    size=None,
+    data=None,
+    palette=None,
+    hue_order=None,
+    hue_norm=None,
+    sizes=None,
+    size_order=None,
+    size_norm=None,
+    markers=True,
+    style_order=None,
+    x_bins=None,
+    y_bins=None,
+    units=None,
+    estimator=None,
+    ci=95,
+    n_boot=1000,
+    alpha=None,
+    x_jitter=None,
+    y_jitter=None,
+    legend='auto',
+    ax=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `x` and `y` (optional): The variables to be plotted on the x and y axes, respectively. They can be column names from the DataFrame or arrays-like objects.
+- `hue` (optional): An additional categorical variable used for grouping the data and creating separate markers with different colors.
+- `style` (optional): An additional categorical variable used for grouping the data and creating separate markers with different styles.
+- `size` (optional): An additional categorical or numeric variable used for grouping the data and creating markers with different sizes.
+- `data` (optional): Specifies the DataFrame or long-form data object that contains the data to be plotted.
+- Many more parameters are available to customize the appearance and behavior of the scatter plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'Height': [170, 165, 180, 175, 160],
+    'Weight': [65, 60, 75, 70, 55],
+    'Gender': ['M', 'F', 'M', 'M', 'F']
+}
+df = pd.DataFrame(data)
+
+# Create a scatter plot
+sns.scatterplot(x='Height', y='Weight', hue='Gender', data=df)
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.scatterplot()` function is used to create a scatter plot of the 'Height' variable against the 'Weight' variable in the DataFrame `df`. The resulting scatter plot visualizes the relationship between height and weight, with different markers and colors representing different genders.
+
+Scatter plots are commonly used to explore the relationship between two continuous variables. They can help identify patterns, trends, clusters, or outliers in the data. By incorporating categorical variables through hue, style, or size parameters, scatter plots can provide additional insights and facilitate deeper analysis of the data.
+
+***
+## .pairplot()
+
