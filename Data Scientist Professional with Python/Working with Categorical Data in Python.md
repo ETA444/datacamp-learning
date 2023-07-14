@@ -50,7 +50,7 @@ adult = pd.read_csv("data/adult.csv", dtype=adult_dtypes)
 # 3 # Check the dtype:
 adult["Marital Status"].dtype
 ```
-![[Pasted image 20230714224138.png]]
+![Pasted image 20230714224138](/images/Pasted%20image%2020230714224138.png)
 
 ***
 ## .nbytes
@@ -87,13 +87,13 @@ The `.nbytes` attribute is useful for assessing the memory footprint of a DataFr
 adult = pd.read_csv("data/adult.csv")
 adult['Marital Status'].nbytes
 ```
-![[Pasted image 20230714224258.png]]
+![Pasted image 20230714224258](/images/Pasted%20image%2020230714224258.png)
 ```python
 # Why do we use categorical: memory
 adult["Marital Status"] = adult['Marital Status'].astype("category")
 adult["Marital Status"].nbytes
 ```
-![[Pasted image 20230714224355.png]]
+![Pasted image 20230714224355](/images/Pasted%20image%2020230714224355.png)
 
 
 ***
@@ -158,7 +158,7 @@ series2 = pd.Series(list_of_occupations, dtype="category")
 print("series2 data type:", series2.dtype)
 print("series2 number of bytes:", series2.nbytes)
 ```
-![[Pasted image 20230714212920.png]]
+![Pasted image 20230714212920](/images/Pasted%20image%2020230714212920.png)
 
 ##### Exercise 2
 ```python
@@ -166,14 +166,14 @@ print("series2 number of bytes:", series2.nbytes)
 medals = pd.Categorical(medals_won, categories=['Bronze', 'Silver', 'Gold'], ordered=True)
 print(medals)
 ```
-![[Pasted image 20230714213648.png]]
+![Pasted image 20230714213648](/images/Pasted%20image%2020230714213648.png)
 
 ##### Exercise 3
 ```python
 # Check the dtypes
 print(adult.dtypes)
 ```
-![[Pasted image 20230714213831.png]]
+![Pasted image 20230714213831](/images/Pasted%20image%2020230714213831.png)
 
 ```python
 # Create a dictionary with column names as keys and "category" as values

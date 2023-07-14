@@ -48,7 +48,7 @@ This function is helpful when you want to focus on specific data types in your a
 ```python
 print(salaries.select_dtypes('object').head)
 ```
-![[Pasted image 20230714215341.png]]
+![Pasted image 20230714215341](/images/Pasted%20image%2020230714215341.png)
 
 ### All dtypes
 ![Pasted image 20230710164146](/images/Pasted%20image%2020230710164146.png)
@@ -98,7 +98,7 @@ This function is particularly useful for obtaining insights into the distributio
 ```python
 print(salaries["Designation"].value_counts())
 ```
-![[Pasted image 20230714215319.png]]
+![Pasted image 20230714215319](/images/Pasted%20image%2020230714215319.png)
 
 
 
@@ -247,13 +247,13 @@ print(salaries[["Designation", "Job_Category"]].head())
 
 
 ```
-![[Pasted image 20230714220153.png]]
+![Pasted image 20230714220153](/images/Pasted%20image%2020230714220153.png)
 
 ```python
 sns.countplot(data=salaries, x="Job_Category")
 plt.show()
 ```
-![[Pasted image 20230714220316.png]]
+![Pasted image 20230714220316](/images/Pasted%20image%2020230714220316.png)
 
 
 
@@ -310,7 +310,7 @@ for col in non_numeric.columns:
 print(f"Number of unique values in {col} column: ", non_numeric[col].nunique())
   
 ```
-![[Pasted image 20230714220646.png]]
+![Pasted image 20230714220646](/images/Pasted%20image%2020230714220646.png)
 
 ##### Exercise 2
 ```python
@@ -763,7 +763,7 @@ planes["Duration"] = planes["Duration"].astype(float)
 sns.histplot(x='Duration', data=planes)
 plt.show()
 ```
-![[Pasted image 20230714220807.png]]
+![Pasted image 20230714220807](/images/Pasted%20image%2020230714220807.png)
 
 ##### Exercise 2
 ```python
@@ -892,7 +892,7 @@ plt.show()
 # Display descriptive statistics for flight duration
 print(planes["Duration"].describe())
 ```
-![[Pasted image 20230714152601.png]]![[Pasted image 20230714152740.png]]
+![Pasted image 20230714152601](/images/Pasted%20image%2020230714152601.png)![Pasted image 20230714152740](/images/Pasted%20image%2020230714152740.png)
 
 
 ##### Exercise 2
@@ -913,7 +913,7 @@ planes = planes[(planes["Price"] > lower) & (planes["Price"] < upper)]
   
 print(planes["Price"].describe())
 ```
-![[Pasted image 20230714153409.png]]
+![Pasted image 20230714153409](/images/Pasted%20image%2020230714153409.png)
 ***
 ## .read_csv()
 
@@ -1001,19 +1001,19 @@ The `.to_datetime()` function is useful for converting string representations of
 ```python
 divorce.head(2)
 ```
-![[Pasted image 20230714220943.png]]
+![Pasted image 20230714220943](/images/Pasted%20image%2020230714220943.png)
 
 ```python
 divorce['marriage_date'] = pd.to_datetime(divorce[['month', 'day', 'year']])
 divorce.head(2)
 ```
-![[Pasted image 20230714221051.png]]
+![Pasted image 20230714221051](/images/Pasted%20image%2020230714221051.png)
 ### Using dt.month, dt.day, dt.year
 ```python
 divorce['marriage_month'] = divorce["marriage_date"].dt.month
 divorce.head()
 ```
-![[Pasted image 20230714221436.png]]
+![Pasted image 20230714221436](/images/Pasted%20image%2020230714221436.png)
 
 ***
 ## .lineplot()
@@ -1094,7 +1094,7 @@ divorce = pd.read_csv('divorce.csv', parse_dates = ["divorce_date", "dob_m
 
 print(divorce.info())
 ```
-![[Pasted image 20230714160928.png]]
+![Pasted image 20230714160928](/images/Pasted%20image%2020230714160928.png)
 ```python
 # Convert the marriage_date column to DateTime values
 divorce["marriage_date"] = pd.to_datetime(divorce["marriage_date"])
@@ -1109,7 +1109,7 @@ divorce["marriage_year"] = divorce["marriage_date"].dt.year
 sns.lineplot(data=divorce, x="marriage_year", y="num_kids")
 plt.show()
 ```
-![[Pasted image 20230714162545.png]]
+![Pasted image 20230714162545](/images/Pasted%20image%2020230714162545.png)
 
 ***
 ## .corr()
@@ -1219,7 +1219,7 @@ Heatmaps are useful for displaying and exploring patterns or relationships in ma
 sns.heatmap(divorce.corr(), annot=True)
 plt.show()
 ```
-![[Pasted image 20230714222220.png]]
+![Pasted image 20230714222220](/images/Pasted%20image%2020230714222220.png)
 
 ***
 ## .scatterplot()
@@ -1356,12 +1356,12 @@ Pair plots are useful for exploring the relationships and distributions of multi
 sns.pairplot(data=divorce)
 plt.show()
 ```
-![[Pasted image 20230714222310.png]]
+![Pasted image 20230714222310](/images/Pasted%20image%2020230714222310.png)
 ```python
 sns.pairplot(data=divorce, vars=["income_man", "income_woman", "marriage_duration"])
 plt.show()
 ```
-![[Pasted image 20230714222406.png]]
+![Pasted image 20230714222406](/images/Pasted%20image%2020230714222406.png)
 ***
 ### Exercises
 
@@ -1369,11 +1369,11 @@ plt.show()
 ```python
 divorce.corr()
 ```
-![[Pasted image 20230714222534.png]]
+![Pasted image 20230714222534](/images/Pasted%20image%2020230714222534.png)
 ```python
 sns.heatmap(divorce.corr(), annot=True, cmap='YlGnBu')
 ```
-![[Pasted image 20230714222705.png]]
+![Pasted image 20230714222705](/images/Pasted%20image%2020230714222705.png)
 
 ##### Exercise 2
 ```python
@@ -1381,7 +1381,7 @@ sns.heatmap(divorce.corr(), annot=True, cmap='YlGnBu')
 sns.scatterplot(data=divorce, x='marriage_duration', y='num_kids')
 plt.show()
 ```
-![[Pasted image 20230714165202.png]]
+![Pasted image 20230714165202](/images/Pasted%20image%2020230714165202.png)
 
 ##### Exercise 3
 ```python
@@ -1389,7 +1389,7 @@ plt.show()
 sns.pairplot(data=divorce, vars=['income_woman', 'marriage_duration'])
 plt.show()
 ```
-![[Pasted image 20230714222804.png]]
+![Pasted image 20230714222804](/images/Pasted%20image%2020230714222804.png)
 ***
 ## .kdeplot()
 
@@ -1455,12 +1455,12 @@ Kernel density estimate plots are useful for visualizing the distribution and de
 sns.kdeplot(data=divorce, x='marriage_duration', hue='education_man')
 plt.show()
 ```
-![[Pasted image 20230714222901.png]]
+![Pasted image 20230714222901](/images/Pasted%20image%2020230714222901.png)
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='education_man', cut=0)
 plt.show()
 ```
-![[Pasted image 20230714222957.png]]
+![Pasted image 20230714222957](/images/Pasted%20image%2020230714222957.png)
 
 ***
 
@@ -1471,26 +1471,26 @@ plt.show()
 sns.scatterplot(data=divorce, x='woman_age_marriage', y='income_woman', hue='education_woman')
 plt.show()
 ```
-![[Pasted image 20230714223033.png]]
+![Pasted image 20230714223033](/images/Pasted%20image%2020230714223033.png)
 
 ##### Exercise 2
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids')
 plt.show()
 ```
-![[Pasted image 20230714223048.png]]
+![Pasted image 20230714223048](/images/Pasted%20image%2020230714223048.png)
 
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0)
 plt.show()
 ```
-![[Pasted image 20230714223103.png]]
+![Pasted image 20230714223103](/images/Pasted%20image%2020230714223103.png)
 
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0, cumulative=True)
 plt.show()
 ```
-![[Pasted image 20230714223123.png]]
+![Pasted image 20230714223123](/images/Pasted%20image%2020230714223123.png)
 ***
 ## .crosstab()
 
@@ -1557,7 +1557,7 @@ Cross-tabulation tables are useful for analyzing the relationship between catego
 pd.crosstab(planes["Source"], planes["Destination"],
 		   values=planes["Price"], aggfunc="median")
 ```
-![[Pasted image 20230714223302.png]]
+![Pasted image 20230714223302](/images/Pasted%20image%2020230714223302.png)
 
 ***
 ### Exercises
@@ -1567,7 +1567,7 @@ pd.crosstab(planes["Source"], planes["Destination"],
 # Print the relative frequency of Job_Category
 print(salaries["Job_Category"].value_counts(normalize=True))
 ```
-![[Pasted image 20230714172300.png]]
+![Pasted image 20230714172300](/images/Pasted%20image%2020230714172300.png)
 
 ##### Exercise 2
 ```python
@@ -1655,7 +1655,7 @@ salaries["weekday"] = salaries["date_of_response"].dt.weekday
 sns.heatmap(salaries.corr(), annot=True)
 plt.show()
 ```
-![[Pasted image 20230714223413.png]]
+![Pasted image 20230714223413](/images/Pasted%20image%2020230714223413.png)
 
 ##### Exercise 2
 ```python
@@ -1756,7 +1756,7 @@ Bar plots are useful for comparing and visualizing the distribution of a numeric
 sns.barplot(data=planes, x='Airline', y='Duration')
 plt.show()
 ```
-![[Pasted image 20230714223539.png]]
+![Pasted image 20230714223539](/images/Pasted%20image%2020230714223539.png)
 
 ***
 ## .isin()
@@ -1810,7 +1810,7 @@ usa_and_gb = salaries[salaries['Employee_Location'].isin(["US", "GB"])]
 sns.barplot(data=usa_and_gb, x="Employee_Location", y="Salary_USD")
 plt.show()
 ```
-![[Pasted image 20230714223611.png]]
+![Pasted image 20230714223611](/images/Pasted%20image%2020230714223611.png)
 
 ##### Exercise 2
 ```python
@@ -1818,7 +1818,7 @@ plt.show()
 sns.barplot(data=salaries, x="Company_Size", y="Salary_USD", hue="Employment_Status")
 plt.show()
 ```
-![[Pasted image 20230714223637.png]]
+![Pasted image 20230714223637](/images/Pasted%20image%2020230714223637.png)
 
 ***
 ## .agg()
@@ -1873,7 +1873,7 @@ books.groupby('genre').agg(
 						   median_year = ("year", "medianS")
 )
 ```
-![[Pasted image 20230714223825.png]]
+![Pasted image 20230714223825](/images/Pasted%20image%2020230714223825.png)
 
 ***
 ## .isna()
@@ -1923,7 +1923,7 @@ The `.isna()` function is useful for identifying missing or null values in a dat
 ```python
 print(salaries.isna().sum())
 ```
-![[Pasted image 20230714223900.png]]
+![Pasted image 20230714223900](/images/Pasted%20image%2020230714223900.png)
 ***
 ## .fillna()
 
