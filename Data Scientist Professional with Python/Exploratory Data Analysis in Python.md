@@ -1323,3 +1323,91 @@ plt.show()
 ```
 ![[Pasted image 20230714165317.png]]
 ***
+## .kdeplot()
+
+The `.kdeplot()` function in seaborn is used to create a kernel density estimate plot, which visualizes the distribution of a single variable or the joint distribution of two variables. It provides a smoothed representation of the data's underlying probability density function.
+
+**Function signature:**
+```python
+seaborn.kdeplot(
+    data=None,
+    *,
+    x=None,
+    y=None,
+    shade=False,
+    vertical=False,
+    kernel='gau',
+    bw='scott',
+    gridsize=100,
+    cut=3,
+    clip=None,
+    legend=True,
+    cumulative=False,
+    shade_lowest=None,
+    cbar=False,
+    cbar_ax=None,
+    cbar_kws=None,
+    ax=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `data`: Specifies the input data for the kernel density estimate plot. It can be a DataFrame or any other long-form data object.
+- `x` and `y` (optional): The variable(s) to be plotted on the x and/or y axes. They can be column names from the DataFrame or arrays-like objects.
+- `shade` (optional): Specifies whether to shade the area under the density curve. If `True`, the area is shaded.
+- `kernel` (optional): Specifies the kernel function used for estimation. It can be `'gau'` (Gaussian), `'cos'` (cosine), `'biw'` (biweight), `'epa'` (Epanechnikov), or `'tri'` (triangular).
+- `bw` (optional): Specifies the bandwidth estimation method. It can be `'scott'`, `'silverman'`, a scalar bandwidth value, or a callable function.
+- `legend` (optional): Specifies whether to display the legend. If `True`, the legend is displayed.
+- Many more parameters are available to customize the appearance and behavior of the kernel density estimate plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'Height': [170, 165, 180, 175, 160],
+    'Weight': [65, 60, 75, 70, 55]
+}
+df = pd.DataFrame(data)
+
+# Create a kernel density estimate plot for the 'Height' variable
+sns.kdeplot(data=df, x='Height', shade=True)
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.kdeplot()` function is used to create a kernel density estimate plot for the 'Height' variable in the DataFrame `df`. The resulting plot displays a smoothed estimate of the distribution of heights, with the area under the curve shaded.
+
+Kernel density estimate plots are useful for visualizing the distribution and density of a single variable or the joint distribution of two variables. They provide a smooth representation of the underlying probability density function, allowing for insights into the shape, mode, and spread of the data. By customizing the shading, kernel function, bandwidth estimation, and other parameters, the appearance and level of detail of the plot can be adjusted to suit the specific requirements of the analysis.
+
+![[Pasted image 20230714165843.png]]
+![[Pasted image 20230714170016.png]]
+***
+### Exercises
+![[Pasted image 20230714170232.png]]
+```python
+sns.scatterplot(data=divorce, x='woman_age_marriage', y='income_woman', hue='education_woman')
+plt.show()
+```
+![[Pasted image 20230714170444.png]]
+![[Pasted image 20230714170507.png]]
+```python
+sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids')
+plt.show()
+```
+![[Pasted image 20230714170720.png]]
+![[Pasted image 20230714170746.png]]
+```python
+sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0)
+plt.show()
+```
+![[Pasted image 20230714170825.png]]
+![[Pasted image 20230714170838.png]]
+```python
+sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0, cumulative=True)
+plt.show()
+```
+![[Pasted image 20230714170945.png]]
