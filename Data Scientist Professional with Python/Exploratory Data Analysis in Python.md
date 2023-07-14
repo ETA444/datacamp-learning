@@ -1219,8 +1219,8 @@ Heatmaps are useful for displaying and exploring patterns or relationships in ma
 sns.heatmap(divorce.corr(), annot=True)
 plt.show()
 ```
+![[Pasted image 20230714222220.png]]
 
-![[Pasted image 20230714164209.png]]
 ***
 ## .scatterplot()
 
@@ -1352,26 +1352,44 @@ In the example, the `.pairplot()` function is used to create a pair plot of the 
 
 Pair plots are useful for exploring the relationships and distributions of multiple variables in a dataset. They allow for the identification of patterns, correlations, and potential outliers in the data. By incorporating hue parameters, pair plots can provide further insights by visualizing the data based on additional categorical variables.
 
-![[Pasted image 20230714164653.png]]
-![[Pasted image 20230714164744.png]]
+```python
+sns.pairplot(data=divorce)
+plt.show()
+```
+![[Pasted image 20230714222310.png]]
+```python
+sns.pairplot(data=divorce, vars=["income_man", "income_woman", "marriage_duration"])
+plt.show()
+```
+![[Pasted image 20230714222406.png]]
 ***
 ### Exercises
-![[Pasted image 20230714165034.png]]
-![[Pasted image 20230714165044.png]]
-![[Pasted image 20230714165137.png]]
+
+##### Exercise 1
+```python
+divorce.corr()
+```
+![[Pasted image 20230714222534.png]]
+```python
+sns.heatmap(divorce.corr(), annot=True, cmap='YlGnBu')
+```
+![[Pasted image 20230714222705.png]]
+
+##### Exercise 2
 ```python
 # Create the scatterplot
 sns.scatterplot(data=divorce, x='marriage_duration', y='num_kids')
 plt.show()
 ```
 ![[Pasted image 20230714165202.png]]
-![[Pasted image 20230714165331.png]]
+
+##### Exercise 3
 ```python
 # Create a pairplot for income_woman and marriage_duration
 sns.pairplot(data=divorce, vars=['income_woman', 'marriage_duration'])
 plt.show()
 ```
-![[Pasted image 20230714165317.png]]
+![[Pasted image 20230714222804.png]]
 ***
 ## .kdeplot()
 
@@ -1433,34 +1451,46 @@ In the example, the `.kdeplot()` function is used to create a kernel density est
 
 Kernel density estimate plots are useful for visualizing the distribution and density of a single variable or the joint distribution of two variables. They provide a smooth representation of the underlying probability density function, allowing for insights into the shape, mode, and spread of the data. By customizing the shading, kernel function, bandwidth estimation, and other parameters, the appearance and level of detail of the plot can be adjusted to suit the specific requirements of the analysis.
 
-![[Pasted image 20230714165843.png]]
-![[Pasted image 20230714170016.png]]
+```python
+sns.kdeplot(data=divorce, x='marriage_duration', hue='education_man')
+plt.show()
+```
+![[Pasted image 20230714222901.png]]
+```python
+sns.kdeplot(data=divorce, x='marriage_duration', hue='education_man', cut=0)
+plt.show()
+```
+![[Pasted image 20230714222957.png]]
+
 ***
+
 ### Exercises
-![[Pasted image 20230714170232.png]]
+
+##### Exercise 1
 ```python
 sns.scatterplot(data=divorce, x='woman_age_marriage', y='income_woman', hue='education_woman')
 plt.show()
 ```
-![[Pasted image 20230714170444.png]]
-![[Pasted image 20230714170507.png]]
+![[Pasted image 20230714223033.png]]
+
+##### Exercise 2
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids')
 plt.show()
 ```
-![[Pasted image 20230714170720.png]]
-![[Pasted image 20230714170746.png]]
+![[Pasted image 20230714223048.png]]
+
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0)
 plt.show()
 ```
-![[Pasted image 20230714170825.png]]
-![[Pasted image 20230714170838.png]]
+![[Pasted image 20230714223103.png]]
+
 ```python
 sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0, cumulative=True)
 plt.show()
 ```
-![[Pasted image 20230714170945.png]]
+![[Pasted image 20230714223123.png]]
 ***
 ## .crosstab()
 
@@ -1522,17 +1552,24 @@ In the example, the `.crosstab()` function is used to create a cross-tabulation 
 
 Cross-tabulation tables are useful for analyzing the relationship between categorical variables and understanding their distribution and association. They can provide insights into patterns, proportions, or conditional frequencies in the data. By including row and column margins, the cross-tabulation table can also show the total counts/sums in each category.
 
-![[Pasted image 20230714171713.png]]
+```python
+# Aggregated values with pd.crosstab()
+pd.crosstab(planes["Source"], planes["Destination"],
+		   values=planes["Price"], aggfunc="median")
+```
+![[Pasted image 20230714223302.png]]
+
 ***
 ### Exercises
-![[Pasted image 20230714171832.png]]
+
+##### Exercise 1
 ```python
 # Print the relative frequency of Job_Category
 print(salaries["Job_Category"].value_counts(normalize=True))
 ```
 ![[Pasted image 20230714172300.png]]
 
-![[Pasted image 20230714172313.png]]
+##### Exercise 2
 ```python
 # Cross-tabulate Company_Size and Experience
 print(pd.crosstab(salaries["Company_Size"], salaries["Experience"]))
@@ -1544,6 +1581,7 @@ print(pd.crosstab(salaries["Job_Category"], salaries["Company_Size"]))
 print(pd.crosstab(salaries["Job_Category"], salaries["Company_Size"],
             values=salaries["Salary_USD"], aggfunc="mean"))
 ```
+
 ***
 ## .cut()
 
@@ -1605,7 +1643,7 @@ The `.cut()` function is useful for discretizing continuous data and creating ca
 ***
 ### Exercises
 
-![[Pasted image 20230714173537.png]]
+##### Exercise 1
 ```python
 # Get the month of the response
 salaries["month"] = salaries["date_of_response"].dt.month
@@ -1617,8 +1655,9 @@ salaries["weekday"] = salaries["date_of_response"].dt.weekday
 sns.heatmap(salaries.corr(), annot=True)
 plt.show()
 ```
-![[Pasted image 20230714174546.png]]
-![[Pasted image 20230714174606.png]]
+![[Pasted image 20230714223413.png]]
+
+##### Exercise 2
 ```python
 # Find the 25th percentile
 twenty_fifth = salaries["Salary_USD"].quantile(0.25)
@@ -1631,10 +1670,8 @@ seventy_fifth = salaries["Salary_USD"].quantile(0.75)
 
 print(twenty_fifth, salaries_median, seventy_fifth)
 ```
-![[Pasted image 20230714174733.png]]
-![[Pasted image 20230714175027.png]]
-![[Pasted image 20230714175352.png]]
-![[Pasted image 20230714175406.png]]
+
+##### Exercise 3
 ```python
 # Create salary labels
 salary_labels = ["entry", "mid", "senior", "exec"]
@@ -1651,6 +1688,7 @@ salaries["salary_level"] = pd.cut(salaries["Salary_USD"],
 sns.countplot(data=salaries, x="Company_Size", hue="salary_level")
 plt.show()
 ```
+
 ***
 ## .barplot()
 
@@ -1714,7 +1752,12 @@ In the example, the `.barplot()` function is used to create a bar plot of the 'V
 
 Bar plots are useful for comparing and visualizing the distribution of a numeric variable across different categories. They provide a quick overview of the central tendency and variation of the values within each category. By incorporating hue parameters, bar plots can represent additional categorical dimensions by using different colors for each category, allowing for more complex comparisons and analyses.
 
-![[Pasted image 20230714175649.png]]
+```python
+sns.barplot(data=planes, x='Airline', y='Duration')
+plt.show()
+```
+![[Pasted image 20230714223539.png]]
+
 ***
 ## .isin()
 
@@ -1757,7 +1800,8 @@ In the example, the `.isin()` function is used to check whether each element in 
 The `.isin()` function is useful for filtering, querying, or manipulating data based on membership in a set of values. It can be used to identify and extract rows or columns that contain specific values, perform conditional operations, or create Boolean masks for data selection.
 ***
 ### Exercises
-![[Pasted image 20230714180021.png]]
+
+##### Exercises 1
 ```python
 # Filter for employees in the US or GB
 usa_and_gb = salaries[salaries['Employee_Location'].isin(["US", "GB"])]
@@ -1766,16 +1810,16 @@ usa_and_gb = salaries[salaries['Employee_Location'].isin(["US", "GB"])]
 sns.barplot(data=usa_and_gb, x="Employee_Location", y="Salary_USD")
 plt.show()
 ```
-![[Pasted image 20230714180524.png]]
+![[Pasted image 20230714223611.png]]
 
-![[Pasted image 20230714180553.png]]
+##### Exercise 2
 ```python
 # Create a bar plot of salary versus company size, factoring in employment status
 sns.barplot(data=salaries, x="Company_Size", y="Salary_USD", hue="Employment_Status")
 plt.show()
 ```
-![[Pasted image 20230714180652.png]]
-![[Pasted image 20230714180850.png]]
+![[Pasted image 20230714223637.png]]
+
 ***
 ## .agg()
 
@@ -1821,7 +1865,16 @@ In the example, the `.agg()` function is used to compute the sum and mean of the
 
 The `.agg()` function provides a flexible way to compute various aggregation statistics or apply custom aggregation functions to subsets of data. It is commonly used in conjunction with grouping operations to calculate summary statistics, create pivot tables, or perform complex aggregations based on specific criteria.
 
-![[Pasted image 20230714181052.png]]
+```python
+# Aggregation
+books.groupby('genre').agg(
+						   mean_rating = ("rating", "mean"),
+						   std_rating = ("rating", "std"),
+						   median_year = ("year", "medianS")
+)
+```
+![[Pasted image 20230714223825.png]]
+
 ***
 ## .isna()
 
@@ -1867,7 +1920,10 @@ In the example, the `.isna()` function is used to check for missing values in th
 
 The `.isna()` function is useful for identifying missing or null values in a dataset. It helps in data cleaning, preprocessing, and handling missing values through methods like imputation or removal. By combining this function with other pandas functions like `.sum()`, `.any()`, or `.all()`, you can perform further operations to analyze and handle missing values in your data.
 
-![[Pasted image 20230714181211.png]]
+```python
+print(salaries.isna().sum())
+```
+![[Pasted image 20230714223900.png]]
 ***
 ## .fillna()
 

@@ -40,7 +40,17 @@ In the example, the `.Categorical()` function is used to convert the `data` Seri
 
 Categorical data type provides advantages in terms of memory usage and performance when working with data that has a limited number of distinct values. It enables efficient storage by mapping the values to a separate array of categories, reducing the memory footprint. Categorical data type also allows for meaningful comparisons, sorting, and ordering of the values based on the specified order or the order of appearance. It can be especially useful for working with categorical variables in statistical analyses, plotting, and machine learning tasks.
 
-![[Pasted image 20230714212157.png]]
+```python
+# 1 # Create a dictionary:
+adult_dtypes = {"Marital Status": "category"}
+
+# 2 # Set the dtype parameter:
+adult = pd.read_csv("data/adult.csv", dtype=adult_dtypes)
+
+# 3 # Check the dtype:
+adult["Marital Status"].dtype
+```
+![[Pasted image 20230714224138.png]]
 
 ***
 ## .nbytes
@@ -72,7 +82,19 @@ The resulting `memory_usage` value will be the total memory usage of the DataFra
 
 The `.nbytes` attribute is useful for assessing the memory footprint of a DataFrame or Series. It can be used to measure the memory consumption of different objects, optimize memory usage, or track memory usage changes during data processing or analysis. By comparing the memory usage before and after certain operations, you can evaluate the impact of those operations on memory efficiency and identify potential opportunities for optimization.
 
-![[Pasted image 20230714211845.png]]
+```python
+# Why do we use categorical: memory
+adult = pd.read_csv("data/adult.csv")
+adult['Marital Status'].nbytes
+```
+![[Pasted image 20230714224258.png]]
+```python
+# Why do we use categorical: memory
+adult["Marital Status"] = adult['Marital Status'].astype("category")
+adult["Marital Status"].nbytes
+```
+![[Pasted image 20230714224355.png]]
+
 
 ***
 ## .Series()
