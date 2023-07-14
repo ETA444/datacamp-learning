@@ -44,8 +44,11 @@ In the example, we have a DataFrame `df` with columns of different data types. T
 
 This function is helpful when you want to focus on specific data types in your analysis or when you need to separate columns based on their data types for further processing.
 
-***Datacamp Example***
-![Pasted image 20230710164636](/images/Pasted%20image%2020230710164636.png)
+
+```python
+print(salaries.select_dtypes('object').head)
+```
+![[Pasted image 20230714215341.png]]
 
 ### All dtypes
 ![Pasted image 20230710164146](/images/Pasted%20image%2020230710164146.png)
@@ -91,8 +94,12 @@ In the example, the `.value_counts()` function is used to count the frequency of
 
 This function is particularly useful for obtaining insights into the distribution of values in a Series and identifying the most common or least common values present.
 
-***Datacamp Example***
-![Pasted image 20230710164544](/images/Pasted%20image%2020230710164544.png)
+
+```python
+print(salaries["Designation"].value_counts())
+```
+![[Pasted image 20230714215319.png]]
+
 
 
 * * *
@@ -209,13 +216,46 @@ In the example, the `np.select()` function is used to apply conditions to the el
 
 This function is useful for applying complex conditional logic to arrays and assigning different values based on specified conditions. It allows for efficient and vectorized operations on large arrays.
 
-**Datacamp example**
-![Pasted image 20230710171000](/images/Pasted%20image%2020230710171000.png)
-![Pasted image 20230710171042](/images/Pasted%20image%2020230710171042.png)
-![Pasted image 20230710171059](/images/Pasted%20image%2020230710171059.png)
-![Pasted image 20230710171114](/images/Pasted%20image%2020230710171114.png)
-![Pasted image 20230710171125](/images/Pasted%20image%2020230710171125.png)
-![Pasted image 20230710171151](/images/Pasted%20image%2020230710171151.png)
+
+```python
+# Finding multiple phrases in strings
+job_categories = ["Data Science", "Data Analytics",
+				 "Data Engineering", "Machine Learning",
+				 "Managerial", "Consultant"]
+
+data_science = "Data Scientist|NLP"
+data_analyst = "Analyst|Analytics"
+data_engineer = "Data Engineer|ETL|Architect|Infrastructure"
+ml_engineer = "Machine Learning|ML|Big Data|AI"
+manager = "Manager|Head|Director|Lead|Principal|Staff"
+consultant = "Consultant|Freelance"
+
+conditions = [
+			  (salaries["Designation"].str.contains(data_science)),
+			  (salaries["Designation"].str.contains(data_analyst)),
+			  (salaries["Designation"].str.contains(data_engineer)),
+			  (salaries["Designation"].str.contains(ml_engineer)),
+			  (salaries["Designation"].str.contains(manager)),
+			  (salaries["Designation"].str.contains(consultant))		  
+]
+
+salaries["Job_Category"] = np.select(conditions,
+									job_categories,
+									default="Other")
+
+print(salaries[["Designation", "Job_Category"]].head())
+
+
+```
+![[Pasted image 20230714220153.png]]
+
+```python
+sns.countplot(data=salaries, x="Job_Category")
+plt.show()
+```
+![[Pasted image 20230714220316.png]]
+
+
 
 ***
 ## .countplot()
@@ -258,8 +298,7 @@ sns.countplot(x='Category', data=df)
 ***
 ### Exercises
 
-First we select only non_numeric columns and save it in non_numeric. Then we loop over all columns in non_numeric and f-print the number of unique values in each column with .nunique.
-
+##### Exercise 1
 ```python
 # Filter the DataFrame for object columns
 non_numeric = planes.select_dtypes("object")
@@ -271,10 +310,9 @@ for col in non_numeric.columns:
 print(f"Number of unique values in {col} column: ", non_numeric[col].nunique())
   
 ```
-![Pasted image 20230710173017](/images/Pasted%20image%2020230710173017.png)
+![[Pasted image 20230714220646.png]]
 
-![Pasted image 20230710191155](/images/Pasted%20image%2020230710191155.png)
-![Pasted image 20230710191217](/images/Pasted%20image%2020230710191217.png)
+##### Exercise 2
 ```python
 # Create a list of categories
 flight_categories = ["Short-haul", "Medium", "Long-haul"]
@@ -288,7 +326,8 @@ medium_flights = "5h|6h|7h|8h|9h"
 # Create long-haul values
 long_flights = "10h|11h|12h|13h|14h|15h|16h"
 ```
-![Pasted image 20230710191426](/images/Pasted%20image%2020230710191426.png)
+
+
 ```python
 # Create conditions for values in flight_categories to be created
 
@@ -706,11 +745,7 @@ In the example, the `.histplot()` function is used to create a histogram plot of
 The `.histplot()` function in seaborn provides a high-level interface to create visually appealing and informative histograms. It offers various customization options and can handle complex plotting scenarios, making it a versatile tool for exploratory data analysis and visualization.
 ***
 ### Exercises
-
-![Pasted image 20230710203014](/images/Pasted%20image%2020230710203014.png)
-![Pasted image 20230710203055](/images/Pasted%20image%2020230710203055.png)
-![Pasted image 20230710204536](/images/Pasted%20image%2020230710204536.png)
-![Pasted image 20230710204641](/images/Pasted%20image%2020230710204641.png)
+##### Exercise 1
 ```python
 # Preview the column
 print(planes["Duration"].head())
@@ -728,9 +763,9 @@ planes["Duration"] = planes["Duration"].astype(float)
 sns.histplot(x='Duration', data=planes)
 plt.show()
 ```
-![Pasted image 20230710205338](/images/Pasted%20image%2020230710205338.png)
+![[Pasted image 20230714220807.png]]
 
-![Pasted image 20230714120053](/images/Pasted%20image%2020230714120053.png)
+##### Exercise 2
 ```python
 # Price standard deviation by Airline
 planes["airline_price_st_dev"] = planes.groupby("Airline")["Price"].transform(lambda x: x.std())
@@ -847,12 +882,8 @@ The resulting values will be:
 The `.quantile()` function is helpful for understanding the distribution and spread of numerical data. It allows you to compute specific quantiles such as the median, quartiles, or any desired percentiles. This information can be useful for data exploration, understanding the central tendency, and identifying data points that fall within certain ranges.
 ***
 ### Exercises
-![[Pasted image 20230714151840.png]]
-![[Pasted image 20230714151854.png]]
-![[Pasted image 20230714151903.png]]
-![[Pasted image 20230714151937.png]]
-![[Pasted image 20230714152651.png]]
-![[Pasted image 20230714152853.png]]
+
+##### Exercise 1
 ```python
 # Plot a histogram of flight prices
 sns.histplot(data=planes, x="Price")
@@ -862,7 +893,9 @@ plt.show()
 print(planes["Duration"].describe())
 ```
 ![[Pasted image 20230714152601.png]]![[Pasted image 20230714152740.png]]
-![[Pasted image 20230714153031.png]]
+
+
+##### Exercise 2
 ```python
 # Find the 75th and 25th percentiles
 price_seventy_fifth = planes["Price"].quantile(0.75)
@@ -964,10 +997,23 @@ In the example, the `.to_datetime()` function is used to convert a Series of dat
 
 The `.to_datetime()` function is useful for converting string representations of dates or times into a pandas DateTime format. Once in this format, pandas provides a range of powerful functionalities for working with dates and times, such as date arithmetic, resampling, indexing, and more.
 
-![[Pasted image 20230714155654.png]]
+###
+```python
+divorce.head(2)
+```
+![[Pasted image 20230714220943.png]]
 
+```python
+divorce['marriage_date'] = pd.to_datetime(divorce[['month', 'day', 'year']])
+divorce.head(2)
+```
+![[Pasted image 20230714221051.png]]
 ### Using dt.month, dt.day, dt.year
-![[Pasted image 20230714155757.png]]
+```python
+divorce['marriage_month'] = divorce["marriage_date"].dt.month
+divorce.head()
+```
+![[Pasted image 20230714221436.png]]
 
 ***
 ## .lineplot()
@@ -1040,22 +1086,21 @@ Line plots are useful for displaying the relationship between two continuous var
 
 ***
 ### Exercises
-![[Pasted image 20230714160629.png]]
+
+##### Exercise 1
 ```python
 # Import divorce.csv, parsing the appropriate columns as dates in the import
 divorce = pd.read_csv('divorce.csv', parse_dates = ["divorce_date", "dob_man", "dob_woman", "marriage_date"])
 
-print(divorce.dtypes)
+print(divorce.info())
 ```
-![[Pasted image 20230714160858.png]]
 ![[Pasted image 20230714160928.png]]
-![[Pasted image 20230714160943.png]]
 ```python
 # Convert the marriage_date column to DateTime values
 divorce["marriage_date"] = pd.to_datetime(divorce["marriage_date"])
 ```
-![[Pasted image 20230714162114.png]]
-![[Pasted image 20230714162409.png]]
+
+##### Exercise 2
 ```python
 # Define the marriage_year column
 divorce["marriage_year"] = divorce["marriage_date"].dt.year
@@ -1169,6 +1214,11 @@ plt.show()
 In the example, the `.heatmap()` function is used to create a heatmap of the DataFrame `df`. The resulting heatmap visualizes the values in the DataFrame using different colors, and annotations are added to each cell to display the data values.
 
 Heatmaps are useful for displaying and exploring patterns or relationships in matrix-like data. They are commonly used to visualize correlation matrices, confusion matrices, and other forms of tabular data. Heatmaps allow for quick identification of high and low values, patterns, clusters, or trends within the data.
+
+```python
+sns.heatmap(divorce.corr(), annot=True)
+plt.show()
+```
 
 ![[Pasted image 20230714164209.png]]
 ***
