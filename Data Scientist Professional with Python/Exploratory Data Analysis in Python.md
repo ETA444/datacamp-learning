@@ -1243,3 +1243,83 @@ Scatter plots are commonly used to explore the relationship between two continuo
 ***
 ## .pairplot()
 
+The `.pairplot()` function in seaborn is used to create a grid of scatter plots, also known as a pair plot, which displays the pairwise relationships between multiple variables in a dataset. It provides a visual representation of the correlations and distributions of variables.
+
+**Function signature:**
+```python
+seaborn.pairplot(
+    data,
+    *,
+    hue=None,
+    hue_order=None,
+    palette=None,
+    vars=None,
+    x_vars=None,
+    y_vars=None,
+    kind='scatter',
+    diag_kind='auto',
+    markers=None,
+    height=2.5,
+    aspect=1,
+    dropna=True,
+    plot_kws=None,
+    diag_kws=None,
+    grid_kws=None,
+    size=None
+)
+```
+
+**Parameters:**
+- `data`: Specifies the input data for the pair plot. It can be a DataFrame or any other long-form data object.
+- `hue` (optional): An additional categorical variable used for coloring the scatter plots based on different categories.
+- `vars`, `x_vars`, `y_vars` (optional): Specify the variables to be included in the pair plot. They can be column names from the DataFrame or arrays-like objects.
+- `kind` (optional): Specifies the type of plot for the off-diagonal subplots. It can be `'scatter'`, `'reg'`, `'resid'`, `'kde'`, or `'hex'`.
+- `diag_kind` (optional): Specifies the type of plot for the diagonal subplots. It can be `'auto'`, `'hist'`, `'kde'`, or `None`.
+- Many more parameters are available to customize the appearance and behavior of the pair plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'SepalLength': [5.1, 4.9, 4.7, 4.6, 5.0],
+    'SepalWidth': [3.5, 3.0, 3.2, 3.1, 3.6],
+    'PetalLength': [1.4, 1.4, 1.3, 1.5, 1.4],
+    'PetalWidth': [0.2, 0.2, 0.2, 0.2, 0.2],
+    'Species': ['Setosa', 'Setosa', 'Setosa', 'Setosa', 'Setosa']
+}
+df = pd.DataFrame(data)
+
+# Create a pair plot
+sns.pairplot(data=df, hue='Species')
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.pairplot()` function is used to create a pair plot of the variables in the DataFrame `df`. The resulting pair plot displays scatter plots for each pairwise combination of variables and differentiates the data points by coloring them based on the 'Species' variable.
+
+Pair plots are useful for exploring the relationships and distributions of multiple variables in a dataset. They allow for the identification of patterns, correlations, and potential outliers in the data. By incorporating hue parameters, pair plots can provide further insights by visualizing the data based on additional categorical variables.
+
+![[Pasted image 20230714164653.png]]
+![[Pasted image 20230714164744.png]]
+***
+### Exercises
+![[Pasted image 20230714165034.png]]
+![[Pasted image 20230714165044.png]]
+![[Pasted image 20230714165137.png]]
+```python
+# Create the scatterplot
+sns.scatterplot(data=divorce, x='marriage_duration', y='num_kids')
+plt.show()
+```
+![[Pasted image 20230714165202.png]]
+![[Pasted image 20230714165331.png]]
+```python
+# Create a pairplot for income_woman and marriage_duration
+sns.pairplot(data=divorce, vars=['income_woman', 'marriage_duration'])
+plt.show()
+```
+![[Pasted image 20230714165317.png]]
+***
