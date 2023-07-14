@@ -77,5 +77,10 @@ While these notes are primarily for my own reference, others who are learning to
 
 This project is licensed under the MIT License.
 
+##  
+##### ~ Thank you for being here ~
+##### Sign up to Datacamp for the full experience: [https://www.datacamp.com](https://www.datacamp.com)
+##### I use Obsidian to manage and write these notes: [https://www.obsidian.md](https://www.obsidian.md)
+##### Add me on LinkedIn: [https://www.linkedin.com/georgedreemer](https://www.linkedin.com/in/georgedreemer/)
 ---
-\* **Disclaimer:** I did my best to not infringe on Datacamp's rights by mostly only outlining the functions themselves, you can always reach me at `georgedreemer@proton.me`.
+###### Disclaimer: I did my best to not infringe on Datacamp's rights by mostly only outlining the functions themselves, you can always reach me at `penpal@dreemcorp.com` for modification/removal.
