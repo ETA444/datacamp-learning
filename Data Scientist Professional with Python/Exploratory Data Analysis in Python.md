@@ -720,3 +720,171 @@ planes["price_destination_mean"] = planes.groupby("Destination")["Price"].tran
 
 print(planes[["Destination","price_destination_mean"]].value_counts())
 ```
+
+* * *
+## .describe()
+
+The `.describe()` function in pandas is used to generate descriptive statistics of a DataFrame or Series, providing summary information about the central tendency, dispersion, and shape of the data.
+
+**Function signature:**
+```python
+DataFrame.describe(percentiles=None, include=None, exclude=None)
+```
+
+**Parameters:**
+- `percentiles` (optional): Specifies the percentiles to include in the summary. The default is `[.25, .5, .75]`, which includes the 25th, 50th (median), and 75th percentiles.
+- `include` (optional): Specifies the data types to include in the summary. It can be a list of data types or None, which includes all types. By default, only numeric columns are included.
+- `exclude` (optional): Specifies the data types to exclude from the summary. It can be a list of data types or None, which excludes no types. By default, None.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'Category': ['A', 'B', 'C', 'A', 'B'],
+    'Value': [1, 2, 3, 4, 5]
+}
+df = pd.DataFrame(data)
+
+# Generate descriptive statistics
+summary = df.describe()
+```
+
+The resulting `summary` DataFrame will be:
+```
+          Value
+count  5.000000
+mean   3.000000
+std    1.581139
+min    1.000000
+25%    2.000000
+50%    3.000000
+75%    4.000000
+max    5.000000
+```
+
+In the example, the `.describe()` function is used to generate descriptive statistics for the DataFrame `df`. The resulting `summary` DataFrame includes key summary statistics such as count, mean, standard deviation, minimum, 25th percentile, median (50th percentile), 75th percentile, and maximum for the numeric column 'Value'.
+
+The `.describe()` function provides a quick overview of the distribution and basic statistical properties of the data. It is helpful for gaining initial insights, detecting outliers, understanding the range of values, and identifying potential issues or anomalies in the dataset.
+
+***
+## .quantile()
+
+The `.quantile()` function in pandas is used to compute the quantiles of a Series or DataFrame. Quantiles represent the values that partition a dataset into equal-sized intervals. It is handy for calculating IQR and subsequently outliers.
+
+**Function signature:**
+```python
+Series.quantile(q=0.5, interpolation='linear')
+```
+
+**Parameters:**
+- `q`: Specifies the quantile(s) to compute. It can be a float representing a single quantile (e.g., 0.5 for the median) or a list/array of quantiles.
+- `interpolation` (optional): Specifies the method to use for interpolation when the desired quantile lies between two data points. It can be `'linear'`, `'lower'`, `'higher'`, `'midpoint'`, or `'nearest'`.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+s = pd.Series([1, 2, 3, 4, 5])
+
+# Compute the median (50th percentile)
+median = s.quantile(0.5)
+
+# Compute the 25th and 75th percentiles
+percentiles = s.quantile([0.25, 0.75])
+
+# Calculating IQR
+iqr = s.quantile(0.75) - s.quantile(0.25)
+
+# Identifying outliers
+upper_limit = s.quantile(0.75) + (1.5 * iqr)
+lower_limit = s.quantile(0.25) - (1.5 * iqr)
+
+# Subsetting to explore outliers: In a dataframe this would be handy as you could subset for values below the lower limit and above the upper limit, respectively. This would allow you to explore these observations in detail and in relation to other columns in the dataframe
+
+# Subsetting to remove outliers: In the opposite way you could also keep values between these upper and lower limit thereby removing all outliers on both sides.
+```
+
+In the example, the `.quantile()` function is used to compute quantiles of the Series `s`. The `q` parameter is set to 0.5 to compute the median (50th percentile) in the first case. In the second case, the `q` parameter is a list `[0.25, 0.75]` to compute the 25th and 75th percentiles.
+
+The resulting values will be:
+- `median`: 3.0
+- `percentiles`:
+  - 25th percentile: 2.0
+  - 75th percentile: 4.0
+
+The `.quantile()` function is helpful for understanding the distribution and spread of numerical data. It allows you to compute specific quantiles such as the median, quartiles, or any desired percentiles. This information can be useful for data exploration, understanding the central tendency, and identifying data points that fall within certain ranges.
+***
+### Exercises
+![[Pasted image 20230714151840.png]]
+![[Pasted image 20230714151854.png]]
+![[Pasted image 20230714151903.png]]
+![[Pasted image 20230714151937.png]]
+![[Pasted image 20230714152651.png]]
+![[Pasted image 20230714152853.png]]
+```python
+# Plot a histogram of flight prices
+sns.histplot(data=planes, x="Price")
+plt.show()
+
+# Display descriptive statistics for flight duration
+print(planes["Duration"].describe())
+```
+![[Pasted image 20230714152601.png]]![[Pasted image 20230714152740.png]]
+![[Pasted image 20230714153031.png]]
+```python
+# Find the 75th and 25th percentiles
+price_seventy_fifth = planes["Price"].quantile(0.75)
+price_twenty_fifth = planes["Price"].quantile(0.25)
+
+# Calculate iqr
+prices_iqr = price_seventy_fifth - price_twenty_fifth
+
+# Calculate the thresholds
+upper = price_seventy_fifth + (1.5 * prices_iqr)
+lower = price_twenty_fifth - (1.5 * prices_iqr)
+
+# Subset the data
+planes = planes[(planes["Price"] > lower) & (planes["Price"] < upper)]
+  
+print(planes["Price"].describe())
+```
+![[Pasted image 20230714153409.png]]
+***
+## .read_csv()
+
+The `.read_csv()` function in pandas is used to read a CSV (Comma-Separated Values) file and load its contents into a pandas DataFrame.
+
+**Function signature:**
+```python
+pandas.read_csv(filepath_or_buffer, sep=',', delimiter=None, header='infer', names=None, index_col=None, usecols=None, dtype=None, parse_dates=False, infer_datetime_format=False, dayfirst=False, nrows=None, skiprows=None, skipfooter=0, na_values=None, keep_default_na=True, na_filter=True, verbose=False, skip_blank_lines=True, encoding=None, squeeze=False, thousands=None, decimal='.', lineterminator=None, comment=None, error_bad_lines=True, warn_bad_lines=True, on_bad_lines=None, delimiter_whitespace=False, low_memory=True, memory_map=False, float_precision=None)
+```
+
+**Parameters:**
+- `filepath_or_buffer`: Specifies the path to the CSV file or a URL or any object with a `read()` method.
+- `sep` (optional): Specifies the delimiter character to separate fields. The default is `','`.
+- `header` (optional): Specifies the row number to use as column names. The default is `'infer'`, which uses the first row as column names. If `header=None`, no column names are inferred, and the columns are assigned integer labels.
+- `index_col` (optional): Specifies the column(s) to use as the row index. It can be a single column name or a list of column names.
+- `parse_dates` (optional): If `parse_dates=True`, the function attempts to parse dates in the CSV file and convert them into datetime objects.
+- `dtype` (optional): Specifies the data type for specific columns or the entire DataFrame.
+- `na_values` (optional): Specifies the values to consider as missing or NA values.
+- Many more parameters are available to handle various file formats and data reading options.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Read a CSV file into a DataFrame
+df = pd.read_csv('data.csv')
+
+# Print the first few rows of the DataFrame
+print(df.head())
+```
+
+In the example, the `.read_csv()` function is used to read a CSV file named `'data.csv'` into a pandas DataFrame. The resulting DataFrame is stored in the variable `df`. The `.head()` function is then used to display the first few rows of the DataFrame.
+
+The `.read_csv()` function provides a convenient way to read CSV files and import them into pandas for further data analysis and manipulation. It allows you to handle various file formats, specify custom delimiters, handle missing values, and perform various data reading configurations.
+
+***
