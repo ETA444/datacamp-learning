@@ -1411,3 +1411,511 @@ sns.kdeplot(data=divorce, x='marriage_duration', hue='num_kids', cut=0, cumulati
 plt.show()
 ```
 ![[Pasted image 20230714170945.png]]
+***
+## .crosstab()
+
+The `.crosstab()` function in pandas is used to compute a cross-tabulation table, which displays the frequency distribution of variables in a tabular format. It provides a convenient way to summarize and analyze the relationship between two or more categorical variables.
+
+**Function signature:**
+```python
+pandas.crosstab(
+    index,
+    columns,
+    values=None,
+    rownames=None,
+    colnames=None,
+    aggfunc=None,
+    margins=False,
+    margins_name='All',
+    dropna=True,
+    normalize=False
+)
+```
+
+**Parameters:**
+- `index`: Specifies the column or array-like object to be used as the index (rows) of the cross-tabulation table.
+- `columns`: Specifies the column or array-like object to be used as the columns of the cross-tabulation table.
+- `values` (optional): Specifies the column or array-like object to be used as the values in the table. If not provided, the count of occurrences will be used.
+- `rownames` and `colnames` (optional): Specifies the names for the index and column names, respectively.
+- `aggfunc` (optional): Specifies the aggregation function to be applied when values are specified. It can be a function name (e.g., `'sum'`, `'mean'`) or a callable function.
+- `margins` (optional): Specifies whether to include row and column margins, which provide the total counts/sums in the table.
+- `dropna` (optional): Specifies whether to exclude missing values (`NaN`) from the cross-tabulation.
+- `normalize` (optional): Specifies whether to normalize the cross-tabulation table by dividing each cell by the sum of all cells. The result will represent proportions or percentages.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'Gender': ['M', 'F', 'M', 'F', 'F'],
+    'Education': ['High School', 'College', 'College', 'High School', 'College']
+}
+df = pd.DataFrame(data)
+
+# Create a cross-tabulation table
+cross_tab = pd.crosstab(index=df['Gender'], columns=df['Education'])
+
+# Display the cross-tabulation table
+print(cross_tab)
+```
+
+The resulting `cross_tab` DataFrame will be:
+```
+Education  College  High School
+Gender                        
+F                2            1
+M                1            1
+```
+
+In the example, the `.crosstab()` function is used to create a cross-tabulation table based on the 'Gender' and 'Education' variables in the DataFrame `df`. The resulting table summarizes the frequency distribution of education levels based on gender.
+
+Cross-tabulation tables are useful for analyzing the relationship between categorical variables and understanding their distribution and association. They can provide insights into patterns, proportions, or conditional frequencies in the data. By including row and column margins, the cross-tabulation table can also show the total counts/sums in each category.
+
+![[Pasted image 20230714171713.png]]
+***
+### Exercises
+![[Pasted image 20230714171832.png]]
+```python
+# Print the relative frequency of Job_Category
+print(salaries["Job_Category"].value_counts(normalize=True))
+```
+![[Pasted image 20230714172300.png]]
+
+![[Pasted image 20230714172313.png]]
+```python
+# Cross-tabulate Company_Size and Experience
+print(pd.crosstab(salaries["Company_Size"], salaries["Experience"]))
+
+# Cross-tabulate Job_Category and Company_Size
+print(pd.crosstab(salaries["Job_Category"], salaries["Company_Size"]))
+
+# Cross-tabulate Job_Category and Company_Size
+print(pd.crosstab(salaries["Job_Category"], salaries["Company_Size"],
+            values=salaries["Salary_USD"], aggfunc="mean"))
+```
+***
+## .cut()
+
+The `.cut()` function in pandas is used to segment and categorize numerical data into discrete intervals or bins. It allows for the creation of categorical variables from continuous data by dividing the data into groups or ranges.
+
+**Function signature:**
+```python
+pandas.cut(
+    x,
+    bins,
+    right=True,
+    labels=None,
+    retbins=False,
+    precision=3,
+    include_lowest=False,
+    duplicates='raise',
+    ordered=True
+)
+```
+
+**Parameters:**
+- `x`: Specifies the input numerical data to be categorized into bins. It can be a Series, DataFrame column, or a NumPy array.
+- `bins`: Specifies the intervals or cut points to define the bins. It can be an integer representing the number of equal-width bins, a sequence of bin edges, or an interval specification.
+- `right` (optional): Specifies whether the intervals are right-closed (includes the right bin edge) or left-closed (excludes the right bin edge).
+- `labels` (optional): Specifies the labels to assign to the bins. If not provided, the resulting bins will be integer-based labels.
+- `retbins` (optional): Specifies whether to return the bins as well. If `True`, a tuple of (resulting_categorical_data, bins) will be returned.
+- Many more parameters are available to customize the behavior of the binning process.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = pd.Series([1, 3, 5, 7, 9])
+
+# Cut the data into bins
+bins = [0, 4, 8, 10]
+categories = pd.cut(data, bins)
+
+# Display the categorized data
+print(categories)
+```
+
+The resulting `categories` Series will be:
+```
+0     (0, 4]
+1     (0, 4]
+2     (4, 8]
+3     (4, 8]
+4    (8, 10]
+dtype: category
+Categories (3, interval[int64]): [(0, 4] < (4, 8] < (8, 10]]
+```
+
+In the example, the `.cut()` function is used to categorize the numerical data in the `data` Series into bins specified by the `bins` parameter. The resulting `categories` Series represents the categorical data with the respective bin intervals.
+
+The `.cut()` function is useful for discretizing continuous data and creating categories or intervals for analysis. It is commonly used in data preprocessing, feature engineering, and exploratory data analysis. By specifying appropriate bins and labels, it allows for the transformation of numerical data into meaningful and interpretable categorical variables.
+
+***
+### Exercises
+
+![[Pasted image 20230714173537.png]]
+```python
+# Get the month of the response
+salaries["month"] = salaries["date_of_response"].dt.month
+
+# Extract the weekday of the response
+salaries["weekday"] = salaries["date_of_response"].dt.weekday  
+
+# Create a heatmap
+sns.heatmap(salaries.corr(), annot=True)
+plt.show()
+```
+![[Pasted image 20230714174546.png]]
+![[Pasted image 20230714174606.png]]
+```python
+# Find the 25th percentile
+twenty_fifth = salaries["Salary_USD"].quantile(0.25)
+
+# Save the median
+salaries_median = salaries["Salary_USD"].median()
+
+# Gather the 75th percentile
+seventy_fifth = salaries["Salary_USD"].quantile(0.75)
+
+print(twenty_fifth, salaries_median, seventy_fifth)
+```
+![[Pasted image 20230714174733.png]]
+![[Pasted image 20230714175027.png]]
+![[Pasted image 20230714175352.png]]
+![[Pasted image 20230714175406.png]]
+```python
+# Create salary labels
+salary_labels = ["entry", "mid", "senior", "exec"]
+  
+# Create the salary ranges list
+salary_ranges = [0, twenty_fifth, salaries_median, seventy_fifth, salaries["Salary_USD"].max()]
+
+# Create salary_level
+salaries["salary_level"] = pd.cut(salaries["Salary_USD"],
+                                  bins=salary_ranges,
+                                  labels=salary_labels)
+
+# Plot the count of salary levels at companies of different sizes
+sns.countplot(data=salaries, x="Company_Size", hue="salary_level")
+plt.show()
+```
+***
+## .barplot()
+
+The `.barplot()` function in seaborn is used to create a bar plot, which visualizes the relationship between a categorical variable and a numeric variable. It displays the average value of the numeric variable for each category as a bar, with the height of the bar representing the value.
+
+**Function signature:**
+```python
+seaborn.barplot(
+    *,
+    x=None,
+    y=None,
+    hue=None,
+    data=None,
+    order=None,
+    hue_order=None,
+    estimator=<function mean>,
+    ci=95,
+    n_boot=1000,
+    units=None,
+    orient=None,
+    color=None,
+    palette=None,
+    saturation=0.75,
+    errcolor='.26',
+    errwidth=None,
+    capsize=None,
+    dodge=True,
+    ax=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `x` and `y` (optional): The variables to be plotted on the x and y axes, respectively. They can be column names from the DataFrame or arrays-like objects.
+- `hue` (optional): An additional categorical variable used for grouping the data and creating separate bars with different colors.
+- `data` (optional): Specifies the DataFrame or long-form data object that contains the data to be plotted.
+- `order` (optional): Specifies the order in which the categories should be plotted.
+- `estimator` (optional): Specifies the statistical function used to estimate the value for each category. It can be a function name (e.g., `'mean'`, `'median'`) or a callable function.
+- `ci` (optional): Specifies the size of the confidence interval to be drawn around the estimated values.
+- Many more parameters are available to customize the appearance and behavior of the bar plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {
+    'Category': ['A', 'B', 'C', 'A', 'B', 'C'],
+    'Value': [10, 15, 5, 8, 12, 7]
+}
+df = pd.DataFrame(data)
+
+# Create a bar plot
+sns.barplot(x='Category', y='Value', data=df)
+
+# Display the plot
+plt.show()
+```
+
+In the example, the `.barplot()` function is used to create a bar plot of the 'Value' variable for each category in the DataFrame `df`. The resulting bar plot visualizes the average value for each category as a bar.
+
+Bar plots are useful for comparing and visualizing the distribution of a numeric variable across different categories. They provide a quick overview of the central tendency and variation of the values within each category. By incorporating hue parameters, bar plots can represent additional categorical dimensions by using different colors for each category, allowing for more complex comparisons and analyses.
+
+![[Pasted image 20230714175649.png]]
+***
+## .isin()
+
+The `.isin()` function in pandas is used to check whether each element in a Series or DataFrame column is contained in a specified list or another Series. It returns a Boolean Series or DataFrame indicating whether each element is present in the specified values.
+
+**Function signature:**
+```python
+Series.isin(values)
+```
+
+**Parameters:**
+- `values`: Specifies the list, array, or Series of values to check for membership.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = pd.Series([1, 2, 3, 4, 5])
+
+# Check if each element is in a list of values
+is_member = data.isin([2, 4, 6])
+
+# Display the result
+print(is_member)
+```
+
+The resulting `is_member` Series will be:
+```
+0    False
+1     True
+2    False
+3     True
+4    False
+dtype: bool
+```
+
+In the example, the `.isin()` function is used to check whether each element in the `data` Series is present in the list `[2, 4, 6]`. The resulting `is_member` Series indicates whether each element is a member of the specified values, with `True` representing membership and `False` representing non-membership.
+
+The `.isin()` function is useful for filtering, querying, or manipulating data based on membership in a set of values. It can be used to identify and extract rows or columns that contain specific values, perform conditional operations, or create Boolean masks for data selection.
+***
+### Exercises
+![[Pasted image 20230714180021.png]]
+```python
+# Filter for employees in the US or GB
+usa_and_gb = salaries[salaries['Employee_Location'].isin(["US", "GB"])]
+
+# Create a barplot of salaries by location
+sns.barplot(data=usa_and_gb, x="Employee_Location", y="Salary_USD")
+plt.show()
+```
+![[Pasted image 20230714180524.png]]
+
+![[Pasted image 20230714180553.png]]
+```python
+# Create a bar plot of salary versus company size, factoring in employment status
+sns.barplot(data=salaries, x="Company_Size", y="Salary_USD", hue="Employment_Status")
+plt.show()
+```
+![[Pasted image 20230714180652.png]]
+![[Pasted image 20230714180850.png]]
+***
+## .agg()
+
+The `.agg()` function in pandas is used to apply one or more aggregation functions to a DataFrame or Series. It allows for the computation of summary statistics or customized aggregations on groups of data.
+
+**Function signature:**
+```python
+DataFrame.agg(func=None, axis=0, *args, **kwargs)
+```
+
+**Parameters:**
+- `func`: Specifies the aggregation function(s) to apply. It can be a single function or a list/dictionary of functions.
+- `axis` (optional): Specifies the axis along which the aggregation is performed. `axis=0` (default) applies the aggregation vertically (column-wise), while `axis=1` applies it horizontally (row-wise).
+- `*args` and `**kwargs`: Additional arguments and keyword arguments that can be passed to the aggregation function(s).
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'Category': ['A', 'A', 'B', 'B', 'B'],
+    'Value': [10, 15, 5, 8, 12]
+}
+df = pd.DataFrame(data)
+
+# Compute the sum and mean of 'Value' for each category
+summary = df.groupby('Category')['Value'].agg(['sum', 'mean'])
+
+# Display the summary statistics
+print(summary)
+```
+
+The resulting `summary` DataFrame will be:
+```
+          sum  mean
+Category           
+A          25  12.5
+B          25   8.3
+```
+
+In the example, the `.agg()` function is used to compute the sum and mean of the 'Value' column for each category in the DataFrame `df`. The resulting `summary` DataFrame contains the summary statistics grouped by the 'Category' column.
+
+The `.agg()` function provides a flexible way to compute various aggregation statistics or apply custom aggregation functions to subsets of data. It is commonly used in conjunction with grouping operations to calculate summary statistics, create pivot tables, or perform complex aggregations based on specific criteria.
+
+![[Pasted image 20230714181052.png]]
+***
+## .isna()
+
+The `.isna()` function in pandas is used to check for missing or null values in a DataFrame or Series. It returns a Boolean DataFrame or Series indicating whether each element is missing (`True`) or not missing (`False`).
+
+**Function signature:**
+```python
+DataFrame.isna()
+```
+
+**Parameters:**
+This function does not take any additional parameters.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'A': [1, None, 3, 4, None],
+    'B': [5, 6, 7, None, 9]
+}
+df = pd.DataFrame(data)
+
+# Check for missing values
+is_missing = df.isna()
+
+# Display the result
+print(is_missing)
+```
+
+The resulting `is_missing` DataFrame will be:
+```
+       A      B
+0  False  False
+1   True  False
+2  False  False
+3  False   True
+4   True  False
+```
+
+In the example, the `.isna()` function is used to check for missing values in the DataFrame `df`. The resulting `is_missing` DataFrame indicates whether each element in the original DataFrame is missing (`True`) or not missing (`False`).
+
+The `.isna()` function is useful for identifying missing or null values in a dataset. It helps in data cleaning, preprocessing, and handling missing values through methods like imputation or removal. By combining this function with other pandas functions like `.sum()`, `.any()`, or `.all()`, you can perform further operations to analyze and handle missing values in your data.
+
+![[Pasted image 20230714181211.png]]
+***
+## .fillna()
+
+The `.fillna()` function in pandas is used to fill missing or null values in a DataFrame or Series with specified values. It provides a way to handle or replace missing data points in a dataset.
+
+**Function signature:**
+```python
+DataFrame.fillna(
+    value=None,
+    method=None,
+    axis=None,
+    inplace=False,
+    limit=None,
+    downcast=None,
+    **kwargs
+)
+```
+
+**Parameters:**
+- `value` (optional): Specifies the value or dictionary of values to fill the missing values with.
+- `method` (optional): Specifies the method to use for filling missing values. It can be `'backfill'`, `'bfill'`, `'pad'`, `'ffill'`, or a custom method.
+- `axis` (optional): Specifies the axis along which missing values are filled. `axis=0` (default) fills missing values vertically (column-wise), while `axis=1` fills them horizontally (row-wise).
+- `inplace` (optional): Specifies whether to modify the DataFrame in place or return a new DataFrame with the filled values.
+- `limit` (optional): Specifies the maximum number of consecutive missing values to fill.
+- `downcast` (optional): Specifies a type casting option to downcast the filled values to a smaller dtype.
+- `**kwargs`: Additional keyword arguments that can be passed to control the behavior of specific filling methods.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'A': [1, None, 3, None, 5],
+    'B': [None, 6, None, 8, 9]
+}
+df = pd.DataFrame(data)
+
+# Fill missing values with a specific value
+filled_df = df.fillna(value=0)
+
+# Display the filled DataFrame
+print(filled_df)
+```
+
+The resulting `filled_df` DataFrame will be:
+```
+     A    B
+0  1.0  0.0
+1  0.0  6.0
+2  3.0  0.0
+3  0.0  8.0
+4  5.0  9.0
+```
+
+In the example, the `.fillna()` function is used to fill the missing values in the DataFrame `df` with the value 0. The resulting `filled_df` DataFrame contains the original data with the missing values replaced by 0.
+
+The `.fillna()` function provides a convenient way to handle missing or null values in a dataset. It allows for various strategies to fill missing values, such as replacing with a constant value, filling with the previous or next valid value (forward fill or backward fill), or applying custom filling methods. By specifying different values or methods, you can customize the approach to fill missing data based on the specific requirements of your analysis.
+
+***
+## .map()
+
+The `.map()` function in pandas is used to transform values in a Series or DataFrame column based on a mapping or a provided function. It allows for the replacement or transformation of values in a column using a specified mapping or a callable function.
+
+**Function signature:**
+```python
+Series.map(arg, na_action=None)
+```
+
+**Parameters:**
+- `arg`: Specifies the mapping or the callable function to apply to each element in the Series or DataFrame column.
+- `na_action` (optional): Specifies the action to take if there are missing values (`NaN`) in the Series. It can be `'ignore'` to leave the missing values as they are, or `'raise'` to raise an exception.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = pd.Series(['apple', 'banana', 'orange'])
+
+# Create a mapping dictionary
+mapping = {'apple': 'fruit', 'banana': 'fruit', 'orange': 'fruit'}
+
+# Map the values using the mapping dictionary
+mapped_data = data.map(mapping)
+
+# Display the mapped Series
+print(mapped_data)
+```
+
+The resulting `mapped_data` Series will be:
+```
+0    fruit
+1    fruit
+2    fruit
+dtype: object
+```
+
+In the example, the `.map()` function is used to map the values in the `data` Series using the `mapping` dictionary. The resulting `mapped_data` Series contains the transformed values based on the mapping.
+
+The `.map()` function is useful for replacing values in a Series or DataFrame column based on a provided mapping or a callable function. It enables various data transformations, such as converting categorical values to numerical representations, performing data cleaning or data normalization tasks, or applying custom transformations based on specific criteria. Additionally, the `.map()` function can be used in conjunction with lambda functions or other callable objects to perform more complex transformations on the data.
