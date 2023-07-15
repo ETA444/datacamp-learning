@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ca224018f0d52bff",
+            "id": "4e3d92315f70fa3c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -17,14 +17,6 @@
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "4e3d92315f70fa3c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
             }
           }
         ]
@@ -154,12 +146,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ca224018f0d52bff",
+  "active": "4e3d92315f70fa3c",
   "lastOpenFiles": [
+    "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "images/Pasted image 20230715201534.png",
     "images/Pasted image 20230715201336.png",
     "images/Pasted image 20230715200952.png",
-    "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "images/datacamp-learning_thumb.png",
     "datacamp-learning_thumb.png",
     "images/Pasted image 20230714224355.png",
@@ -168,7 +160,6 @@
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "images/Pasted image 20230714223900.png",
     "images/Pasted image 20230714223825.png",
-    "images/Pasted image 20230714223637.png",
     "quizdata_generator.py~",
     "quiz_data.json",
     "quizdata_generator.py",

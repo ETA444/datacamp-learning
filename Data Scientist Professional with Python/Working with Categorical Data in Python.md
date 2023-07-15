@@ -256,20 +256,20 @@ groupby_object = adult.groupby(by=["Above/Below 50k"])
 
 groupby_object.mean()
 ```
-![[Pasted image 20230715200952.png]]
+![Pasted image 20230715200952](/images/Pasted%20image%2020230715200952.png)
 ```python
 adult.groupby(by=["Above/Below 50k"]).mean()
 ```
-![[Pasted image 20230715200952.png]]
+![Pasted image 20230715200952](/images/Pasted%20image%2020230715200952.png)
 
 ```python
 adult.groupby(by=["Above/Below 50k"])['Age', 'Education Num'].sum()
 ```
-![[Pasted image 20230715201336.png]]
+![Pasted image 20230715201336](/images/Pasted%20image%2020230715201336.png)
 
 ```python
 adult.groupby(by=["Above/Below50k", "Marital Status"]).size
 ```
-![[Pasted image 20230715201534.png]]
+![Pasted image 20230715201534](/images/Pasted%20image%2020230715201534.png)
 ***
 ## 
