@@ -193,4 +193,83 @@ print(adult2.dtypes)
 ```
 
 ***
+## .groupby()
+
+The `.groupby()` function in pandas is used to split a DataFrame into groups based on one or more columns. It is typically followed by an aggregation or transformation operation to compute summary statistics or perform group-wise operations on the data.
+
+**Function signature:**
+```python
+DataFrame.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, squeeze=<no_default>, observed=False, **kwargs)
+```
+
+**Parameters:**
+- `by`: Specifies the column(s) or key(s) by which the DataFrame should be grouped. It can be a column name, a list of column names, an array, or a dictionary mapping column names to group keys.
+- `axis` (optional): Specifies the axis along which the grouping is performed. `axis=0` (default) groups the data vertically (by rows), while `axis=1` groups it horizontally (by columns).
+- `level` (optional): Specifies the level(s) of a MultiIndex to be used for grouping.
+- `as_index` (optional): Specifies whether to set the grouping columns as the index of the resulting DataFrame. If `True`, the grouping columns become the index. If `False`, they remain as regular columns.
+- `sort` (optional): Specifies whether to sort the resulting groups by the group keys. If `True`, the groups are sorted. If `False`, the groups are not sorted.
+- `group_keys` (optional): Specifies whether to include the group keys in the resulting DataFrame index or columns.
+- `observed` (optional): Specifies whether to use only observed values for grouping. If `True`, only the observed values are used. If `False`, all possible values from the grouping columns are included, even if they are not observed in the data.
+- `**kwargs`: Additional keyword arguments that can be passed to control specific aspects of the grouping operation.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {
+    'Category': ['A', 'B', 'A', 'B', 'A'],
+    'Value': [10, 15, 5, 8, 12]
+}
+df = pd.DataFrame(data)
+
+# Group the DataFrame by 'Category' column
+grouped_df = df.groupby('Category')
+
+# Perform aggregation on the grouped data
+mean_values = grouped_df['Value'].mean()
+
+# Display the mean values
+print(mean_values)
+```
+
+The resulting `mean_values` Series will be:
+```
+Category
+A    9.0
+B    11.5
+Name: Value, dtype: float64
+```
+
+In the example, the `.groupby()` function is used to group the DataFrame `df` by the 'Category' column. The resulting `grouped_df` object represents the grouped data. Subsequently, the mean of the 'Value' column is computed for each group using the `.mean()` function.
+
+The `.groupby()` function is a powerful tool in pandas for performing group-wise operations, such as aggregation, transformation, or filtering, on subsets of data. It allows for the analysis of data based on specific categories or groups and provides flexibility in computing summary statistics or applying custom functions to each group. The resulting grouped object can be further manipulated, such as by applying additional aggregation functions, accessing individual groups, or merging the results back into the original DataFrame.
+
+```python
+# without groupby
+adult = pd.read_csv("data/adult.csv")
+adult1 = adult[adult["Above/Below 50k"] == " <=50K"]
+adult2 = adult[adult["Above/Below 50k"] == " >50K"]
+
+# with groupby
+groupby_object = adult.groupby(by=["Above/Below 50k"])
+
+groupby_object.mean()
+```
+![[Pasted image 20230715200952.png]]
+```python
+adult.groupby(by=["Above/Below 50k"]).mean()
+```
+![[Pasted image 20230715200952.png]]
+
+```python
+adult.groupby(by=["Above/Below 50k"])['Age', 'Education Num'].sum()
+```
+![[Pasted image 20230715201336.png]]
+
+```python
+adult.groupby(by=["Above/Below50k", "Marital Status"]).size
+```
+![[Pasted image 20230715201534.png]]
+***
 ## 
