@@ -317,7 +317,7 @@ print(gb.size)
 # Print out the mean of each group for all columns
 print(gb.mean())
 ```
-![[Pasted image 20230716135027.png]]
+![Pasted image 20230716135027](/images/Pasted%20image%2020230716135027.png)
 
 ##### Exercise 2
 ```python
@@ -330,7 +330,7 @@ gb = adult.groupby(by=user_list)
 # Find the mean for the variable "Hours/Week" for each group - Be efficient!
 print(gb["Hours/Week"].mean())
 ```
-![[Pasted image 20230716135657.png]]
+![Pasted image 20230716135657](/images/Pasted%20image%2020230716135657.png)
 
 ***
 ## .cat
@@ -379,7 +379,7 @@ dogs['coat'] = dogs['coat'].cat.set_categories(
 
 dogs['coat'].value_counts(dropna=False)
 ```
-![[Pasted image 20230716140536.png]]
+![Pasted image 20230716140536](/images/Pasted%20image%2020230716140536.png)
 ```python
 # .cat.set_categories(new_categories=[...]) - continued
 dogs['coat'] = dogs['coat'].cat.set_categories(
@@ -388,13 +388,13 @@ dogs['coat'] = dogs['coat'].cat.set_categories(
 )
 dogs['coat'].head(3)
 ```
-![[Pasted image 20230716141051.png]]
+![Pasted image 20230716141051](/images/Pasted%20image%2020230716141051.png)
 
 ##### Missing Categories
 ```python
 dogs['likes_people'].value_counts(dropna=False)
 ```
-![[Pasted image 20230716141229.png]]
+![Pasted image 20230716141229](/images/Pasted%20image%2020230716141229.png)
 ```python
 # add 2 new categories
 dogs['likes_people'] = dogs['likes_people'].cat.add_categories(
@@ -404,12 +404,12 @@ dogs['likes_people'] = dogs['likes_people'].cat.add_categories(
 # check 
 dogs['likes_people'].cat.categories
 ```
-![[Pasted image 20230716141454.png]]
+![Pasted image 20230716141454](/images/Pasted%20image%2020230716141454.png)
 ```python
 # setting up the new categories will be covered in a different lesson
 dogs['likes_people'].value_counts(dropna=False)
 ```
-![[Pasted image 20230716141650.png]]
+![Pasted image 20230716141650](/images/Pasted%20image%2020230716141650.png)
 
 ##### Removing categories
 ```python
@@ -419,7 +419,7 @@ dogs['coat'] = dogs['coat'].cat.remove_categories(removals=['wirehaired'])
 
 dogs['coat'] = dogs['coat'].cat.categories
 ```
-![[Pasted image 20230716141955.png]]
+![Pasted image 20230716141955](/images/Pasted%20image%2020230716141955.png)
 
 ### Exercises
 
@@ -429,7 +429,7 @@ dogs['coat'] = dogs['coat'].cat.categories
 # Check frequency counts while also printing the NaN count
 print(dogs['keep_in'].value_counts(dropna=False))
 ```
-![[Pasted image 20230716142408.png]]
+![Pasted image 20230716142408](/images/Pasted%20image%2020230716142408.png)
 ```python
 # Switch to a categorical variable
 dogs["keep_in"] = dogs["keep_in"].astype("category")
@@ -441,7 +441,7 @@ dogs["keep_in"] = dogs["keep_in"].cat.add_categories(new_categories)
 # Check frequency counts one more time
 print(dogs["keep_in"].value_counts(dropna=False))
 ```
-![[Pasted image 20230716142827.png]]
+![Pasted image 20230716142827](/images/Pasted%20image%2020230716142827.png)
 
 ##### Exercise 2
 ```python
@@ -465,7 +465,7 @@ print(dogs["likes_children"].value_counts())
 # Print the categories one more time
 print(dogs['likes_children'].cat.categories)
 ```
-![[Pasted image 20230716143439.png]]
+![Pasted image 20230716143439](/images/Pasted%20image%2020230716143439.png)
 
 
 ### Updating categories
@@ -474,7 +474,7 @@ print(dogs['likes_children'].cat.categories)
 dogs['breed'] = dogs['breed'].astype('category')
 dogs['breed'].value_counts()
 ```
-![[Pasted image 20230716143643.png]]
+![Pasted image 20230716143643](/images/Pasted%20image%2020230716143643.png)
 
 ##### Renaming categories
 ```python
@@ -483,7 +483,7 @@ my_changes = {"Unknown Mix":"Unknown"}
 dogs['breed'] = dogs['breed'].cat.rename_categories(my_changes)
 dogs['breed'].value_counts()
 ```
-![[Pasted image 20230716144013.png]]
+![Pasted image 20230716144013](/images/Pasted%20image%2020230716144013.png)
 
 ##### Combining with Lambda functions
 ```python
@@ -491,7 +491,7 @@ dogs['breed'].value_counts()
 dogs['sex'] = dogs['sex'].cat.rename_categories(lambda c: c.title())
 dogs.cat.categories
 ```
-![[Pasted image 20230716144313.png]]
+![Pasted image 20230716144313](/images/Pasted%20image%2020230716144313.png)
 
 
 ##### Collapsing categories
@@ -499,7 +499,7 @@ dogs.cat.categories
 dogs['colors'] = dogs['colors'].astype('category')
 print(dogs['colors'].cat.categories)
 ```
-![[Pasted image 20230716145235.png]]
+![Pasted image 20230716145235](/images/Pasted%20image%2020230716145235.png)
 ```python
 # all colors to be collapsed
 update_colors = {
@@ -514,7 +514,7 @@ dogs["main_color"] = dogs["color"].replace(update_colors)
 # ! this method changes the dtype
 dogs["main_color"].dtype
 ```
-![[Pasted image 20230716145902.png]]
+![Pasted image 20230716145902](/images/Pasted%20image%2020230716145902.png)
 ```python
 # reassign dtype
 dogs["main_color"] = dogs["main_color"].astype("category")
@@ -522,7 +522,7 @@ dogs["main_color"] = dogs["main_color"].astype("category")
 # check
 dog["main_color"].cat.categories
 ```
-![[Pasted image 20230716150006.png]]
+![Pasted image 20230716150006](/images/Pasted%20image%2020230716150006.png)
 
 ### Exercises
 
@@ -540,7 +540,7 @@ dogs["likes_children"] =  dogs["likes_children"].cat.rename_categories(lambda
 # Print the list of categories
 print(dogs['likes_children'].cat.categories)
 ```
-![[Pasted image 20230716150655.png]]
+![Pasted image 20230716150655](/images/Pasted%20image%2020230716150655.png)
 
 ##### Exercise 2
 ```python
@@ -559,7 +559,7 @@ dogs["coat_collapsed"] = dogs["coat_collapsed"].astype('category')
 # Print the frequency table
 print(dogs["coat_collapsed"].value_counts())
 ```
-![[Pasted image 20230716151105.png]]
+![Pasted image 20230716151105](/images/Pasted%20image%2020230716151105.png)
 
 ### Reordering categories
 
@@ -581,7 +581,7 @@ dogs['coat'].cat.reorder_categories(
 dogs.groupby(by=['coat'])['age'].mean
 
 ```
-![[Pasted image 20230716151938.png]]
+![Pasted image 20230716151938](/images/Pasted%20image%2020230716151938.png)
 
 
 ## Exercises
@@ -614,7 +614,7 @@ print(dogs.groupby(by='size')['sex'].value_counts())
 # Do larger dogs need more room to roam?
 print(dogs.groupby(by='size')['keep_in'].value_counts())
 ```
-![[Pasted image 20230716153456.png]]
+![Pasted image 20230716153456](/images/Pasted%20image%2020230716153456.png)
 
 ***
 ## .str.strip()
@@ -650,14 +650,14 @@ The `.strip()` function is commonly used when dealing with user inputs or readin
 # Identifying the issue
 dogs['get_along_cats'].value_counts()
 ```
-![[Pasted image 20230716154545.png]]
+![Pasted image 20230716154545](/images/Pasted%20image%2020230716154545.png)
 ```python
 # Removing trailing white space (strip)
 dogs['get_along_cats'] = dogs['get_along_cats'].str.strip()
 
 dogs['get_along_cats'].value_counts()
 ```
-![[Pasted image 20230716154516.png]]
+![Pasted image 20230716154516](/images/Pasted%20image%2020230716154516.png)
 ***
 ## .str.title()
 
@@ -703,7 +703,7 @@ dogs['get_along_cats'] = dogs['get_along_cats'].str.title()
 
 dogs['get_along_cats'].value_counts()
 ```
-![[Pasted image 20230716154837.png]]
+![Pasted image 20230716154837](/images/Pasted%20image%2020230716154837.png)
 
 ```python
 # Fixing misspellings
@@ -712,7 +712,7 @@ dogs['get_along_cats'].replace(replace_map, inplace=True)
 
 dogs['get_along_cats'].value_counts()
 ```
-![[Pasted image 20230716155058.png]]
+![Pasted image 20230716155058](/images/Pasted%20image%2020230716155058.png)
 ```python
 # Always remember to make it categorical again
 dogs['get_along_cats'] = dogs['get_along_cats'].astype('category')
@@ -762,7 +762,7 @@ The `.str.contains()` function is useful for performing pattern matching or subs
 ```python
 dogs['breed'].str.contains("Shepherd", regex=False)
 ```
-![[Pasted image 20230716155500.png]]
+![Pasted image 20230716155500](/images/Pasted%20image%2020230716155500.png)
 
 ***
 ## .loc\[]
@@ -807,7 +807,7 @@ The `.loc[]` function is powerful for label-based indexing and allows you to per
 ```python
 dogs.loc[dogs['get_along_cats'] == "Yes", "size"].value_counts(sort=False)
 ```
-![[Pasted image 20230716155733.png]]
+![Pasted image 20230716155733](/images/Pasted%20image%2020230716155733.png)
 
 ### Exercises
 
@@ -831,26 +831,28 @@ dogs["sex"] = dogs["sex"].astype("category")
 
 print(dogs["sex"].value_counts())
 ```
-![[Pasted image 20230716160135.png]]
+![Pasted image 20230716160135](/images/Pasted%20image%2020230716160135.png)
 
 ##### Exercise 2
 ```python
 # Print the category of the coat for ID 23807
 print(dogs.loc[dogs.index == 23807, 'coat'])
 ```
-![[Pasted image 20230716160802.png]]
+![Pasted image 20230716160802](/images/Pasted%20image%2020230716160802.png)
 ```python
 # Find the count of male and female dogs who have a "long" coat
 print(dogs.loc[dogs['coat'] == 'long', 'sex'].value_counts())
 ```
-![[Pasted image 20230716160736.png]]
+![Pasted image 20230716160736](/images/Pasted%20image%2020230716160736.png)
 ```python
 # Print the mean age of dogs with a breed of "English Cocker Spaniel"
 print(dogs.loc[dogs['breed'] == 'English Cocker Spaniel', 'age'].mean())
 ```
-![[Pasted image 20230716160902.png]]
+![Pasted image 20230716160902](/images/Pasted%20image%2020230716160902.png)
 ```python
 # Count the number of dogs that have "English" in their breed name
 print(dogs[dogs["breed"].str.contains("English", regex=False)].shape[0])
 ```
-![[Pasted image 20230716161136.png]]
+![Pasted image 20230716161136](/images/Pasted%20image%2020230716161136.png)
+
+

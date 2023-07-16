@@ -4,35 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "c52649a484e8936b",
+        "id": "dc28f6e4737e7bde",
         "type": "tabs",
         "children": [
           {
-            "id": "4e3d92315f70fa3c",
+            "id": "889ac69ab3a7b859",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "b171ff4d79feedc7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -159,8 +138,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b171ff4d79feedc7",
+  "active": "889ac69ab3a7b859",
   "lastOpenFiles": [
+    "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "images/Pasted image 20230716161136.png",
     "images/Pasted image 20230716160902.png",
     "images/Pasted image 20230716160855.png",
@@ -171,9 +151,7 @@
     "images/Pasted image 20230716160135.png",
     "images/Pasted image 20230716160129.png",
     "images/Pasted image 20230716155733.png",
-    "images/Pasted image 20230716155500.png",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "Other/start-quiz.py functions.md",
     "Other",
     "quizdata_generator.py~",
