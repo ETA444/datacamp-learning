@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Other/start-quiz.py functions.md",
+                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Other/start-quiz.py functions.md",
+                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Other/start-quiz.py functions.md",
+                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Other/start-quiz.py functions.md"
+                "file": "Data Scientist Professional with Python/Working with Categorical Data in Python.md"
               }
             }
           }
@@ -159,22 +159,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "5d950ae2fcc809e3",
+  "active": "b171ff4d79feedc7",
   "lastOpenFiles": [
+    "images/Pasted image 20230716151938.png",
+    "images/Pasted image 20230716151105.png",
+    "images/Pasted image 20230716151056.png",
+    "images/Pasted image 20230716150655.png",
+    "images/Pasted image 20230716150006.png",
+    "images/Pasted image 20230716145902.png",
+    "images/Pasted image 20230716145855.png",
+    "images/Pasted image 20230716145235.png",
+    "images/Pasted image 20230716144313.png",
+    "images/Pasted image 20230716144013.png",
+    "images/Pasted image 20230716143643.png",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "Other/start-quiz.py functions.md",
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
+    "Other/start-quiz.py functions.md",
     "Other",
-    "images/Pasted image 20230715201534.png",
-    "images/Pasted image 20230715201336.png",
-    "images/Pasted image 20230715200952.png",
-    "images/datacamp-learning_thumb.png",
-    "datacamp-learning_thumb.png",
-    "images/Pasted image 20230714224355.png",
-    "images/Pasted image 20230714224258.png",
-    "images/Pasted image 20230714224138.png",
-    "images/Pasted image 20230714223900.png",
-    "images/Pasted image 20230714223825.png",
     "quizdata_generator.py~",
     "quiz_data.json",
     "quizdata_generator.py",

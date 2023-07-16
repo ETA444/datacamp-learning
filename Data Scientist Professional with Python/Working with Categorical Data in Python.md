@@ -271,5 +271,315 @@ adult.groupby(by=["Above/Below 50k"])['Age', 'Education Num'].sum()
 adult.groupby(by=["Above/Below50k", "Marital Status"]).size
 ```
 ![Pasted image 20230715201534](/images/Pasted%20image%2020230715201534.png)
+
 ***
-## 
+## .size
+
+In pandas, the `.size` attribute is used to retrieve the number of elements in a DataFrame or Series. It returns the total number of values in the object.
+
+**Attribute syntax:**
+```python
+DataFrame.size
+Series.size
+```
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {'A': [1, 2, 3], 'B': [4, 5, 6]}
+df = pd.DataFrame(data)
+
+# Get the size of the DataFrame
+df_size = df.size
+
+# Display the size
+print(df_size)
+```
+
+The resulting `df_size` value will be the total number of elements in the DataFrame.
+
+In the example, the `.size` attribute is used to retrieve the size of the DataFrame `df`. The resulting value represents the total number of elements in the DataFrame, which is calculated as the product of the number of rows and the number of columns.
+
+The `.size` attribute is useful for determining the overall size or number of elements in a DataFrame or Series. It can be used to check the dimensions of a DataFrame, calculate the memory usage, or perform size-related operations or comparisons. Note that the `.size` attribute returns the total number of elements, including missing or NaN (Not a Number) values.
+
+### Exercises
+
+##### Exercise 1
+```python
+# Group the adult dataset by "Sex" and "Above/Below 50k"
+gb = adult.groupby(by=["Sex", "Above/Below 50k"])
+
+# Print out how many rows are in each created group
+print(gb.size)
+  
+# Print out the mean of each group for all columns
+print(gb.mean())
+```
+![[Pasted image 20230716135027.png]]
+
+##### Exercise 2
+```python
+# Create a list of user-selected variables
+user_list = ['Education', 'Above/Below 50k']
+
+# Create a GroupBy object using this list
+gb = adult.groupby(by=user_list)
+
+# Find the mean for the variable "Hours/Week" for each group - Be efficient!
+print(gb["Hours/Week"].mean())
+```
+![[Pasted image 20230716135657.png]]
+
+***
+## .cat
+
+In pandas, the `.cat` accessor is used to access categorical data and perform operations specific to categorical data types. It provides access to a set of methods and properties that are useful for working with categorical columns in a DataFrame.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {'Category': ['A', 'B', 'A', 'B', 'A']}
+df = pd.DataFrame(data)
+
+# Convert the 'Category' column to a categorical data type
+df['Category'] = df['Category'].astype('category')
+
+# Access categorical methods using .cat accessor
+df['Category'].cat.categories = ['Category 1', 'Category 2']  # Rename categories
+df['Category'] = df['Category'].cat.add_categories('Category 3')  # Add a new category
+df['Category'] = df['Category'].cat.remove_unused_categories()  # Remove unused categories
+
+# Display the modified DataFrame
+print(df)
+```
+
+The resulting output will be:
+```
+     Category
+0  Category 1
+1  Category 2
+2  Category 1
+3  Category 2
+4  Category 1
+```
+
+In the example, the `.cat` accessor is used to perform operations on the 'Category' column. Firstly, the column is converted to a categorical data type using `.astype('category')`. Then, several categorical methods are applied using the `.cat` accessor. The categories are renamed using `.cat.categories`, a new category is added using `.cat.add_categories()`, and unused categories are removed using `.cat.remove_unused_categories()`.
+
+The `.cat` accessor provides a range of methods and properties for categorical data manipulation, such as renaming categories, adding new categories, removing unused categories, reordering categories, and more. It allows for efficient handling and analysis of categorical variables in pandas DataFrames, enabling operations and computations specific to categorical data types.
+
+```python
+# .cat.set_categories(new_categories=[...])
+dogs['coat'] = dogs['coat'].cat.set_categories(
+   new_categories=['short','medium','long']
+)
+
+dogs['coat'].value_counts(dropna=False)
+```
+![[Pasted image 20230716140536.png]]
+```python
+# .cat.set_categories(new_categories=[...]) - continued
+dogs['coat'] = dogs['coat'].cat.set_categories(
+   new_categories=['short', 'medium', 'long']
+   ordered=True
+)
+dogs['coat'].head(3)
+```
+![[Pasted image 20230716141051.png]]
+
+##### Missing Categories
+```python
+dogs['likes_people'].value_counts(dropna=False)
+```
+![[Pasted image 20230716141229.png]]
+```python
+# add 2 new categories
+dogs['likes_people'] = dogs['likes_people'].cat.add_categories(
+   new_categories = ['did not check', 'could not tell']
+)
+
+# check 
+dogs['likes_people'].cat.categories
+```
+![[Pasted image 20230716141454.png]]
+```python
+# setting up the new categories will be covered in a different lesson
+dogs['likes_people'].value_counts(dropna=False)
+```
+![[Pasted image 20230716141650.png]]
+
+##### Removing categories
+```python
+# .cat.remove_categories(removals=[...])
+dogs['coat'] = dogs['coat'].astype('category')
+dogs['coat'] = dogs['coat'].cat.remove_categories(removals=['wirehaired'])
+
+dogs['coat'] = dogs['coat'].cat.categories
+```
+![[Pasted image 20230716141955.png]]
+
+### Exercises
+
+##### Exercise 1
+
+```python
+# Check frequency counts while also printing the NaN count
+print(dogs['keep_in'].value_counts(dropna=False))
+```
+![[Pasted image 20230716142408.png]]
+```python
+# Switch to a categorical variable
+dogs["keep_in"] = dogs["keep_in"].astype("category")
+
+# Add new categories
+new_categories = ["Unknown History", "Open Yard (Countryside)"]
+dogs["keep_in"] = dogs["keep_in"].cat.add_categories(new_categories)
+
+# Check frequency counts one more time
+print(dogs["keep_in"].value_counts(dropna=False))
+```
+![[Pasted image 20230716142827.png]]
+
+##### Exercise 2
+```python
+# Set "maybe" to be "no"
+dogs.loc[dogs["likes_children"] == "maybe", "likes_children"] = "no"
+
+
+# Print out categories
+print(dogs["likes_children"].cat.categories)
+
+
+# Print the frequency table
+print(dogs["likes_children"].value_counts())
+  
+
+# Remove the `"maybe" category
+dogs["likes_children"] = dogs["likes_children"].cat.remove_categories(["maybe"])
+print(dogs["likes_children"].value_counts())
+
+  
+# Print the categories one more time
+print(dogs['likes_children'].cat.categories)
+```
+![[Pasted image 20230716143439.png]]
+
+
+### Updating categories
+
+```python
+dogs['breed'] = dogs['breed'].astype('category')
+dogs['breed'].value_counts()
+```
+![[Pasted image 20230716143643.png]]
+
+##### Renaming categories
+```python
+# .rename_categories
+my_changes = {"Unknown Mix":"Unknown"}
+dogs['breed'] = dogs['breed'].cat.rename_categories(my_changes)
+dogs['breed'].value_counts()
+```
+![[Pasted image 20230716144013.png]]
+
+##### Combining with Lambda functions
+```python
+# Title Case all current categories
+dogs['sex'] = dogs['sex'].cat.rename_categories(lambda c: c.title())
+dogs.cat.categories
+```
+![[Pasted image 20230716144313.png]]
+
+
+##### Collapsing categories
+```python
+dogs['colors'] = dogs['colors'].astype('category')
+print(dogs['colors'].cat.categories)
+```
+![[Pasted image 20230716145235.png]]
+```python
+# all colors to be collapsed
+update_colors = {
+				 "black and brown":"black",
+				 "black and tan":"black",
+				 "black and white":"black"
+}
+
+# create a new column "main_color" 
+dogs["main_color"] = dogs["color"].replace(update_colors)
+
+# ! this method changes the dtype
+dogs["main_color"].dtype
+```
+![[Pasted image 20230716145902.png]]
+```python
+# reassign dtype
+dogs["main_color"] = dogs["main_color"].astype("category")
+
+# check
+dog["main_color"].cat.categories
+```
+![[Pasted image 20230716150006.png]]
+
+### Exercises
+
+##### Exercise 1
+```python
+# Create the my_changes dictionary
+my_changes = {"Maybe?":"Maybe"}
+
+# Rename the categories listed in the my_changes dictionary
+dogs["likes_children"] = dogs['likes_children'].cat.rename_categories(my_changes) 
+
+# Use a lambda function to convert all categories to uppercase using upper()
+dogs["likes_children"] =  dogs["likes_children"].cat.rename_categories(lambda c: c.upper())
+
+# Print the list of categories
+print(dogs['likes_children'].cat.categories)
+```
+![[Pasted image 20230716150655.png]]
+
+##### Exercise 2
+```python
+# Create the update_coats dictionary
+update_coats = {
+    'wirehaired':'medium',
+    'medium-long':'medium'
+}
+  
+# Create a new column, coat_collapsed
+dogs["coat_collapsed"] = dogs['coat'].replace(update_coats)
+
+# Convert the column to categorical
+dogs["coat_collapsed"] = dogs["coat_collapsed"].astype('category')
+
+# Print the frequency table
+print(dogs["coat_collapsed"].value_counts())
+```
+![[Pasted image 20230716151105.png]]
+
+### Reordering categories
+
+```python
+# using .reorder_categories
+dogs['coat'] = dogs['coat'].cat.reorder_categories(
+   new_categories = ['short', 'medium', 'wirehaired', 'long'],
+   ordered = True
+)
+
+# now using inplace (shorter)
+dogs['coat'].cat.reorder_categories(
+   new_categories = ['short', 'medium', 'wirehaired', 'long'],
+   ordered = True,
+   inplace = True
+)
+
+# visualizations, printouts etc. will use this order, e.g.:
+dogs.groupby(by=['coat'])['age'].mean
+
+```
+![[Pasted image 20230716151938.png]]
+
