@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "dc28f6e4737e7bde",
+        "id": "71fa85a312cba788",
         "type": "tabs",
         "children": [
           {
-            "id": "889ac69ab3a7b859",
+            "id": "c499a5d2b5a844a3",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -138,19 +138,19 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "889ac69ab3a7b859",
+  "active": "c499a5d2b5a844a3",
   "lastOpenFiles": [
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-    "images/Pasted image 20230716161136.png",
-    "images/Pasted image 20230716160902.png",
-    "images/Pasted image 20230716160855.png",
-    "images/Pasted image 20230716160802.png",
-    "images/Pasted image 20230716160736.png",
-    "images/Pasted image 20230716160639.png",
-    "images/Pasted image 20230716160631.png",
-    "images/Pasted image 20230716160135.png",
-    "images/Pasted image 20230716160129.png",
-    "images/Pasted image 20230716155733.png",
+    "images/Pasted image 20230716183517.png",
+    "images/Pasted image 20230716183339.png",
+    "images/Pasted image 20230716183200.png",
+    "images/Pasted image 20230716182938.png",
+    "images/Pasted image 20230716182720.png",
+    "images/Pasted image 20230716182631.png",
+    "images/Pasted image 20230716182447.png",
+    "images/Pasted image 20230716182349.png",
+    "images/Pasted image 20230716181753.png",
+    "images/Pasted image 20230716181432.png",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "Other/start-quiz.py functions.md",
     "Other",

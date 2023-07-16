@@ -855,4 +855,270 @@ print(dogs[dogs["breed"].str.contains("English", regex=False)].shape[0])
 ```
 ![Pasted image 20230716161136](/images/Pasted%20image%2020230716161136.png)
 
+***
+## sns.catplot()
 
+The `sns.catplot()` function is a categorical plot function provided by the Seaborn library. It is used to create categorical plots that can display the relationship between one categorical variable and one or more numerical or categorical variables.
+
+**Function syntax:**
+```python
+sns.catplot(x=None, y=None, hue=None, data=None, kind='strip', ...)
+```
+
+**Parameters:**
+- `x`, `y`, `hue` (optional): Variables that specify the data for the x-axis, y-axis, and hue grouping, respectively. These parameters accept column names or arrays from the `data` parameter.
+- `data`: Specifies the DataFrame or long-form data object that contains the data to be plotted.
+- `kind` (optional): Specifies the type of categorical plot to be created. It can be 'strip', 'swarm', 'box', 'violin', 'boxen', 'point', 'bar', or 'count', with 'strip' being the default.
+- Additional parameters: `sns.catplot()` supports many additional parameters such as `order`, `col`, `row`, `height`, `aspect`, `orient`, `dodge`, `palette`, and more, which allow you to further customize the categorical plot.
+
+**Example of use:**
+```python
+import seaborn as sns
+
+# Create a sample DataFrame
+data = {'Category': ['A', 'B', 'A', 'B', 'A'],
+        'Value': [10, 15, 8, 12, 9],
+        'Group': ['X', 'Y', 'X', 'Y', 'X']}
+df = pd.DataFrame(data)
+
+# Create a categorical plot using sns.catplot()
+sns.catplot(x='Category', y='Value', hue='Group', data=df, kind='bar')
+```
+
+This example creates a bar plot using `sns.catplot()` from the Seaborn library. It specifies the 'Category' column for the x-axis, the 'Value' column for the y-axis, and the 'Group' column for color grouping. The data is provided from the DataFrame `df`, and the plot type is set to 'bar' using the `kind` parameter.
+
+The `sns.catplot()` function allows you to create various types of categorical plots, such as strip plots, swarm plots, box plots, violin plots, bar plots, and more. It provides a convenient way to visualize categorical data and relationships between categorical and numerical variables.
+
+
+### sns.catplot(kind='box')
+
+```python
+reviews['Score'].value_counts()
+```
+![Pasted image 20230716174943](/images/Pasted%20image%2020230716174943.png)
+```python
+# Setting font size and plot background
+sns.set(font_scale=1.4)
+sns.set_style("whitegrid")
+
+sns.catplot(
+	x='Pool',
+	y='Score',
+	data=reviews,
+	kind='box'
+)
+plt.show()
+```
+![Pasted image 20230716175209](/images/Pasted%20image%2020230716175209.png)
+
+### Exercises
+
+##### Exercise 1
+```python
+# Set the font size to 1.25
+sns.set(font_scale=1.25)
+
+# Set the background to "darkgrid"
+sns.set_style("darkgrid")
+
+# Create a boxplot
+sns.catplot(x= "Traveler type", y="Helpful votes", data=reviews, kind='box')
+
+plt.show()
+```
+![Pasted image 20230716175444](/images/Pasted%20image%2020230716175444.png)
+
+### sns.catplot(kind='bar')
+
+```python
+# Traditional bar chart
+reviews["Traveler type"].value_counts().plot.bar()
+```
+![Pasted image 20230716175927](/images/Pasted%20image%2020230716175927.png)
+```python
+# Seaborn bar chart
+sns.set(font_scale=1.3)
+sns.set_style("darkgrid")
+sns.catplot(x="Traveler type", y="Score", data=reviews, kind="bar")
+plt.show()
+```
+![Pasted image 20230716180105](/images/Pasted%20image%2020230716180105.png)
+
+##### Ordering the categories
+```python
+reviews["Traveler type"] = reviews["Traveler type"].astype("category")
+reviews["Traveler type"].cat.categories
+```
+![Pasted image 20230716180259](/images/Pasted%20image%2020230716180259.png)
+```python
+sns.catplot(x="Traveler type", y="Score", data=reviews, kind="bar")
+plt.show()
+```
+![Pasted image 20230716180358](/images/Pasted%20image%2020230716180358.png)
+
+##### Hue parameter
+```python
+sns.set(font_scale=1.2)
+sns.set_style("darkgrid")
+sns.catplot(
+	x="Traveler type", 
+	y="Score", 
+	data=reviews, 
+	kind="bar", 
+	hue="Tennis court"
+)
+plt.show()
+```
+![Pasted image 20230716180603](/images/Pasted%20image%2020230716180603.png)
+
+### Exercises
+
+##### Exercise 1
+```python
+# Print the frequency counts of "Period of stay"
+print(reviews["Period of stay"].value_counts())
+```
+![Pasted image 20230716180848](/images/Pasted%20image%2020230716180848.png)
+```python
+sns.set(font_scale=1.4)
+sns.set_style("whitegrid")
+
+# Create a bar plot of "Helpful votes" by "Period of stay"
+sns.catplot(x='Period of stay', y='Helpful votes', data=reviews, kind='bar')
+plt.show()
+```
+![Pasted image 20230716180936](/images/Pasted%20image%2020230716180936.png)
+
+##### Exercise 2
+```python
+# Create a bar chart
+sns.set(font_scale=.9)
+sns.set_style("whitegrid")
+sns.catplot(x="User continent", y="Score", data=reviews, kind="bar")
+plt.show()
+```
+![Pasted image 20230716181116](/images/Pasted%20image%2020230716181116.png)
+```python
+# Print the frequency counts for "User continent"
+print(reviews['User continent'].value_counts())
+```
+![Pasted image 20230716181202](/images/Pasted%20image%2020230716181202.png)
+```python
+# Set style
+sns.set(font_scale=.9)
+sns.set_style("whitegrid")
+  
+# Print the frequency counts for "User continent"
+print(reviews["User continent"].value_counts())
+  
+# Convert "User continent" to a categorical variable
+reviews["User continent"] = reviews['User continent'].astype('category')
+sns.catplot(x="User continent", y="Score", data=reviews, kind="bar")
+plt.show()
+```
+![Pasted image 20230716181432](/images/Pasted%20image%2020230716181432.png)
+```python
+# Set style
+sns.set(font_scale=.9)
+sns.set_style("whitegrid")
+  
+# Print the frequency counts for "User continent"
+print(reviews["User continent"].value_counts())
+
+# Convert "User continent" to a categorical variable
+reviews["User continent"] = reviews["User continent"].astype("category")
+
+# Reorder "User continent" using continent_categories and rerun the graphic
+continent_categories = list(reviews["User continent"].value_counts().index)
+reviews["User continent"] = reviews["User continent"].cat.reorder_categories(new_categories=continent_categories)
+
+sns.catplot(x="User continent", y="Score", data=reviews, kind="bar")
+plt.show()
+```
+![Pasted image 20230716181753](/images/Pasted%20image%2020230716181753.png)
+
+##### Exercise 3
+```python
+# Add a second category to split the data on: "Free internet"
+sns.set(font_scale=2)
+sns.set_style("darkgrid")
+sns.catplot(x="Casino", y="Score", data=reviews, kind="bar", hue="Free internet")
+plt.show()
+```
+![Pasted image 20230716182349](/images/Pasted%20image%2020230716182349.png)
+```python
+# Switch the x and hue categories
+sns.set(font_scale=2)
+sns.set_style("darkgrid")
+sns.catplot(x="Free internet", y="Score", data=reviews, kind="bar", hue="Casino")
+plt.show()
+```
+![Pasted image 20230716182447](/images/Pasted%20image%2020230716182447.png)
+```python
+# Update x to be "User continent"
+sns.set(font_scale=2)
+sns.set_style("darkgrid")
+sns.catplot(x="User continent", y="Score", data=reviews, kind="bar", hue="Casino")
+plt.show()
+```
+![Pasted image 20230716182631](/images/Pasted%20image%2020230716182631.png)
+```python
+# Lower the font size so that all text fits on the screen.
+sns.set(font_scale=1.0)
+sns.set_style("darkgrid")
+sns.catplot(x="User continent", y="Score", data=reviews, kind="bar", hue="Casino")
+plt.show()
+```
+![Pasted image 20230716182720](/images/Pasted%20image%2020230716182720.png)
+
+### sns.catplot(kind='point')
+
+```python
+sns.catplot(x='Pool', y='Score', data=reviews, kind='point')
+plt.show()
+```
+![Pasted image 20230716182938](/images/Pasted%20image%2020230716182938.png)
+
+##### Point plot with hue & dodge
+```python
+sns.catplot(
+			x="Spa", 
+			y="Score", 
+			data=reviews, 
+			kind="point", 
+			hue="Tennis court", 
+			dodge=True
+)
+plt.show()
+```
+![Pasted image 20230716183200](/images/Pasted%20image%2020230716183200.png)
+
+##### Using the join parameter
+```python
+sns.catplot(
+			x="Score",
+			y="Review weekday",
+			data=reviews,
+			kind="point",
+			join=False
+)
+plt.show()
+```
+![Pasted image 20230716183339](/images/Pasted%20image%2020230716183339.png)
+
+### sns.catplot(kind='count')
+
+```python
+sns.catplot(
+			x='Tennis court',
+			data=reviews,
+			kind='count',
+			hue='Spa'
+)
+plt.show()
+```
+![Pasted image 20230716183517](/images/Pasted%20image%2020230716183517.png)
+
+### Exercises
+
+##### Exercise 1
