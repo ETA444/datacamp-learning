@@ -583,3 +583,274 @@ dogs.groupby(by=['coat'])['age'].mean
 ```
 ![[Pasted image 20230716151938.png]]
 
+
+## Exercises
+
+##### Exercise 1
+```python
+# Print out the current categories of the size variable
+print(dogs["size"].cat.categories)
+
+# Reorder the categories, specifying the Series is ordinal, and overwriting the original series
+dogs["size"].cat.reorder_categories(
+  new_categories=["small", "medium", "large"],
+  ordered=True,
+  inplace=True
+)
+```
+
+##### Exercise 2
+```python
+# Previous code
+dogs["size"].cat.reorder_categories(
+  new_categories=["small", "medium", "large"],
+  ordered=True,
+  inplace=True
+)
+
+# How many Male/Female dogs are available of each size?
+print(dogs.groupby(by='size')['sex'].value_counts())
+  
+# Do larger dogs need more room to roam?
+print(dogs.groupby(by='size')['keep_in'].value_counts())
+```
+![[Pasted image 20230716153456.png]]
+
+***
+## .str.strip()
+
+The `.str.strip()` function in Python is a string method that is used to remove leading and trailing whitespace characters from a string. It returns a new string with the leading and trailing whitespace removed.
+
+**Function syntax:**
+```python
+string.strip()
+```
+
+**Parameters:**
+This function does not take any additional parameters.
+
+**Example of use:**
+```python
+# Remove leading and trailing whitespace
+string = "   Hello, World!   "
+stripped_string = string.strip()
+print(stripped_string)
+```
+
+The resulting output will be:
+```
+Hello, World!
+```
+
+In the example, the `.strip()` function is used to remove the leading and trailing whitespace from the string `string`. The resulting `stripped_string` contains the original string without the leading and trailing spaces.
+
+The `.strip()` function is commonly used when dealing with user inputs or reading data from external sources, where leading or trailing whitespace may be present. It helps in cleaning and normalizing the string data by removing unnecessary whitespace characters. Note that `.strip()` only removes leading and trailing whitespace and does not affect any whitespace characters within the string.
+
+```python
+# Identifying the issue
+dogs['get_along_cats'].value_counts()
+```
+![[Pasted image 20230716154545.png]]
+```python
+# Removing trailing white space (strip)
+dogs['get_along_cats'] = dogs['get_along_cats'].str.strip()
+
+dogs['get_along_cats'].value_counts()
+```
+![[Pasted image 20230716154516.png]]
+***
+## .str.title()
+
+The `.str.title()` function in pandas is a string method that is used to convert the first character of each word in a string to uppercase and convert the remaining characters to lowercase. It returns a new string with the title-cased format.
+
+**Function syntax:**
+```python
+Series.str.title()
+```
+
+**Parameters:**
+This function does not take any additional parameters.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = {'Name': ['john doe', 'jane smith', 'alice brown']}
+series = pd.Series(data['Name'])
+
+# Convert the strings to title case
+title_case_series = series.str.title()
+print(title_case_series)
+```
+
+The resulting output will be:
+```
+0      John Doe
+1    Jane Smith
+2    Alice Brown
+dtype: object
+```
+
+In the example, the `.str.title()` function is used to convert the strings in the `series` to title case. Each word in the string has its first character converted to uppercase, while the remaining characters are converted to lowercase.
+
+The `.str.title()` function is useful for formatting strings, especially when dealing with names or titles that require capitalization. It helps in standardizing the capitalization of strings and making them visually appealing. It can be applied to individual strings within a Series or DataFrame column using the `.str` accessor. Note that the original Series is not modified, and a new Series with the title-cased strings is returned.
+
+
+```python
+# Capitalization: .title() / .upper() / .lower()
+dogs['get_along_cats'] = dogs['get_along_cats'].str.title()
+
+dogs['get_along_cats'].value_counts()
+```
+![[Pasted image 20230716154837.png]]
+
+```python
+# Fixing misspellings
+replace_map = {'Noo':'No'}
+dogs['get_along_cats'].replace(replace_map, inplace=True)
+
+dogs['get_along_cats'].value_counts()
+```
+![[Pasted image 20230716155058.png]]
+```python
+# Always remember to make it categorical again
+dogs['get_along_cats'] = dogs['get_along_cats'].astype('category')
+```
+
+***
+## .str.contains()
+
+The `.str.contains()` function in pandas is used to check whether each element in a string Series contains a specified pattern or substring. It returns a boolean Series indicating whether the pattern or substring is present in each element of the original Series.
+
+**Function syntax:**
+```python
+Series.str.contains(pat, case=True, na=False, regex=True)
+```
+
+**Parameters:**
+- `pat`: Specifies the pattern or substring to search for within each element of the Series.
+- `case` (optional): Specifies whether the search should be case-sensitive. If `True` (default), the search is case-sensitive. If `False`, the search is case-insensitive.
+- `na` (optional): Specifies whether missing values should be treated as `False`. If `True`, missing values are treated as `False`. If `False` (default), missing values are treated as `NA` (not available).
+- `regex` (optional): Specifies whether the pattern is a regular expression. If `True` (default), the pattern is treated as a regular expression. If `False`, the pattern is treated as a literal string.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = {'Text': ['apple', 'banana', 'orange']}
+series = pd.Series(data['Text'])
+
+# Check for the presence of a pattern
+contains_series = series.str.contains('na')
+print(contains_series)
+```
+
+The resulting output will be:
+```
+0    False
+1     True
+2    False
+dtype: bool
+```
+
+In the example, the `.str.contains()` function is used to check whether the substring `'na'` is present in each element of the `series`. The resulting `contains_series` is a boolean Series where `True` indicates that the pattern is present and `False` indicates its absence.
+
+The `.str.contains()` function is useful for performing pattern matching or substring searches within string data. It allows you to identify elements that contain specific patterns or substrings, enabling filtering, conditional operations, or creating new columns based on the search results. Note that `.str.contains()` supports both literal strings and regular expressions, giving you flexibility in defining the patterns to search for.
+
+```python
+dogs['breed'].str.contains("Shepherd", regex=False)
+```
+![[Pasted image 20230716155500.png]]
+
+***
+## .loc\[]
+
+The `.loc[]` function in pandas is used for label-based indexing and slicing of rows and columns in a DataFrame. It allows you to access specific rows and columns by their labels or a boolean condition based on labels.
+
+**Function syntax:**
+```python
+DataFrame.loc[row_indexer, column_indexer]
+```
+
+**Parameters:**
+- `row_indexer`: Specifies the labels or boolean condition to select specific rows from the DataFrame. It can be a single label, a list of labels, a slice object, or a boolean condition.
+- `column_indexer`: Specifies the labels or boolean condition to select specific columns from the DataFrame. It can be a single label, a list of labels, a slice object, or a boolean condition.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {'Name': ['John', 'Jane', 'Alice'],
+        'Age': [25, 30, 35],
+        'City': ['New York', 'London', 'Paris']}
+df = pd.DataFrame(data)
+
+# Access specific rows and columns using .loc[]
+subset = df.loc[[0, 2], ['Name', 'City']]
+print(subset)
+```
+
+The resulting output will be:
+```
+   Name      City
+0  John  New York
+2  Alice     Paris
+```
+
+In the example, the `.loc[]` function is used to access a subset of rows and columns from the DataFrame `df`. The `row_indexer` `[0, 2]` selects the first and third rows, and the `column_indexer` `['Name', 'City']` selects the 'Name' and 'City' columns. The resulting `subset` DataFrame contains the selected rows and columns.
+
+The `.loc[]` function is powerful for label-based indexing and allows you to perform various operations, such as selecting specific rows and columns, modifying values, conditional filtering, or creating new columns based on label-based conditions. It provides a flexible and intuitive way to access and manipulate data in a DataFrame using labels.
+
+```python
+dogs.loc[dogs['get_along_cats'] == "Yes", "size"].value_counts(sort=False)
+```
+![[Pasted image 20230716155733.png]]
+
+### Exercises
+
+##### Exercise 1
+```python
+# Fix the misspelled word
+replace_map = {"Malez": "male"}
+
+# Update the sex column using the created map
+dogs["sex"] = dogs["sex"].replace(replace_map)
+  
+# Strip away leading whitespace
+dogs["sex"] = dogs["sex"].str.strip() 
+
+# Make all responses lowercase
+dogs["sex"] = dogs["sex"].str.lower()
+
+# Convert to a categorical Series
+dogs["sex"] = dogs["sex"].astype("category")
+
+
+print(dogs["sex"].value_counts())
+```
+![[Pasted image 20230716160135.png]]
+
+##### Exercise 2
+```python
+# Print the category of the coat for ID 23807
+print(dogs.loc[dogs.index == 23807, 'coat'])
+```
+![[Pasted image 20230716160802.png]]
+```python
+# Find the count of male and female dogs who have a "long" coat
+print(dogs.loc[dogs['coat'] == 'long', 'sex'].value_counts())
+```
+![[Pasted image 20230716160736.png]]
+```python
+# Print the mean age of dogs with a breed of "English Cocker Spaniel"
+print(dogs.loc[dogs['breed'] == 'English Cocker Spaniel', 'age'].mean())
+```
+![[Pasted image 20230716160902.png]]
+```python
+# Count the number of dogs that have "English" in their breed name
+print(dogs[dogs["breed"].str.contains("English", regex=False)].shape[0])
+```
+![[Pasted image 20230716161136.png]]
