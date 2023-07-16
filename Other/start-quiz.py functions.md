@@ -344,3 +344,79 @@ Age: 25
 In the example, the `input()` function is used to prompt the user for their name and age. The messages "Enter your name: " and "Enter your age: " are displayed as prompts to guide the user. The entered values are stored in the `name` and `age` variables, respectively. The output then displays the entered name and age.
 
 The `input()` function allows you to interact with the user and obtain input during the execution of a program. It is commonly used to create interactive programs, collect user information, perform calculations based on user input, and create customizable or interactive scripts. Note that the value returned by `input()` is always a string, so if you need to perform numerical operations, you may need to convert the input to the appropriate data type using functions like `int()` or `float()`.
+
+***
+## .upper()
+
+The `.upper()` function in Python is a string method that is used to convert all the characters in a string to uppercase. It returns a new string with all the characters converted to uppercase.
+
+**Function syntax:**
+```python
+string.upper()
+```
+
+**Parameters:**
+This function does not take any additional parameters.
+
+**Example of use:**
+```python
+# Convert a string to uppercase
+my_string = "Hello, World!"
+uppercase_string = my_string.upper()
+print(uppercase_string)
+```
+
+The resulting output will be:
+```
+HELLO, WORLD!
+```
+
+In the example, the `.upper()` function is used to convert the string `my_string` to uppercase. The resulting `uppercase_string` contains all the characters of the original string in uppercase.
+
+The `.upper()` function is useful when you want to convert a string to uppercase, which can be beneficial for various purposes, such as standardizing input, performing case-insensitive comparisons, or displaying text in a consistent format. It does not modify the original string; instead, it returns a new string with the uppercase conversion applied.
+
+***
+## sys.argv
+
+`sys.argv` is a list in Python that contains the command-line arguments passed to a script or program when it is executed from the command line. It allows you to access and process the arguments provided to the script during runtime.
+
+The `sys.argv` list consists of the following elements:
+
+- `sys.argv[0]`: The name of the script itself.
+- `sys.argv[1]`, `sys.argv[2]`, ...: The command-line arguments passed to the script, if any.
+
+**Module usage:**
+To use `sys.argv`, you need to import the `sys` module at the beginning of your script using `import sys`.
+
+**Example of use:**
+Consider a script named `my_script.py` that takes two command-line arguments: `arg1` and `arg2`. Here's an example of how you can access and process the command-line arguments using `sys.argv`:
+
+```python
+import sys
+
+# Access the command-line arguments
+script_name = sys.argv[0]
+arg1 = sys.argv[1]
+arg2 = sys.argv[2]
+
+# Print the command-line arguments
+print("Script name:", script_name)
+print("Argument 1:", arg1)
+print("Argument 2:", arg2)
+```
+
+Assuming you execute the script from the command line as follows:
+```
+python my_script.py value1 value2
+```
+
+The resulting output will be:
+```
+Script name: my_script.py
+Argument 1: value1
+Argument 2: value2
+```
+
+In this example, `sys.argv[0]` represents the script name (`my_script.py`), `sys.argv[1]` represents the first command-line argument (`value1`), and `sys.argv[2]` represents the second command-line argument (`value2`).
+
+The `sys.argv` list is commonly used in Python scripts that need to receive and process command-line arguments. It allows you to make your scripts more flexible and customizable by accepting user input or configuration options from the command line. Note that the elements in `sys.argv` are always strings, so if you need to perform operations or conversions on the command-line arguments, you may need to use appropriate functions or methods to handle the data types accordingly.
