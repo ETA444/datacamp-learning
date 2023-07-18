@@ -11,12 +11,21 @@ import sys
 # Path to your Markdown files. If no path is provided, it defaults to the current directory.
 path = sys.argv[1] if len(sys.argv) > 1 else "."
 
-markdown_files = [f for f in os.listdir(path) if f.endswith('.md')]
+markdown_files = []
+
+# Walk through each directory and subdirectory in the path
+for dirpath, dirnames, filenames in os.walk(path):
+    # For each file in the filenames list
+    for filename in filenames:
+        # If the file ends with .md
+        if filename.endswith('.md'):
+            # Append the full file path to the markdown_files list
+            markdown_files.append(os.path.join(dirpath, filename))
 
 data = {}
 
 for file in markdown_files:
-    with open(os.path.join(path, file), 'r', encoding='utf-8') as f:
+    with open(file, 'r', encoding='utf-8') as f:  # No need to join with path, as full path is stored in markdown_files
         lines = f.readlines()
 
     current_function = None
