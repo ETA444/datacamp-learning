@@ -1140,4 +1140,426 @@ plt.show()
 ```
 ![Pasted image 20230716184017](/images/Pasted%20image%2020230716184017.png)
 
-##
+##### Exercise 2
+```python
+sns.set(font_scale=1.4)
+sns.set_style("darkgrid")
+
+# Create a catplot that will count the frequency of "Score" across "Traveler type"
+sns.catplot(
+  x='Score',
+  data=reviews,
+  hue='Traveler type',
+  kind='count'
+)
+
+plt.show()
+```
+![Pasted image 20230718131938](/images/Pasted%20image%2020230718131938.png)
+
+
+### Additional .catplot options
+
+##### Using the catplot() facetgrid
+
+```python
+sns.catplot(
+			x="Traveler type",
+			data=reviews,
+			kind="count",
+			col="User continent",
+			col_wrap=3,
+			palette=sns.color_palette("Set1")
+)
+```
+![Pasted image 20230718132617](/images/Pasted%20image%2020230718132617.png)
+
+```python
+ax = sns.catplot(
+			x="Traveler type",
+			data=reviews,
+			kind="count",
+			col="User continent",
+			col_wrap=3,
+			palette=sns.color_palette("Set1")
+)
+ax.fig.suptitle("Hotel Score by Traveler Type & User Continent")
+ax.set_axis_labels("Traveler Type", "Number of Reviews")
+plt.subplots_adjust(top=.9)
+plt.show()
+```
+![Pasted image 20230718133121](/images/Pasted%20image%2020230718133121.png)
+
+### Exercises
+
+##### Exercise 1
+```python
+# Create a catplot for each "Period of stay" broken down by "Review weekday"
+ax = sns.catplot(
+  # Make sure Review weekday is along the x-axis
+  x='Review weekday',
+  # Specify Period of stay as the column to create individual graphics for
+  col='Period of stay',
+  # Specify that a count plot should be created
+  kind='count',
+  # Wrap the plots after every 2nd graphic.
+  col_wrap=2,
+  data=reviews
+)
+
+plt.show()
+```
+![Pasted image 20230718133726](/images/Pasted%20image%2020230718133726.png)
+
+##### Exercise 2
+```python
+# Adjust the color
+ax = sns.catplot(
+  x="Free internet", y="Score",
+  hue="Traveler type", kind="bar",
+  data=reviews,
+  palette=sns.color_palette("Set2")
+)
+
+  
+
+# Add a title
+ax.fig.suptitle("Hotel Score by Traveler Type and Free Internet Access")
+
+# Update the axis labels
+ax.set_axis_labels("Free Internet", "Average Review Rating")
+
+  
+
+# Adjust the starting height of the graphic
+plt.subplots_adjust(top=0.93)
+plt.show()
+```
+![Pasted image 20230718133948](/images/Pasted%20image%2020230718133948.png)
+
+##### Exercise 3
+```python
+# Print the frequency table of body_type and include NaN values
+print(used_cars["body_type"].value_counts(dropna=False))
+
+  
+
+# Update NaN values
+used_cars.loc[used_cars["body_type"].isna(), "body_type"] = "other"
+
+  
+
+# Convert body_type to title case
+used_cars["body_type"] = used_cars["body_type"].str.title()
+
+  
+
+# Check the dtype
+print(used_cars["body_type"].dtype)
+```
+
+##### Exercise 3
+```python
+# Print the frequency table of Sale Rating
+print(used_cars["Sale Rating"].value_counts())
+```
+![Pasted image 20230718135904](/images/Pasted%20image%2020230718135904.png)
+```python
+# Find the average score
+average_score = used_cars["Sale Rating"].astype("int").mean()
+
+# Print the average
+print(average_score)
+```
+![Pasted image 20230718140226](/images/Pasted%20image%2020230718140226.png)
+
+***
+## .cat.codes
+
+The `.cat.codes` attribute in pandas is used to obtain the category codes of a categorical column in a DataFrame or Series. It returns a Series of integers representing the category codes corresponding to the categorical values.
+
+**Attribute syntax:**
+```python
+Series.cat.codes
+```
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample Series with categorical data
+data = pd.Series(['A', 'B', 'C', 'A', 'B'])
+categories = ['A', 'B', 'C']
+categorical_series = pd.Categorical(data, categories=categories)
+
+# Get the category codes
+category_codes = categorical_series.codes
+print(category_codes)
+```
+
+The resulting output will be:
+```
+[0 1 2 0 1]
+```
+
+In the example, a Series `categorical_series` is created with categorical data using `pd.Categorical()`. The `category_codes` attribute is then used to obtain the category codes for each value in the categorical series. The resulting `category_codes` Series contains the integer codes corresponding to the categories ['A', 'B', 'C'], where 'A' is represented by 0, 'B' by 1, and 'C' by 2.
+
+The `.cat.codes` attribute is helpful when you need to convert categorical data into numerical codes for various purposes, such as encoding categorical variables for machine learning algorithms or performing numerical computations on categorical data. It provides a convenient way to access the underlying integer codes of categorical values in a DataFrame or Series.
+
+
+##### Label Encoding
+
+```python
+# Codes each category as an integer from 0 through n
+# -1 = NA
+
+# Example
+used_cars['manufacturer_name'] = used_cars['manufacturer_name'].astype('category')
+
+# Using .cat.codes we create a new column for the coded categorical variable
+used_cars['manufacturer_code'] = used_cars['manufacturer_name'].cat.codes
+
+# Let's see what happened
+print(used_cars[['manufacturer_name', 'manufacturer_code']])
+```
+![Pasted image 20230718140807](/images/Pasted%20image%2020230718140807.png)
+
+##### Creating a Codebook
+```python
+codes = used_cars['manufacturer_name'].cat.codes
+categories = used_cars['manufacturer_name']
+
+name_map = dict(zip(codes, categories))
+print(name_map)
+```
+![Pasted image 20230718141030](/images/Pasted%20image%2020230718141030.png)
+
+```python
+# To revert previous values we can use .map
+used_cars['manufacturer_code'].map(name_map)
+```
+![Pasted image 20230718141312](/images/Pasted%20image%2020230718141312.png)
+***
+## zip()
+
+The `zip()` function in Python is used to combine or iterate over multiple iterables simultaneously. It takes multiple iterables as input and returns an iterator that produces tuples containing elements from each iterable.
+
+**Function syntax:**
+```python
+zip(iterable1, iterable2, ...)
+```
+
+**Parameters:**
+The `zip()` function takes one or more iterables as input. These can be sequences like lists, tuples, or strings, or any other iterable object.
+
+**Example of use:**
+```python
+# Using zip() to combine two lists
+numbers = [1, 2, 3]
+letters = ['A', 'B', 'C']
+combined = zip(numbers, letters)
+
+# Iterate over the combined elements
+for num, letter in combined:
+    print(num, letter)
+```
+
+The resulting output will be:
+```
+1 A
+2 B
+3 C
+```
+
+In the example, `zip(numbers, letters)` combines the `numbers` and `letters` lists into an iterator of tuples, where each tuple contains the corresponding elements from both lists. The `for` loop then iterates over the combined elements, unpacking them into `num` and `letter`, and prints each pair.
+
+The `zip()` function is commonly used when you need to iterate over multiple iterables in parallel or combine their corresponding elements. It is useful for tasks like pairwise comparisons, merging data from multiple sources, or creating dictionaries or data structures based on multiple sequences.
+
+***
+## np.where()
+
+The `np.where()` function in NumPy is used to return elements from one of two arrays based on a specified condition. It acts as a vectorized version of the conditional expression in Python.
+
+**Function syntax:**
+```python
+np.where(condition, x, y)
+```
+
+**Parameters:**
+- `condition`: Specifies the condition to evaluate. It can be a boolean array or a logical expression.
+- `x`: Specifies the array or value to select when the condition is True.
+- `y`: Specifies the array or value to select when the condition is False.
+
+**Example of use:**
+```python
+import numpy as np
+
+# Create a sample NumPy array
+arr = np.array([1, 2, 3, 4, 5])
+
+# Use np.where() to apply a condition and return elements from different arrays
+result = np.where(arr < 3, arr, arr*10)
+print(result)
+```
+
+The resulting output will be:
+```
+[ 1  2 30 40 50]
+```
+
+In the example, `np.where(arr < 3, arr, arr*10)` applies the condition `arr < 3` to the array `arr`. For elements where the condition is True, it selects the corresponding elements from `arr`. For elements where the condition is False, it selects the corresponding elements from `arr*10`. The resulting array `result` contains the selected elements based on the condition.
+
+The `np.where()` function is useful for performing element-wise conditional operations on NumPy arrays. It allows you to select elements from different arrays or assign values based on specified conditions in a concise and efficient manner. It is commonly used in data manipulation, data cleaning, and numerical computations where conditional logic is required.
+
+##### Boolean coding
+```python
+# Finding all body types that have van in them and create a new column which indicates if a vehicle is a van or not (1 or 0)
+
+used_cars['van_code'] = np.where(
+	 used_cars['body_type'].str.contains('van', regex=False), 1, 0
+)
+
+# Lets inspect
+used_cars['van_code'].value_counts()
+```
+![Pasted image 20230718141716](/images/Pasted%20image%2020230718141716.png)
+
+## Exercises
+
+##### Exercise 1
+
+```python
+# Convert to categorical and print the frequency table
+used_cars["color"] = used_cars["color"].astype("category")
+print(used_cars["color"].value_counts())
+```
+![Pasted image 20230718142122](/images/Pasted%20image%2020230718142122.png)
+```python
+# Create a label encoding
+used_cars["color_code"] = used_cars["color"].cat.codes
+
+# Create codes and categories objects
+codes = used_cars["color"].cat.codes
+categories = used_cars["color"]
+color_map = dict(zip(codes, categories))
+
+# Print the map
+print(color_map)
+```
+![Pasted image 20230718142303](/images/Pasted%20image%2020230718142303.png)
+
+##### Exercise 2
+
+```python
+# Update the color column using the color_map
+used_cars_updated["color"] = used_cars_updated['color'].map(color_map)
+# Update the engine fuel column using the fuel_map
+used_cars_updated["engine_fuel"] = used_cars_updated['engine_fuel'].map(fuel_map)
+# Update the transmission column using the transmission_map
+used_cars_updated["transmission"] = used_cars_updated['transmission'].map(transmission_map)
+
+# Print the info statement
+print(used_cars_updated.info())
+```
+![Pasted image 20230718142527](/images/Pasted%20image%2020230718142527.png)
+
+##### Exercise 3
+
+```python
+# Print the manufacturer name frequency table
+print(used_cars['manufacturer_name'].value_counts())
+```
+![Pasted image 20230718142640](/images/Pasted%20image%2020230718142640.png)
+```python
+# Create a Boolean column for the most common manufacturer name
+used_cars["is_volkswagen"] = np.where(
+  used_cars["manufacturer_name"].str.contains("Volkswagen", regex=False), 1, 0
+)
+  
+# Check the final frequency table
+print(used_cars["is_volkswagen"].value_counts())
+```
+![Pasted image 20230718142933](/images/Pasted%20image%2020230718142933.png)
+
+### One-hot Encoding aka. Dummifying variables
+
+## .get_dummies()
+
+The `get_dummies()` function in pandas is used to convert categorical variables into dummy or indicator variables. It creates a new DataFrame with binary columns representing the presence or absence of each category from the original variable.
+
+**Function syntax:**
+```python
+pd.get_dummies(data, prefix=None, prefix_sep='_', dummy_na=False, columns=None, drop_first=False)
+```
+
+**Parameters:**
+- `data`: Specifies the DataFrame or Series containing the categorical variables to be converted.
+- `prefix` (optional): Specifies the prefix to add to the column names of the dummy variables.
+- `prefix_sep` (optional): Specifies the separator to use between the prefix and the original column name.
+- `dummy_na` (optional): Specifies whether to include a column for missing values (NaN). If `True`, a column will be added to represent missing values. Default is `False`.
+- `columns` (optional): Specifies the columns in the DataFrame to be converted. If `None`, all categorical columns are converted.
+- `drop_first` (optional): Specifies whether to drop the first category for each variable to avoid multicollinearity. Default is `False`.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame with a categorical variable
+data = {'Category': ['A', 'B', 'A', 'C']}
+df = pd.DataFrame(data)
+
+# Convert the categorical variable into dummy variables
+dummy_df = pd.get_dummies(df, prefix='Category', prefix_sep='_', drop_first=True)
+print(dummy_df)
+```
+
+The resulting output will be:
+```
+   Category_B  Category_C
+0           0           0
+1           1           0
+2           0           0
+3           0           1
+```
+
+In the example, `pd.get_dummies(df, prefix='Category', prefix_sep='_', drop_first=True)` converts the 'Category' column in the DataFrame `df` into dummy variables. The resulting `dummy_df` DataFrame contains binary columns for each category, with 'Category' used as the prefix and '_' as the prefix separator. The first category ('A') is dropped to avoid multicollinearity using the `drop_first` parameter.
+
+The `get_dummies()` function is useful for converting categorical variables into a numerical format suitable for machine learning algorithms or statistical analysis. It allows you to encode categorical variables as binary columns, making them compatible with various modeling techniques. Additionally, it provides flexibility through optional parameters for customizing the column names, including missing values, and handling multicollinearity.
+
+##### One-hot Encoding on a DataFrame
+```python
+# Creating our new dummified dataframe
+used_cars_onehot = pd.get_dummies(used_cars[['odometer_value', 'color']])
+used_cars_onehot.head()
+```
+![Pasted image 20230718143423](/images/Pasted%20image%2020230718143423.png)
+```python
+print(used_cars_onehot.shape)
+```
+![Pasted image 20230718143445](/images/Pasted%20image%2020230718143445.png)
+
+##### Specifying columns to dummify
+```python
+# Dummifying only the "color" column and giving the new column names no prefix
+used_cars_onehot = pd.get_dummies(used_cars, columns=['color'], prefix='')
+used_cars_onehot.head()
+```
+![Pasted image 20230718143620](/images/Pasted%20image%2020230718143620.png)
+
+### Exercises
+
+##### Exercise 1
+```python
+# Create one-hot encoding for just two columns
+used_cars_simple = pd.get_dummies(
+  used_cars,
+  # Specify the columns from the instructions
+  columns=['manufacturer_name', 'transmission'],
+  # Set the prefix
+  prefix='dummy'
+)
+
+# Print the shape of the new dataset
+print(used_cars_simple.shape)
+```
+![Pasted image 20230718143901](/images/Pasted%20image%2020230718143901.png)
