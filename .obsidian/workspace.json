@@ -11,8 +11,12 @@
             "id": "6c652b3f67f4d66d",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "notes/Data Scientist Professional with Python/Data Communication Concepts.md"
+              }
             }
           }
         ]
@@ -140,8 +148,11 @@
   },
   "active": "6c652b3f67f4d66d",
   "lastOpenFiles": [
-    "obsidian_filelink_converter.py",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA13-Data_Communication_Concepts.pdf",
+    "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
+    "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
+    "obsidian_filelink_converter.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA2-Intermediate_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA1-Introduction_to_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA12-Working_with_Categorical_Data_in_Python.pdf",
@@ -151,10 +162,8 @@
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA8-Data_Science_Toolbox_Part1.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA7-Introduction_to_Data_Visualization_with_Seaborn.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA6-Introduction_to_Data_Visualization_with_Matplotlib.pdf",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA5-Introduction_to_Statistics_in_Python.pdf",
     "notes/Other/start-quiz.py functions.md",
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-    "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "images/Pasted image 20230718143901.png",
     "images/Pasted image 20230718143620.png",
     "images/Pasted image 20230718143445.png",
