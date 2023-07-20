@@ -49,7 +49,7 @@ file.close()
 ```python
 print(text)
 ```
-![[Pasted image 20230719191729.png]]
+![Pasted image 20230719191729](/images/Pasted%20image%2020230719191729.png)
 
 ##### Writing to a file
 ```python
@@ -70,13 +70,13 @@ file = open('moby_dick.txt', mode='r')
 # Print it
 print(file.read())
 ```
-![[Pasted image 20230719194411.png]]
+![Pasted image 20230719194411](/images/Pasted%20image%2020230719194411.png)
 
 ```python
 # Check whether file is closed
 print(file.closed)
 ```
-![[Pasted image 20230719194432.png]]
+![Pasted image 20230719194432](/images/Pasted%20image%2020230719194432.png)
 
 ```python
 # Close file
@@ -85,7 +85,7 @@ file.close()
 # Check whether file is closed
 print(file.closed)
 ```
-![[Pasted image 20230719194444.png]]
+![Pasted image 20230719194444](/images/Pasted%20image%2020230719194444.png)
 
 ***
 ## with
@@ -116,7 +116,7 @@ The `with` statement is useful because it ensures proper resource cleanup, such 
 with open('huck_finn.txt', 'r') as file:
 	print(file.read())
 ```
-![[Pasted image 20230719192017.png]]
+![Pasted image 20230719192017](/images/Pasted%20image%2020230719192017.png)
 
 ### Exercises
 
@@ -128,7 +128,7 @@ with open('moby_dick.txt', 'r') as file:
 	print(file.readline())
 	print(file.readline())
 ```
-![[Pasted image 20230719194844.png]]
+![Pasted image 20230719194844](/images/Pasted%20image%2020230719194844.png)
 
 
 ## .readline()
@@ -206,7 +206,7 @@ filename = 'MNIST.txt'
 data = np.loadtxt(filename, delimeter = ',')
 data
 ```
-![[Pasted image 20230719193036.png]]
+![Pasted image 20230719193036](/images/Pasted%20image%2020230719193036.png)
 
 ##### Customizing the NumPy import
 - `skiprows` (optional): Specifies the number of rows at the beginning of the file to skip before loading the data.
@@ -216,7 +216,7 @@ filename = 'MNIST_header.txt'
 data = np.loadtxt(filename, delimiter = ',', skiprows = 1)
 print(data)
 ```
-![[Pasted image 20230719193300.png]]
+![Pasted image 20230719193300](/images/Pasted%20image%2020230719193300.png)
 
 - `usecols` (optional): Specifies which columns to load from the file. It can be a single column index, a sequence of column indices, or a sequence of column names.
 ```python
@@ -225,14 +225,14 @@ filename = 'MNIST_header.txt'
 data = np.loadtxt(filename, delimiter=',', skiprows=1, usecols[0,2])
 print(data)
 ```
-![[Pasted image 20230719193453.png]]
+![Pasted image 20230719193453](/images/Pasted%20image%2020230719193453.png)
 
 - `dtype` (optional): Specifies the data type of the resulting array. By default, it is set to `float`.
 ```python
 data = np.loadtxt(filename, delimiter = ',', dtype = str)
 ```
 
-![[Pasted image 20230719193916.png]]
+![Pasted image 20230719193916](/images/Pasted%20image%2020230719193916.png)
 
 ### Exercises 
 
@@ -259,8 +259,8 @@ plt.imshow(im_sq, cmap='Greys', interpolation='nearest')
 plt.show()
 
 ```
-![[Pasted image 20230719205725.png]]
-![[Pasted image 20230719205739.png]]
+![Pasted image 20230719205725](/images/Pasted%20image%2020230719205725.png)
+![Pasted image 20230719205739](/images/Pasted%20image%2020230719205739.png)
 
 ##### Exercise 2
 ```python
@@ -276,7 +276,7 @@ data = np.loadtxt(file, delimiter='\t', skiprows=1, usecols=[0,2])
 # Print data
 print(data)
 ```
-![[Pasted image 20230719210013.png]]
+![Pasted image 20230719210013](/images/Pasted%20image%2020230719210013.png)
 
 ##### Exercise 3
 ```python
@@ -302,8 +302,8 @@ plt.ylabel('percentage of larvae')
 plt.show()
 
 ```
-![[Pasted image 20230719210225.png]]
-![[Pasted image 20230719210239.png]]
+![Pasted image 20230719210225](/images/Pasted%20image%2020230719210225.png)
+![Pasted image 20230719210239](/images/Pasted%20image%2020230719210239.png)
 
 ##### Exercise 4
 ```python
@@ -317,7 +317,7 @@ d = np.recfromcsv(file, delimiter = ',', names=True, dtype=None)
 print(d[:3])
 
 ```
-![[Pasted image 20230719211247.png]]
+![Pasted image 20230719211247](/images/Pasted%20image%2020230719211247.png)
 
 
 ## np.genfromtxt()
@@ -392,7 +392,7 @@ filename = 'wineequality-red.csv'
 data = pd.read_csv(filename)
 data.head()
 ```
-![[Pasted image 20230719193844.png]]
+![Pasted image 20230719193844](/images/Pasted%20image%2020230719193844.png)
 
 ### Exercises
 
@@ -410,7 +410,7 @@ df = pd.read_csv(file)
 # View the head of the DataFrame
 print(df.head())
 ```
-![[Pasted image 20230719211413.png]]
+![Pasted image 20230719211413](/images/Pasted%20image%2020230719211413.png)
 
 ##### Exercise 2
 ```python
@@ -432,8 +432,8 @@ plt.xlabel('Age (years)')
 plt.ylabel('count')
 plt.show()
 ```
-![[Pasted image 20230719212203.png]]
-![[Pasted image 20230719212211.png]]
+![Pasted image 20230719212203](/images/Pasted%20image%2020230719212203.png)
+![Pasted image 20230719212211](/images/Pasted%20image%2020230719212211.png)
 
 
 ## type()
@@ -508,7 +508,7 @@ with open('pickled_fruit.pkl', 'rb') as file:
 	data = pickle.load(file)
 print(data)
 ```
-![[Pasted image 20230720102203.png]]
+![Pasted image 20230720102203](/images/Pasted%20image%2020230720102203.png)
 
 ##### Exercise 1
 ```python
@@ -525,7 +525,7 @@ print(d)
 # Print datatype of d
 print(type(d))
 ```
-![[Pasted image 20230720105934.png]]
+![Pasted image 20230720105934](/images/Pasted%20image%2020230720105934.png)
 
 ***
 ## pd.ExcelFile()
@@ -569,7 +569,7 @@ filename = 'urbanpop.xlsx'
 data = pd.ExcelFile(filename)
 print(data.sheet_names)
 ```
-![[Pasted image 20230720102552.png]]
+![Pasted image 20230720102552](/images/Pasted%20image%2020230720102552.png)
 
 ```python
 df1 = data.parse('1960-1966') # sheet name variant (str)
@@ -646,7 +646,7 @@ xls = pd.ExcelFile(file)
 # Print sheet names
 print(xls.sheet_names)
 ```
-![[Pasted image 20230720110105.png]]
+![Pasted image 20230720110105](/images/Pasted%20image%2020230720110105.png)
 
 ##### Exercise 2
 ```python
@@ -662,7 +662,7 @@ df2 = xls.parse(0)
 # Print the head of the DataFrame df2
 print(df2.head())
 ```
-![[Pasted image 20230720110228.png]]
+![Pasted image 20230720110228](/images/Pasted%20image%2020230720110228.png)
 
 ##### Exercise 3
 ```python
@@ -678,7 +678,7 @@ df2 = xls.parse(1, usecols=[0], skiprows=1, names=['Country'])
 # Print the head of the DataFrame df2
 print(df2.head())
 ```
-![[Pasted image 20230720110455.png]]
+![Pasted image 20230720110455](/images/Pasted%20image%2020230720110455.png)
 
 ***
 ## pd.read_sas()
@@ -738,8 +738,8 @@ pd.DataFrame.hist(df_sas[['P']])
 plt.ylabel('count')
 plt.show()
 ```
-![[Pasted image 20230720110739.png]]
-![[Pasted image 20230720110747.png]]
+![Pasted image 20230720110739](/images/Pasted%20image%2020230720110739.png)
+![Pasted image 20230720110747](/images/Pasted%20image%2020230720110747.png)
 
 ***
 ## pd.read_stata()
@@ -797,8 +797,8 @@ plt.xlabel('Extent of disease')
 plt.ylabel('Number of countries')
 plt.show()
 ```
-![[Pasted image 20230720110939.png]]
-![[Pasted image 20230720111003.png]]
+![Pasted image 20230720110939](/images/Pasted%20image%2020230720110939.png)
+![Pasted image 20230720111003](/images/Pasted%20image%2020230720111003.png)
 
 
 ***
@@ -851,7 +851,7 @@ data = h5py.File(filename, 'r')
 
 print(type(data))
 ```
-![[Pasted image 20230720103823.png]]
+![Pasted image 20230720103823](/images/Pasted%20image%2020230720103823.png)
 
 
 ##### The Structure of HDF5 Files
@@ -861,23 +861,23 @@ Data - Main Keys (Meta, Quality, Strain)
 for key in data.keys():
 	print(key)
 ```
-![[Pasted image 20230720104100.png]]
+![Pasted image 20230720104100](/images/Pasted%20image%2020230720104100.png)
 ```python
 print(type(data['meta']))
 ```
-![[Pasted image 20230720104241.png]]
+![Pasted image 20230720104241](/images/Pasted%20image%2020230720104241.png)
 
 Each Main Key Has Keys
 ```python
 for key in data['meta'].keys():
 	print(key)
 ```
-![[Pasted image 20230720104413.png]]
+![Pasted image 20230720104413](/images/Pasted%20image%2020230720104413.png)
 
 ```python
 print(np.array(data['meta']['Description']), np.array(data['meta']['Detector']))
 ```
-![[Pasted image 20230720104544.png]]
+![Pasted image 20230720104544](/images/Pasted%20image%2020230720104544.png)
 
 ##### Exercise 1
 ```python
@@ -898,7 +898,7 @@ print(type(data))
 for key in data.keys():
     print(key)
 ```
-![[Pasted image 20230720111402.png]]
+![Pasted image 20230720111402](/images/Pasted%20image%2020230720111402.png)
 
 ##### Exercise 2
 ```python
@@ -924,8 +924,8 @@ plt.xlabel('GPS Time (s)')
 plt.ylabel('strain')
 plt.show()
 ```
-![[Pasted image 20230720111606.png]]
-![[Pasted image 20230720111614.png]]
+![Pasted image 20230720111606](/images/Pasted%20image%2020230720111606.png)
+![Pasted image 20230720111614](/images/Pasted%20image%2020230720111614.png)
 
 
 ***
@@ -1009,12 +1009,12 @@ filename = 'workspace.mat'
 mat = scipy.io.loadmat(filename)
 print(type(mat))
 ```
-![[Pasted image 20230720105103.png]]
-![[Pasted image 20230720111726.png]]
+![Pasted image 20230720105103](/images/Pasted%20image%2020230720105103.png)
+![Pasted image 20230720111726](/images/Pasted%20image%2020230720111726.png)
 ```python
 print(type(mat['x']))
 ```
-![[Pasted image 20230720105159.png]]
+![Pasted image 20230720105159](/images/Pasted%20image%2020230720105159.png)
 
 ##### Exercise 1
 ```python
@@ -1027,7 +1027,7 @@ mat = scipy.io.loadmat('albeck_gene_expression.mat')
 # Print the datatype type of mat
 print(type(mat))
 ```
-![[Pasted image 20230720111917.png]]
+![Pasted image 20230720111917](/images/Pasted%20image%2020230720111917.png)
 
 ##### Exercise 2
 ```python
@@ -1048,7 +1048,7 @@ plt.xlabel('time (min.)')
 plt.ylabel('normalized fluorescence (measure of expression)')
 plt.show()
 ```
-![[Pasted image 20230720112112.png]]
-![[Pasted image 20230720112120.png]]
+![Pasted image 20230720112112](/images/Pasted%20image%2020230720112112.png)
+![Pasted image 20230720112120](/images/Pasted%20image%2020230720112120.png)
 
 
