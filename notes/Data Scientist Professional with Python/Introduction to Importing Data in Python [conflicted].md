@@ -1051,4 +1051,505 @@ plt.show()
 ![Pasted image 20230720112112](/images/Pasted%20image%2020230720112112.png)
 ![Pasted image 20230720112120](/images/Pasted%20image%2020230720112120.png)
 
+***
+## create_engine()
+
+The `create_engine()` function is part of the SQLAlchemy library in Python and is used to create a database engine for connecting to a database server.
+
+**Function syntax:**
+```python
+create_engine(url, **kwargs)
+```
+
+**Parameters:**
+- `url`: Specifies the URL or connection string for the database server.
+- Additional keyword arguments (`kwargs`) can be provided to further customize the behavior of the engine, such as specifying the database driver, authentication credentials, and more.
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Use the engine to establish a connection to the database
+connection = engine.connect()
+
+# Perform database operations using the connection
+result = connection.execute('SELECT * FROM mytable')
+
+# Close the connection when finished
+connection.close()
+```
+
+In this example, `create_engine('postgresql://username:password@localhost/mydatabase')` creates a PostgreSQL database engine with the specified connection URL. The `engine` object is then used to establish a connection to the database server using the `connect()` method. With the connection established, you can execute SQL statements and perform various database operations. Finally, the connection is closed using the `close()` method to release the resources associated with it.
+
+The `create_engine()` function is a fundamental component of SQLAlchemy and provides a convenient way to create and manage connections to various database servers. It abstracts away the details of the underlying database driver and allows you to interact with databases in a unified manner using the SQLAlchemy ORM (Object-Relational Mapping) or SQL expressions.
+
+##### Creating a database engine
+```python
+import sqlalchemy
+engine = create_engine('sqlite://Northwind.sqlite')
+
+table_names = engine.table_names()
+print(table_names)
+```
+![[Pasted image 20230720113107.png]]
+
+
+## .table_names()
+
+The `.table_names()` method is used to retrieve a list of table names existing in a connected database using SQLAlchemy.
+
+**Method syntax:**
+```python
+engine.table_names()
+```
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Retrieve the list of table names
+table_names = engine.table_names()
+
+# Display the table names
+print(table_names)
+```
+
+In this example, `engine.table_names()` retrieves the list of table names existing in the connected database. The resulting `table_names` variable contains the names of all the tables present in the database.
+
+By using the `.table_names()` method, you can obtain a list of available tables in a database. This information can be useful for further analysis, data exploration, or interacting with specific tables within the database using SQLAlchemy or other database-related libraries and tools.
+
+
+### Exercises 
+
+##### Exercise 1
+```python
+# Import necessary module
+from sqlalchemy import create_engine
+
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+```
+
+##### Exercise 2
+```python
+# Import necessary module
+from sqlalchemy import create_engine 
+
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Save the table names to a list: table_names
+table_names = list(engine.table_names())
+
+# Print the table names to the shell
+print(table_names)
+```
+![[Pasted image 20230720144858.png]]
+
+
+## .connect()
+
+The `.connect()` method is used to establish a connection to a database server using an engine created with SQLAlchemy.
+
+**Method syntax:**
+```python
+engine.connect()
+```
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Establish a connection to the database
+connection = engine.connect()
+
+# Perform database operations using the connection
+result = connection.execute('SELECT * FROM mytable')
+
+# Close the connection when finished
+connection.close()
+```
+
+In this example, `engine.connect()` establishes a connection to the database server using the engine created with SQLAlchemy. The resulting `connection` object represents the connection to the database.
+
+Once the connection is established, you can use the connection object to execute SQL statements and perform various database operations. In the example, `connection.execute('SELECT * FROM mytable')` executes a SELECT query on the table named `mytable`. Finally, the connection is closed using the `close()` method to release the resources associated with it.
+
+The `.connect()` method is a crucial step for interacting with a database using SQLAlchemy. It allows you to establish a connection to the database server and execute SQL statements or perform database operations using the resulting connection object.
+
+
+## .execute()
+
+The `.execute()` method is used to execute a SQL statement or query on a database using a connection object in SQLAlchemy.
+
+**Method syntax:**
+```python
+connection.execute(statement, *multiparams, **params)
+```
+
+**Parameters:**
+- `statement`: Specifies the SQL statement or query to be executed.
+- `multiparams` (optional): Specifies the positional parameters to be bound to the SQL statement. It can be a tuple or a list.
+- `params` (optional): Specifies the keyword parameters to be bound to the SQL statement. It can be a dictionary.
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Establish a connection to the database
+connection = engine.connect()
+
+# Execute a SQL statement
+result = connection.execute('SELECT * FROM mytable')
+
+# Fetch the results
+rows = result.fetchall()
+
+# Display the results
+for row in rows:
+    print(row)
+
+# Close the connection when finished
+connection.close()
+```
+
+In this example, `connection.execute('SELECT * FROM mytable')` executes a SELECT query on the table named `mytable`. The resulting `result` object represents the outcome of the executed query.
+
+After executing the SQL statement, you can retrieve the results using methods such as `fetchall()`, `fetchone()`, or `fetchmany()` on the `result` object. In the example, `rows = result.fetchall()` retrieves all the rows returned by the query, and they are displayed using a loop.
+
+The `.execute()` method allows you to execute arbitrary SQL statements or queries on a database using the connection object. It is a powerful feature of SQLAlchemy that enables you to interact with databases and retrieve results based on the executed queries.
+
+
+## .fetchall()
+
+The `.fetchall()` method is used to retrieve all the rows returned by a query executed on a database using SQLAlchemy.
+
+**Method syntax:**
+```python
+result.fetchall()
+```
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Establish a connection to the database
+connection = engine.connect()
+
+# Execute a SQL statement
+result = connection.execute('SELECT * FROM mytable')
+
+# Fetch all the results
+rows = result.fetchall()
+
+# Display the results
+for row in rows:
+    print(row)
+
+# Close the connection when finished
+connection.close()
+```
+
+In this example, `result.fetchall()` retrieves all the rows returned by the query executed on the table named `mytable`. The resulting `rows` variable contains a list of tuples, where each tuple represents a row from the query result.
+
+By using the `.fetchall()` method, you can obtain all the rows returned by a query and perform further processing or analysis on the retrieved data. In the example, the retrieved rows are displayed using a loop to print each row.
+
+The `.fetchall()` method is commonly used in conjunction with the `.execute()` method to retrieve all the query results. It allows you to access the complete result set returned by the executed query, enabling you to work with the data in a flexible and iterative manner.
+
+
+## .fetchmany()
+
+The `.fetchmany()` method is used to retrieve a specific number of rows from the result set of a query executed on a database using SQLAlchemy.
+
+**Method syntax:**
+```python
+result.fetchmany(size=None)
+```
+
+**Parameters:**
+- `size` (optional): Specifies the number of rows to fetch from the result set. If not provided, it uses the default cursor's fetch size.
+
+**Example of use:**
+```python
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Establish a connection to the database
+connection = engine.connect()
+
+# Execute a SQL statement
+result = connection.execute('SELECT * FROM mytable')
+
+# Fetch a specific number of rows
+rows = result.fetchmany(size=5)
+
+# Display the fetched rows
+for row in rows:
+    print(row)
+
+# Close the connection when finished
+connection.close()
+```
+
+In this example, `result.fetchmany(size=5)` retrieves five rows from the query result of the executed SQL statement. The resulting `rows` variable contains a list of tuples, where each tuple represents a fetched row.
+
+By using the `.fetchmany()` method, you can control the number of rows to retrieve at a time from the result set. This can be useful when dealing with large result sets or when you want to fetch rows in batches. In the example, the fetched rows are displayed using a loop to print each row.
+
+The `.fetchmany()` method provides flexibility in fetching a specific number of rows from the result set, allowing you to process the data in a more manageable and efficient manner.
+
+
+```python
+import sqlalchemy
+
+# Create an engine, connect, execute the query, fetch the result, close
+engine = create_engine('sqlite://Northwind.sqlite')
+con = engine.connect()
+rs = con.execute('SELECT * FROM Orders')
+df = pd.DataFrame(rs.fetchall())
+con.close()
+
+print(df.head())
+```
+![[Pasted image 20230720142318.png]]
+```python
+# To add proper column names we can use the keys from the original Orders table
+# ...
+df = pd.DataFrame(rs.fetchall())
+df.columns = rs.keys()
+con.close()
+
+print(df.head())
+```
+![[Pasted image 20230720142828.png]]
+
+##### Using the Context Manager
+```python
+import sqlalchemy
+engine = create_engine('sqlite://Northwind.sqlite')
+
+with engine.connect() as con:
+	rs = con.execute('SELECT OrderID, OrderDate, ShipName FROM Orders')
+	df = pd.DataFrame(rs.fetchmany(5))
+	df.columns = rs.keys()
+```
+
+
+### Exercises
+
+##### Exercise 1
+```python
+# Import packages
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Open engine connection: con
+con = engine.connect()
+
+# Perform query: rs
+rs = con.execute('SELECT * FROM Album')
+
+# Save results of the query to DataFrame: df
+df = pd.DataFrame(rs.fetchall())
+
+# Close connection
+con.close()
+
+# Print head of DataFrame df
+print(df.head())
+```
+![[Pasted image 20230720145155.png]]
+
+##### Exercise 2
+```python
+# Open engine in context manager
+# Perform query and save results to DataFrame: df
+with engine.connect() as con:
+    rs = con.execute('SELECT LastName, Title FROM Employee')
+    df = pd.DataFrame(rs.fetchmany(3))
+    df.columns = rs.keys()
+
+# Print the length of the DataFrame df
+print(len(df))
+
+# Print the head of the DataFrame df
+print(df.head())
+```
+![[Pasted image 20230720145337.png]]
+
+##### Exercise 3
+```python
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Open engine in context manager
+# Perform query and save results to DataFrame: df
+with engine.connect() as con:
+    rs = con.execute('SELECT * FROM Employee WHERE EmployeeId >= 6')
+    df = pd.DataFrame(rs.fetchall())
+    df.columns = rs.keys()
+
+# Print the head of the DataFrame df
+print(df.head())
+```
+![[Pasted image 20230720145509.png]]
+
+##### Exercise 4
+```python
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Open engine in context manager
+with engine.connect() as con:
+    rs = con.execute('SELECT * FROM Employee ORDER BY BirthDate')
+    df = pd.DataFrame(rs.fetchall())
+
+    # Set the DataFrame's column names
+    df.columns = rs.keys()
+
+# Print head of DataFrame
+print(df.head())
+```
+![[Pasted image 20230720145814.png]]
+
+
+## pd.read_sql_query()
+
+The `pd.read_sql_query()` function is used to execute a SQL query on a database using SQLAlchemy and return the results as a pandas DataFrame.
+
+**Function syntax:**
+```python
+pd.read_sql_query(sql, con, params=None, index_col=None, coerce_float=True, parse_dates=None, chunksize=None)
+```
+
+**Parameters:**
+- `sql`: Specifies the SQL query to be executed.
+- `con`: Specifies the database connection object or a SQLAlchemy engine to use for connecting to the database.
+- `params` (optional): Specifies the parameters to be bound to the SQL query.
+- `index_col` (optional): Specifies the column(s) to be used as the index of the resulting DataFrame.
+- `coerce_float` (optional): Specifies whether to convert numeric columns to float data type. By default, it is `True`.
+- `parse_dates` (optional): Specifies the columns to parse as dates. It can be a single column name or a list of column names.
+- `chunksize` (optional): Specifies the number of rows to fetch at a time. It can be used for iterative processing of large result sets.
+
+**Example of use:**
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Create a database engine
+engine = create_engine('postgresql://username:password@localhost/mydatabase')
+
+# Execute a SQL query and load the results into a DataFrame
+df = pd.read_sql_query('SELECT * FROM mytable', engine)
+
+# Display the loaded data
+print(df)
+```
+
+In this example, `pd.read_sql_query('SELECT * FROM mytable', engine)` executes the SQL query `'SELECT * FROM mytable'` on the database using the SQLAlchemy engine `engine`. The resulting data is loaded into a DataFrame `df` for further processing and analysis.
+
+The `pd.read_sql_query()` function provides a convenient way to execute SQL queries on a database and retrieve the results as a pandas DataFrame. It leverages the power of SQLAlchemy to establish connections to different database servers and retrieve data in a tabular format that can be easily manipulated and analyzed using pandas' extensive data manipulation and analysis capabilities.
+
+##### The Pandas way to SQL Queries
+```python
+import sqlalchemy import create_engine
+engine = create_engine('sqlite:///Northwind.sqlite')
+df = pd.read_sql_query('SELECT * FROM Orders', engine)
+```
+
+##### Using INNER JOIN
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+engine = create_engine('sqlite:///Northwind.sqlite')
+df = pd.read_sql_query("SELECT OrderID, CompanyName FROM Orders INNER JOIN Customers on Orders.CustomerID = Customers.CustomerID", engine)
+print(df.head())
+```
+
+### Exercises
+
+##### Exercise 1
+```python
+# Import packages
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Execute query and store records in DataFrame: df
+df = pd.read_sql_query('SELECT * FROM Album', engine)
+
+# Print head of DataFrame
+print(df.head())
+
+# Open engine in context manager and store query result in df1
+with engine.connect() as con:
+    rs = con.execute("SELECT * FROM Album")
+    df1 = pd.DataFrame(rs.fetchall())
+    df1.columns = rs.keys()
+
+# Confirm that both methods yield the same result
+print(df.equals(df1))
+```
+![[Pasted image 20230720150006.png]]
+
+##### Exercise 2
+```python
+# Import packages
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Create engine: engine
+engine = create_engine('sqlite:///Chinook.sqlite')
+
+# Execute query and store records in DataFrame: df
+df = pd.read_sql_query('SELECT * FROM Employee WHERE EmployeeId >= 6 ORDER BY BirthDate', engine)
+
+# Print head of DataFrame
+print(df.head())
+```
+![[Pasted image 20230720150149.png]]
+
+##### Exercise 3
+```python
+# Open engine in context manager
+# Perform query and save results to DataFrame: df
+with engine.connect() as con:
+    rs = con.execute('SELECT Title, Name FROM Album INNER JOIN Artist on Album.ArtistID = Artist.ArtistID')
+    df = pd.DataFrame(rs.fetchall())
+    df.columns = rs.keys()
+
+# Print head of DataFrame df
+print(df.head())
+```
+![[Pasted image 20230720150823.png]]
+
+##### Exercise 4
+```python
+# Execute query and store records in DataFrame: df
+df = pd.read_sql_query('SELECT * FROM PlaylistTrack INNER JOIN Track on PlaylistTrack.TrackId = Track.TrackId WHERE Milliseconds < 250000', engine)
+
+# Print head of DataFrame
+print(df.head())
+```
+![[Pasted image 20230720151117.png]]
 
