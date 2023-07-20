@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md"
+                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md"
               }
             }
           }
@@ -148,22 +148,23 @@
   },
   "active": "6c652b3f67f4d66d",
   "lastOpenFiles": [
-    "images/Pasted image 20230719212211.png",
-    "images/Pasted image 20230719212203.png",
-    "images/Pasted image 20230719211413.png",
-    "images/Pasted image 20230719211247.png",
-    "images/Pasted image 20230719210239.png",
-    "images/Pasted image 20230719210225.png",
-    "images/Pasted image 20230719210013.png",
-    "images/Pasted image 20230719205739.png",
-    "images/Pasted image 20230719205725.png",
-    "images/Pasted image 20230719194844.png",
-    "images/Pasted image 20230719194444.png",
+    "images/Pasted image 20230720112120.png",
+    "images/Pasted image 20230720112112.png",
+    "images/Pasted image 20230720111917.png",
+    "images/Pasted image 20230720111903.png",
+    "images/Pasted image 20230720111901.png",
+    "images/Pasted image 20230720111726.png",
+    "images/Pasted image 20230720111614.png",
+    "images/Pasted image 20230720111606.png",
+    "images/Pasted image 20230720111402.png",
+    "images/Pasted image 20230720111003.png",
+    "images/Pasted image 20230720110939.png",
+    "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
     "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
+    "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA13-Data_Communication_Concepts.pdf",
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "obsidian_filelink_converter.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA2-Intermediate_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA1-Introduction_to_Python.pdf",
