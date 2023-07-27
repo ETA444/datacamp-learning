@@ -1552,4 +1552,3 @@ df = pd.read_sql_query('SELECT * FROM PlaylistTrack INNER JOIN Track on Playlist
 print(df.head())
 ```
 ![[Pasted image 20230720151117.png]]
-

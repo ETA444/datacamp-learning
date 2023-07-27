@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
+                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
+                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
+                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md"
+                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md"
               }
             }
           }
@@ -148,6 +148,13 @@
   },
   "active": "6c652b3f67f4d66d",
   "lastOpenFiles": [
+    "images/Pasted image 20230720172955.png",
+    "images/Pasted image 20230720172557.png",
+    "images/Pasted image 20230720171258.png",
+    "images/Pasted image 20230720164903.png",
+    "images/Pasted image 20230720164845.png",
+    "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
+    "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA14-Introduction_to_Importing_Data_in_Python.pdf",
     "images/Pasted image 20230720151117.png",
     "images/Pasted image 20230720150823.png",
@@ -155,14 +162,9 @@
     "images/Pasted image 20230720150814.png",
     "images/Pasted image 20230720150149.png",
     "images/Pasted image 20230720150006.png",
-    "images/Pasted image 20230720145814.png",
-    "images/Pasted image 20230720145509.png",
-    "images/Pasted image 20230720145337.png",
-    "images/Pasted image 20230720145155.png",
     "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
     "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
-    "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA13-Data_Communication_Concepts.pdf",
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "obsidian_filelink_converter.py",
@@ -173,7 +175,6 @@
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA10-Intermediate_Data_Visualization_with_Seaborn.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA9-Data_Science_Toolbox_Part2.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA8-Data_Science_Toolbox_Part1.pdf",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA7-Introduction_to_Data_Visualization_with_Seaborn.pdf",
     "notes/Other/start-quiz.py functions.md",
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
