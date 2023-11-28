@@ -9,7 +9,7 @@ The repository is organized into separate folders for each track. Within these t
 Here is a basic view of the repository's structure:
 
 ```
-datacamp-notes
+datacamp-learning
 │   README.md
 │   quizdata_generator.py
 │   start-quiz.py
