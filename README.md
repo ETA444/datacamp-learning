@@ -1,6 +1,6 @@
 # DataCamp Notes & Quiz
 
-Welcome to my `datacamp-notes` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI skills on DataCamp\*. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses. In addition, this repository also hosts a flashcard-style quiz to test your memory on different functions based on the notes.
+Welcome to my `datacamp-learning` repository! This repository serves as my personal codebook, tracking my journey of leveling up my Python, R, SQL and PowerBI skills on DataCamp\*. It is a compilation of markdown files summarizing various functions, concepts, and lessons I have encountered across different courses. In addition, this repository also hosts a flashcard-style quiz to test your memory on different functions based on the notes.
 
 ## Repository Structure
 
