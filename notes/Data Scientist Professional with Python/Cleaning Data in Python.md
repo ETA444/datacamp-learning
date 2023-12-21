@@ -218,3 +218,34 @@ The `.duplicated()` method is useful for detecting and handling duplicate rows i
 column_names = ['first_name','last_name','address']
 duplicates = height_weight.duplicated(subset = column_names, keep = False)
 ```
+
+---
+## .info()
+The `.info()` method in pandas is used to display concise information about a DataFrame, including the data types, non-null values, and memory usage. It provides a quick summary of the DataFrame's structure and contents.
+
+**Method syntax:**
+```python
+DataFrame.info(verbose=True, memory_usage=True, null_counts=True)
+```
+
+**Parameters:**
+- `verbose` (optional): Controls the amount of information displayed. If `True`, all column names and the count of non-null values are shown. If `False`, a concise summary is displayed. By default, `verbose=None` displays the summary based on the DataFrame's size.
+- `memory_usage` (optional): Specifies whether to include memory usage information in the summary. By default, it's set to `True`, and memory usage is included if the DataFrame has numeric columns.
+- `null_counts` (optional): Specifies whether to include the count of null values in the summary. By default, it's set to `True`, and the count of null values is included if the DataFrame has null values.
+
+**Example of use:**
+```python
+import pandas as pd
+
+# Create a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, None, 35]}
+df = pd.DataFrame(data)
+
+# Display information about the DataFrame
+df.info()
+```
+
+In this example, `df.info()` displays information about the DataFrame `df`. The output includes data type information, the count of non-null values, memory usage, and the presence of null values in each column.
+
+The `.info()` method is a useful tool for quickly assessing the structure and data quality of a DataFrame. It helps you identify missing values, understand the data types, and get an overview of the DataFrame's memory usage.
