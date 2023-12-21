@@ -436,5 +436,123 @@ In this example:
 The `.drop_duplicates()` method is a valuable tool for cleaning and preparing data by removing redundant rows from a DataFrame. Depending on your data analysis needs, you can choose to keep the first, last, or remove all occurrences of duplicate rows.
 
 ---
-## .subset()
+## .set()
 
+In Python, a `set` is an unordered collection of unique elements. Sets are defined by enclosing a comma-separated sequence of elements in curly braces `{}` or by using the `set()` constructor.
+
+Here are some common operations you can perform with sets:
+
+**1. Creating a Set:**
+```python
+my_set = {1, 2, 3}
+```
+
+**2. Adding Elements:**
+```python
+my_set.add(4)  # Adds the element 4 to the set
+```
+
+**3. Removing Elements:**
+```python
+my_set.remove(2)  # Removes the element 2 from the set
+```
+
+**4. Checking for Membership:**
+```python
+if 3 in my_set:
+    print("3 is in the set")
+```
+
+**5. Set Operations (Union, Intersection, Difference):**
+```python
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+
+union_set = set1.union(set2)         # Union of two sets
+intersection_set = set1.intersection(set2)  # Intersection of two sets
+difference_set = set1.difference(set2)    # Set difference
+```
+
+**6. Iterating Over a Set:**
+```python
+for item in my_set:
+    print(item)
+```
+
+**7. Length of a Set:**
+```python
+length = len(my_set)  # Returns the number of elements in the set
+```
+
+**8. Creating an Empty Set:**
+```python
+empty_set = set()  # Creates an empty set
+```
+
+Sets are commonly used to store unique values or perform mathematical set operations like union, intersection, and difference. They are mutable, which means you can add or remove elements after creating them. However, sets themselves are not hashable and cannot be elements of another set.
+
+---
+## .difference()
+
+The `.difference()` method in Python is used to find the set difference between two sets. It returns a new set containing elements that are in the first set but not in the second set. In other words, it calculates the elements that are unique to the first set.
+
+**Method syntax:**
+```python
+set1.difference(set2)
+```
+
+- `set1`: The set from which you want to find the difference.
+- `set2`: The set you want to compare with `set1` to find the difference.
+
+**Example:**
+```python
+set1 = {1, 2, 3, 4, 5}
+set2 = {3, 4, 5, 6, 7}
+
+difference_set = set1.difference(set2)
+```
+
+In this example, `difference_set` will contain elements {1, 2}, which are in `set1` but not in `set2`.
+
+You can also use the `-` operator to find the difference between sets:
+
+```python
+difference_set = set1 - set2
+```
+
+Both `.difference()` and the `-` operator perform the same set difference operation. Sets are useful for comparing and manipulating collections of unique elements.
+
+---
+## .isin()
+
+The `.isin()` method in pandas is used to filter data frames. It is often used to filter rows or select a subset of rows from a DataFrame where a specified column's values match any of the values in a given list, series, or another iterable.
+
+**Method syntax:**
+```python
+DataFrame[DataFrame['column_name'].isin(values)]
+```
+
+- `DataFrame`: The DataFrame you want to filter.
+- `'column_name'`: The name of the column you want to filter based on.
+- `values`: A list, series, or iterable containing the values you want to use for filtering.
+
+**Example:**
+```python
+import pandas as pd
+
+# Create a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, 30, 35, 25]}
+df = pd.DataFrame(data)
+
+# Filter rows where 'Name' is in a specified list
+selected_names = ['Bob', 'David']
+filtered_df = df[df['Name'].isin(selected_names)]
+```
+
+In this example, `filtered_df` will contain the rows with names 'Bob' and 'David' because we used the `.isin()` method to filter based on the 'Name' column.
+
+The `.isin()` method is a powerful tool for conditional filtering in pandas, allowing you to select rows where a specific column's values match a predefined list or set of values.
+
+---
+## 
