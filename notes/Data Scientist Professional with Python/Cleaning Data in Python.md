@@ -221,6 +221,7 @@ duplicates = height_weight.duplicated(subset = column_names, keep = False)
 
 ---
 ## .info()
+
 The `.info()` method in pandas is used to display concise information about a DataFrame, including the data types, non-null values, and memory usage. It provides a quick summary of the DataFrame's structure and contents.
 
 **Method syntax:**
@@ -249,3 +250,191 @@ df.info()
 In this example, `df.info()` displays information about the DataFrame `df`. The output includes data type information, the count of non-null values, memory usage, and the presence of null values in each column.
 
 The `.info()` method is a useful tool for quickly assessing the structure and data quality of a DataFrame. It helps you identify missing values, understand the data types, and get an overview of the DataFrame's memory usage.
+
+---
+## .drop()
+
+The `.drop()` method in pandas is used to remove specified rows or columns from a DataFrame.
+
+**Method syntax to drop rows:**
+```python
+DataFrame.drop(labels, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')
+```
+
+**Method syntax to drop columns:**
+```python
+DataFrame.drop(labels, axis=1, index=None, columns=None, level=None, inplace=False, errors='raise')
+```
+
+**Parameters:**
+- `labels`: Specifies the index labels or column names to be dropped. It can be a single label or a list of labels.
+- `axis` (optional): Specifies the axis along which to drop the labels. Use `axis=0` to drop rows (default) and `axis=1` to drop columns.
+- `index` (optional): An alternative to specifying `axis=0`, used to specify the index labels to drop (only applicable if `axis=0`).
+- `columns` (optional): An alternative to specifying `axis=1`, used to specify the column names to drop (only applicable if `axis=1`).
+- `level` (optional): For DataFrames with multi-level indexes, specifies the level from which to drop labels.
+- `inplace` (optional): Specifies whether to modify the DataFrame in-place (if `True`) or return a new DataFrame with the specified rows or columns dropped (if `False`, default).
+- `errors` (optional): Specifies how to handle errors if the specified labels are not found. It can take the following values:
+  - `'raise'` (default): Raise an error if any of the specified labels are not found.
+  - `'ignore'`: Ignore errors and do not raise an error if labels are not found.
+
+**Examples of use:**
+```python
+import pandas as pd
+
+# Create a DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35]}
+df = pd.DataFrame(data)
+
+# Drop rows by index label
+df.drop([0, 2], inplace=True)
+
+# Drop columns by column name
+df.drop(['Age'], axis=1, inplace=True)
+```
+
+In these examples:
+- `df.drop([0, 2], inplace=True)` drops the rows with index labels 0 and 2 from the DataFrame `df`.
+- `df.drop(['Age'], axis=1, inplace=True)` drops the column with the name 'Age' from the DataFrame `df`.
+
+The `.drop()` method is a versatile way to remove rows or columns from a DataFrame in pandas. It allows for the selective removal of specific indices or column names, providing flexibility in data manipulation and cleaning tasks.
+
+---
+## pd.to_datetime()
+
+The `pd.to_datetime()` function in pandas is used to convert a series of date-like objects (e.g., strings, numbers) into a pandas DateTime object. This is particularly useful when you have date or time data in your DataFrame, and you want to ensure it's treated as datetime data for various operations and analyses.
+
+**Function syntax:**
+```python
+pd.to_datetime(arg, errors='raise', format=None, infer_datetime_format=False, exact=True, unit=None, utc=None)
+```
+
+**Parameters:**
+- `arg`: This can be a single datetime-like object or an iterable (e.g., list, Series, array) of datetime-like objects to be converted.
+- `errors` (optional): Specifies how to handle parsing errors. It can take the following values:
+  - `'raise'` (default): Raise an error if any parsing error occurs.
+  - `'coerce'`: Set any parsing errors to NaT (Not a Timestamp) and continue.
+  - `'ignore'`: Ignore parsing errors and return the original input.
+- `format` (optional): A string specifying the expected format of the input data, using format codes (e.g., '%Y-%m-%d' for 'YYYY-MM-DD'). If not provided, pandas will attempt to infer the format.
+- `infer_datetime_format` (optional): If set to `True`, pandas will attempt to infer the datetime format from the input data.
+- `exact` (optional): If `True`, require an exact format match when parsing. If `False`, allow for inexact parsing.
+- `unit` (optional): Specifies the unit of the input data, e.g., 's' for seconds or 'ms' for milliseconds.
+- `utc` (optional): If `True`, convert the datetime to UTC (Coordinated Universal Time).
+
+**Examples:**
+```python
+import pandas as pd
+
+# Convert a string to a datetime object
+date_str = '2023-01-15'
+date = pd.to_datetime(date_str)
+
+# Convert a list of strings to datetime objects
+date_list = ['2023-01-15', '2023-02-20', '2023-03-25']
+date_series = pd.to_datetime(date_list)
+
+# Convert Unix timestamps (seconds since epoch) to datetime
+timestamps = [1610668800, 1613827200, 1616635200]
+date_from_timestamps = pd.to_datetime(timestamps, unit='s')
+```
+
+In these examples:
+- `pd.to_datetime(date_str)` converts the string '2023-01-15' into a pandas DateTime object.
+- `pd.to_datetime(date_list)` converts a list of date strings into a pandas DateTime Series.
+- `pd.to_datetime(timestamps, unit='s')` converts a list of Unix timestamps (given in seconds since the epoch) into pandas DateTime objects.
+
+The `pd.to_datetime()` function is a versatile tool for handling datetime data in pandas. It can handle a wide range of input formats and provides options for handling errors, specifying formats, and more.
+
+---
+## .dt
+
+In pandas, the `.dt` accessor is used to access various datetime-related attributes and methods for a Series containing datetime values. You can use it to perform operations on datetime data efficiently. Here are some common attributes and methods that you can use with `.dt`:
+
+- `.dt.year`: Extracts the year component of datetime values.
+- `.dt.month`: Extracts the month component (1-12) of datetime values.
+- `.dt.day`: Extracts the day component (1-31) of datetime values.
+- `.dt.hour`: Extracts the hour component (0-23) of datetime values.
+- `.dt.minute`: Extracts the minute component (0-59) of datetime values.
+- `.dt.second`: Extracts the second component (0-59) of datetime values.
+- `.dt.microsecond`: Extracts the microsecond component of datetime values.
+- `.dt.weekday`: Returns the day of the week as an integer (0=Monday, 6=Sunday).
+- `.dt.weekday_name` (or `.dt.day_name()`): Returns the name of the day of the week.
+- `.dt.quarter`: Extracts the quarter (1-4) from datetime values.
+- `.dt.is_leap_year`: Returns a boolean indicating if the year is a leap year.
+- `.dt.strftime()`: Formats datetime values as strings using strftime format codes.
+- `.dt.date`: Extracts the date part (year, month, and day) from datetime values.
+- `.dt.time`: Extracts the time part (hour, minute, second, and microsecond) from datetime values.
+- `.dt.timedelta()`: Performs arithmetic operations with datetime values.
+
+Here's an example of how to use the `.dt` accessor with some of these attributes:
+
+```python
+import pandas as pd
+
+# Create a DataFrame with a datetime column
+data = {'Datetime': ['2023-01-15 08:00:00', '2023-02-20 12:30:00', '2023-03-25 18:45:00']}
+df = pd.DataFrame(data)
+
+# Convert the 'Datetime' column to datetime objects
+df['Datetime'] = pd.to_datetime(df['Datetime'])
+
+# Extract various datetime components using .dt
+df['Year'] = df['Datetime'].dt.year
+df['Month'] = df['Datetime'].dt.month
+df['Day'] = df['Datetime'].dt.day
+df['Weekday'] = df['Datetime'].dt.weekday
+df['Quarter'] = df['Datetime'].dt.quarter
+df['IsLeapYear'] = df['Datetime'].dt.is_leap_year
+
+# Display the updated DataFrame
+print(df)
+```
+
+In this example, we first convert a column of datetime strings to datetime objects using `pd.to_datetime()`. Then, we use various `.dt` attributes to extract and create new columns with different datetime components.
+
+These datetime-related operations with `.dt` are quite handy when you need to work with datetime data in pandas and perform operations based on date and time components.
+
+---
+## .drop_duplicates()
+
+The `.drop_duplicates()` method in pandas is used to remove duplicate rows from a DataFrame based on the values in one or more columns. It allows you to keep only the first occurrence of each unique row or remove all duplicates, depending on the parameters you provide.
+
+**Method syntax:**
+```python
+DataFrame.drop_duplicates(subset=None, keep='first', inplace=False, ignore_index=False)
+```
+
+**Parameters:**
+- `subset` (optional): Specifies the column(s) or label(s) to consider for identifying duplicates. It can be a single column name or a list of column names. By default, it checks all columns for duplication.
+- `keep` (optional): Specifies which occurrence(s) of a duplicate to keep. It can take the following values:
+  - `'first'` (default): Keep the first occurrence and remove the subsequent duplicates.
+  - `'last'`: Keep the last occurrence and remove the previous duplicates.
+  - `False`: Remove all duplicates.
+- `inplace` (optional): Specifies whether to modify the DataFrame in-place (if `True`) or return a new DataFrame with duplicates removed (if `False`, default).
+- `ignore_index` (optional): If set to `True`, the resulting DataFrame will have a new index. If `False` (default), the index will be retained.
+
+**Example:**
+```python
+import pandas as pd
+
+# Create a DataFrame with duplicate rows
+data = {'Name': ['Alice', 'Bob', 'Alice', 'Charlie', 'Bob'],
+        'Age': [25, 30, 25, 35, 30]}
+df = pd.DataFrame(data)
+
+# Remove duplicate rows based on 'Name' column, keeping the first occurrence
+df_no_duplicates = df.drop_duplicates(subset='Name')
+
+# Remove duplicate rows based on both 'Name' and 'Age' columns, keeping the last occurrence
+df_no_duplicates_last = df.drop_duplicates(subset=['Name', 'Age'], keep='last')
+```
+
+In this example:
+- `df.drop_duplicates(subset='Name')` removes duplicate rows based on the 'Name' column, keeping the first occurrence and creating a new DataFrame with duplicates removed.
+- `df.drop_duplicates(subset=['Name', 'Age'], keep='last')` removes duplicate rows based on both the 'Name' and 'Age' columns, keeping the last occurrence of each unique combination.
+
+The `.drop_duplicates()` method is a valuable tool for cleaning and preparing data by removing redundant rows from a DataFrame. Depending on your data analysis needs, you can choose to keep the first, last, or remove all occurrences of duplicate rows.
+
+---
+## .subset()
+
