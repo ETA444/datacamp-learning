@@ -18,8 +18,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "853ec31cba0fbd5b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -86,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +116,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +139,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Cleaning Data in Python.md"
+                "file": "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md"
               }
             }
           }
@@ -147,8 +160,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6c652b3f67f4d66d",
+  "active": "5d950ae2fcc809e3",
   "lastOpenFiles": [
+    "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
+    "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
+    "code/Data Scientist Professional with Python/Working with Dates and Times in Python.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA15-Cleaning_Data_in_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA15-Cleaning_Data_in_Python.pdf.opdownload",
     "quizdata_generator.sublime-workspace",
@@ -167,7 +183,6 @@
     "images/Pasted image 20230720164903.png",
     "images/Pasted image 20230720164845.png",
     "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
-    "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA14-Introduction_to_Importing_Data_in_Python.pdf",
     "images/Pasted image 20230720151117.png",
     "images/Pasted image 20230720150823.png",
@@ -179,8 +194,6 @@
     "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA13-Data_Communication_Concepts.pdf",
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "obsidian_filelink_converter.py",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA2-Intermediate_Python.pdf",
     "notes/Other/start-quiz.py functions.md",
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
