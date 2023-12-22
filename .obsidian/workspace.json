@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "1a2fce333b0331a4",
@@ -146,7 +147,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "6c652b3f67f4d66d",
+  "active": "5d950ae2fcc809e3",
   "lastOpenFiles": [
     "quizdata_generator.sublime-workspace",
     "code/Data Scientist Professional with Python/Cleaning Data in Python.sublime-workspace",
