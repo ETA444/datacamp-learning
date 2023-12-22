@@ -776,4 +776,102 @@ In these examples:
 The `.any()` method is helpful for quickly assessing whether any conditions are met in your data, especially when dealing with boolean data or data that can be evaluated as boolean.
 
 ---
-## 
+## .dt.strftime()
+
+In pandas, the `.strftime()` method is used to format dates and times in a DataFrame or Series into a string format based on specified format codes. It's a powerful tool for customizing how date and time information is displayed.
+
+**Method syntax:**
+```python
+Series.dt.strftime(format)
+```
+
+**Parameters:**
+- `format`: A string containing format codes that define how the date and time should be displayed. Format codes start with a percentage symbol `%` and are replaced with the corresponding date or time components when formatting.
+
+**Return value:**
+- A Series of strings with the date and time values formatted according to the specified format.
+
+**Examples:**
+```python
+import pandas as pd
+
+# Create a DataFrame with a date column
+data = {'Date': ['2023-07-01', '2023-07-15']}
+df = pd.DataFrame(data)
+
+# Convert the 'Date' column to a datetime dtype
+df['Date'] = pd.to_datetime(df['Date'])
+
+# Format the date column
+df['Formatted Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+```
+
+In this example:
+- We first create a DataFrame with a 'Date' column containing date strings.
+- We convert the 'Date' column to a datetime data type using `pd.to_datetime()`.
+- Then, we use `dt.strftime('%Y-%m-%d')` to format the date values in the 'Date' column into the 'YYYY-MM-DD' format and store the formatted values in a new column called 'Formatted Date'.
+
+The resulting DataFrame will look like this:
+
+```
+        Date Formatted Date
+0 2023-07-01      2023-07-01
+1 2023-07-15      2023-07-15
+```
+
+You can customize the format string to include various date and time components such as year, month, day, hour, minute, and more using format codes. The `strftime()` method is especially useful for displaying date and time information in the desired format for reporting and visualization purposes.
+
+---
+## .fillna()
+In pandas, the `.fillna()` method is used to fill missing or NaN (Not a Number) values in a DataFrame or Series with specified values or using specific filling strategies.
+
+**Method syntax for Series:**
+```python
+Series.fillna(value=None, method=None, axis=None, inplace=False, limit=None, downcast=None, **kwargs)
+```
+
+**Method syntax for DataFrame:**
+```python
+DataFrame.fillna(value=None, method=None, axis=None, inplace=False, limit=None, downcast=None, **kwargs)
+```
+
+**Parameters:**
+- `value` (optional): The value to use for filling missing values. It can be a scalar, a dictionary, a Series, or a DataFrame.
+- `method` (optional): A method for filling missing values. Options include 'ffill' (forward fill), 'bfill' (backward fill), or None (default, which fills with the specified `value`).
+- `axis` (optional): Specifies whether to fill along rows (axis=0) or columns (axis=1). Default is None, which fills values in both directions.
+- `inplace` (optional): If True, the DataFrame or Series is modified in place, and `None` is returned. If False (default), a new object with missing values filled is returned.
+- `limit` (optional): Maximum number of consecutive NaN values to be filled in a forward or backward fill operation.
+- `downcast` (optional): If specified, downcast the resulting data type (e.g., from float64 to int64) if possible.
+- `**kwargs` (optional): Additional keyword arguments that may be specific to certain fill methods.
+
+**Return value:**
+- If `inplace=True`, it returns `None`.
+- If `inplace=False`, it returns a new DataFrame or Series with missing values filled.
+
+**Examples:**
+```python
+import pandas as pd
+
+# Create a DataFrame with missing values
+data = {'A': [1, 2, None, 4, 5], 'B': [None, 2, 3, None, 5]}
+df = pd.DataFrame(data)
+
+# Fill missing values with a specified value
+df_filled = df.fillna(value=0)
+
+# Fill missing values using forward fill (ffill)
+df_ffill = df.fillna(method='ffill')
+
+# Fill missing values using backward fill (bfill)
+df_bfill = df.fillna(method='bfill')
+
+# Fill missing values in a specific column with a custom value
+df['A'].fillna(value=10, inplace=True)
+```
+
+In these examples:
+- `df.fillna(value=0)` fills missing values in the DataFrame `df` with the specified value (0) and creates a new DataFrame `df_filled`.
+- `df.fillna(method='ffill')` uses forward fill to fill missing values in the DataFrame `df`, creating a new DataFrame `df_ffill`.
+- `df.fillna(method='bfill')` uses backward fill to fill missing values in the DataFrame `df`, creating a new DataFrame `df_bfill`.
+- `df['A'].fillna(value=10, inplace=True)` fills missing values in the 'A' column of the DataFrame `df` with the value 10 in place, modifying the original DataFrame.
+
