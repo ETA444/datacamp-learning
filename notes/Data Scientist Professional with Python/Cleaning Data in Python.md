@@ -875,3 +875,275 @@ In these examples:
 - `df.fillna(method='bfill')` uses backward fill to fill missing values in the DataFrame `df`, creating a new DataFrame `df_bfill`.
 - `df['A'].fillna(value=10, inplace=True)` fills missing values in the 'A' column of the DataFrame `df` with the value 10 in place, modifying the original DataFrame.
 
+---
+## fuzz.WRatio()
+
+In the thefuzz library, the `fuzz.WRatio()` method is used to calculate a similarity ratio between two strings. It is based on the Wagner-Fisher algorithm, which measures the similarity between two strings by comparing the sequences of characters and their positions.
+
+**Method syntax:**
+```python
+fuzz.WRatio(str1, str2)
+```
+
+**Parameters:**
+- `str1`: The first string to be compared.
+- `str2`: The second string to be compared.
+
+**Return value:**
+- Returns an integer similarity ratio between 0 and 100, where higher values indicate greater similarity.
+
+**Example:**
+```python
+from thefuzz import fuzz
+
+# Compare the similarity between two strings
+similarity_ratio = fuzz.WRatio("apple", "apples")
+
+# Result: 94
+```
+
+In this example, `fuzz.WRatio()` is used to compare the similarity between the strings "apple" and "apples." The method returns a similarity ratio of 94, indicating a high degree of similarity between the two strings.
+
+The `fuzz.WRatio()` method is helpful for tasks like string matching, deduplication, and record linkage where you want to quantify how similar two strings are in a fuzzy manner.
+
+---
+## process.extract()
+
+In the thefuzz library, the `process.extract()` function is used to find the best matches for a given query string within a list of strings or choices. It uses fuzzy string matching to identify the most similar strings from the list.
+
+**Function syntax:**
+```python
+process.extract(query, choices, scorer=fuzz.WRatio, limit=5, processor=None)
+```
+
+**Parameters:**
+- `query`: The query string for which you want to find matches within the list of choices.
+- `choices`: A list of strings among which you want to find matches for the query.
+- `scorer` (optional): The scoring function used to compare the similarity between the query and each choice. It defaults to `fuzz.WRatio`, but you can specify other scoring functions provided by thefuzz.
+- `limit` (optional): The maximum number of matches to return. It defaults to 5.
+- `processor` (optional): A function to preprocess the strings before comparing them.
+
+**Return value:**
+- Returns a list of tuples, each containing a choice string and its similarity score to the query string, sorted in descending order of similarity.
+
+**Example:**
+```python
+from thefuzz import process
+
+# List of choices
+choices = ["apple", "banana", "cherry", "date", "grape"]
+
+# Find the best matches for the query "apples"
+matches = process.extract("apples", choices)
+
+# Result:
+# [('apple', 90), ('cherry', 45), ('date', 45), ('banana', 36), ('grape', 9)]
+```
+
+In this example, `process.extract()` is used to find the best matches for the query "apples" within the list of choices. It returns a list of tuples, where each tuple contains a choice and its similarity score to the query.
+
+The `process.extract()` function is useful in applications where you need to find approximate matches for a given query string, such as record linkage, fuzzy search, or spell correction.
+
+---
+## `recordlinkage.Index()`
+
+In the "recordlinkage" library, the `Index()` class is used to create and manage indexing structures for efficient record linkage tasks. It is a fundamental component of the record linkage process, enabling the comparison of records between different datasets.
+
+**Class instantiation:**
+```python
+indexer = recordlinkage.Index()
+```
+
+**Methods:**
+- `.full()` method: Create a full index, where all pairs of records are compared.
+- `.block()` method: Create a block index, specifying specific blocks or groups of records to compare.
+- `.sortedneighbourhood()` method: Create a sorted neighborhood index for efficient comparison of nearby records.
+- `.pairs()` method: Retrieve the pairs of record indices for comparison based on the index type.
+
+**Example:**
+```python
+import recordlinkage
+
+# Create an indexer
+indexer = recordlinkage.Index()
+
+# Create a full index for comparing all pairs of records
+indexer.full()
+
+# Generate pairs of record indices for comparison
+pairs = indexer.pairs(df1, df2)
+
+# Result: A MultiIndex containing pairs of record indices
+```
+
+In this example:
+- We instantiate the `Index()` class using `recordlinkage.Index()`.
+- We create a full index using the `.full()` method, which compares all pairs of records.
+- We then generate pairs of record indices for comparison between two DataFrames `df1` and `df2` using the `.pairs()` method.
+
+The `recordlinkage.Index()` class is a crucial step in the record linkage process, allowing you to efficiently identify pairs of records that need to be compared for matching or deduplication tasks.
+
+---
+## `recordlinkage.Index().block()`
+
+In the "recordlinkage" library, the `.block()` method is used in conjunction with the `Index()` class to create a block index, which specifies specific blocks or groups of records to be compared during the record linkage process. This can be useful when you have prior knowledge or domain-specific information about which records are likely to match.
+
+**Method syntax:**
+```python
+Index.block(left_on=None, right_on=None, lfilter=None, rfilter=None)
+```
+
+**Parameters:**
+- `left_on` (optional): The column name or list of column names from the left DataFrame (usually the first dataset) used for blocking.
+- `right_on` (optional): The column name or list of column names from the right DataFrame (usually the second dataset) used for blocking.
+- `lfilter` (optional): A custom filtering function for the left DataFrame, used to create the block index.
+- `rfilter` (optional): A custom filtering function for the right DataFrame, used to create the block index.
+
+**Return value:**
+- Returns the current `Index` object with the block index applied.
+
+**Example:**
+```python
+import recordlinkage
+
+# Create an indexer
+indexer = recordlinkage.Index()
+
+# Create a block index based on a specific column
+indexer.block(left_on='zipcode')
+
+# Generate pairs of record indices for comparison
+pairs = indexer.pairs(df1, df2)
+
+# Result: A MultiIndex containing pairs of record indices, filtered by the 'zipcode' column
+```
+
+In this example:
+- We instantiate the `Index()` class using `recordlinkage.Index()`.
+- We create a block index using the `.block()` method, specifying the 'zipcode' column as the blocking key. This means that only records with the same 'zipcode' value will be compared during the record linkage process.
+- We then generate pairs of record indices for comparison between two DataFrames `df1` and `df2` using the `.pairs()` method. The pairs are filtered based on the block index, so only records with matching 'zipcode' values are considered.
+
+The `.block()` method is a powerful tool in record linkage when you have prior knowledge or criteria for selecting which records to compare, potentially improving the efficiency and accuracy of the linkage process.
+
+---
+## `recordlinkage.Compare()`
+
+The `Compare()` class in the "recordlinkage" library is used to create comparison objects for specifying the rules and methods to compare records from different datasets or sources.
+
+**Class instantiation:**
+```python
+comparison = recordlinkage.Compare()
+```
+
+**Methods and attributes:**
+- `.exact(column1, column2)` method: Specify that two columns should be compared for exact equality.
+- `.string(column1, column2, method='jarowinkler', threshold=0.85)` method: Specify that two string columns should be compared using a fuzzy string matching method like Jaro-Winkler.
+- `.numeric(column1, column2, method='step', offset=0.1)` method: Specify that two numeric columns should be compared using a numeric comparison method.
+- `.geo(left_coordinates, right_coordinates)` method: Specify that two sets of geographical coordinates should be compared.
+- `.date_of_birth(column1, column2)` method: Specify that two date of birth columns should be compared.
+- `.compute(df, method='simple')` method: Compute the comparison results for a DataFrame using the specified method.
+
+**Example:**
+```python
+import recordlinkage
+
+# Create a comparison object
+comparison = recordlinkage.Compare()
+
+# Specify comparison rules
+comparison.exact('first_name', 'first_name')
+comparison.string('last_name', 'last_name', method='jarowinkler', threshold=0.85)
+comparison.numeric('income', 'income', method='step', offset=0.1)
+
+# Compute comparison results for a DataFrame
+result = comparison.compute(df)
+```
+
+In this example:
+- We create a `Compare()` object using `recordlinkage.Compare()`.
+- We specify comparison rules using methods like `.exact()`, `.string()`, and `.numeric()`. These rules define how specific columns in a DataFrame should be compared.
+- We use the `.compute()` method to apply the comparison rules to a DataFrame `df` and compute the comparison results.
+
+The `Compare()` class is a fundamental component of the "recordlinkage" library, allowing you to define the comparison logic tailored to your record linkage task. It helps you determine which fields should be compared and how similar they need to be to consider two records as potential matches.
+
+---
+## `recordlinkage.Compare().compute()`
+
+In the "recordlinkage" library, the `compute()` method is used in conjunction with the `Compare()` class to perform the actual comparison of records based on the specified comparison rules. It computes the comparison results for a DataFrame, indicating the degree of similarity between records.
+
+**Method syntax:**
+```python
+comparison.compute(df, method='simple')
+```
+
+**Parameters:**
+- `df`: The DataFrame containing the records you want to compare.
+- `method` (optional): The method used for computing comparison results. Options include 'simple' (default), 'step', 'symmetric', and 'dedupe'. The method defines how the results are calculated.
+
+**Return value:**
+- Returns a DataFrame containing the comparison results. Each row corresponds to a pair of records, and each column represents a comparison rule, with values indicating the similarity or match score.
+
+**Example:**
+```python
+import recordlinkage
+
+# Create a comparison object
+comparison = recordlinkage.Compare()
+
+# Specify comparison rules
+comparison.exact('first_name', 'first_name')
+comparison.string('last_name', 'last_name', method='jarowinkler', threshold=0.85)
+comparison.numeric('income', 'income', method='step', offset=0.1)
+
+# Compute comparison results for a DataFrame
+result = comparison.compute(df)
+```
+
+In this example:
+- We create a `Compare()` object and specify comparison rules using methods like `.exact()`, `.string()`, and `.numeric()`.
+- We use the `.compute()` method to apply these comparison rules to a DataFrame `df`.
+- The resulting DataFrame `result` contains the comparison results, with each row representing a pair of records and each column representing a comparison rule. The values in the DataFrame indicate the degree of similarity between the corresponding records for each rule.
+
+The `compute()` method is a crucial step in record linkage, as it quantifies how similar records are based on the defined comparison rules. These similarity scores can then be used to identify potential matches or duplicates in your data. The choice of the `method` parameter affects how the similarity scores are computed, allowing you to fine-tune the comparison process based on your specific requirements.
+
+---
+## `.get_level_values(level)`
+
+In pandas, the `.get_level_values()` method is used to extract the values at a specific level of a multi-level index DataFrame.
+
+**Method syntax:**
+```python
+DataFrame.get_level_values(level)
+```
+
+**Parameters:**
+- `level`: An integer or label representing the level of the multi-level index from which you want to retrieve values.
+
+**Return value:**
+- Returns a pandas Series containing the values from the specified level of the index.
+
+**Example:**
+```python
+import pandas as pd
+
+# Create a multi-level index DataFrame
+data = {
+    'A': [1, 2, 3, 4],
+    'B': [5, 6, 7, 8]
+}
+
+index = pd.MultiIndex.from_tuples([('x', 'i'), ('x', 'ii'), ('y', 'i'), ('y', 'ii')], names=['first', 'second'])
+
+df = pd.DataFrame(data, index=index)
+
+# Get values from the 'first' level of the index
+first_level_values = df.index.get_level_values('first')
+
+# Result: Index(['x', 'x', 'y', 'y'], dtype='object', name='first')
+```
+
+In this example:
+- We create a multi-level index DataFrame `df` with two levels: 'first' and 'second'.
+- We use `.index.get_level_values('first')` to retrieve the values from the 'first' level of the index. This returns an Index object containing the values 'x', 'x', 'y', and 'y'.
+
+The `.get_level_values()` method is helpful when working with multi-level index DataFrames, allowing you to access and manipulate data at specific levels of the index. You can use these extracted values for various data analysis and filtering tasks.
