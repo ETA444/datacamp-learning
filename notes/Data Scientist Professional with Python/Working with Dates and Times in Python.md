@@ -225,3 +225,145 @@ In this example:
 The `.isoformat()` method is particularly useful when you need to represent date and time information in a standard and interoperable format, such as when working with web services or exchanging data between different systems that adhere to the ISO 8601 standard.
 
 ---
+## `datetime.datetime()`
+
+In Python, the `datetime.datetime` class is used to work with date and time values, allowing you to represent and manipulate both date and time components. It is part of the `datetime` module in Python's standard library.
+
+**Class Constructor:**
+```python
+datetime.datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)
+```
+
+- `year`: The year as an integer.
+- `month`: The month as an integer (range 1-12).
+- `day`: The day of the month as an integer (range 1-31).
+- `hour` (optional): The hour as an integer (default is 0).
+- `minute` (optional): The minute as an integer (default is 0).
+- `second` (optional): The second as an integer (default is 0).
+- `microsecond` (optional): The microsecond as an integer (default is 0).
+- `tzinfo` (optional): A time zone object (e.g., from `datetime.timezone`) representing the time zone information (default is `None`).
+- `fold` (optional): Used to disambiguate the result when a time change (such as a Daylight Saving Time transition) occurs.
+
+**Attributes and Methods:**
+- Various attributes and methods are available to access and manipulate date and time components, such as `.year`, `.month`, `.day`, `.hour`, `.minute`, `.second`, `.microsecond`, `.weekday()`, `.strftime(format)`, and more.
+
+**Example:**
+```python
+import datetime
+
+# Create a datetime object for the current date and time
+current_datetime = datetime.datetime.now()
+
+# Access date and time components
+year = current_datetime.year
+month = current_datetime.month
+day = current_datetime.day
+hour = current_datetime.hour
+minute = current_datetime.minute
+
+# Format the datetime as a string
+formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+print(f"Year: {year}, Month: {month}, Day: {day}, Hour: {hour}, Minute: {minute}")
+print(f"Formatted Datetime: {formatted_datetime}")
+```
+
+In this example:
+- We create a `datetime.datetime` object for the current date and time using `datetime.datetime.now()`.
+- We access various date and time components using attributes like `.year`, `.month`, `.day`, `.hour`, and `.minute`.
+- We use the `.strftime()` method to format the `datetime` object as a string according to a specific format.
+
+The `datetime.datetime` class is a powerful tool for working with date and time values, allowing you to handle a wide range of date and time-related operations and calculations in Python.
+
+---
+## `datetime.datetime.strptime()`
+
+In Python, the `datetime.datetime.strptime()` method is used to parse a string representing a date and time and convert it into a `datetime` object. This method is useful when you have a date and time string in a specific format and you want to create a `datetime` object from it.
+
+**Method Syntax:**
+```python
+datetime.datetime.strptime(date_string, format)
+```
+
+- `date_string`: The input date and time string that you want to parse.
+- `format`: A string specifying the format of the `date_string`. It consists of format codes representing various components of the date and time.
+
+**Return Value:**
+- Returns a `datetime` object representing the parsed date and time.
+
+**Format Codes:**
+- Format codes are placeholders for various date and time components. Some commonly used format codes include:
+  - `%Y`: Year with century as a decimal number (e.g., "2023").
+  - `%m`: Month as a zero-padded decimal number (01 to 12).
+  - `%d`: Day of the month as a zero-padded decimal number (01 to 31).
+  - `%H`: Hour (24-hour clock) as a zero-padded decimal number (00 to 23).
+  - `%M`: Minute as a zero-padded decimal number (00 to 59).
+  - `%S`: Second as a zero-padded decimal number (00 to 59).
+
+**Example:**
+```python
+import datetime
+
+# Parse a date and time string
+date_string = "2023-12-22 14:30:00"
+parsed_datetime = datetime.datetime.strptime(date_string, "%Y-%m-%d %H:%M:%S")
+
+# Access date and time components of the parsed datetime
+year = parsed_datetime.year
+month = parsed_datetime.month
+day = parsed_datetime.day
+hour = parsed_datetime.hour
+minute = parsed_datetime.minute
+
+print(f"Year: {year}, Month: {month}, Day: {day}, Hour: {hour}, Minute: {minute}")
+```
+
+In this example:
+- We have a date and time string in the format "2023-12-22 14:30:00."
+- We use `datetime.datetime.strptime()` to parse the string and create a `datetime` object `parsed_datetime`.
+- We then access various date and time components of the parsed `datetime` object using attributes like `.year`, `.month`, `.day`, `.hour`, and `.minute`.
+
+The `datetime.datetime.strptime()` method is essential for converting date and time strings into `datetime` objects, making it possible to work with and manipulate date and time values in your Python applications.
+
+---
+## `datetime.datetime.fromtimestamp()`
+
+In Python, the `datetime.datetime.fromtimestamp()` method is used to create a `datetime` object representing a date and time based on a Unix timestamp. A Unix timestamp is a numeric value that represents the number of seconds elapsed since January 1, 1970, at 00:00:00 UTC (Coordinated Universal Time).
+
+**Method Syntax:**
+```python
+datetime.datetime.fromtimestamp(timestamp, tz=None)
+```
+
+- `timestamp`: The Unix timestamp value as a floating-point number or an integer.
+- `tz` (optional): A time zone object (e.g., from `datetime.timezone`) representing the time zone information (default is `None`).
+
+**Return Value:**
+- Returns a `datetime` object representing the date and time corresponding to the Unix timestamp.
+
+**Example:**
+```python
+import datetime
+
+# Create a datetime object from a Unix timestamp
+timestamp = 1679760000  # Represents February 25, 2023, at 12:00:00 UTC
+datetime_from_timestamp = datetime.datetime.fromtimestamp(timestamp)
+
+# Access date and time components of the datetime
+year = datetime_from_timestamp.year
+month = datetime_from_timestamp.month
+day = datetime_from_timestamp.day
+hour = datetime_from_timestamp.hour
+minute = datetime_from_timestamp.minute
+
+print(f"Year: {year}, Month: {month}, Day: {day}, Hour: {hour}, Minute: {minute}")
+```
+
+In this example:
+- We have a Unix timestamp value of `1679760000`, which represents February 25, 2023, at 12:00:00 UTC.
+- We use `datetime.datetime.fromtimestamp()` to create a `datetime` object `datetime_from_timestamp` based on the Unix timestamp.
+- We access various date and time components of the created `datetime` object using attributes like `.year`, `.month`, `.day`, `.hour`, and `.minute`.
+
+The `datetime.datetime.fromtimestamp()` method is useful for converting Unix timestamps into human-readable date and time representations, allowing you to work with timestamps in Python applications.
+
+---
