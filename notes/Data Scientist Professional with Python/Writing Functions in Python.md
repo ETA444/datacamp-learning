@@ -506,3 +506,172 @@ So, in the code example provided:
 These collected arguments can then be used within the `wrapper` function to call the original function with the adjusted arguments.
 
 ---
+## `magic` or `dunder` operators
+
+In Python, there are several built-in attributes (often referred to as "magic" or "dunder" methods) and attributes that are commonly used to access metadata or perform special operations on objects. Here are some of the most common ones:
+
+1. **`__doc__`**: Provides the docstring (documentation string) of an object, which is typically a string containing information about the object's purpose and usage.
+
+2. **`__name__`**: Returns the name of a module, function, class, or method as a string.
+
+3. **`__module__`**: Indicates the name of the module where the object is defined. Useful for determining the module of a function or class.
+
+4. **`__class__`**: Returns the class to which an instance belongs. Useful for checking the class of an object.
+
+5. **`__dict__`**: Contains a dictionary of an object's attributes and their values. Useful for introspection and dynamic attribute access.
+
+6. **`__getattr__`**: Allows custom handling of attribute access. It's called when an attribute is not found through the usual lookup process.
+
+7. **`__setattr__`**: Allows custom handling of attribute assignment. It's called when an attribute is assigned a value.
+
+8. **`__delattr__`**: Allows custom handling of attribute deletion. It's called when an attribute is deleted using the `del` statement.
+
+9. **`__init__`**: A special method used for initializing instances of a class. It's called automatically when an object is created.
+
+10. **`__call__`**: Allows an object to be called as if it were a function. It's invoked when you use parentheses `()` to call an object.
+
+11. **`__str__`**: Returns a string representation of an object. It's called by the built-in `str()` function and when using `print`.
+
+12. **`__repr__`**: Returns a string representation of an object that can be used to recreate the object. It's called by the built-in `repr()` function.
+
+13. **`__eq__`**: Defines the behavior of the equality (`==`) operator for custom objects. It's used to compare objects for equality.
+
+14. **`__lt__`, `__le__`, `__gt__`, `__ge__`**: Define comparison methods for custom objects to support ordering operations like `<`, `<=`, `>`, `>=`.
+
+15. **`__len__`**: Defines the behavior of the built-in `len()` function for custom objects. It's used to determine the length of an object.
+
+16. **`__getitem__`, `__setitem__`, `__delitem__`**: Define methods for indexing and slicing custom objects (used with square brackets `[]`).
+
+These are some of the most commonly used metadata attributes and special methods in Python. They allow you to customize the behavior of your classes and objects, perform introspection, and access important information about your code.
+
+---
+## `__wrapped__`
+
+1. **`@functools.wraps` Decorator**:
+   - The `@functools.wraps` decorator is used to create custom decorators that wrap or modify the behavior of a function.
+   - One of its main purposes is to ensure that the wrapped function retains its original metadata (e.g., docstring, name) so that it behaves like the original function.
+
+2. **`__wrapped__` Attribute**:
+   - When you use `@functools.wraps` to decorate a function, the decorator sets the `__wrapped__` attribute of the wrapper function (the decorated function) to refer to the original (wrapped) function.
+   - This allows you to access the original function through the `__wrapped__` attribute, even though you are working with the decorated version.
+
+Here's an example:
+
+```python
+import functools
+
+def my_decorator(func):
+    @functools.wraps(func)  # Preserve metadata of the original function
+    def wrapper(*args, **kwargs):
+        print("Before calling the function")
+        result = func(*args, **kwargs)
+        print("After calling the function")
+        return result
+    return wrapper
+
+@my_decorator
+def my_function():
+    """This is a docstring."""
+    print("Inside the function")
+
+print(my_function.__name__)  # Output: "my_function" (preserves function name)
+print(my_function.__doc__)   # Output: "This is a docstring." (preserves docstring)
+
+# Access the original function using the __wrapped__ attribute
+original_function = my_function.__wrapped__
+print(original_function.__name__)  # Output: "my_function"
+```
+
+In this example, `@functools.wraps(func)` ensures that the decorated `wrapper` function retains the metadata of the original `my_function`, including its name and docstring. You can access the original function using the `__wrapped__` attribute.
+
+---
+## `signal.signal()`
+
+In Python, the `signal.signal()` function is used to set a handler function for a specific signal. Signals are a form of inter-process communication used to notify a process that a specific event has occurred. You can use `signal.signal()` to associate a custom handler function with a signal, allowing your program to respond to various events, such as keyboard interrupts (`SIGINT`) or termination requests (`SIGTERM`).
+
+**Function Syntax:**
+```python
+signal.signal(signalnum, handler)
+```
+
+**Parameters:**
+- `signalnum`: An integer representing the signal number (e.g., `signal.SIGINT` for Ctrl+C).
+- `handler`: A callable (usually a function) that will be called when the specified signal is received. It takes two arguments: the signal number and the current stack frame (frame object).
+
+**Return Value:**
+- The return value of `signal.signal()` is the previous signal handler function (if one existed) for the specified signal.
+
+**Examples:**
+
+```python
+import signal
+import time
+
+# Define a custom handler function for SIGINT (Ctrl+C)
+def sigint_handler(signum, frame):
+    print(f"Received SIGINT (Ctrl+C). Exiting gracefully.")
+    exit(0)
+
+# Set the custom handler for SIGINT
+signal.signal(signal.SIGINT, sigint_handler)
+
+# Wait for SIGINT (Ctrl+C)
+print("Press Ctrl+C to trigger the custom handler.")
+while True:
+    time.sleep(1)
+```
+
+In this example:
+- We define a custom handler function `sigint_handler` to handle the `SIGINT` signal (Ctrl+C).
+- We use `signal.signal(signal.SIGINT, sigint_handler)` to set the custom handler for the `SIGINT` signal.
+- When you press Ctrl+C while running the program, it triggers the custom handler function.
+
+The `signal.signal()` function is a powerful tool for managing signal handling in your Python programs, allowing you to define custom behavior when specific events or interrupts occur.
+
+---
+## `signal.alarm()`
+
+In Python, the `signal.alarm()` function is used to schedule an alarm signal (specifically, `SIGALRM`) to be sent to the calling process after a specified number of seconds. This function is often used for setting timers and creating timeouts within your Python programs.
+
+**Function Syntax:**
+```python
+signal.alarm(seconds)
+```
+
+**Parameters:**
+- `seconds`: An integer representing the number of seconds after which the alarm signal (`SIGALRM`) will be triggered. If `seconds` is `0`, any previously scheduled alarm is canceled.
+
+**Return Value:**
+- The return value of `signal.alarm()` is the number of seconds remaining before any previously scheduled alarm was set. If no alarm was previously set, it returns `0`.
+
+**Example:**
+
+```python
+import signal
+import time
+
+# Define a handler for the alarm signal (SIGALRM)
+def alarm_handler(signum, frame):
+    print("Alarm triggered!")
+
+# Set the custom alarm handler
+signal.signal(signal.SIGALRM, alarm_handler)
+
+# Schedule an alarm to trigger after 5 seconds
+signal.alarm(5)
+
+try:
+    print("Waiting for the alarm to trigger...")
+    time.sleep(10)
+except KeyboardInterrupt:
+    pass
+```
+
+In this example:
+- We define a custom handler function `alarm_handler` to handle the alarm signal (`SIGALRM`).
+- We set the custom alarm handler using `signal.signal(signal.SIGALRM, alarm_handler)`.
+- We schedule an alarm to trigger after 5 seconds using `signal.alarm(5)`.
+- We use a `try` block and `time.sleep(10)` to wait for the alarm to trigger.
+- The alarm signal is delivered to the process after 5 seconds, and the custom handler prints "Alarm triggered!".
+
+The `signal.alarm()` function is useful for creating timers and implementing timeouts in Python programs. It allows you to schedule actions to occur after a specified duration, which can be helpful for various timing-related tasks.
