@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Sampling in Python.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Sampling in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Sampling in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md"
+                "file": "notes/Data Scientist Professional with Python/Sampling in Python.md"
               }
             }
           }
@@ -149,10 +149,12 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
+    "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
+    "code/Data Scientist Professional with Python/Sampling in Python.py",
+    "notes/Data Scientist Professional with Python/Sampling in Python.md",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA18-Introduction_to_Regression_with_statsmodels_in_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA18-Introduction_to_Regression_with_statsmodels_in_Python.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Writing Functions in Python.md",
-    "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
     "code/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA17-Writing_Functions_in_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA17-Writing_Functions_in_Python.pdf.opdownload",
@@ -162,8 +164,6 @@
     "code/Data Scientist Professional with Python/Writing Functions in Python.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA16-Working_with_Dates_and_Times_in_Python.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
-    "code/Data Scientist Professional with Python/Working with Dates and Times in Python.py",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA15-Cleaning_Data_in_Python.pdf",
     "code/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "code/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
     "code/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
