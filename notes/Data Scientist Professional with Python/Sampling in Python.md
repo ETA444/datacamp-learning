@@ -362,3 +362,259 @@ print(random_numbers)
 The `numpy.random` module is a powerful tool for generating random data and simulating random processes in various applications, including statistics, machine learning, and scientific computing. Setting a seed with `np.random.seed()` is often used to ensure that the same sequence of random numbers is generated each time, making results reproducible.
 
 ---
+## `.iloc[::]`
+
+In Python, the `.iloc[]` method is used to select specific rows and columns from a Pandas DataFrame by their integer positions. It allows for integer-based indexing and slicing of the DataFrame.
+
+**Method Syntax for Selection by Integer Position:**
+```python
+DataFrame.iloc[row_selection, column_selection]
+```
+
+- `row_selection` (optional): Specifies which rows to select based on integer positions. It can be a single integer, a list of integers, or a slice.
+- `column_selection` (optional): Specifies which columns to select based on integer positions. It can be a single integer, a list of integers, or a slice.
+
+**Examples:**
+
+1. Select a Single Row by Integer Position:
+   ```python
+   single_row = df.iloc[2]  # Selects the third row (0-based indexing)
+   ```
+
+2. Select Specific Rows by Integer Position:
+   ```python
+   selected_rows = df.iloc[[0, 2, 4]]  # Selects the first, third, and fifth rows
+   ```
+
+3. Select a Single Column by Integer Position:
+   ```python
+   single_column = df.iloc[:, 1]  # Selects the second column (1st column with 0-based indexing)
+   ```
+
+4. Select Specific Columns by Integer Position:
+   ```python
+   selected_columns = df.iloc[:, [0, 2, 3]]  # Selects the first, third, and fourth columns
+   ```
+
+5. Select Specific Rows and Columns by Integer Position:
+   ```python
+   subset = df.iloc[[0, 2, 4], [1, 3]]  # Selects specific rows and columns
+   ```
+
+6. Use Slicing to Select Rows and Columns:
+   ```python
+   sliced_data = df.iloc[1:4, 2:5]  # Selects rows 1, 2, 3 and columns 2, 3, 4
+   ```
+
+7. Use '::' to select every \#'th row:
+   ```python
+   everyth_data = df.iloc[::25]  # Selects every 25th row, so 25, 50, 75 and so on.
+   ```
+The `.iloc[]` method is useful when you want to extract specific parts of a DataFrame based on their integer positions rather than their labels. It provides flexibility for subsetting and analyzing data within the DataFrame.
+
+---
+## `.plot()`
+
+The `.plot()` method is a versatile function in Python's data visualization libraries, such as Matplotlib and Pandas, that is used to create various types of plots and charts to visualize data. The specific syntax and options may vary depending on the library used. Here, I'll provide a general overview of the `.plot()` method.
+
+**Method Syntax (Pandas DataFrame):**
+```python
+DataFrame.plot(
+    x=None,  # Label or position for the x-axis
+    y=None,  # Label or position for the y-axis
+    kind='line',  # Type of plot (e.g., 'line', 'bar', 'scatter', 'hist')
+    ax=None,  # Matplotlib axis object to which the plot is added
+    subplots=False,  # If True, create separate subplots for each column
+    figsize=None,  # Size of the plot (width, height)
+    title=None,  # Title of the plot
+    legend=True,  # Display the legend
+    grid=False,  # Display grid lines
+    style=None,  # Plot style (e.g., 'k--' for black dashed line)
+    colormap=None,  # Colormap for the plot
+    ...  # Additional plot-specific options
+)
+```
+
+**Method Syntax (Matplotlib):**
+```python
+import matplotlib.pyplot as plt
+
+plt.plot(
+    x_data,  # x-axis data
+    y_data,  # y-axis data
+    label=None,  # Label for the plot
+    color=None,  # Line color
+    linestyle=None,  # Line style (e.g., 'dashed', 'dotted')
+    marker=None,  # Marker style (e.g., 'o' for circles)
+    ...  # Additional plot-specific options
+)
+```
+
+**Examples:**
+
+1. **Line Plot (Pandas):**
+   ```python
+   import pandas as pd
+
+   # Create a DataFrame
+   data = pd.DataFrame({'x': [1, 2, 3, 4, 5], 'y': [2, 4, 1, 3, 5]})
+
+   # Create a line plot
+   data.plot(x='x', y='y', kind='line', title='Line Plot')
+   ```
+
+2. **Scatter Plot (Pandas):**
+   ```python
+   import pandas as pd
+
+   # Create a DataFrame
+   data = pd.DataFrame({'x': [1, 2, 3, 4, 5], 'y': [2, 4, 1, 3, 5]})
+
+   # Create a scatter plot
+   data.plot(x='x', y='y', kind='scatter', title='Scatter Plot')
+   ```
+
+3. **Line Plot (Matplotlib):**
+   ```python
+   import matplotlib.pyplot as plt
+
+   x = [1, 2, 3, 4, 5]
+   y = [2, 4, 1, 3, 5]
+
+   # Create a line plot
+   plt.plot(x, y, label='Line Plot', color='blue', linestyle='-', marker='o')
+   plt.xlabel('X-Axis')
+   plt.ylabel('Y-Axis')
+   plt.title('Line Plot Example')
+   plt.legend()
+   plt.grid(True)
+   plt.show()
+   ```
+
+The `.plot()` method is a fundamental tool for creating various types of plots, including line plots, scatter plots, bar plots, histograms, and more. Depending on the library used (Pandas or Matplotlib), the specific options and syntax may vary, but the concept of using `.plot()` to visualize data remains consistent. You can customize plots by specifying attributes like labels, colors, markers, and titles to effectively communicate information from your data.
+
+---
+In Python, the `.reset_index()` method is commonly used with Pandas DataFrames to reset the index of the DataFrame. When data is manipulated or filtered in a DataFrame, the index may become disorganized or contain gaps. The `.reset_index()` method allows you to reorganize the index and, optionally, move the current index into a new column.
+
+**Method Syntax:**
+```python
+DataFrame.reset_index(
+    level=None,        # Specifies which levels of the index to reset (default: reset all)
+    drop=False,        # If True, drops the index levels instead of converting them to columns
+    inplace=False,     # If True, modifies the DataFrame in place and returns None
+    col_level=0,       # For DataFrames with multi-level columns, specifies the column level to reset
+    col_fill=''        # Value to use for filling missing entries when resetting columns
+)
+```
+
+**Parameters:**
+- `level` (optional): Specifies which levels of the index to reset. By default, it resets all levels. You can provide an integer, a label, or a list of integers/labels.
+- `drop` (optional): If `True`, drops the index levels instead of converting them to columns. Default is `False`.
+- `inplace` (optional): If `True`, modifies the DataFrame in place and returns `None`. Default is `False`.
+- `col_level` (optional): For DataFrames with multi-level columns, specifies the column level to reset. Default is `0`.
+- `col_fill` (optional): Value to use for filling missing entries when resetting columns. Default is an empty string.
+
+**Examples:**
+
+```python
+import pandas as pd
+
+# Sample DataFrame
+data = pd.DataFrame({
+    'Name': ['Alice', 'Bob', 'Charlie'],
+    'Age': [25, 30, 35],
+})
+
+# Set the 'Name' column as the index
+data.set_index('Name', inplace=True)
+
+# Reset the index
+reset_data = data.reset_index()
+print(reset_data)
+```
+
+In this example, we first set the 'Name' column as the index for the DataFrame using `set_index()`. Then, we use `.reset_index()` to reset the index, which moves the 'Name' column back as a regular column and assigns a default integer index.
+
+The `.reset_index()` method is handy when you want to reorganize the index of a DataFrame, especially after filtering or performing operations that change the structure of the data. It helps maintain the consistency and integrity of the DataFrame's structure.
+
+---
+## `numpy.where()`
+
+In NumPy, the `numpy.where()` function is used to return the indices of elements in an array that satisfy a specified condition. It is a versatile function that allows you to perform conditional operations on NumPy arrays and find the positions of elements that meet certain criteria.
+
+**Function Syntax:**
+```python
+numpy.where(condition, x, y)
+```
+
+**Parameters:**
+- `condition`: A boolean array or a condition expression that defines the condition for selection.
+- `x`: Values to be used for elements that satisfy the condition.
+- `y`: Values to be used for elements that do not satisfy the condition.
+
+**Return Value:**
+- An array of indices where the condition is `True`.
+
+**Examples:**
+
+1. Using a boolean condition:
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+condition = (arr > 3)
+
+indices = np.where(condition)
+print(indices)  # Output: (array([3, 4]),)
+```
+
+2. Using `x` and `y` parameters:
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+condition = (arr > 3)
+
+result = np.where(condition, arr * 2, arr * 10)
+print(result)  # Output: [10 20 30  8 10]
+```
+
+In the first example, we use `numpy.where()` with a boolean condition to find the indices where the elements in the array `arr` are greater than 3. The result is an array of indices where the condition is `True`.
+
+In the second example, we use `numpy.where()` with the `x` and `y` parameters to conditionally modify elements in the array. If the condition is `True`, we double the element value; otherwise, we multiply it by 10.
+
+The `numpy.where()` function is widely used for conditional operations and indexing in NumPy arrays. It allows you to perform element-wise selection and modification based on specified conditions, making it a valuable tool for data manipulation and filtering.
+
+---
+Certainly, let's continue with the original output style:
+
+## `.cat.remove_unused_categories()`
+
+In Pandas, the `.cat.remove_unused_categories()` method is used to remove unused categories from a categorical (or "cat") data type within a Pandas Series. Categorical data is a data type that represents categories or labels, and sometimes categories that are not present in the data may be retained. This method allows you to remove these unused categories, making the data more memory-efficient.
+
+**Method Syntax:**
+```python
+Series.cat.remove_unused_categories()
+```
+
+**Example:**
+```python
+import pandas as pd
+
+# Create a Pandas Series with categorical data
+data = pd.Series(["A", "B", "A", "C", "B"], dtype="category")
+
+# Remove unused categories
+data.cat.remove_unused_categories(inplace=True)
+
+print(data)
+```
+
+In this example:
+- We create a Pandas Series called `data` with categorical data using the `dtype="category"` argument.
+- Then, we use the `.cat.remove_unused_categories()` method to remove any categories that are not used in the `data` Series.
+- By setting `inplace=True`, we modify the original Series `data` in place, and it will no longer contain unused categories.
+
+This method is particularly useful when you are working with categorical data, and you want to optimize memory usage by removing categories that do not appear in the dataset. It helps keep the categorical data more memory-efficient and improves performance when performing operations on the data.
+
+---
