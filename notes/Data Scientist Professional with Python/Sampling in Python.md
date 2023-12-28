@@ -618,3 +618,95 @@ In this example:
 This method is particularly useful when you are working with categorical data, and you want to optimize memory usage by removing categories that do not appear in the dataset. It helps keep the categorical data more memory-efficient and improves performance when performing operations on the data.
 
 ---
+## `numpy.random.choice()`
+
+In NumPy, the `numpy.random.choice()` function is used to generate random samples (randomly selected elements) from a given array or sequence. You can use this function to perform random sampling with or without replacement.
+
+**Function Syntax:**
+```python
+numpy.random.choice(a, size=None, replace=True, p=None)
+```
+
+**Parameters:**
+- `a`: The array-like object from which to sample. It can be an array, list, or similar data structure.
+- `size` (optional): Determines the number of random samples to draw. It can be an integer or a tuple of integers specifying the shape of the output. If not provided, a single random sample is drawn.
+- `replace` (optional): If `True` (default), sampling is done with replacement, meaning the same item can be selected multiple times. If `False`, sampling is done without replacement, ensuring that each item is selected at most once.
+- `p` (optional): An array-like object representing the probabilities associated with each entry in the input array `a`. If provided, it specifies the probability distribution for selecting elements. The probabilities should sum to 1.
+
+**Examples:**
+
+1. Randomly sample elements from an array with replacement:
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+# Sample three elements with replacement
+random_samples = np.random.choice(arr, size=3, replace=True)
+print(random_samples)
+```
+
+2. Randomly sample elements from an array without replacement:
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+# Sample three elements without replacement
+random_samples = np.random.choice(arr, size=3, replace=False)
+print(random_samples)
+```
+
+3. Randomly sample elements with specified probabilities:
+```python
+import numpy as np
+
+arr = np.array([1, 2, 3, 4, 5])
+
+# Sample three elements with specified probabilities
+probabilities = [0.1, 0.2, 0.3, 0.2, 0.2]
+random_samples = np.random.choice(arr, size=3, replace=True, p=probabilities)
+print(random_samples)
+```
+
+The `numpy.random.choice()` function is useful for various tasks such as random sampling, creating random subsets of data, and generating random values based on specified probabilities. It is a versatile function that can be applied in a wide range of data analysis and simulation scenarios.
+
+---
+## `.std()`
+
+In Python's Pandas library, the `.std()` method is used to calculate the standard deviation of numeric data in a Pandas Series or DataFrame. The standard deviation is a measure of the spread or variability of the data points in a dataset. It quantifies how much individual data points deviate from the mean (average) value.
+
+**Method Syntax for Series:**
+```python
+Series.std(axis=None, skipna=None, level=None, ddof=1, numeric_only=None)
+```
+
+**Method Syntax for DataFrame:**
+```python
+DataFrame.std(axis=None, skipna=None, level=None, ddof=1, numeric_only=None)
+```
+
+**Parameters:**
+- `axis` (optional): Specifies the axis along which the standard deviation is calculated. By default, it computes the standard deviation of the entire Series or DataFrame.
+- `skipna` (optional): A boolean value that indicates whether to exclude missing (NaN) values when calculating the standard deviation. By default (`skipna=None`), it follows the global setting `pd.options.mode.use_inf_as_na`.
+- `level` (optional): For DataFrames with hierarchical indexing, specifies the level on which to perform the standard deviation calculation.
+- `ddof` (optional): Represents the "delta degrees of freedom," which adjusts the divisor in the formula for calculating the sample standard deviation. By default, it is set to 1, which computes the sample standard deviation. Use `ddof=0` for population standard deviation.
+- `numeric_only` (optional): If `True`, only numeric data types are considered when calculating the standard deviation. Non-numeric data types are ignored.
+
+**Example:**
+
+```python
+import pandas as pd
+
+data = pd.Series([1, 2, 3, 4, 5])
+
+# Calculate the standard deviation
+std_deviation = data.std()
+print(std_deviation)
+```
+
+In this example, we have a Pandas Series `data` containing numeric values. We use the `.std()` method to calculate the standard deviation of the data. The result is a single numeric value representing the standard deviation of the Series.
+
+The standard deviation is a valuable statistic in data analysis and is used to understand the spread or dispersion of data points. It provides insights into the variability of the data, with higher standard deviations indicating greater dispersion from the mean.
+
+---
