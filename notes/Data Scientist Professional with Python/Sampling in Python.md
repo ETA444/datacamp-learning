@@ -710,3 +710,82 @@ In this example, we have a Pandas Series `data` containing numeric values. We us
 The standard deviation is a valuable statistic in data analysis and is used to understand the spread or dispersion of data points. It provides insights into the variability of the data, with higher standard deviations indicating greater dispersion from the mean.
 
 ---
+## `numpy.std()`
+
+In Python's NumPy library, the `numpy.std()` function is used to calculate the standard deviation of numeric data in a NumPy array. The standard deviation is a measure of the spread or variability of the data points in a dataset. It quantifies how much individual data points deviate from the mean (average) value.
+
+**Function Syntax:**
+```python
+numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False)
+```
+
+**Parameters:**
+- `a`: The input array containing the numeric data for which you want to calculate the standard deviation.
+- `axis` (optional): Specifies the axis along which the standard deviation is calculated. By default (`axis=None`), it computes the standard deviation for the entire array.
+- `dtype` (optional): Specifies the data type of the output. If not provided, the data type is inferred from the input data.
+- `out` (optional): An alternative output array in which to place the result. If not provided, a new array is created.
+- `ddof` (optional): Represents the "delta degrees of freedom," which adjusts the divisor in the formula for calculating the sample standard deviation. By default, it is set to 0, which computes the population standard deviation. Use `ddof=1` for the sample standard deviation.
+- `keepdims` (optional): If `True`, the dimensions of the result are kept the same as the input data. If `False` (default), dimensions with size 1 are removed from the output.
+
+**Example:**
+
+```python
+import numpy as np
+
+data = np.array([1, 2, 3, 4, 5])
+
+# Calculate the standard deviation
+std_deviation = np.std(data)
+print(std_deviation)
+```
+
+In this example, we have a NumPy array `data` containing numeric values. We use the `numpy.std()` function to calculate the standard deviation of the data. The result is a single numeric value representing the standard deviation of the array.
+
+The standard deviation is a valuable statistic in data analysis and is used to understand the spread or dispersion of data points. It provides insights into the variability of the data, with higher standard deviations indicating greater dispersion from the mean.
+
+---
+## `numpy.quantile()`
+
+In Python's NumPy library, the `numpy.quantile()` function is used to compute the quantile of a given dataset. A quantile is a statistical measure that divides a dataset into equal portions. The function allows you to find the value below which a specific percentage of the data falls, which is known as a quantile.
+
+**Function Syntax:**
+```python
+numpy.quantile(a, q, axis=None, out=None, overwrite_input=False, interpolation='linear', keepdims=False)
+```
+
+**Parameters:**
+- `a`: The input array or sequence containing the dataset for which you want to compute the quantile.
+- `q`: The quantile(s) to compute, represented as a float or an array of floats between 0 and 1. For a single quantile, you can pass a single float (e.g., 0.25 for the first quartile or 0.5 for the median). For multiple quantiles, pass an array of floats.
+- `axis` (optional): Specifies the axis along which to compute the quantiles. By default (`axis=None`), it computes the quantiles for the entire array.
+- `out` (optional): An alternative output array in which to place the result. If not provided, a new array is created.
+- `overwrite_input` (optional): If `True`, the function may perform computations in place and modify the input array `a`. Default is `False`.
+- `interpolation` (optional): Specifies the method to use when interpolating between data points to compute quantiles. Options include 'linear', 'lower', 'higher', 'midpoint', and others. Default is 'linear'.
+- `keepdims` (optional): If `True`, the dimensions of the result are kept the same as the input data. If `False` (default), dimensions with size 1 are removed from the output.
+
+**Examples:**
+
+1. Compute the median (50th percentile) of an array:
+```python
+import numpy as np
+
+data = np.array([1, 2, 3, 4, 5])
+
+# Compute the median (50th percentile)
+median = np.quantile(data, 0.5)
+print(median)
+```
+
+2. Compute multiple quantiles (e.g., quartiles) of an array:
+```python
+import numpy as np
+
+data = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Compute quartiles (25th, 50th, and 75th percentiles)
+quartiles = np.quantile(data, [0.25, 0.5, 0.75])
+print(quartiles)
+```
+
+In these examples, we use the `numpy.quantile()` function to compute quantiles of the given datasets. The function returns the specified quantile(s) as output.
+
+Quantiles are commonly used to understand the distribution of data, identify outliers, and summarize data in statistical analysis. You can specify different quantiles to obtain values such as quartiles (25th, 50th, and 75th percentiles) or any other desired quantile.

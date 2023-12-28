@@ -415,46 +415,126 @@ print(sd_of_means_500)
 
 ### --- Exercise 1 --- ###
 
+# Generate 1 bootstrap resample
+spotify_1_resample = spotify_sample.sample(frac=1,replace=True)
 
+# Print the resample
+print(spotify_1_resample)
+
+# Calculate of the danceability column of spotify_1_resample
+mean_danceability_1 = np.mean(spotify_1_resample['danceability'])
+
+# Print the result
+print(mean_danceability_1)
+
+# Replicate this 1000 times
+mean_danceability_1000 = []
+for i in range(1000):
+	mean_danceability_1000.append(
+        np.mean(spotify_sample.sample(frac=1, replace=True)['danceability'])
+	)
+  
+# Print the result
+print(mean_danceability_1000)
+
+# Draw a histogram of the resample means
+plt.hist(mean_danceability_1000)
+plt.show()
 
 
 ### --- Exercise 2 --- ###
 
+mean_popularity_2000_samp = []
 
+# Generate a sampling distribution of 2000 replicates
+for i in range(2000):
+    mean_popularity_2000_samp.append(
+    	# Sample 500 rows and calculate the mean popularity 
+    	np.mean(spotify_population['popularity'].sample(n=500, replace=False))
+    )
+
+# Print the sampling distribution results
+print(mean_popularity_2000_samp)
+
+mean_popularity_2000_boot = []
+
+# Generate a bootstrap distribution of 2000 replicates
+for i in range(2000):
+    mean_popularity_2000_boot.append(
+    	# Resample 500 rows and calculate the mean popularity     
+    	np.mean(spotify_sample['popularity'].sample(n=500, replace=True))
+    )
+
+# Print the bootstrap distribution results
+print(mean_popularity_2000_boot)
 
 
 ### --- Exercise 3 --- ###
 
+# Calculate the population mean popularity
+pop_mean = spotify_population['popularity'].mean()
 
+# Calculate the original sample mean popularity
+samp_mean = spotify_sample['popularity'].mean()
+
+# Calculate the sampling dist'n estimate of mean popularity
+samp_distn_mean = np.mean(sampling_distribution)
+
+# Calculate the bootstrap dist'n estimate of mean popularity
+boot_distn_mean = np.mean(bootstrap_distribution)
+
+# Print the means
+print([pop_mean, samp_mean, samp_distn_mean, boot_distn_mean])
 
 
 ### --- Exercise 4 --- ###
 
+# Calculate the population std dev popularity
+pop_sd = spotify_population.popularity.std(ddof=0)
+
+# Calculate the original sample std dev popularity
+samp_sd = spotify_sample.popularity.std(ddof=1)
+
+# Calculate the sampling dist'n estimate of std dev popularity
+samp_distn_sd = np.std(sampling_distribution,ddof=1) * np.sqrt(5000)
+
+# Calculate the bootstrap dist'n estimate of std dev popularity
+boot_distn_sd = np.std(bootstrap_distribution,ddof=1) * np.sqrt(5000)
+
+# Print the standard deviations
+print([pop_sd, samp_sd, samp_distn_sd, boot_distn_sd])
 
 
 
 ### --- Exercise 5 --- ###
 
+# Generate a 95% confidence interval using the quantile method
+lower_quant = np.quantile(bootstrap_distribution, 0.025)
+upper_quant = np.quantile(bootstrap_distribution, 0.975)
 
+# Print quantile method confidence interval
+print((lower_quant, upper_quant))
 
 
 ### --- Exercise 6 --- ###
 
+# Find the mean and std dev of the bootstrap distribution
+point_estimate = np.mean(bootstrap_distribution)
+standard_error = np.std(bootstrap_distribution, ddof=1)
 
+# Find the lower limit of the confidence interval
+lower_se = norm.ppf(
+                    0.025,
+                    loc=point_estimate,
+                    scale=standard_error
+                    )
 
+# Find the upper limit of the confidence interval
+upper_se = norm.ppf(
+                    0.975,
+                    loc=point_estimate,
+                    scale=standard_error
+                    )
 
-### --- Exercise 7 --- ###
-
-
-
-
-### --- Exercise 8 --- ###
-
-
-
-
-### --- Exercise 9 --- ###
-
-
-
-
+# Print standard error method confidence interval
+print((lower_se, upper_se))
