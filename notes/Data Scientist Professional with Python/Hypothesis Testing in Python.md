@@ -74,3 +74,133 @@ In this example, we use `scipy.stats.norm.cdf()` to calculate the cumulative dis
 You can also use `scipy.stats.norm.cdf()` to calculate the CDF for non-standard normal distributions by specifying the `loc` (mean) and `scale` (standard deviation) parameters to customize the distribution.
 
 ---
+Certainly, here's the updated information with the "alternative" parameter included:
+
+## `pingouin.ttest()`
+
+In Python, the `pingouin.ttest()` function is part of the Pingouin library, which is used for statistical analysis. Specifically, `pingouin.ttest()` is used for conducting independent two-sample t-tests to compare the means of two groups or conditions. This test is also known as the Student's t-test.
+
+**Function Syntax:**
+```python
+pingouin.ttest(x, y, tail='two-sided', paired=False, equal_var=True, alternative='two-sided')
+```
+
+**Parameters:**
+- `x`: The data for the first group or condition.
+- `y`: The data for the second group or condition.
+- `tail` (optional): The type of t-test to perform. It can be 'two-sided' (default), 'one-sided', or 'greater'. Use 'two-sided' for a two-tailed test, 'one-sided' for a one-tailed test, and 'greater' for a one-tailed test with greater-than comparison.
+- `paired` (optional): If `True`, performs a paired t-test (related samples). If `False` (default), performs an independent t-test (unrelated samples).
+- `equal_var` (optional): If `True` (default), assumes equal variances for both groups. If `False`, assumes unequal variances.
+- `alternative` (optional): Specifies the alternative hypothesis for the test. It can be 'two-sided' (default), 'less', or 'greater', indicating whether you are testing for two-tailed or one-tailed significance.
+
+**Return Value:**
+- A Pandas DataFrame containing the t-statistic, degrees of freedom, p-value, and test result (e.g., 'significant' or 'not significant').
+
+**Example:**
+
+```python
+import pingouin as pg
+import pandas as pd
+
+# Sample data for two groups
+group1 = [75, 80, 85, 90, 95]
+group2 = [65, 70, 75, 80, 85]
+
+# Create a DataFrame
+data = pd.DataFrame({'Group1': group1, 'Group2': group2})
+
+# Perform an independent two-sample t-test with a one-tailed test
+result = pg.ttest(data['Group1'], data['Group2'], alternative='greater')
+
+# Print the result
+print(result)
+```
+
+In this example, we use `pingouin.ttest()` to perform an independent two-sample t-test between two groups represented by `Group1` and `Group2`. The "alternative" parameter is set to 'greater', indicating a one-tailed test for the greater-than comparison. The function returns a DataFrame containing the t-statistic, degrees of freedom, p-value, and test result.
+
+The `pingouin.ttest()` function is part of the Pingouin library, which provides a wide range of statistical tests and tools for data analysis in Python. It is particularly useful for conducting various statistical tests, including t-tests, ANOVA, correlation analysis, and more.
+
+---
+## `pingouin.anova()`
+
+In Python, the `pingouin.anova()` function is used to perform an analysis of variance (ANOVA) to compare the means of two or more groups or conditions. ANOVA is a statistical test commonly used to determine whether there are significant differences between group means.
+
+**Function Syntax:**
+```python
+pingouin.anova(data=None, dv=None, between=None, detailed=False, effsize='np2', correction=True)
+```
+
+**Parameters:**
+- `data`: A Pandas DataFrame containing the data for the ANOVA.
+- `dv`: The dependent variable (column name) to be analyzed.
+- `between`: The independent variable(s) or factor(s) to compare. This can be a single factor or a list of factors.
+- `detailed` (optional): If `True`, returns detailed ANOVA results including SS (sums of squares) and MS (mean squares). Default is `False`.
+- `effsize` (optional): Specifies the effect size measure to calculate. Options include 'np2' (partial eta-squared, default), 'h2' (eta-squared), and 'omega2' (omega-squared).
+- `correction` (optional): If `True` (default), performs Greenhouse-Geisser correction for violations of sphericity when appropriate.
+
+**Return Value:**
+- A Pandas DataFrame containing ANOVA results, including F-statistic, p-value, and effect size.
+
+**Example:**
+
+```python
+import pingouin as pg
+
+# Sample data in a Pandas DataFrame
+data = pg.read_dataset('anova')
+
+# Perform a one-way ANOVA
+result = pg.anova(data=data, dv='Scores', between='Group')
+
+# Print the ANOVA result
+print(result)
+```
+
+In this example, we use `pingouin.anova()` to perform a one-way ANOVA on a dataset with dependent variable 'Scores' and independent variable 'Group'. The function returns a Pandas DataFrame containing ANOVA results, including the F-statistic, p-value, and effect size.
+
+The `pingouin.anova()` function is part of the Pingouin library, which provides a wide range of statistical tests and tools for data analysis in Python. It is commonly used for conducting various statistical analyses, including ANOVA, t-tests, correlation analysis, and more.
+
+---
+## `pingouin.pairwise_tests()`
+
+In Python, the `pingouin.pairwise_tests()` function is used to perform pairwise post hoc tests following an analysis of variance (ANOVA) or repeated measures ANOVA. Post hoc tests are used to compare specific groups or conditions after finding a significant effect in the initial ANOVA.
+
+**Function Syntax:**
+```python
+pingouin.pairwise_tests(data=None, dv=None, between=None, parametric=True, p_adjust='bonf', coverage=0.95, effsize='cohen', tail='two-sided')
+```
+
+**Parameters:**
+- `data`: A Pandas DataFrame containing the data for the ANOVA.
+- `dv`: The dependent variable (column name) to be analyzed.
+- `between`: The independent variable(s) or factor(s) for which post hoc tests are performed. This can be a single factor or a list of factors.
+- `parametric` (optional): If `True` (default), performs parametric post hoc tests. If `False`, performs non-parametric tests.
+- `p_adjust` (optional): Specifies the method for p-value adjustment. Options include 'bonf' (Bonferroni, default), 'sidak', 'holm', 'fdr_bh' (Benjamini-Hochberg false discovery rate), and others.
+- `coverage` (optional): The coverage probability for confidence intervals. Default is `0.95`.
+- `effsize` (optional): Specifies the effect size measure to calculate for post hoc tests. Options include 'cohen' (Cohen's d, default), 'hedges', 'r', and others.
+- `tail` (optional): The type of tail(s) for the post hoc tests. It can be 'two-sided' (default), 'one-sided', or 'greater'. Use 'two-sided' for two-tailed tests and 'one-sided' for one-tailed tests.
+
+**Return Value:**
+- A Pandas DataFrame containing the results of the pairwise post hoc tests, including p-values, confidence intervals, and effect size measures.
+
+**Example:**
+
+```python
+import pingouin as pg
+
+# Sample data in a Pandas DataFrame
+data = pg.read_dataset('anova')
+
+# Perform a one-way ANOVA
+result_anova = pg.anova(data=data, dv='Scores', between='Group')
+
+# Perform pairwise post hoc tests
+posthoc = pg.pairwise_tests(data=data, dv='Scores', between='Group')
+
+# Print the post hoc test results
+print(posthoc)
+```
+
+In this example, we first perform a one-way ANOVA using `pingouin.anova()`. Then, we use `pingouin.pairwise_tests()` to perform pairwise post hoc tests on the same dataset. The function returns a Pandas DataFrame containing the results of the pairwise post hoc tests, including p-values, confidence intervals, and effect size measures.
+
+The `pingouin.pairwise_tests()` function is a useful tool for conducting post hoc tests after performing ANOVA or repeated measures ANOVA to identify specific group differences.
