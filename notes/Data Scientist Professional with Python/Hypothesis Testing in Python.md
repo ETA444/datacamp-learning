@@ -204,3 +204,221 @@ print(posthoc)
 In this example, we first perform a one-way ANOVA using `pingouin.anova()`. Then, we use `pingouin.pairwise_tests()` to perform pairwise post hoc tests on the same dataset. The function returns a Pandas DataFrame containing the results of the pairwise post hoc tests, including p-values, confidence intervals, and effect size measures.
 
 The `pingouin.pairwise_tests()` function is a useful tool for conducting post hoc tests after performing ANOVA or repeated measures ANOVA to identify specific group differences.
+
+---
+## `proportions_ztest()`
+
+In Python, the `proportions_ztest()` function is used to perform a Z-test for comparing proportions or testing the equality of proportions between two groups. This test is commonly used to assess whether there is a significant difference in the proportions of a specific event or outcome in two independent samples.
+
+**Function Syntax:**
+```python
+scipy.stats.proportions_ztest(count, nobs, value=None, alternative='two-sided', prop_var=False)
+```
+
+**Parameters:**
+- `count`: The number of successes (events of interest) in the samples.
+- `nobs`: The total number of observations or trials in the samples.
+- `value` (optional): The null hypothesis value for the proportion. If not provided, it is assumed to be 0.
+- `alternative` (optional): The alternative hypothesis for the test. It can be 'two-sided' (default), 'larger', or 'smaller', indicating the direction of the test.
+- `prop_var` (optional): If `True`, assumes that the variances of the proportions in the two samples are not equal. Default is `False`, assuming equal variances.
+
+**Return Value:**
+- A tuple containing the test statistic (Z-score) and the p-value for the Z-test.
+
+**Example:**
+
+```python
+import scipy.stats as stats
+
+# Sample data
+successes1 = 45  # Number of successes in sample 1
+nobs1 = 100      # Total number of observations in sample 1
+successes2 = 60  # Number of successes in sample 2
+nobs2 = 100      # Total number of observations in sample 2
+
+# Perform a two-sample Z-test for proportions
+z_statistic, p_value = stats.proportions_ztest([successes1, successes2], [nobs1, nobs2])
+
+# Print the Z-score and p-value
+print("Z-statistic:", z_statistic)
+print("P-value:", p_value)
+```
+
+In this example, we use `scipy.stats.proportions_ztest()` to perform a two-sample Z-test for proportions. We compare the proportions of successes in two independent samples, `sample1` and `sample2`. The function returns a tuple containing the Z-statistic and p-value for the Z-test.
+
+The `proportions_ztest()` function is commonly used in hypothesis testing scenarios to determine whether there is a statistically significant difference in proportions between two groups or samples. It helps assess whether an observed difference in proportions is likely to have occurred by chance.
+
+## `statsmodels.stats.proportion.proportions_ztest()`
+
+In Python's `statsmodels` library, the `proportions_ztest()` function is used to perform a Z-test for comparing proportions or testing the equality of proportions between two groups. This test is commonly used to assess whether there is a significant difference in the proportions of a specific event or outcome in two independent samples.
+
+**Function Syntax:**
+```python
+statsmodels.stats.proportion.proportions_ztest(count, nobs, value=None, alternative='two-sided', prop_var=False)
+```
+
+**Parameters:**
+- `count`: The number of successes (events of interest) in the samples.
+- `nobs`: The total number of observations or trials in the samples.
+- `value` (optional): The null hypothesis value for the proportion. If not provided, it is assumed to be 0.
+- `alternative` (optional): The alternative hypothesis for the test. It can be 'two-sided' (default), 'larger', or 'smaller', indicating the direction of the test.
+- `prop_var` (optional): If `True`, assumes that the variances of the proportions in the two samples are not equal. Default is `False`, assuming equal variances.
+
+**Return Value:**
+- A tuple containing the test statistic (Z-score) and the p-value for the Z-test.
+
+**Example:**
+
+```python
+import statsmodels.api as sm
+import numpy as np
+
+# Sample data
+successes1 = 45  # Number of successes in sample 1
+nobs1 = 100      # Total number of observations in sample 1
+successes2 = 60  # Number of successes in sample 2
+nobs2 = 100      # Total number of observations in sample 2
+
+# Perform a two-sample Z-test for proportions using statsmodels
+z_statistic, p_value = sm.stats.proportions_ztest([successes1, successes2], [nobs1, nobs2])
+
+# Print the Z-score and p-value
+print("Z-statistic:", z_statistic)
+print("P-value:", p_value)
+```
+
+In this example, we use `statsmodels.stats.proportion.proportions_ztest()` to perform a two-sample Z-test for proportions. We compare the proportions of successes in two independent samples, `sample1` and `sample2`. The function returns a tuple containing the Z-statistic and p-value for the Z-test.
+
+The `proportions_ztest()` function in `statsmodels` is commonly used in hypothesis testing scenarios to determine whether there is a statistically significant difference in proportions between two groups or samples. It helps assess whether an observed difference in proportions is likely to have occurred by chance.
+
+---
+## `pingouin.chi2_independence()`
+
+In Python, the `pingouin.chi2_independence()` function is used to perform a chi-squared test of independence for contingency tables. This test is used to determine whether there is a significant association between two categorical variables.
+
+**Function Syntax:**
+```python
+pingouin.chi2_independence(data, x, y, correction=True, lambda_='log-likelihood', tail='two-sided')
+```
+
+**Parameters:**
+- `data`: A Pandas DataFrame containing the data for the chi-squared test.
+- `x`: The name of the first categorical variable (column name).
+- `y`: The name of the second categorical variable (column name).
+- `correction` (optional): If `True` (default), applies Yates' continuity correction for 2x2 contingency tables when appropriate.
+- `lambda_` (optional): The method used to calculate the association measure. Options include 'log-likelihood' (default), 'cramer', 'phi', and others.
+- `tail` (optional): The type of tail for the chi-squared test. It can be 'two-sided' (default), 'greater', or 'less', indicating the direction of the test.
+
+**Return Value:**
+- A Pandas DataFrame containing the chi-squared test result, including the chi-squared statistic, degrees of freedom, p-value, and association measure.
+
+**Example:**
+
+```python
+import pingouin as pg
+import pandas as pd
+
+# Sample data in a Pandas DataFrame
+data = pd.DataFrame({'Gender': ['Male', 'Female', 'Male', 'Female', 'Male'],
+                     'Preference': ['Yes', 'No', 'Yes', 'Yes', 'No']})
+
+# Perform a chi-squared test of independence
+result = pg.chi2_independence(data=data, x='Gender', y='Preference')
+
+# Print the chi-squared test result
+print(result)
+```
+
+In this example, we use `pingouin.chi2_independence()` to perform a chi-squared test of independence on a contingency table with categorical variables 'Gender' and 'Preference'. The function returns a Pandas DataFrame containing the chi-squared test result, including the chi-squared statistic, degrees of freedom, p-value, and association measure.
+
+The `chi2_independence()` function in Pingouin is commonly used to assess the independence between two categorical variables and determine whether there is a statistically significant association between them.
+
+---
+## `plt.bar()`
+
+The `plt.bar()` function is part of the Matplotlib library in Python, and it is used to create bar plots or bar charts to visualize data. Bar plots are commonly used to represent categorical data and display the values of different categories or groups.
+
+**Function Syntax:**
+```python
+plt.bar(x, height, width=0.8, align='center', color=None, edgecolor='black', linewidth=1.0, tick_label=None, label=None)
+```
+
+**Parameters:**
+- `x`: The x-coordinates or positions of the bars.
+- `height`: The height or value of each bar.
+- `width` (optional): The width of the bars. Default is 0.8.
+- `align` (optional): The alignment of the bars with respect to their x-coordinates. Options include 'center' (default), 'edge', or 'align'.
+- `color` (optional): The color of the bars. It can be a single color or a list of colors for individual bars.
+- `edgecolor` (optional): The color of the edges of the bars. Default is 'black'.
+- `linewidth` (optional): The width of the edges of the bars. Default is 1.0.
+- `tick_label` (optional): Labels for the x-axis ticks.
+- `label` (optional): A label for the bars, which can be used for creating a legend.
+
+**Example:**
+```python
+import matplotlib.pyplot as plt
+
+# Sample data
+categories = ['A', 'B', 'C', 'D']
+values = [25, 40, 30, 55]
+
+# Create a bar plot
+plt.bar(categories, values, width=0.6, color='blue', edgecolor='black', linewidth=1.2, label='Data')
+
+# Add labels and a title
+plt.xlabel('Categories')
+plt.ylabel('Values')
+plt.title('Bar Plot Example')
+
+# Add a legend
+plt.legend()
+
+# Show the plot
+plt.show()
+```
+
+The `plt.bar()` function in Matplotlib is a versatile tool for creating bar plots to visualize categorical data. You can further customize the appearance of the plot by adjusting parameters to suit your specific needs.
+
+---
+## `scipy.stats.chisquare()`
+
+In Python's SciPy library, the `scipy.stats.chisquare()` function is used to perform a chi-squared goodness-of-fit test. This test is used to determine whether the observed frequency distribution of categorical data fits a specified theoretical or expected distribution.
+
+**Function Syntax:**
+```python
+scipy.stats.chisquare(f_obs, f_exp=None, ddof=0, axis=0)
+```
+
+**Parameters:**
+- `f_obs`: The observed frequencies or values. This is typically an array or list.
+- `f_exp` (optional): The expected frequencies or values. If not provided, it assumes a uniform distribution. Also, it can be an array or list.
+- `ddof` (optional): The degree of freedom correction. Default is 0.
+- `axis` (optional): The axis along which the chi-squared test is applied. Default is 0.
+
+**Return Value:**
+- A tuple containing the chi-squared test statistic and the p-value.
+
+**Example:**
+```python
+import scipy.stats as stats
+import numpy as np
+
+# Observed frequencies
+observed = np.array([18, 22, 16, 5, 19])
+
+# Expected frequencies (a uniform distribution)
+expected = np.array([16, 16, 16, 16, 16])
+
+# Perform the chi-squared goodness-of-fit test
+chi2_stat, p_value = stats.chisquare(f_obs=observed, f_exp=expected)
+
+# Print the test statistic and p-value
+print("Chi-squared statistic:", chi2_stat)
+print("P-value:", p_value)
+```
+
+In this example, we use `scipy.stats.chisquare()` to perform a chi-squared goodness-of-fit test. We provide the observed frequencies (`observed`) and expected frequencies (`expected`). The function returns a tuple containing the chi-squared test statistic and the p-value.
+
+The chi-squared goodness-of-fit test is useful for determining whether the observed data follows a specified distribution. The p-value can be used to assess the goodness of fit, where a low p-value suggests that the observed and expected distributions significantly differ.
+
+Please note that the `scipy.stats.chisquare()` function can be used for other chi-squared tests as well, such as the chi-squared test for independence in contingency tables, by appropriately providing the observed and expected frequencies.

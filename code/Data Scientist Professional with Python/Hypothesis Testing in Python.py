@@ -196,61 +196,142 @@ print(pairwise_results)
 
 ## Chapter 3
 
+
 ### --- Exercise 1 --- ###
 
+# Hypothesize that the proportion of late shipments is 6%
+p_0 = 0.06
 
+# Calculate the sample proportion of late shipments
+p_hat = (late_shipments['late'] == "Yes").mean()
 
+# Calculate the sample size
+n = len(late_shipments)
+
+# Calculate the numerator and denominator of the test statistic
+numerator = p_hat - p_0
+denominator = np.sqrt(p_0 * (1 - p_0) / n)
+
+# Calculate the test statistic
+z_score = numerator / denominator
+
+# Calculate the p-value from the z-score
+p_value = 1 - norm.cdf(z_score)
+
+# Print the p-value
+print(p_value)
 
 
 ### --- Exercise 2 --- ###
 
+# Calculate the pooled estimate of the population proportion
+p_hat = (((ns['expensive']*p_hats[('expensive', 'Yes')])+(ns['reasonable']*p_hats[('reasonable', 'Yes')]))/(ns['expensive']+ns['reasonable']))
 
+# Print the result
+print(p_hat)
 
+# Calculate p_hat one minus p_hat
+p_hat_times_not_p_hat = p_hat * (1 - p_hat)
+
+# Divide this by each of the sample sizes and then sum
+p_hat_times_not_p_hat_over_ns = (p_hat_times_not_p_hat / ns['reasonable']) + (p_hat_times_not_p_hat / ns['expensive'])
+
+# Calculate the standard error
+std_error = np.sqrt(p_hat_times_not_p_hat_over_ns)
+
+# Print the result
+print(std_error)
+
+# Calculate the z-score
+z_score = ((p_hats['expensive']-p_hats['reasonable'])/std_error)
+
+# Print z_score
+print(z_score)
+
+# Calculate the p-value from the z-score
+p_value = 1 - norm.cdf(z_score)
+
+# Print p_value
+print(p_value)
 
 
 ### --- Exercise 3 --- ###
 
+# Count the late column values for each freight_cost_group
+late_by_freight_cost_group = late_shipments.groupby("freight_cost_group")['late'].value_counts()
 
+# Create an array of the "Yes" counts for each freight_cost_group
+success_counts = np.array([late_by_freight_cost_group[('expensive', 'Yes')], late_by_freight_cost_group[('reasonable', 'Yes')]])
+
+# Create an array of the total number of rows in each freight_cost_group
+n = np.array([sum(late_by_freight_cost_group['expensive']), sum(late_by_freight_cost_group['reasonable'])])
+
+# Run a z-test on the two proportions
+stat, p_value = proportions_ztest(success_counts, n, alternative='larger')
+
+
+# Print the results
+print(stat, p_value)
 
 
 
 ### --- Exercise 4 --- ###
 
+# Proportion of freight_cost_group grouped by vendor_inco_term
+props = late_shipments.groupby('vendor_inco_term')['freight_cost_group'].value_counts(normalize=True)
 
+# Convert props to wide format
+wide_props = props.unstack()
 
+# Proportional stacked bar plot of freight_cost_group vs. vendor_inco_term
+wide_props.plot(kind="bar", stacked=True)
+plt.show()
+
+# Determine if freight_cost_group and vendor_inco_term are independent
+expected, observed, stats = pingouin.chi2_independence(late_shipments, 'freight_cost_group', 'vendor_inco_term')
+
+# Print results
+print(stats[stats['test'] == 'pearson']) 
 
 
 ### --- Exercise 5 --- ###
 
+# Find the number of rows in late_shipments
+n_total = len(late_shipments)
 
+# Create n column that is prop column * n_total
+hypothesized["n"] = hypothesized["prop"] * n_total
+
+# Plot a red bar graph of n vs. vendor_inco_term for incoterm_counts
+plt.bar(
+   incoterm_counts['vendor_inco_term'],
+   incoterm_counts['n'],
+   color="red",
+   label="Observed"
+)
+
+# Add a blue bar plot for the hypothesized counts
+plt.bar(
+   hypothesized['vendor_inco_term'],
+   hypothesized['n'],
+   label="Hypothesized",
+   alpha=0.5,
+   color='blue'
+)
+
+plt.legend()
+plt.show()
 
 
 
 ### --- Exercise 6 --- ###
 
+# Perform a goodness of fit test on the incoterm counts n
+gof_test = chisquare(f_obs=incoterm_counts['n'], f_exp=hypothesized['n'])
 
 
-
-
-### --- Exercise 7 --- ###
-
-
-
-
-
-### --- Exercise 8 --- ###
-
-
-
-
-### --- Exercise 9 --- ###
-
-
-
-
-### --- Exercise 10 --- ###
-
-
+# Print gof_test results
+print(gof_test)
 
 
 
