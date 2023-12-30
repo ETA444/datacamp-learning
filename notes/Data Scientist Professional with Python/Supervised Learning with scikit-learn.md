@@ -220,3 +220,321 @@ In this example, we use `.score()` to calculate the accuracy score of a Logistic
 The specific score or metric provided by `.score()` varies depending on the type of estimator and problem. For regression tasks, it might return metrics like mean squared error (MSE) or R-squared, while for classification tasks, it typically returns accuracy or other classification metrics.
 
 ---
+## `LinearRegression()`
+
+In scikit-learn, the `LinearRegression()` class is a part of the linear regression algorithm, which is used for modeling the relationship between a dependent variable and one or more independent variables by fitting a linear equation. Linear regression is commonly used for both regression and prediction tasks.
+
+**Class Constructor:**
+```python
+from sklearn.linear_model import LinearRegression
+
+LinearRegression(fit_intercept=True, normalize=False, copy_X=True, n_jobs=None)
+```
+
+**Parameters:**
+- `fit_intercept` (optional): Whether to calculate the intercept (bias) of the linear model (default is True).
+- `normalize` (optional): Whether to normalize the features before fitting the model (default is False). Normalization can be useful when features have different scales.
+- `copy_X` (optional): Whether to copy the feature matrix `X` before fitting (default is True). It's usually unnecessary to change this parameter.
+- `n_jobs` (optional): The number of CPU cores to use for parallelism. Setting it to -1 uses all available CPU cores (default is None).
+
+**Methods:**
+- `.fit(X, y, sample_weight=None)`: Fit the linear regression model to the training data.
+- `.predict(X)`: Predict target values for input data.
+- `.score(X, y, sample_weight=None)`: Calculate the coefficient of determination (R-squared) of the prediction.
+
+**Attributes:**
+- `.coef_`: The coefficients (slopes) of the linear model.
+- `.intercept_`: The intercept (bias) of the linear model.
+- `.rank_`: The effective rank of the feature matrix.
+
+**Example:**
+```python
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4]])
+y = np.array([2, 4, 6])
+
+# Create a Linear Regression model
+model = LinearRegression()
+
+# Fit the model to the data
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict([[4, 5]])
+print("Predicted value:", predictions[0])
+
+# Access coefficients and intercept
+coefficients = model.coef_
+intercept = model.intercept_
+print("Coefficients:", coefficients)
+print("Intercept:", intercept)
+```
+
+In this example, we use `LinearRegression()` to create a linear regression model. We fit the model to the provided sample data, make predictions, and access the coefficients and intercept of the linear model. Linear regression is a simple yet powerful algorithm used for modeling linear relationships between variables.
+
+---
+## `mean_squared_error()`
+
+In the context of machine learning and regression tasks, the `mean_squared_error()` function is used to calculate the mean squared error (MSE) between predicted values and actual (ground truth) values. MSE is a widely used metric for evaluating the performance of regression models, and it quantifies the average squared difference between predicted and actual values.
+
+**Function Syntax:**
+```python
+from sklearn.metrics import mean_squared_error
+
+mean_squared_error(y_true, y_pred, sample_weight=None, multioutput='uniform_average', squared=True)
+```
+
+**Parameters:**
+- `y_true`: The true or actual target values.
+- `y_pred`: The predicted target values obtained from a regression model.
+- `sample_weight` (optional): An array of sample weights to assign different weights to individual samples. Default is None.
+- `multioutput` (optional): Specifies how the MSE for multiple outputs should be aggregated if `y_true` and `y_pred` have multiple columns. Options include 'raw_values', 'uniform_average' (default), or an array.
+- `squared` (optional): Whether to return the MSE in squared form (default is True). If set to False, the root mean squared error (RMSE) is returned.
+
+**Return Value:**
+- The mean squared error (MSE) or RMSE, depending on the value of the `squared` parameter. For multioutput scenarios, the return value is based on the `multioutput` parameter setting.
+
+**Example:**
+```python
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+# True target values
+y_true = np.array([3.0, 4.5, 2.5, 5.0, 6.0])
+
+# Predicted target values from a regression model
+y_pred = np.array([2.8, 4.2, 2.7, 4.8, 5.5])
+
+# Calculate the mean squared error (MSE)
+mse = mean_squared_error(y_true, y_pred)
+
+# Calculate the root mean squared error (RMSE)
+rmse = mean_squared_error(y_true, y_pred, squared=False)
+
+print("Mean Squared Error (MSE):", mse)
+print("Root Mean Squared Error (RMSE):", rmse)
+```
+
+In this example, we use `mean_squared_error()` to calculate the MSE between the true target values (`y_true`) and the predicted target values (`y_pred`). Additionally, we calculate the RMSE by setting the `squared` parameter to False. These metrics help assess the goodness of fit of a regression model, with lower values indicating better model performance.
+
+---
+## `KFold()`
+
+In machine learning and model evaluation, `KFold` is a technique for cross-validation, which helps assess the performance and generalization of a predictive model. It divides a dataset into multiple subsets or "folds" to evaluate a model's performance on different parts of the data. `KFold` is commonly used to prevent overfitting and to obtain a more robust estimate of a model's performance.
+
+**Class Constructor:**
+```python
+from sklearn.model_selection import KFold
+
+KFold(n_splits, shuffle=False, random_state=None)
+```
+
+**Parameters:**
+- `n_splits`: The number of splits or folds to create. It represents how many subsets the dataset will be divided into.
+- `shuffle` (optional): Whether to shuffle the data before splitting (default is False). Shuffling can help ensure that each fold represents a random sample of the data.
+- `random_state` (optional): An integer seed or a random number generator for controlling the randomness of the data splitting. Setting this parameter ensures reproducibility.
+
+**Attributes:**
+- `.split(X, y=None, groups=None)`: Generate indices to split data into training and test sets. It yields pairs of training and test indices for each fold.
+
+**Example - Using KFold for Cross-Validation:**
+```python
+from sklearn.model_selection import KFold
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+y = np.array([0, 1, 0, 1, 1])
+
+# Create a KFold cross-validator with 3 folds
+kf = KFold(n_splits=3, shuffle=True, random_state=42)
+
+# Perform cross-validation
+for train_index, test_index in kf.split(X):
+    X_train, X_test = X[train_index], X[test_index]
+    y_train, y_test = y[train_index], y[test_index]
+    # Train and evaluate a model on each fold
+    # (e.g., using X_train, y_train, X_test, y_test)
+```
+
+In this example, we create a `KFold` cross-validator with 3 folds and use it to perform cross-validation on a dataset. The data is divided into training and testing subsets for each fold, allowing us to train and evaluate a model on different subsets of the data.
+
+`KFold` is a valuable tool for assessing a model's performance and generalization by providing multiple evaluation results on different parts of the dataset. It helps ensure that the model's performance is consistent across different subsets of the data.
+
+---
+## `cross_val_score()`
+
+In machine learning, `cross_val_score` is a function provided by scikit-learn (sklearn) that is used for performing k-fold cross-validation on a machine learning model. Cross-validation is a technique for assessing a model's performance by splitting the data into multiple subsets or "folds," training and testing the model on different subsets, and computing performance metrics for each fold. `cross_val_score` simplifies the process of cross-validation and provides an array of scores for each fold.
+
+**Function Syntax:**
+```python
+from sklearn.model_selection import cross_val_score
+
+cross_val_score(estimator, X, y=None, groups=None, scoring=None, cv=None, n_jobs=None, verbose=0, fit_params=None, pre_dispatch='2*n_jobs', error_score=nan)
+```
+
+**Parameters:**
+- `estimator`: The machine learning model or estimator to be evaluated.
+- `X`: The feature matrix or input data.
+- `y` (optional): The target variable or labels for supervised learning tasks.
+- `groups` (optional): Group labels for grouping samples if necessary.
+- `scoring` (optional): The scoring metric or evaluation method to use (default is None, which uses the estimator's default scorer).
+- `cv` (optional): The cross-validation strategy to determine how the data should be split into folds (default is 5-fold cross-validation).
+- `n_jobs` (optional): The number of CPU cores to use for parallel computation (default is 1).
+- `verbose` (optional): Verbosity level for controlling the amount of output during cross-validation (default is 0, which means no output).
+- `fit_params` (optional): Additional parameters to pass to the `fit` method of the estimator.
+- `pre_dispatch` (optional): Controls the number of batches to dispatch for parallel computation (default is '2*n_jobs').
+- `error_score` (optional): Value to assign in case an error occurs during cross-validation (default is 'nan').
+
+**Return Value:**
+- An array of scores (e.g., accuracy, mean squared error) for each fold in the cross-validation.
+
+**Example - Using `cross_val_score` for Cross-Validation:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+# Load the Iris dataset
+iris = load_iris()
+X, y = iris.data, iris.target
+
+# Create a Decision Tree classifier
+classifier = DecisionTreeClassifier()
+
+# Perform 5-fold cross-validation and calculate accuracy
+scores = cross_val_score(classifier, X, y, cv=5, scoring='accuracy')
+
+# Print the accuracy scores for each fold
+print("Accuracy scores:", scores)
+```
+
+In this example, we use `cross_val_score` to perform 5-fold cross-validation on a Decision Tree classifier using the Iris dataset. The `scoring` parameter is set to 'accuracy' to calculate accuracy scores for each fold. The function returns an array of accuracy scores, allowing you to assess the model's performance across different folds of the data.
+
+`cross_val_score` is a convenient tool for estimating the generalization performance of a machine learning model and obtaining a distribution of performance scores across multiple folds of the data.
+
+---
+## `Ridge()`
+
+In machine learning, `Ridge` is a linear regression model with L2 regularization, also known as ridge regression. Ridge regression is used to mitigate overfitting in linear regression models by adding a penalty term to the loss function, which encourages the model to have smaller coefficient values. This regularization technique is particularly useful when dealing with multicollinearity in the input features.
+
+**Class Constructor:**
+```python
+from sklearn.linear_model import Ridge
+
+Ridge(alpha=1.0, fit_intercept=True, normalize=False, copy_X=True, max_iter=None, tol=0.001, solver='auto', random_state=None)
+```
+
+**Parameters:**
+- `alpha` (optional): The regularization strength, controlling the amount of regularization applied to the coefficients. Higher values result in stronger regularization. Default is 1.0.
+- `fit_intercept` (optional): Whether to calculate the intercept (bias) of the linear model (default is True).
+- `normalize` (optional): Whether to normalize the features before fitting the model (default is False). Normalization can be useful when features have different scales.
+- `copy_X` (optional): Whether to copy the feature matrix `X` before fitting (default is True). It's usually unnecessary to change this parameter.
+- `max_iter` (optional): The maximum number of iterations for solver convergence (default is None).
+- `tol` (optional): Tolerance for stopping criteria (default is 0.001).
+- `solver` (optional): The solver algorithm to use for optimization. Options include 'auto', 'svd', 'cholesky', 'lsqr', 'sparse_cg', 'sag', and 'saga' (default is 'auto').
+- `random_state` (optional): An integer seed or a random number generator for controlling the randomness of the solver. Setting this parameter ensures reproducibility.
+
+**Methods:**
+- `.fit(X, y, sample_weight=None)`: Fit the ridge regression model to the training data.
+- `.predict(X)`: Predict target values for input data.
+- `.score(X, y, sample_weight=None)`: Calculate the coefficient of determination (R-squared) of the prediction.
+
+**Attributes:**
+- `.coef_`: The coefficients (slopes) of the linear model.
+- `.intercept_`: The intercept (bias) of the linear model.
+
+**Example:**
+```python
+from sklearn.linear_model import Ridge
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4]])
+y = np.array([2, 4, 6])
+
+# Create a Ridge regression model with alpha=0.1
+model = Ridge(alpha=0.1)
+
+# Fit the model to the data
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict([[4, 5]])
+print("Predicted value:", predictions[0])
+
+# Access coefficients and intercept
+coefficients = model.coef_
+intercept = model.intercept_
+print("Coefficients:", coefficients)
+print("Intercept:", intercept)
+```
+
+In this example, we use `Ridge()` to create a ridge regression model with a specified regularization strength (`alpha`) and fit it to the provided sample data. We then make predictions, access the coefficients, and examine the intercept of the trained model. Ridge regression is effective for handling multicollinearity and preventing overfitting in linear regression models.
+
+---
+## `Lasso()`
+
+In machine learning, `Lasso` is a linear regression model with L1 regularization, also known as Lasso regression. Lasso regression is used to mitigate overfitting in linear regression models by adding a penalty term to the loss function, which encourages the model to have smaller coefficient values and perform feature selection. This regularization technique is particularly useful when dealing with high-dimensional data, where some features may be less important.
+
+**Class Constructor:**
+```python
+from sklearn.linear_model import Lasso
+
+Lasso(alpha=1.0, fit_intercept=True, normalize=False, precompute=False, copy_X=True, max_iter=1000, tol=0.0001, warm_start=False, positive=False, random_state=None, selection='cyclic')
+```
+
+**Parameters:**
+- `alpha` (optional): The regularization strength, controlling the amount of regularization applied to the coefficients. Higher values result in stronger regularization. Default is 1.0.
+- `fit_intercept` (optional): Whether to calculate the intercept (bias) of the linear model (default is True).
+- `normalize` (optional): Whether to normalize the features before fitting the model (default is False). Normalization can be useful when features have different scales.
+- `precompute` (optional): Whether to precompute the Gram matrix for faster fitting (default is False). Use with caution for large datasets.
+- `copy_X` (optional): Whether to copy the feature matrix `X` before fitting (default is True). It's usually unnecessary to change this parameter.
+- `max_iter` (optional): The maximum number of iterations for solver convergence (default is 1000).
+- `tol` (optional): Tolerance for stopping criteria (default is 0.0001).
+- `warm_start` (optional): Whether to reuse the solution of the previous call to fit as initialization (default is False).
+- `positive` (optional): Whether to constrain the coefficients to be non-negative (default is False).
+- `random_state` (optional): An integer seed or a random number generator for controlling the randomness of the solver. Setting this parameter ensures reproducibility.
+- `selection` (optional): The method used to select features when `alpha` is between 0 and 1. Options include 'cyclic' (default) and 'random'.
+
+**Methods:**
+- `.fit(X, y, sample_weight=None)`: Fit the Lasso regression model to the training data.
+- `.predict(X)`: Predict target values for input data.
+- `.score(X, y, sample_weight=None)`: Calculate the coefficient of determination (R-squared) of the prediction.
+
+**Attributes:**
+- `.coef_`: The coefficients (slopes) of the linear model.
+- `.intercept_`: The intercept (bias) of the linear model.
+
+**Example:**
+```python
+from sklearn.linear_model import Lasso
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4]])
+y = np.array([2, 4, 6])
+
+# Create a Lasso regression model with alpha=0.1
+model = Lasso(alpha=0.1)
+
+# Fit the model to the data
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict([[4, 5]])
+print("Predicted value:", predictions[0])
+
+# Access coefficients and intercept
+coefficients = model.coef_
+intercept = model.intercept_
+print("Coefficients:", coefficients)
+print("Intercept:", intercept)
+```
+
+In this example, we use `Lasso()` to create a Lasso regression model with a specified regularization strength (`alpha`) and fit it to the provided sample data. We then make predictions, access the coefficients, and examine the intercept of the trained model. Lasso regression is effective for feature selection and preventing overfitting in linear regression models.
+
+---
