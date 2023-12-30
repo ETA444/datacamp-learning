@@ -1,8 +1,9 @@
 # Code Exercises from Cleaning Data in Python #
 
-## Chapter 1
+## Chapter 2
 
 ### --- Exercise 1 --- ###
+
 # Print the information of ride_sharing
 print(ride_sharing.info())
 
@@ -19,7 +20,7 @@ assert ride_sharing['user_type_cat'].dtype == 'category'
 print(ride_sharing['user_type_cat'].describe())
 
 
-### --- Exercise 1 --- ###
+### --- Exercise 2 --- ###
 
 # Strip duration of minutes
 ride_sharing['duration_trim'] = ride_sharing['duration'].str.strip('minutes' or 'minute')
