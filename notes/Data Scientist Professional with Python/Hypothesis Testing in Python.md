@@ -74,8 +74,6 @@ In this example, we use `scipy.stats.norm.cdf()` to calculate the cumulative dis
 You can also use `scipy.stats.norm.cdf()` to calculate the CDF for non-standard normal distributions by specifying the `loc` (mean) and `scale` (standard deviation) parameters to customize the distribution.
 
 ---
-Certainly, here's the updated information with the "alternative" parameter included:
-
 ## `pingouin.ttest()`
 
 In Python, the `pingouin.ttest()` function is part of the Pingouin library, which is used for statistical analysis. Specifically, `pingouin.ttest()` is used for conducting independent two-sample t-tests to compare the means of two groups or conditions. This test is also known as the Student's t-test.
@@ -422,3 +420,234 @@ In this example, we use `scipy.stats.chisquare()` to perform a chi-squared goodn
 The chi-squared goodness-of-fit test is useful for determining whether the observed data follows a specified distribution. The p-value can be used to assess the goodness of fit, where a low p-value suggests that the observed and expected distributions significantly differ.
 
 Please note that the `scipy.stats.chisquare()` function can be used for other chi-squared tests as well, such as the chi-squared test for independence in contingency tables, by appropriately providing the observed and expected frequencies.
+
+---
+## `scipy.stats.rankdata()`
+
+In Python's SciPy library, the `scipy.stats.rankdata()` function is used to compute the ranks of elements in an array. It assigns a rank to each element based on their values, with ties handled according to the specified method.
+
+**Function Syntax:**
+```python
+scipy.stats.rankdata(a, method='average')
+```
+
+**Parameters:**
+- `a`: The input array for which ranks are computed.
+- `method` (optional): The method used to assign ranks to tied elements. Options include 'average' (default), 'min', 'max', 'dense', and 'ordinal'.
+
+**Return Value:**
+- An array of ranks for the elements in the input array `a`.
+
+**Example:**
+```python
+import scipy.stats as stats
+import numpy as np
+
+# Input array
+data = np.array([3, 1, 2, 2, 4])
+
+# Compute ranks with the 'average' method
+ranks = stats.rankdata(data, method='average')
+
+# Print the ranks
+print(ranks)
+# Output: [3. 1. 2.5 2.5 5.]
+```
+
+In this example, we use `scipy.stats.rankdata()` to compute the ranks of elements in the input array `data` using the 'average' method. The function returns an array of ranks, with tied elements assigned ranks based on the average of their positions.
+
+The `scipy.stats.rankdata()` function is commonly used in various statistical analyses and non-parametric tests where ranking data is required. Different ranking methods can be chosen based on the specific requirements of the analysis.
+
+---
+## `pingouin.wilcoxon()`
+
+In Python's Pingouin library, the `pingouin.wilcoxon()` function is used to perform a Wilcoxon signed-rank test, also known as the Wilcoxon matched-pairs signed-rank test. This non-parametric test is used to determine whether there is a significant difference between two related groups or conditions.
+
+**Function Syntax:**
+```python
+pingouin.wilcoxon(x, y=None, paired=True, correction=False, alternative='two-sided')
+```
+
+**Parameters:**
+- `x`: The data for the first group or condition.
+- `y` (optional): The data for the second group or condition. If provided, the test is conducted for paired data (default). If not provided, a one-sample Wilcoxon test is performed.
+- `paired` (optional): If `True` (default), the test is conducted for paired data. If `False`, a two-sample Wilcoxon test is performed.
+- `correction` (optional): Whether to apply continuity correction for the two-sample test (default is `False`).
+- `alternative` (optional): The alternative hypothesis for the two-sample test. Options include 'two-sided' (default), 'less', or 'greater'.
+
+**Return Value:**
+- A dictionary containing the test statistic, p-value, and the result of the test.
+
+**Example:**
+```python
+import pingouin as pg
+import numpy as np
+
+# Sample data
+group1 = np.array([14, 18, 20, 24, 25])
+group2 = np.array([10, 16, 22, 18, 28])
+
+# Perform a Wilcoxon signed-rank test (paired)
+result = pg.wilcoxon(group1, group2)
+print(result)
+```
+
+In this example, we use `pingouin.wilcoxon()` to perform a Wilcoxon signed-rank test on two related groups (`group1` and `group2`). The function returns a dictionary containing the test statistic, p-value, and the result of the test.
+
+The Wilcoxon signed-rank test is useful for comparing two related groups or conditions, such as before and after measurements, when the data may not follow a normal distribution. It helps determine whether there is a significant difference between the groups.
+
+---
+Parametric and non-parametric tests are two broad categories of statistical tests, and they differ in their assumptions and practical applications. Here's a brief overview of the practical differences between these two types of tests:
+
+1. **Assumptions**:
+   - **Parametric Tests**: Parametric tests assume that the data follow a specific probability distribution, typically the normal (Gaussian) distribution. These tests make specific assumptions about the population parameters, such as the mean and variance. Common parametric tests include t-tests, ANOVA, and linear regression.
+
+   - **Non-parametric Tests**: Non-parametric tests, also known as distribution-free tests, do not assume any particular probability distribution for the data. They are more flexible and can be used with data that do not meet the assumptions of parametric tests. Non-parametric tests include the Wilcoxon rank-sum test, Mann-Whitney U test, and Kruskal-Wallis test.
+
+2. **Data Types**:
+   - **Parametric Tests**: Parametric tests are generally suitable for continuous or interval data, as well as categorical data that can be transformed into a continuous format (e.g., by using dummy coding).
+
+   - **Non-parametric Tests**: Non-parametric tests are more versatile and can be applied to various types of data, including ordinal data and non-normally distributed data.
+
+3. **Sample Size**:
+   - **Parametric Tests**: Parametric tests are often more robust and powerful when sample sizes are large. They tend to perform well when the data distribution approximates the assumed parametric distribution.
+
+   - **Non-parametric Tests**: Non-parametric tests are often preferred when dealing with small sample sizes or when the data distribution significantly deviates from the assumed parametric distribution.
+
+4. **Hypothesis Testing**:
+   - **Parametric Tests**: Parametric tests are typically used for comparing means, variances, and regression relationships. They provide more precise parameter estimates and can be more powerful when the parametric assumptions are met.
+
+   - **Non-parametric Tests**: Non-parametric tests are used for comparing medians, distributions, and non-linear relationships. They are less sensitive to extreme outliers and deviations from normality.
+
+5. **Sensitivity**:
+   - **Parametric Tests**: Parametric tests can be sensitive to violations of parametric assumptions. If the data do not meet the assumptions (e.g., normality, homoscedasticity), the results may be inaccurate.
+
+   - **Non-parametric Tests**: Non-parametric tests are less sensitive to the underlying data distribution and are often considered more robust in the presence of outliers or non-normally distributed data.
+
+In practical terms, the choice between parametric and non-parametric tests depends on several factors, including the nature of your data, the assumptions you can reasonably make, the research question you are addressing, and the specific statistical test you intend to perform. It's important to select the most appropriate test based on your data and research objectives to obtain reliable and meaningful results.
+
+---
+## `.pivot()`
+
+In Pandas, the `.pivot()` method is used to reshape and transform data in a DataFrame. It allows you to convert long-format data (also known as "stacked" or "molten" data) into wide-format data (also known as "unstacked" or "pivoted" data). This method is particularly useful for data analysis and visualization when you want to reorganize your data.
+
+**Method Syntax:**
+```python
+dataframe.pivot(index=None, columns=None, values=None)
+```
+
+**Parameters:**
+- `index`: The column or columns to be used as the new index (rows) in the pivoted DataFrame.
+- `columns`: The column or columns to be used as the new columns in the pivoted DataFrame.
+- `values`: The column or columns to be used as the values to fill the cells of the pivoted DataFrame.
+
+**Return Value:**
+- A new DataFrame with the data reshaped according to the specified index, columns, and values.
+
+**Example:**
+```python
+import pandas as pd
+
+# Sample data in long format
+data = {'Date': ['2023-01-01', '2023-01-01', '2023-01-02', '2023-01-02'],
+        'Variable': ['A', 'B', 'A', 'B'],
+        'Value': [10, 15, 12, 18]}
+
+df = pd.DataFrame(data)
+
+# Pivot the DataFrame
+pivot_df = df.pivot(index='Date', columns='Variable', values='Value')
+
+print(pivot_df)
+```
+
+In this example, we have a DataFrame `df` with long-format data containing dates, variables, and values. We use the `.pivot()` method to reshape the data into a wide-format DataFrame where the unique values in the 'Date' column become the index, the unique values in the 'Variable' column become the columns, and the 'Value' column becomes the cell values.
+
+The resulting `pivot_df` DataFrame will look like this:
+
+```
+Variable      A   B
+Date              
+2023-01-01   10  15
+2023-01-02   12  18
+```
+
+The `.pivot()` method is a powerful tool for data manipulation in Pandas, allowing you to efficiently transform data for analysis and visualization purposes.
+
+---
+## `pingouin.mwu()`
+
+In Python's Pingouin library, the `pingouin.mwu()` function is used to perform a Mann-Whitney U test, also known as the Wilcoxon rank-sum test. This non-parametric test is used to determine whether there is a significant difference between two independent groups.
+
+**Function Syntax:**
+```python
+pingouin.mwu(x, y, alternative='two-sided', method='auto')
+```
+
+**Parameters:**
+- `x`: The data for the first group.
+- `y`: The data for the second group.
+- `alternative` (optional): The type of test to perform. Options include 'two-sided' (default), 'less', or 'greater'.
+- `method` (optional): The method used to compute the U statistic. Options include 'auto' (default), 'exact', 'asymptotic', 'normal', or 'best'.
+
+**Return Value:**
+- A dictionary containing the test statistic, p-value, and the result of the test.
+
+**Example:**
+```python
+import pingouin as pg
+import numpy as np
+
+# Sample data for two independent groups
+group1 = np.array([22, 30, 40, 38, 25, 28, 32])
+group2 = np.array([15, 20, 18, 27, 19, 24, 16])
+
+# Perform a Mann-Whitney U test
+result = pg.mwu(group1, group2, alternative='two-sided')
+print(result)
+```
+
+In this corrected example, we use `pingouin.mwu()` to perform a Mann-Whitney U test on two independent groups (`group1` and `group2`) while specifying the `alternative` parameter for the type of test to perform. The function returns a dictionary containing the test statistic, p-value, and the result of the test.
+
+Thank you for bringing this to my attention, and I appreciate your understanding.
+
+---
+## `pingouin.kruskal()`
+
+In Python's Pingouin library, the `pingouin.kruskal()` function is used to perform a Kruskal-Wallis H test. This non-parametric test is used to determine whether there are statistically significant differences between the means of three or more independent groups.
+
+**Function Syntax:**
+```python
+pingouin.kruskal(data, dv, between, detailed=False)
+```
+
+**Parameters:**
+- `data`: The DataFrame containing the data.
+- `dv`: The dependent variable (column name) that you want to analyze.
+- `between`: The grouping variable (column name) that defines the groups for comparison.
+- `detailed` (optional): If `True`, returns additional detailed statistics (default is `False`).
+
+**Return Value:**
+- A dictionary containing the test statistic (`H`), p-value (`p-unc`), and optionally, detailed statistics.
+
+**Example:**
+```python
+import pingouin as pg
+import pandas as pd
+
+# Sample data in a DataFrame
+data = pd.DataFrame({
+    'Group': ['A', 'A', 'B', 'B', 'C', 'C'],
+    'Score': [15, 18, 12, 17, 20, 22]
+})
+
+# Perform a Kruskal-Wallis H test
+result = pg.kruskal(data, dv='Score', between='Group')
+print(result)
+```
+
+In this example, we use `pingouin.kruskal()` to perform a Kruskal-Wallis H test on three independent groups defined by the 'Group' column in the DataFrame. The function returns a dictionary containing the test statistic (`H`), p-value (`p-unc`), and additional detailed statistics if `detailed=True` is specified.
+
+The Kruskal-Wallis H test is useful when you want to compare the means of multiple independent groups, and the data may not meet the assumptions of parametric tests. It helps determine whether there are statistically significant differences between the groups.
+
+You can adjust the `detailed` parameter to obtain more or less detailed statistics based on your analysis needs.
