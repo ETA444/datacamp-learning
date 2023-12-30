@@ -1000,3 +1000,313 @@ print("Generated Values:", values)
 In this example, `np.linspace()` is used to generate an array of 10 equally spaced values between 0 and 1. The `start` and `stop` parameters define the range, and `num` specifies the number of samples. The resulting array contains 10 equally spaced values, including both the start and stop values.
 
 ---
+## `pd.get_dummies()`
+
+In the Pandas library, the `pd.get_dummies()` function is used to convert categorical (or nominal) variables into a binary/indicator representation called one-hot encoding. This is a common preprocessing step in machine learning when dealing with categorical data, as many machine learning algorithms require numerical inputs.
+
+**Function Syntax:**
+```python
+pd.get_dummies(data, columns=None, prefix=None, prefix_sep='_', dummy_na=False, drop_first=False, dtype=None)
+```
+
+**Parameters:**
+- `data`: The DataFrame or Series containing the categorical variables to be one-hot encoded.
+- `columns` (optional): The columns in the DataFrame to one-hot encode. If not specified, all categorical columns will be encoded.
+- `prefix` (optional): Prefix to add to the column names of the resulting one-hot encoded columns.
+- `prefix_sep` (optional): Separator between prefix and column name (default is '_').
+- `dummy_na` (optional): Whether to add a column to indicate missing values (default is False).
+- `drop_first` (optional): Whether to drop the first category level to avoid multicollinearity (default is False).
+- `dtype` (optional): Data type for the resulting DataFrame.
+
+**Return Value:**
+- A DataFrame with one-hot encoded columns for the specified categorical variables.
+
+**Example:**
+```python
+import pandas as pd
+
+# Sample DataFrame with a categorical column
+data = pd.DataFrame({'Category': ['A', 'B', 'A', 'C', 'B']})
+
+# Perform one-hot encoding
+encoded_data = pd.get_dummies(data, columns=['Category'], prefix='Category', prefix_sep='-')
+
+print(encoded_data)
+```
+
+In this example, the `pd.get_dummies()` function is used to perform one-hot encoding on the 'Category' column of the DataFrame. The resulting DataFrame contains binary columns for each unique category, and 'Category' is used as a prefix in column names.
+
+---
+## `pd.concat()`
+
+In the Pandas library, the `pd.concat()` function is used to concatenate (combine) two or more Pandas objects, such as DataFrames or Series, along a particular axis. It allows you to stack or join data vertically (along rows) or horizontally (along columns) based on the specified axis.
+
+**Function Syntax:**
+```python
+pd.concat(objs, axis=0, join='outer', ignore_index=False, keys=None, levels=None, names=None, verify_integrity=False, sort=False, copy=True)
+```
+
+**Parameters:**
+- `objs`: A sequence or mapping of Pandas objects (DataFrames or Series) to concatenate.
+- `axis` (optional): The axis along which the objects will be concatenated. Default is 0 (concatenation along rows). Use `axis=1` for concatenation along columns.
+- `join` (optional): Type of join to perform. Options include 'outer' (default), 'inner', 'left', or 'right'.
+- `ignore_index` (optional): If True, reset the index of the resulting object. Default is False.
+- `keys` (optional): An optional list or array of values to use as the new index or column names.
+- `levels` (optional): If the input objects have a MultiIndex, levels specify which levels are concatenated.
+- `names` (optional): Names to use for MultiIndex levels when `levels` are specified.
+- `verify_integrity` (optional): If True, check whether there are any duplicates in the resulting object. Default is False.
+- `sort` (optional): Sort the resulting object by the index. Default is False.
+- `copy` (optional): If False, avoid copying data when possible. Default is True.
+
+**Return Value:**
+- A new Pandas object (DataFrame or Series) resulting from the concatenation of input objects.
+
+**Example:**
+```python
+import pandas as pd
+
+# Sample DataFrames
+df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2'],
+                    'B': ['B0', 'B1', 'B2']})
+df2 = pd.DataFrame({'A': ['A3', 'A4', 'A5'],
+                    'B': ['B3', 'B4', 'B5']})
+
+# Concatenate along rows (axis=0)
+result = pd.concat([df1, df2], axis=0, ignore_index=True)
+
+print(result)
+```
+
+In this example, the `pd.concat()` function is used to concatenate two DataFrames (`df1` and `df2`) along rows (axis=0). The resulting DataFrame (`result`) contains the combined data from both input DataFrames, and `ignore_index=True` is used to reset the index.
+
+---
+## `SimpleImputer()`
+
+In scikit-learn, the `SimpleImputer` class is used for imputing missing values in a dataset. It provides a simple strategy to replace missing values with a constant or a statistic (such as the mean, median, or most frequent value) along specified columns.
+
+**Class Constructor:**
+```python
+from sklearn.impute import SimpleImputer
+
+SimpleImputer(missing_values=nan, strategy='mean', fill_value=None, verbose=0, copy=True, add_indicator=False)
+```
+
+**Parameters:**
+- `missing_values`: The placeholder for missing values. Default is NaN.
+- `strategy` (optional): The imputation strategy to use. Options include 'mean' (default), 'median', 'most_frequent', or a constant value.
+- `fill_value` (optional): If `strategy` is set to 'constant', this parameter specifies the constant value to use for imputation. Default is None.
+- `verbose` (optional): Controls the verbosity of the imputer (default is 0).
+- `copy` (optional): Whether to create a copy of the input data or modify it in place. Default is True.
+- `add_indicator` (optional): If True, an indicator feature is added for missing values. Default is False.
+
+**Methods:**
+- `.fit(X)`: Fit the imputer to the dataset `X` and compute the imputation values.
+- `.transform(X)`: Transform the dataset `X` by replacing missing values with imputed values based on the fitted strategy.
+- `.fit_transform(X)`: Fit the imputer and transform the dataset in a single step.
+
+**Attributes:**
+- `.statistics_`: The computed imputation values for each column.
+- `.indicator_`: The indicator matrix that marks the imputed values.
+
+**Example:**
+```python
+import pandas as pd
+from sklearn.impute import SimpleImputer
+
+# Sample DataFrame with missing values
+data = pd.DataFrame({'A': [1, 2, None, 4, 5],
+                     'B': [None, 2, 3, 4, 5]})
+
+# Create a SimpleImputer instance
+imputer = SimpleImputer(strategy='mean')
+
+# Fit the imputer and transform the data
+imputed_data = imputer.fit_transform(data)
+
+print("Imputed Data:")
+print(imputed_data)
+```
+
+In this example, the `SimpleImputer` is used to impute missing values in a DataFrame. The strategy chosen is 'mean', which replaces missing values with the mean of each column. The `fit_transform()` method fits the imputer on the data and transforms the data in one step, resulting in an imputed DataFrame.
+
+---
+## `Pipeline()`
+
+In scikit-learn, the `Pipeline` class is a powerful tool for streamlining the machine learning workflow by combining multiple data processing steps and a final estimator (machine learning model) into a single, cohesive unit. This simplifies the code, improves reproducibility, and makes it easier to deploy machine learning pipelines.
+
+**Class Constructor:**
+```python
+from sklearn.pipeline import Pipeline
+
+Pipeline(steps, memory=None, verbose=False)
+```
+
+**Parameters:**
+- `steps`: A list of tuples, where each tuple contains a string (name) and an estimator object. The steps are executed sequentially, and the last step should be an estimator.
+- `memory` (optional): Used for caching transformers to avoid redundant computation during fitting and transforming. Default is None.
+- `verbose` (optional): Controls the verbosity of messages during the pipeline's operations. Default is False.
+
+**Methods:**
+- `.fit(X, y)`: Fits the pipeline on the training data `X` and target values `y`.
+- `.predict(X)`: Predicts target values using the pipeline.
+- `.transform(X)`: Applies transformations to the data `X` using the pipeline.
+- `.fit_transform(X, y)`: Fits the pipeline and transforms the data in one step.
+- `.score(X, y)`: Computes the score or performance metric of the final estimator on test data `X` and true labels `y`.
+
+**Attributes:**
+- `.named_steps`: A dictionary of the steps in the pipeline, where keys are step names and values are the corresponding estimator objects.
+- `.steps`: A list of tuples containing the names and estimator objects for each step.
+
+**Example:**
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+
+# Create a pipeline with data preprocessing and a classifier
+pipe = Pipeline([
+    ('scaler', StandardScaler()),   # Step 1: Standardization
+    ('pca', PCA(n_components=2)),   # Step 2: Dimensionality reduction
+    ('classifier', LogisticRegression())  # Step 3: Classifier
+])
+
+# Fit the pipeline on training data and labels
+X_train = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+y_train = [0, 1, 0]
+pipe.fit(X_train, y_train)
+
+# Make predictions on new data
+X_new = [[3, 4, 5]]
+predictions = pipe.predict(X_new)
+print("Predictions:", predictions)
+```
+
+In this example, a `Pipeline` is created with three steps: standardization (using `StandardScaler`), dimensionality reduction (using `PCA`), and classification (using `LogisticRegression`). The `fit` method is used to fit the pipeline on training data and labels, and then `predict` is used to make predictions on new data. The pipeline ensures that data is processed sequentially through each step.
+
+---
+## `dropna()`
+
+In Pandas, the `dropna()` method is used to remove missing (NaN) values from a DataFrame or Series. It is a common data cleaning operation to eliminate rows or columns containing missing data, allowing for cleaner and more meaningful analysis.
+
+**Method Syntax (DataFrame):**
+```python
+DataFrame.dropna(axis=0, how='any', thresh=None, subset=None, inplace=False)
+```
+
+**Method Syntax (Series):**
+```python
+Series.dropna(axis=0, inplace=False)
+```
+
+**Parameters (DataFrame):**
+- `axis` (optional): Specifies whether to drop rows (0) or columns (1) with missing values. Default is 0 (rows).
+- `how` (optional): Determines when to drop rows or columns. Options include 'any' (default), 'all', where 'any' drops if any NaN is present, and 'all' drops if all values are NaN.
+- `thresh` (optional): Minimum number of non-null values required to keep a row or column. Rows or columns with fewer non-null values than `thresh` will be dropped.
+- `subset` (optional): Specify a subset of columns or rows to consider for missing value removal.
+- `inplace` (optional): If True, modifies the original DataFrame in place and returns None. If False (default), returns a new DataFrame with missing values removed.
+
+**Parameters (Series):**
+- `axis` (optional): Specifies whether to drop the element (0) or not (None) when it contains NaN.
+- `inplace` (optional): If True, modifies the original Series in place and returns None. If False (default), returns a new Series with missing values removed.
+
+**Return Value:**
+- A new DataFrame or Series with missing values removed, or None if `inplace=True`.
+
+**Examples (DataFrame):**
+```python
+import pandas as pd
+
+# Create a DataFrame with missing values
+data = {'A': [1, 2, None, 4],
+        'B': [None, 2, 3, None],
+        'C': [5, 6, 7, 8]}
+df = pd.DataFrame(data)
+
+# Drop rows with any missing values
+clean_df = df.dropna()
+print(clean_df)
+
+# Drop columns with all missing values
+clean_df = df.dropna(axis=1, how='all')
+print(clean_df)
+
+# Drop rows with at least 2 non-null values
+clean_df = df.dropna(thresh=2)
+print(clean_df)
+
+# Drop rows where 'A' or 'B' has missing values
+clean_df = df.dropna(subset=['A', 'B'])
+print(clean_df)
+```
+
+**Examples (Series):**
+```python
+import pandas as pd
+
+# Create a Series with missing values
+s = pd.Series([1, 2, None, 4, 5])
+
+# Drop missing values from the Series
+clean_s = s.dropna()
+print(clean_s)
+```
+
+In these examples, the `dropna()` method is used to remove missing values from a DataFrame (`df`) and a Series (`s`). Different options are demonstrated, such as dropping rows or columns based on the presence of missing values, specifying a threshold for non-null values, and considering a subset of columns or rows for missing value removal.
+
+---
+## `StandardScaler()`
+
+In scikit-learn, the `StandardScaler` class is used for standardizing features by removing the mean and scaling them to unit variance. Standardization is a common preprocessing step in machine learning, ensuring that features have similar scales, which can improve the performance of certain machine learning algorithms.
+
+**Class Constructor:**
+```python
+from sklearn.preprocessing import StandardScaler
+
+StandardScaler(copy=True, with_mean=True, with_std=True)
+```
+
+**Parameters:**
+- `copy` (optional): If True (default), a copy of the input data is created. If False, the transformation is applied in place.
+- `with_mean` (optional): If True (default), center the data by subtracting the mean from each feature.
+- `with_std` (optional): If True (default), scale the data to have unit variance (divide by the standard deviation).
+
+**Methods:**
+- `.fit(X, y=None)`: Compute the mean and standard deviation of the training data `X` to be used for later scaling.
+- `.transform(X)`: Standardize the input data `X` based on the computed mean and standard deviation.
+- `.fit_transform(X, y=None)`: Fit to data, then transform it in one step.
+
+**Attributes:**
+- `.mean_`: The mean value for each feature in the training data.
+- `.var_`: The variance for each feature in the training data.
+
+**Example:**
+```python
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+# Sample data
+data = np.array([[1, 2],
+                 [3, 4],
+                 [5, 6]])
+
+# Create a StandardScaler instance
+scaler = StandardScaler()
+
+# Fit the scaler on the data and compute mean and standard deviation
+scaler.fit(data)
+
+# Transform the data to standardize it
+standardized_data = scaler.transform(data)
+
+print("Original Data:")
+print(data)
+
+print("Standardized Data:")
+print(standardized_data)
+
+print("Mean Values:", scaler.mean_)
+print("Variance Values:", scaler.var_)
+```
+
+In this example, a `StandardScaler` is used to standardize a numpy array (`data`) by centering the data (subtracting the mean) and scaling it to unit variance (dividing by the standard deviation). The `fit` method computes the mean and standard deviation based on the training data, and the `transform` method applies the standardization to the data.
