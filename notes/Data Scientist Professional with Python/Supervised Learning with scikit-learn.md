@@ -538,3 +538,465 @@ print("Intercept:", intercept)
 In this example, we use `Lasso()` to create a Lasso regression model with a specified regularization strength (`alpha`) and fit it to the provided sample data. We then make predictions, access the coefficients, and examine the intercept of the trained model. Lasso regression is effective for feature selection and preventing overfitting in linear regression models.
 
 ---
+## `confusion_matrix()`
+
+In machine learning and classification tasks, the `confusion_matrix()` function is used to calculate a confusion matrix, which is a table that is used to evaluate the performance of a classification model, particularly in binary classification problems.
+
+**Function Syntax:**
+```python
+from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_true, y_pred, labels=None, sample_weight=None, normalize=None)
+```
+
+**Parameters:**
+- `y_true`: The true class labels or ground truth values.
+- `y_pred`: The predicted class labels or model's predictions.
+- `labels` (optional): List of labels to index the matrix. By default, it uses unique labels present in `y_true` and `y_pred`.
+- `sample_weight` (optional): Array of weights to assign to individual samples (default is None).
+- `normalize` (optional): If True, the confusion matrix is normalized to show the class-wise fractions (default is None).
+
+**Return Value:**
+- A confusion matrix, represented as a 2x2 NumPy array or matrix, where the rows and columns correspond to the actual and predicted class labels, respectively.
+
+In a typical confusion matrix:
+- The top-left cell (element `[0, 0]`) represents true negatives (TN), which are instances correctly predicted as the negative class (0).
+- The top-right cell (element `[0, 1]`) represents false positives (FP), which are instances incorrectly predicted as the positive class (1).
+- The bottom-left cell (element `[1, 0]`) represents false negatives (FN), which are instances incorrectly predicted as the negative class (0).
+- The bottom-right cell (element `[1, 1]`) represents true positives (TP), which are instances correctly predicted as the positive class (1).
+
+**Example:**
+```python
+from sklearn.metrics import confusion_matrix
+
+# Sample data
+y_true = [0, 1, 0, 1, 1, 0, 1, 0, 0, 1]
+y_pred = [0, 1, 1, 1, 1, 0, 1, 0, 0, 0]
+
+# Calculate the confusion matrix
+cm = confusion_matrix(y_true, y_pred)
+
+# Print the confusion matrix
+print(cm)
+```
+
+In this example, we use `confusion_matrix()` to calculate a confusion matrix based on the true class labels (`y_true`) and the model's predicted class labels (`y_pred`). The resulting confusion matrix provides valuable information for evaluating the performance of binary classification models, including metrics such as accuracy, precision, recall, and F1-score. It helps assess how well a model distinguishes between positive and negative classes and can aid in model tuning and decision-making.
+
+---
+## `classification_report()`
+
+In machine learning and classification tasks, the `classification_report()` function is used to generate a comprehensive classification report that includes various evaluation metrics for a classification model. This report is particularly useful for assessing the performance of a classification model, including precision, recall, F1-score, and support for each class.
+
+**Function Syntax:**
+```python
+from sklearn.metrics import classification_report
+
+classification_report(y_true, y_pred, labels=None, target_names=None, sample_weight=None, digits=2, output_dict=False, zero_division='warn')
+```
+
+**Parameters:**
+- `y_true`: The true class labels or ground truth values.
+- `y_pred`: The predicted class labels or model's predictions.
+- `labels` (optional): List of labels to index the report. By default, it uses unique labels present in `y_true` and `y_pred`.
+- `target_names` (optional): List of display names for each class (default is None).
+- `sample_weight` (optional): Array of weights to assign to individual samples (default is None).
+- `digits` (optional): Number of decimal digits to round the output metrics (default is 2).
+- `output_dict` (optional): If True, the report is returned as a dictionary (default is False).
+- `zero_division` (optional): Behavior when encountering zero divisions (default is 'warn', other options are 'warn', 0, and 1).
+
+**Return Value:**
+- A string or dictionary containing the classification report with various evaluation metrics for each class and the overall performance.
+
+**Example:**
+```python
+from sklearn.metrics import classification_report
+
+# Sample data
+y_true = [0, 1, 0, 1, 1, 0, 1, 0, 0, 1]
+y_pred = [0, 1, 1, 1, 1, 0, 1, 0, 0, 0]
+
+# Generate a classification report
+report = classification_report(y_true, y_pred, target_names=['Class 0', 'Class 1'])
+
+# Print the classification report
+print(report)
+```
+
+In this example, we use `classification_report()` to generate a classification report based on the true class labels (`y_true`) and the model's predicted class labels (`y_pred`). The report includes precision, recall, F1-score, and support metrics for each class. You can also specify the `target_names` parameter to provide display names for each class. The classification report is a valuable tool for assessing the performance of classification models and understanding their strengths and weaknesses for different classes.
+
+---
+## `LogisticRegression()`
+
+In machine learning, `LogisticRegression` is a popular classification algorithm used for binary and multi-class classification problems. Despite its name, Logistic Regression is a classification algorithm, not a regression algorithm. It models the probability that an input belongs to a particular class.
+
+**Class Constructor:**
+```python
+from sklearn.linear_model import LogisticRegression
+
+LogisticRegression(penalty='l2', dual=False, tol=0.0001, C=1.0, fit_intercept=True, intercept_scaling=1, class_weight=None, random_state=None, solver='lbfgs', max_iter=100, multi_class='auto', verbose=0, warm_start=False, n_jobs=None, l1_ratio=None)
+```
+
+**Parameters:**
+- `penalty` (optional): The type of regularization to apply. Options include 'l1', 'l2' (default), 'elasticnet', or 'none'.
+- `dual` (optional): Dual or primal formulation (default is False). Dual formulation is more suitable when the number of features is greater than the number of samples.
+- `tol` (optional): Tolerance for stopping criteria (default is 0.0001).
+- `C` (optional): Inverse of regularization strength. Smaller values specify stronger regularization (default is 1.0).
+- `fit_intercept` (optional): Whether to calculate the intercept (bias) of the model (default is True).
+- `intercept_scaling` (optional): Scaling factor for intercept (default is 1).
+- `class_weight` (optional): Weights associated with classes. Can be 'balanced' or a dictionary specifying class weights (default is None).
+- `random_state` (optional): An integer seed or a random number generator for controlling the randomness of the solver. Setting this parameter ensures reproducibility (default is None).
+- `solver` (optional): The solver algorithm to use. Options include 'newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga' (default is 'lbfgs').
+- `max_iter` (optional): Maximum number of iterations for solver convergence (default is 100).
+- `multi_class` (optional): Strategy for multi-class problems. Options include 'auto', 'ovr' (one-vs-rest), 'multinomial' (softmax regression) (default is 'auto').
+- `verbose` (optional): Whether to enable verbose mode (default is 0).
+- `warm_start` (optional): Whether to reuse the solution of the previous call to fit as initialization (default is False).
+- `n_jobs` (optional): Number of CPU cores to use for parallelism. None means 1, and -1 means using all processors (default is None).
+- `l1_ratio` (optional): Mixing parameter for elasticnet regularization (default is None).
+
+**Methods:**
+- `.fit(X, y, sample_weight=None)`: Fit the logistic regression model to the training data.
+- `.predict(X)`: Predict class labels for input data.
+- `.predict_proba(X)`: Predict class probabilities for input data.
+- `.score(X, y, sample_weight=None)`: Calculate the mean accuracy of the model on the given test data and labels.
+
+**Attributes:**
+- `.coef_`: Coefficients (weights) of the features in the decision function.
+- `.intercept_`: Intercept (bias) of the model.
+- `.classes_`: Unique class labels present in the training data.
+
+**Example:**
+```python
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+y = np.array([0, 1, 0, 1, 1])
+
+# Create a Logistic Regression model
+model = LogisticRegression()
+
+# Fit the model to the data
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict(X)
+
+# Calculate the accuracy
+accuracy = model.score(X, y)
+print("Predictions:", predictions)
+print("Accuracy:", accuracy)
+```
+
+In this example, we use `LogisticRegression()` to create a logistic regression model and fit it to the provided sample data. We then make predictions, calculate class probabilities, and measure the accuracy of the trained model. Logistic Regression is a powerful algorithm for binary and multi-class classification tasks.
+
+---
+## `predict_proba()`
+
+In machine learning, the `predict_proba()` method is used with classification models to predict the probability of an input belonging to each class in a multi-class classification problem. It returns an array of class probabilities, where each element corresponds to the probability of the input belonging to a specific class.
+
+**Method Syntax:**
+```python
+model.predict_proba(X)
+```
+
+**Parameters:**
+- `X`: The input data for which you want to predict class probabilities. This should have the same features as the training data used to train the model.
+
+**Return Value:**
+- An array of class probabilities. The shape of the array is `(n_samples, n_classes)`, where `n_samples` is the number of samples in the input data, and `n_classes` is the number of classes.
+
+**Example:**
+```python
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+y = np.array([0, 1, 0, 1, 1])
+
+# Create a Logistic Regression model
+model = LogisticRegression()
+
+# Fit the model to the data
+model.fit(X, y)
+
+# Make predictions for class probabilities
+class_probabilities = model.predict_proba(X)
+
+# Display the class probabilities for each sample
+for i, prob in enumerate(class_probabilities):
+    print(f"Sample {i + 1} Class Probabilities:", prob)
+```
+
+In this example, we use the `predict_proba()` method with a trained Logistic Regression model to predict class probabilities for each sample in the input data. The result is an array of class probabilities, where each row corresponds to a sample, and each column corresponds to a class. This method is particularly useful for multi-class classification tasks when you want to know the confidence of the model's predictions for each class.
+
+---
+## `roc_curve()`
+
+In machine learning and binary classification tasks, the `roc_curve()` function is used to calculate the Receiver Operating Characteristic (ROC) curve. The ROC curve is a graphical representation that shows the trade-off between the true positive rate (sensitivity) and the false positive rate (1 - specificity) for different classification thresholds.
+
+**Function Syntax:**
+```python
+from sklearn.metrics import roc_curve
+
+roc_curve(y_true, y_score, pos_label=None, sample_weight=None, drop_intermediate=True)
+```
+
+**Parameters:**
+- `y_true`: The true binary labels (0 or 1) or ground truth values.
+- `y_score`: The predicted scores or probability estimates for the positive class.
+- `pos_label` (optional): The label of the positive class (default is None, which assumes the positive class is 1).
+- `sample_weight` (optional): Array of weights to assign to individual samples (default is None).
+- `drop_intermediate` (optional): Whether to drop some suboptimal thresholds (default is True). Setting it to False may result in more points in the ROC curve.
+
+**Return Value:**
+- Three arrays representing the ROC curve:
+  - `fpr` (False Positive Rate): An array of false positive rates.
+  - `tpr` (True Positive Rate): An array of true positive rates.
+  - `thresholds`: An array of thresholds used to compute the ROC curve.
+
+**Example:**
+```python
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+y_true = np.array([0, 1, 0, 1, 1, 0, 1, 0, 0, 1])
+y_scores = np.array([0.2, 0.6, 0.4, 0.7, 0.8, 0.3, 0.9, 0.1, 0.2, 0.7])
+
+# Calculate ROC curve
+fpr, tpr, thresholds = roc_curve(y_true, y_scores)
+
+# Calculate area under the curve (AUC)
+roc_auc = auc(fpr, tpr)
+
+# Plot ROC curve
+plt.figure()
+plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.2f})')
+plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic (ROC)')
+plt.legend(loc='lower right')
+plt.show()
+```
+
+In this example, we use `roc_curve()` to calculate the ROC curve for a binary classification problem. We also calculate the area under the curve (AUC) and plot the ROC curve using matplotlib. The ROC curve helps evaluate the trade-off between true positives and false positives at different probability thresholds, and the AUC quantifies the overall performance of the classifier.
+
+---
+## `roc_auc_score()`
+
+In machine learning and binary classification tasks, the `roc_auc_score()` function is used to compute the Receiver Operating Characteristic Area Under the Curve (ROC AUC) score. The ROC AUC score is a metric that quantifies the overall performance of a binary classification model by measuring the area under the ROC curve. It provides a single value that represents the model's ability to distinguish between positive and negative classes.
+
+**Function Syntax:**
+```python
+from sklearn.metrics import roc_auc_score
+
+roc_auc_score(y_true, y_score, average='macro', sample_weight=None, max_fpr=None, multi_class='raise')
+```
+
+**Parameters:**
+- `y_true`: The true binary labels (0 or 1) or ground truth values.
+- `y_score`: The predicted scores or probability estimates for the positive class.
+- `average` (optional): The averaging strategy for multi-class problems. Options include 'macro' (default), 'weighted', 'micro', or 'samples'.
+- `sample_weight` (optional): Array of weights to assign to individual samples (default is None).
+- `max_fpr` (optional): Upper limit on the false positive rate (FPR) for calculating partial AUC (default is None).
+- `multi_class` (optional): Method to handle multi-class ROC AUC. Options include 'raise', 'ovr' (one-vs-rest), 'ovo' (one-vs-one), or 'raw' (return raw scores) (default is 'raise').
+
+**Return Value:**
+- The ROC AUC score, a floating-point value between 0 and 1.
+
+**Example:**
+```python
+from sklearn.metrics import roc_auc_score
+import numpy as np
+
+# Sample data
+y_true = np.array([0, 1, 0, 1, 1, 0, 1, 0, 0, 1])
+y_scores = np.array([0.2, 0.6, 0.4, 0.7, 0.8, 0.3, 0.9, 0.1, 0.2, 0.7])
+
+# Calculate ROC AUC score
+roc_auc = roc_auc_score(y_true, y_scores)
+
+print(f'ROC AUC Score: {roc_auc:.2f}')
+```
+
+In this example, we use `roc_auc_score()` to compute the ROC AUC score for a binary classification problem. The function takes the true binary labels (`y_true`) and the predicted scores or probability estimates for the positive class (`y_scores`) as input. The ROC AUC score provides a single value that summarizes the model's discrimination performance, with higher values indicating better performance.
+
+---
+## `GridSearchCV()`
+
+In machine learning, `GridSearchCV` is a technique used for hyperparameter tuning of machine learning models. It exhaustively searches over a specified hyperparameter grid to find the best combination of hyperparameters that yields the highest model performance. This is particularly useful for optimizing models and improving their predictive accuracy.
+
+**Class Constructor:**
+```python
+from sklearn.model_selection import GridSearchCV
+
+GridSearchCV(estimator, param_grid, scoring=None, n_jobs=None, cv=None, verbose=0, pre_dispatch='2*n_jobs', error_score=nan, return_train_score=False)
+```
+
+**Parameters:**
+- `estimator`: The machine learning model or pipeline for which hyperparameters need to be tuned.
+- `param_grid`: A dictionary or list of dictionaries specifying the hyperparameter grid to search over. Each dictionary corresponds to a set of hyperparameters to explore.
+- `scoring` (optional): The scoring metric used to evaluate model performance during grid search (default is None).
+- `n_jobs` (optional): Number of CPU cores to use for parallelism during cross-validation (default is None).
+- `cv` (optional): The cross-validation strategy or the number of folds (default is 5).
+- `verbose` (optional): Verbosity level for logging (default is 0).
+- `pre_dispatch` (optional): Controls the number of jobs dispatched during parallel execution (default is '2*n_jobs').
+- `error_score` (optional): Value to assign when an error occurs during model fitting (default is 'nan').
+- `return_train_score` (optional): Whether to return training scores in the result (default is False).
+
+**Methods:**
+- `.fit(X, y)`: Fit the GridSearchCV object to the data, which starts the hyperparameter tuning process.
+- `.predict(X)`: Make predictions using the best-tuned model.
+- `.predict_proba(X)`: Make class probability predictions using the best-tuned model.
+- `.score(X, y)`: Calculate the mean accuracy of the best-tuned model on the given test data and labels.
+
+**Attributes:**
+- `.best_estimator_`: The best-tuned model with the optimal hyperparameters.
+- `.best_params_`: The hyperparameters that yielded the best model performance.
+- `.best_score_`: The cross-validated score of the best estimator.
+- `.cv_results_`: A dictionary containing detailed results from the cross-validation grid search.
+
+**Example:**
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+y = np.array([0, 1, 0, 1, 1])
+
+# Create a RandomForestClassifier
+classifier = RandomForestClassifier()
+
+# Define the hyperparameter grid to search over
+param_grid = {
+    'n_estimators': [10, 50, 100],
+    'max_depth': [None, 10, 20],
+    'min_samples_split': [2, 5, 10]
+}
+
+# Create a GridSearchCV object
+grid_search = GridSearchCV(classifier, param_grid, cv=3)
+
+# Fit the GridSearchCV object to the data
+grid_search.fit(X, y)
+
+# Print the best hyperparameters and the best score
+print("Best Hyperparameters:", grid_search.best_params_)
+print("Best Score:", grid_search.best_score_)
+```
+
+In this example, we use `GridSearchCV` to perform hyperparameter tuning for a RandomForestClassifier. We specify a grid of hyperparameters to explore (`param_grid`), and the GridSearchCV object exhaustively searches for the best combination of hyperparameters using cross-validation. The best hyperparameters and the corresponding best score are printed as the result of the grid search.
+
+---
+## `RandomizedSearchCV()`
+
+In machine learning, `RandomizedSearchCV` is a technique used for hyperparameter tuning of machine learning models. It performs a randomized search over specified hyperparameter distributions or ranges, which is more efficient than an exhaustive grid search. Randomized search selects hyperparameters randomly from the specified distributions, allowing you to explore a wide range of possibilities efficiently.
+
+**Class Constructor:**
+```python
+from sklearn.model_selection import RandomizedSearchCV
+
+RandomizedSearchCV(estimator, param_distributions, n_iter=10, scoring=None, n_jobs=None, cv=None, verbose=0, random_state=None, pre_dispatch='2*n_jobs', error_score=nan, return_train_score=False)
+```
+
+**Parameters:**
+- `estimator`: The machine learning model or pipeline for which hyperparameters need to be tuned.
+- `param_distributions`: A dictionary specifying hyperparameter distributions or ranges to sample from. Each key in the dictionary corresponds to a hyperparameter, and the values define the distributions or ranges.
+- `n_iter` (optional): The number of parameter settings that are sampled (default is 10).
+- `scoring` (optional): The scoring metric used to evaluate model performance during the search (default is None).
+- `n_jobs` (optional): Number of CPU cores to use for parallelism during cross-validation (default is None).
+- `cv` (optional): The cross-validation strategy or the number of folds (default is 5).
+- `verbose` (optional): Verbosity level for logging (default is 0).
+- `random_state` (optional): An integer seed or a random number generator for controlling randomness (default is None).
+- `pre_dispatch` (optional): Controls the number of jobs dispatched during parallel execution (default is '2*n_jobs').
+- `error_score` (optional): Value to assign when an error occurs during model fitting (default is 'nan').
+- `return_train_score` (optional): Whether to return training scores in the result (default is False).
+
+**Methods:**
+- `.fit(X, y)`: Fit the RandomizedSearchCV object to the data, which starts the hyperparameter tuning process.
+- `.predict(X)`: Make predictions using the best-tuned model.
+- `.predict_proba(X)`: Make class probability predictions using the best-tuned model.
+- `.score(X, y)`: Calculate the mean accuracy of the best-tuned model on the given test data and labels.
+
+**Attributes:**
+- `.best_estimator_`: The best-tuned model with the optimal hyperparameters.
+- `.best_params_`: The hyperparameters that yielded the best model performance.
+- `.best_score_`: The cross-validated score of the best estimator.
+- `.cv_results_`: A dictionary containing detailed results from the cross-validation randomized search.
+
+**Example:**
+```python
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# Sample data
+X = np.array([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]])
+y = np.array([0, 1, 0, 1, 1])
+
+# Create a RandomForestClassifier
+classifier = RandomForestClassifier()
+
+# Define the hyperparameter distributions to sample from
+param_distributions = {
+    'n_estimators': [10, 50, 100, 200],
+    'max_depth': [None, 10, 20, 30],
+    'min_samples_split': [2, 5, 10, 20]
+}
+
+# Create a RandomizedSearchCV object
+random_search = RandomizedSearchCV(classifier, param_distributions, n_iter=5, cv=3)
+
+# Fit the RandomizedSearchCV object to the data
+random_search.fit(X, y)
+
+# Print the best hyperparameters and the best score
+print("Best Hyperparameters:", random_search.best_params_)
+print("Best Score:", random_search.best_score_)
+```
+
+In this example, we use `RandomizedSearchCV` to perform hyperparameter tuning for a RandomForestClassifier. We specify hyperparameter distributions to sample from (`param_distributions`), and the RandomizedSearchCV object randomly samples hyperparameters for a specified number of iterations. The best hyperparameters and the corresponding best score are printed as the result of the randomized search.
+
+---
+## `np.linspace()`
+
+In NumPy, the `np.linspace()` function is used to generate evenly spaced values over a specified range. It creates an array of equally spaced numbers between a specified start and stop value, with an option to specify the number of points (samples) to generate.
+
+**Function Syntax:**
+```python
+numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
+```
+
+**Parameters:**
+- `start`: The starting value of the sequence.
+- `stop`: The end value of the sequence.
+- `num` (optional): The number of evenly spaced samples to generate. Default is 50.
+- `endpoint` (optional): If True (default), the `stop` value is included in the sequence. If False, it is not included.
+- `retstep` (optional): If True, return the step size between values as a second output. Default is False.
+- `dtype` (optional): The data type of the output array. If not specified, the data type is inferred from the input values.
+- `axis` (optional): The axis in the result along which the `linspace` samples are stored. The default is 0.
+
+**Return Value:**
+- An array of evenly spaced values between `start` and `stop`, with `num` samples.
+
+**Example:**
+```python
+import numpy as np
+
+# Generate 10 equally spaced values between 0 and 1
+values = np.linspace(0, 1, num=10)
+
+print("Generated Values:", values)
+```
+
+In this example, `np.linspace()` is used to generate an array of 10 equally spaced values between 0 and 1. The `start` and `stop` parameters define the range, and `num` specifies the number of samples. The resulting array contains 10 equally spaced values, including both the start and stop values.
+
+---

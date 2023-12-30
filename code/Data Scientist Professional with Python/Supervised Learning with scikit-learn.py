@@ -263,51 +263,88 @@ plt.show()
 
 ### --- Exercise 1 --- ###
 
+# Import confusion matrix
+from sklearn.metrics import confusion_matrix, classification_report
 
+knn = KNeighborsClassifier(n_neighbors=6)
+
+# Fit the model to the training data
+knn.fit(X_train, y_train)
+
+# Predict the labels of the test data: y_pred
+y_pred = knn.predict(X_test)
+
+# Generate the confusion matrix and classification report
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 
 
 
 ### --- Exercise 2 --- ###
 
+# Import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 
+# Instantiate the model
+logreg = LogisticRegression()
+
+# Fit the model
+logreg.fit(X_train, y_train)
+
+# Predict probabilities
+y_pred_probs = logreg.predict_proba(X_test)[:, 1]
+
+print(y_pred_probs[:10])
 
 
 
 ### --- Exercise 3 --- ###
 
+# Import roc_curve
+from sklearn.metrics import roc_curve
 
+# Generate ROC curve values: fpr, tpr, thresholds
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_probs)
 
+plt.plot([0, 1], [0, 1], 'k--')
+
+# Plot tpr against fpr
+plt.plot(fpr, tpr)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve for Diabetes Prediction')
+plt.show()
+
+# Import roc_auc_score
+from sklearn.metrics import roc_auc_score
+
+# Calculate roc_auc_score
+print(roc_auc_score(y_test, y_pred_probs))
+
+# Calculate the confusion matrix
+print(confusion_matrix(y_test, y_pred))
+
+# Calculate the classification report
+print(classification_report(y_test, y_pred))
 
 
 ### --- Exercise 4 --- ###
 
+# Create the parameter space
+params = {"penalty": ["l1", "l2"],
+         "tol": np.linspace(0.0001, 1.0, 50),
+         "C": np.linspace(0.1, 1, 50),
+         "class_weight": ["balanced", {0:0.8, 1:0.2}]}
 
+# Instantiate the RandomizedSearchCV object
+logreg_cv = RandomizedSearchCV(logreg, params, cv=kf)
 
+# Fit the data to the model
+logreg_cv.fit(X_train, y_train)
 
-
-### --- Exercise 5 --- ###
-
-
-
-
-
-### --- Exercise 6 --- ###
-
-
-
-
-
-### --- Exercise 7 --- ###
-
-
-
-
-
-### --- Exercise 8 --- ###
-
-
-
-
+# Print the tuned parameters and score
+print(f"Tuned Logistic Regression Parameters: {logreg_cv.best_params_}")
+print(f"Tuned Logistic Regression Best Accuracy Score: {logreg_cv.best_score_}")
 
 
 
