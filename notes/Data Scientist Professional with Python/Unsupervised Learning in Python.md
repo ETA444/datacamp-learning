@@ -662,3 +662,116 @@ TruncatedSVD (Singular Value Decomposition) and PCA (Principal Component Analysi
    - Both PCA and TruncatedSVD are used for dimensionality reduction. You can specify the number of components (dimensions) to retain in both techniques.
 
 In summary, TruncatedSVD is a technique primarily used for dimensionality reduction and matrix factorization, **especially in the context of sparse data**. PCA, while also used for dimensionality reduction, **focuses on capturing the maximum variance and ensuring orthogonality of the components**. The choice between the two techniques depends on the nature of your data and the goals of your analysis.
+
+---
+## `sklearn.feature_extraction.text.TfidfVectorizer()`
+
+The `TfidfVectorizer()` class is a part of the scikit-learn (sklearn) library and is used for converting a collection of raw text documents into a matrix of TF-IDF (Term Frequency-Inverse Document Frequency) features. TF-IDF is a numerical statistic that reflects the importance of a word in a document relative to a collection of documents (corpus).
+
+**Class Constructor:**
+```python
+sklearn.feature_extraction.text.TfidfVectorizer(input='content', encoding='utf-8', decode_error='strict', strip_accents=None, lowercase=True, preprocessor=None, tokenizer=None, stop_words=None, ngram_range=(1, 1), max_df=1.0, min_df=1, max_features=None, vocabulary=None, binary=False, dtype=<class 'numpy.float64'>, norm='l2', use_idf=True, smooth_idf=True, sublinear_tf=False)
+```
+
+**Parameters:**
+- `input` (optional): The input format of the data. Options include 'content' (default), 'file', or 'filename'.
+- `encoding` (optional): The character encoding to use. Default is 'utf-8'.
+- `decode_error` (optional): How to handle decoding errors. Default is 'strict'.
+- `strip_accents` (optional): Remove accents during the preprocessing step. Default is None.
+- `lowercase` (optional): Convert text to lowercase. Default is True.
+- `preprocessor` (optional): A custom function to preprocess the text.
+- `tokenizer` (optional): A custom tokenizer function.
+- `stop_words` (optional): A list of stop words to be removed during tokenization.
+- `ngram_range` (optional): The range of n-grams to consider. Default is (1, 1) for unigrams.
+- `max_df` (optional): Ignore terms that have a document frequency higher than the specified threshold (float or int). Default is 1.0, meaning no filtering.
+- `min_df` (optional): Ignore terms that have a document frequency lower than the specified threshold (float or int). Default is 1, meaning no filtering.
+- `max_features` (optional): Limit the number of features (vocabulary size). Default is None, which means no limit.
+- `vocabulary` (optional): A custom vocabulary to use.
+- `binary` (optional): If True, output binary TF-IDF representation instead of floats.
+- `dtype` (optional): The data type for the TF-IDF matrix. Default is `numpy.float64`.
+- `norm` (optional): The normalization scheme for term vectors. Options include 'l1', 'l2', or None. Default is 'l2'.
+- `use_idf` (optional): Enable inverse document frequency (IDF) weighting. Default is True.
+- `smooth_idf` (optional): Smooth the IDF weights by adding 1 to document frequencies. Default is True.
+- `sublinear_tf` (optional): Apply sublinear TF scaling, which replaces TF with 1 + log(TF). Default is False.
+
+**Attributes:**
+- `vocabulary_`: The learned vocabulary of terms.
+- `idf_`: The inverse document frequency (IDF) learned from the training data.
+
+**Methods:**
+- `fit(X, y=None)`: Fit the vectorizer to the training data `X`.
+- `transform(X)`: Transform the input data `X` into a TF-IDF matrix.
+- `fit_transform(X, y=None)`: Fit the vectorizer to `X` and transform it in a single step.
+
+**Example:**
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Sample text documents
+documents = [
+    "This is the first document.",
+    "This document is the second document.",
+    "And this is the third one.",
+    "Is this the first document?"
+]
+
+# Create a TfidfVectorizer
+tfidf_vectorizer = TfidfVectorizer()
+
+# Fit and transform the documents
+tfidf_matrix = tfidf_vectorizer.fit_transform(documents)
+
+# Get the learned vocabulary and IDF values
+vocabulary = tfidf_vectorizer.vocabulary_
+idf_values = tfidf_vectorizer.idf_
+
+# Print the TF-IDF matrix, vocabulary, and IDF values
+print("TF-IDF Matrix:")
+print(tfidf_matrix.toarray())
+print("\nVocabulary:")
+print(vocabulary)
+print("\nIDF Values:")
+print(idf_values)
+```
+
+In this example, the `TfidfVectorizer()` is used to convert a list of text documents into a TF-IDF matrix. The TF-IDF matrix represents the importance of each term (word) in each document. It is a common preprocessing step for text-based machine learning tasks, such as text classification and information retrieval.
+
+---
+## `.toarray()`
+
+The `.toarray()` method is commonly used with sparse matrices in libraries like NumPy and Scipy. This method is used to convert a sparse matrix into a dense NumPy array. Sparse matrices are efficient for representing matrices with a significant number of zero elements, but they may not be suitable for all operations. When you need to perform operations that require a dense array, you can use `.toarray()` to convert the sparse matrix into a dense array.
+
+Here's a general explanation of the `.toarray()` method:
+
+**Method Syntax:**
+```python
+sparse_matrix.toarray()
+```
+
+**Parameters:**
+- None
+
+**Return Value:**
+- A dense NumPy array containing the elements of the sparse matrix.
+
+**Example:**
+```python
+import numpy as np
+from scipy.sparse import csr_matrix
+
+# Create a sparse matrix
+data = np.array([1, 2, 0, 0, 3, 0])
+row_indices = np.array([0, 0, 1, 1, 2, 2])
+col_indices = np.array([0, 1, 1, 2, 2, 3])
+sparse_matrix = csr_matrix((data, (row_indices, col_indices)), shape=(3, 4))
+
+# Convert the sparse matrix to a dense array
+dense_array = sparse_matrix.toarray()
+
+# Print the dense array
+print(dense_array)
+```
+
+In this example, we first create a sparse matrix using Scipy's Compressed Sparse Row (CSR) format. Then, we use the `.toarray()` method to convert it into a dense NumPy array. The `dense_array` now contains the elements of the sparse matrix in a dense format, which can be used for operations that require dense arrays.
+
+Please note that converting a large sparse matrix into a dense array may consume a significant amount of memory, so it should be done with caution when working with large datasets.
