@@ -275,3 +275,148 @@ print("Mean Squared Error:", mse)
 In this example, the `mean_squared_error()` function is used to calculate the mean squared error between the true target values (`y_true`) and predicted values (`y_pred`) from a regression model. The resulting MSE score quantifies the average squared difference between the true and predicted values, providing a measure of the model's accuracy in predicting continuous numerical outcomes.
 
 ---
+## Complexity, bias and variance
+
+The relationship between model complexity, bias, and variance is a fundamental concept in machine learning, often referred to as the bias-variance tradeoff.
+
+- As the model's complexity increases (for example, by adding more features or using a more complex algorithm), its capacity to fit the training data also increases. This means that the model can capture more complex patterns in the data.
+
+- When the model's complexity is high, it has lower bias. In other words, it can closely approximate the true underlying function that generated the data. Low bias means that the model is capable of fitting both the training data and the noise in the data.
+
+- However, as the model's complexity increases, it becomes more sensitive to variations and noise in the training data. This leads to higher variance. High variance means that the model is likely to fit the training data very closely, even to the extent of capturing noise and random fluctuations.
+
+- The tradeoff is that, as complexity increases, the model's generalization performance may suffer. It may overfit the training data, meaning it performs well on the training data but poorly on unseen data because it has learned noise instead of true patterns. This is often referred to as overfitting.
+
+To summarize:
+- High complexity → Low bias, High variance
+- Low complexity → High bias, Low variance
+
+The goal in machine learning is to strike a balance between bias and variance to build models that generalize well to unseen data. This often involves techniques like regularization, cross-validation, and choosing an appropriate level of model complexity. The art of machine learning lies in finding the right balance for a specific problem.
+
+---
+## Cross-Validation Error
+- If f-hat suffers from **high variance**/**overfitting**: 
+	- CV error > training error
+		- Remedies:
+			- decrease model complexity
+				- e.g.: decrease max depth, increase min samples per leaf
+			- get more data/rows
+- If f-hat suffers from **high bias**/**underfitting**:
+	- CV error ~= training error >> desired error
+		- Remedies:
+			- increase model complexity
+				- e.g.: increase max depth, decrease min samples per leaf
+			- gather more features/cols
+
+---
+## `sklearn.model_selection.cross_val_score()`
+
+The `cross_val_score()` function is part of scikit-learn (sklearn) and is used for performing k-fold cross-validation on a machine learning model. Cross-validation is a widely used technique for assessing a model's performance by splitting the data into multiple subsets (folds) and iteratively training and evaluating the model on different subsets of the data. It helps estimate the model's generalization performance and reduces the risk of overfitting or underfitting.
+
+**Function Syntax:**
+```python
+sklearn.model_selection.cross_val_score(estimator, X, y=None, groups=None, scoring=None, cv=None, n_jobs=None, verbose=0, fit_params=None, pre_dispatch='2*n_jobs', error_score=nan)
+```
+
+**Parameters:**
+- `estimator`: The machine learning model or estimator to be evaluated.
+- `X`: The input features or data.
+- `y` (optional): The target labels or values (for supervised learning tasks). If omitted, it's used for unsupervised learning or simply ignored.
+- `groups` (optional): Group labels for the samples. Used for grouping data points when performing group-based cross-validation.
+- `scoring` (optional): The scoring metric used to evaluate the model's performance (e.g., 'accuracy', 'mean_squared_error', 'f1', etc.). If `None`, it uses the default scorer for the estimator.
+- `cv` (optional): The cross-validation strategy. You can specify the number of folds or a cross-validation object (e.g., KFold, StratifiedKFold). If `None`, it uses 5-fold cross-validation by default.
+- `n_jobs` (optional): The number of CPU cores to use for parallelization. Set to `-1` to use all available cores.
+- `verbose` (optional): An integer controlling the verbosity of the output during cross-validation.
+- `fit_params` (optional): Additional parameters to pass to the `fit()` method of the estimator.
+- `pre_dispatch` (optional): Controls the number of batches to dispatch during parallel execution.
+- `error_score` (optional): The value to assign to the score if an error occurs during cross-validation.
+
+**Return Value:**
+- An array of scores obtained from cross-validation for each fold. The length of the array is equal to the number of folds.
+
+**Example:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import cross_val_score
+from sklearn.tree import DecisionTreeClassifier
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create a DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+
+# Perform 5-fold cross-validation with accuracy scoring
+scores = cross_val_score(clf, X, y, cv=5, scoring='accuracy')
+
+# Print the cross-validation scores
+print("Cross-Validation Scores:", scores)
+```
+
+In this example, the `cross_val_score()` function is used to perform 5-fold cross-validation on a `DecisionTreeClassifier` model using the Iris dataset. The function returns an array of accuracy scores for each fold of cross-validation. Cross-validation is useful for estimating the model's performance on unseen data and can help identify potential issues such as overfitting or underfitting.
+
+---
+## `sklearn.ensemble.VotingClassifier()`
+
+The `VotingClassifier` class in scikit-learn (sklearn) is an ensemble learning method that combines the predictions of multiple individual classifiers (estimators) to make a final prediction. It allows you to apply different machine learning algorithms and combine their predictions by majority voting (hard voting) or weighted voting to improve overall prediction accuracy.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.VotingClassifier(estimators, voting='hard', weights=None, n_jobs=None, flatten_transform=True)
+```
+
+**Parameters:**
+- `estimators`: A list of tuples, where each tuple consists of a string (a name for the estimator) and an estimator object. Estimators can be classifiers or regressors.
+- `voting` (optional): The type of voting to use. Options are 'hard' (default) for majority voting or 'soft' for weighted voting based on class probabilities.
+- `weights` (optional): A list of float values specifying the weight assigned to each estimator when using 'soft' voting. If `None`, equal weights are assigned to all estimators.
+- `n_jobs` (optional): The number of CPU cores to use for parallel execution during the `fit` and `predict` operations. Set to `-1` to use all available cores.
+- `flatten_transform` (optional): A boolean flag indicating whether to flatten the results of the `transform` method for each estimator when using 'soft' voting.
+
+**Attributes:**
+- `estimators_`: The list of fitted estimator objects.
+- `named_estimators_`: A dictionary containing the names and fitted estimator objects.
+- `classes_`: The class labels of the target variable.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble classifier to the training data.
+- `predict(X)`: Predict the class labels using the ensemble.
+- `predict_proba(X)`: Predict class probabilities using the ensemble.
+- `transform(X)`: Apply transformers to the data.
+
+**Example:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.ensemble import VotingClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create individual classifiers
+clf1 = DecisionTreeClassifier(max_depth=3)
+clf2 = SVC(kernel='linear', probability=True)
+clf3 = LogisticRegression(max_iter=1000)
+
+# Create a VotingClassifier with 'soft' voting
+ensemble_clf = VotingClassifier(estimators=[('dt', clf1), ('svc', clf2), ('lr', clf3)], voting='soft')
+
+# Fit the ensemble classifier to the data
+ensemble_clf.fit(X, y)
+
+# Predict class probabilities for new data
+new_data = [[5.1, 3.5, 1.4, 0.2]]
+class_probabilities = ensemble_clf.predict_proba(new_data)
+
+# Print the class probabilities
+print("Class Probabilities:", class_probabilities)
+```
+
+In this example, a `VotingClassifier` is created with three different classifiers: a decision tree classifier (`clf1`), a support vector machine classifier (`clf2`), and a logistic regression classifier (`clf3`). The ensemble classifier combines their predictions using 'soft' voting, which takes into account class probabilities. The `predict_proba()` method is then used to obtain class probabilities for new data points. This ensemble technique is useful for improving the overall predictive performance by leveraging the strengths of multiple individual classifiers.
+
+---
