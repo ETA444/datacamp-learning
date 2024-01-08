@@ -775,3 +775,252 @@ print(dense_array)
 In this example, we first create a sparse matrix using Scipy's Compressed Sparse Row (CSR) format. Then, we use the `.toarray()` method to convert it into a dense NumPy array. The `dense_array` now contains the elements of the sparse matrix in a dense format, which can be used for operations that require dense arrays.
 
 Please note that converting a large sparse matrix into a dense array may consume a significant amount of memory, so it should be done with caution when working with large datasets.
+
+---
+## `sklearn.decomposition.NMF()`
+
+The `NMF()` class in scikit-learn (sklearn) is used for Non-Negative Matrix Factorization, a dimensionality reduction technique often applied to non-negative data. NMF factorizes a given non-negative matrix into two lower-dimensional matrices, typically interpreted as basis vectors and coefficients, such that the product of these matrices approximates the original matrix.
+
+**Class Constructor:**
+```python
+sklearn.decomposition.NMF(n_components=2, init='nndsvd', solver='cd', beta_loss='frobenius', tol=1e-4, max_iter=200, random_state=None, alpha=0.0, l1_ratio=0.0, verbose=0, shuffle=False)
+```
+
+**Parameters:**
+- `n_components` (optional): The number of components to keep. It determines the dimensionality of the reduced representation. Default is 2.
+- `init` (optional): The initialization method for the algorithm. Options include 'nndsvd' (default), 'nndsvda', 'nndsvdar', 'random', or a user-supplied array.
+- `solver` (optional): The algorithm used for optimization. Options include 'cd' (Coordinate Descent), 'mu' (Multiplicative Update), and 'mm' (Multiplicative Update with Masked Matrices).
+- `beta_loss` (optional): The beta divergence to be minimized. Options include 'frobenius' (default), 'kullback-leibler', 'itakura-saito', or a float value for custom beta.
+- `tol` (optional): Tolerance value for stopping criteria. Default is 1e-4.
+- `max_iter` (optional): The maximum number of iterations. Default is 200.
+- `random_state` (optional): Seed for the random number generator for initialization. Default is None.
+- `alpha` (optional): Regularization term for components. Default is 0.0.
+- `l1_ratio` (optional): The regularization mixing parameter for 'elasticnet' regularization. Default is 0.0.
+- `verbose` (optional): Verbosity level. Default is 0.
+- `shuffle` (optional): Whether to shuffle data before each iteration. Default is False.
+
+**Attributes:**
+- `components_`: The learned basis vectors.
+- `transform(X)`: Transform the input data `X` into the reduced representation using the learned components.
+
+**Methods:**
+- `fit(X)`: Fit the NMF model to the input data `X`.
+- `fit_transform(X)`: Fit the model to `X` and transform it in a single step.
+
+**Example:**
+```python
+from sklearn.decomposition import NMF
+import numpy as np
+
+# Sample non-negative data
+data = np.array([[1, 2, 3],
+                 [4, 5, 6],
+                 [7, 8, 9]])
+
+# Create an NMF model with 2 components
+nmf_model = NMF(n_components=2)
+
+# Fit the model to the data and transform it
+reduced_data = nmf_model.fit_transform(data)
+
+# Print the learned components and the transformed data
+print("Learned Components (Basis Vectors):")
+print(nmf_model.components_)
+print("\nTransformed Data (Coefficient Matrix):")
+print(reduced_data)
+```
+
+In this example, the `NMF()` class is used to perform Non-Negative Matrix Factorization on the sample non-negative data. The result consists of learned basis vectors (`components_`) and the transformed data (`reduced_data`). NMF is commonly used for tasks such as feature extraction, topic modeling, and dimensionality reduction on non-negative data.
+
+---
+When you fit a Non-Negative Matrix Factorization (NMF) model to a dataset of documents and word frequencies with `n_components=10`, you are essentially decomposing your original dataset into two lower-dimensional matrices: a "components" matrix and a "features" matrix. Let's break down what each of these matrices represents and what they practically mean:
+
+1. **Components Matrix (H):**
+   - The components matrix, denoted as H, is a matrix with dimensions `(number of documents, n_components)`. In your case, it will have the shape `(number of documents, 10)` since you specified `n_components=10`.
+   - Each row of the components matrix represents a document, and each column represents one of the 10 components. These components are also referred to as "topics" in the context of text data.
+   - Each element (i, j) in this matrix represents the strength or weight of the j-th component in the i-th document.
+   - Practically, the components matrix tells you how each document can be expressed as a combination of the 10 identified topics/components. Each document is assigned a weight for each component, indicating the relevance or importance of that component to the document.
+
+2. **Features Matrix (W):**
+   - The features matrix, denoted as W, is a matrix with dimensions `(n_components, number of unique words in your vocabulary)`.
+   - Each row of the features matrix represents one of the 10 components (topics), and each column corresponds to a unique word in your vocabulary.
+   - Each element (i, j) in this matrix represents the weight or importance of the j-th word in the i-th component (topic).
+   - Practically, the features matrix tells you the words associated with each of the 10 identified topics/components. It provides insights into the most relevant words for each topic.
+
+3. **Practical Interpretation:**
+   - With the components matrix (W), you can understand how each document in your dataset is composed of the 10 identified topics. For example, you can identify which topics are prevalent in a specific document by looking at the weights assigned to each component.
+   - With the features matrix (H), you can examine the most significant words associated with each topic. This helps you understand the themes or subjects represented by each component.
+
+In practical terms, NMF with `n_components=10` helps you discover 10 distinct topics or themes within your collection of documents and quantifies how each document is related to these topics. It also identifies the most important words for each of these topics.
+
+This topic modeling approach can be valuable for tasks such as document clustering, document classification, and summarization, as it allows you to represent complex text data in a more interpretable and structured way by capturing underlying themes and patterns.
+
+---
+## `matplotlib.pyplot.imshow()`
+
+The `imshow()` function is a part of the Matplotlib library's `pyplot` module and is used to display images or 2D arrays as images. It is a versatile tool for visualizing data in the form of grids or matrices.
+
+**Function Syntax:**
+```python
+matplotlib.pyplot.imshow(X, cmap=None, interpolation=None, aspect=None, origin=None, extent=None, filternorm=1, filterrad=4.0, resample=None, **kwargs)
+```
+
+**Parameters:**
+- `X`: The image or 2D array to be displayed.
+- `cmap` (optional): The colormap to be used for mapping values to colors. Default is 'viridis'.
+- `interpolation` (optional): The interpolation method for displaying the image. Options include 'none' (nearest-neighbor), 'nearest', 'bilinear', 'bicubic', 'spline16', 'spline36', 'hanning', 'hamming', 'hermite', 'kaiser', 'quadric', 'catrom', 'gaussian', 'bessel', 'mitchell', 'sinc', 'lanczos', 'blackman', or 'box'. Default is 'none'.
+- `aspect` (optional): The aspect ratio of the image. Options include 'auto', 'equal', or a scalar value. Default is 'auto'.
+- `origin` (optional): The origin of the image coordinates. Options are 'upper' or 'lower'. Default is 'upper'.
+- `extent` (optional): The bounding box in data coordinates. It defines the extent of the image along both the x-axis and y-axis.
+- `filternorm` (optional): A boolean value indicating whether to normalize the filter kernel. Default is 1.
+- `filterrad` (optional): The filter radius for resampling. Default is 4.0.
+- `resample` (optional): A boolean value indicating whether to resample the data for better display. Default is None.
+- `**kwargs` (optional): Additional keyword arguments that control the appearance of the displayed image, such as `alpha`, `vmin`, `vmax`, `interpolation`, and others.
+
+**Return Value:**
+- The `AxesImage` object representing the displayed image, which can be used for further customization or manipulation if needed.
+
+**Example:**
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create a sample 2D array (image)
+data = np.random.rand(10, 10)
+
+# Display the image with a colormap
+plt.imshow(data, cmap='viridis', interpolation='nearest', origin='upper', aspect='auto')
+plt.colorbar()
+
+# Add labels and title
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.title('Sample Image')
+
+# Show the plot
+plt.show()
+```
+
+In this example, the `imshow()` function is used to display a sample 2D array as an image with a specified colormap ('viridis'). Additional parameters control the interpolation, aspect ratio, origin, and more. `imshow()` is commonly used in various applications, including image processing, data visualization, and scientific plotting.
+
+---
+## `.nlargest()`
+
+The `.nlargest()` method is a part of the pandas library in Python and is used to find the largest values in a Series or DataFrame. It returns the specified number of largest values along with their indices or labels. This method is particularly useful for data analysis and sorting data based on specific criteria.
+
+Here's the general syntax for using the `.nlargest()` method:
+
+**Method Syntax:**
+```python
+pandas.Series.nlargest(n, keep='first')
+pandas.DataFrame.nlargest(n, columns, keep='first')
+```
+
+For a Series:
+- `n`: The number of largest values to return.
+- `keep` (optional): Specifies how to handle duplicates among the largest values. Options are 'first', 'last', and False. Default is 'first'.
+
+For a DataFrame:
+- `n`: The number of largest values to return.
+- `columns`: The column or columns along which to find the largest values.
+- `keep` (optional): Specifies how to handle duplicates among the largest values within each column. Options are 'first', 'last', and False. Default is 'first'.
+
+**Return Value:**
+- For a Series, it returns a new Series containing the `n` largest values, sorted in descending order.
+- For a DataFrame, it returns a new DataFrame with the `n` largest rows based on the specified column(s).
+
+**Example for Series:**
+```python
+import pandas as pd
+
+# Create a Series
+data = pd.Series([10, 30, 20, 40, 50])
+
+# Find the 2 largest values
+largest_values = data.nlargest(2)
+
+# Print the result
+print(largest_values)
+```
+
+**Example for DataFrame:**
+```python
+import pandas as pd
+
+# Create a DataFrame
+data = pd.DataFrame({'A': [10, 20, 30, 40, 50], 'B': [5, 15, 10, 25, 20]})
+
+# Find the 2 largest rows based on column 'A'
+largest_rows = data.nlargest(2, columns='A')
+
+# Print the result
+print(largest_rows)
+```
+
+In both examples, the `.nlargest()` method is used to find the specified number of largest values (2 in this case) and return them along with their indices or labels. The `keep` parameter determines how to handle duplicates among the largest values.
+
+---
+## `.dot()`
+
+The `.dot()` method or operator is commonly used for performing matrix multiplication or dot product operations in various Python libraries, particularly with NumPy arrays.
+
+Here's how it's used:
+
+### `.dot()` Method for NumPy Arrays
+
+In NumPy, the `.dot()` method is used to perform matrix multiplication between two arrays. The `.dot()` method can be called on one of the arrays, and the other array is passed as an argument to the method.
+
+**Method Syntax:**
+```python
+numpy.dot(a, b)
+```
+
+- `a`: The first array for matrix multiplication.
+- `b`: The second array for matrix multiplication.
+
+**Example:**
+```python
+import numpy as np
+
+# Create two NumPy arrays
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# Perform matrix multiplication using .dot()
+result = A.dot(B)
+
+# Print the result
+print(result)
+```
+
+In this example, `.dot()` is used to perform matrix multiplication between arrays `A` and `B`, resulting in the matrix product stored in the `result` variable.
+
+### `numpy.dot()` Function
+
+Alternatively, you can use the `numpy.dot()` function, which performs the same matrix multiplication operation but as a standalone function.
+
+**Function Syntax:**
+```python
+numpy.dot(a, b, out=None)
+```
+
+- `a`: The first array for matrix multiplication.
+- `b`: The second array for matrix multiplication.
+- `out` (optional): An optional output array where the result is stored.
+
+**Example:**
+```python
+import numpy as np
+
+# Create two NumPy arrays
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# Perform matrix multiplication using numpy.dot()
+result = np.dot(A, B)
+
+# Print the result
+print(result)
+```
+
+Both the `.dot()` method and `numpy.dot()` function are commonly used for performing matrix multiplication, which is an essential operation in linear algebra and various numerical computing tasks.
