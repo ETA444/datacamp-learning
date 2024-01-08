@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
+                "file": "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md"
+                "file": "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md"
               }
             }
           }
@@ -149,8 +149,13 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
-    "notes/Data Scientist Professional with Python/Supervised Learning with scikit-learn.md",
+    "code/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.py",
+    "code/Machine Learning with Tree-Based Models in Python.py",
     "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
+    "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA22-Unsupervised_Learning_in_Python.pdf",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA22-Unsupervised_Learning_in_Python.pdf.opdownload",
+    "notes/Data Scientist Professional with Python/Supervised Learning with scikit-learn.md",
     "code/Data Scientist Professional with Python/Unsupervised Learning in Python.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA21-Supervised_Learning_with_scikit-learn.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA21-Supervised_Learning_with_scikit-learn.pdf.opdownload",
@@ -160,10 +165,7 @@
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA20-Hypothesis_Testing_in_Python.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Sampling in Python.md",
     "code/Data Scientist Professional with Python/Hypothesis Testing in Python.py",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA19-Sampling_in_Python.pdf",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA19-Sampling_in_Python.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
-    "code/Data Scientist Professional with Python/Sampling in Python.py",
     "notes/Data Scientist Professional with Python/Writing Functions in Python.md",
     "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
     "notes/Data Scientist Professional with Python/Cleaning Data in Python.md",
@@ -192,7 +194,6 @@
     "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "Other/start-quiz.py functions.md",
     "README.md",
-    "Data.md",
-    "images/Pasted image 20230710164636.png.md"
+    "Data.md"
   ]
 }
