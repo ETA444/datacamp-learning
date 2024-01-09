@@ -420,3 +420,134 @@ print("Class Probabilities:", class_probabilities)
 In this example, a `VotingClassifier` is created with three different classifiers: a decision tree classifier (`clf1`), a support vector machine classifier (`clf2`), and a logistic regression classifier (`clf3`). The ensemble classifier combines their predictions using 'soft' voting, which takes into account class probabilities. The `predict_proba()` method is then used to obtain class probabilities for new data points. This ensemble technique is useful for improving the overall predictive performance by leveraging the strengths of multiple individual classifiers.
 
 ---
+## `sklearn.ensemble.BaggingClassifier()`
+
+The `BaggingClassifier` class in scikit-learn (sklearn) is an ensemble learning method that combines multiple base classifiers (estimators) to improve classification accuracy. It works by training each base classifier on a randomly resampled subset of the training data (bootstrap samples) and then aggregating their predictions through majority voting. This technique is known as bagging (bootstrap aggregating) and can reduce variance and improve model performance.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.BaggingClassifier(base_estimator=None, n_estimators=10, max_samples=1.0, max_features=1.0, bootstrap=True, bootstrap_features=False, oob_score=False, warm_start=False, n_jobs=None, random_state=None, verbose=0)
+```
+
+**Parameters:**
+- `base_estimator` (optional): The base estimator to use for building individual classifiers. It can be any classifier or regressor. If `None`, it uses a decision tree classifier.
+- `n_estimators` (optional): The number of base estimators (sub-classifiers) to create. Default is 10.
+- `max_samples` (optional): The maximum number or proportion of samples to use for training each base estimator. Default is 1.0 (use all samples).
+- `max_features` (optional): The maximum number or proportion of features to use for training each base estimator. Default is 1.0 (use all features).
+- `bootstrap` (optional): Whether to use bootstrap samples for training base estimators. Default is `True`.
+- `bootstrap_features` (optional): Whether to use bootstrap samples for selecting features when training base estimators. Default is `False`.
+- `oob_score` (optional): Whether to calculate the out-of-bag (OOB) score, which estimates the accuracy of the ensemble on unseen data. Default is `False`.
+- `warm_start` (optional): Whether to reuse the existing fitted base estimators when calling `fit()` repeatedly. Default is `False`.
+- `n_jobs` (optional): The number of CPU cores to use for parallel execution during `fit` and `predict`. Set to `-1` to use all available cores.
+- `random_state` (optional): Seed for the random number generator to ensure reproducibility. Default is `None`.
+- `verbose` (optional): An integer controlling the verbosity of the output.
+
+**Attributes:**
+- `base_estimator_`: The fitted base estimator used for creating individual classifiers.
+- `n_features_`: The number of features in the input data.
+- `n_samples_`: The number of samples in the input data.
+- `estimators_`: The list of fitted base estimators.
+- `classes_`: The class labels of the target variable.
+- `oob_score_` : out-of-bag (OOB) score, which estimates the accuracy of the ensemble on unseen data.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble classifier to the training data.
+- `predict(X)`: Predict class labels using the ensemble.
+- `predict_proba(X)`: Predict class probabilities using the ensemble.
+- `score(X, y, sample_weight=None)`: Return the mean accuracy on the given test data and labels.
+
+**Example:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create a DecisionTreeClassifier as the base estimator
+base_estimator = DecisionTreeClassifier(max_depth=3)
+
+# Create a BaggingClassifier with 50 base estimators
+bagging_clf = BaggingClassifier(base_estimator=base_estimator, n_estimators=50, random_state=42)
+
+# Fit the ensemble classifier to the data
+bagging_clf.fit(X, y)
+
+# Predict class labels for new data
+new_data = [[5.1, 3.5, 1.4, 0.2]]
+predicted_labels = bagging_clf.predict(new_data)
+
+# Print the predicted labels
+print("Predicted Labels:", predicted_labels)
+```
+
+In this example, a `BaggingClassifier` is created with a decision tree classifier as the base estimator. The ensemble classifier is then trained on the Iris dataset, and the `predict()` method is used to predict class labels for new data points. Bagging is a powerful ensemble technique for improving the robustness and accuracy of classifiers by reducing overfitting.
+
+---
+## `sklearn.ensemble.RandomForestRegressor()`
+
+The `RandomForestRegressor` class in scikit-learn (sklearn) is an ensemble learning method for regression tasks. It is an extension of the random forest algorithm and is used for building a collection of decision tree regressors, where each tree makes an individual prediction. The final prediction is obtained by averaging or taking the median of the individual tree predictions. This ensemble technique helps improve the accuracy and robustness of regression models.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.RandomForestRegressor(n_estimators=100, criterion='mse', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, ccp_alpha=0.0, max_samples=None)
+```
+
+**Parameters:**
+- `n_estimators` (optional): The number of decision trees in the forest. Default is 100.
+- `criterion` (optional): The function used to measure the quality of a split in each decision tree. Options are 'mse' (mean squared error, default) and 'mae' (mean absolute error).
+- `max_depth` (optional): The maximum depth of each decision tree. Default is `None`, which means nodes are expanded until all leaves are pure or contain less than `min_samples_split` samples.
+- `min_samples_split` (optional): The minimum number of samples required to split an internal node. Default is 2.
+- `min_samples_leaf` (optional): The minimum number of samples required to be at a leaf node. Default is 1.
+- `min_weight_fraction_leaf` (optional): The minimum weighted fraction of the sum total of weights required to be at a leaf node. Default is 0.0.
+- `max_features` (optional): The number of features to consider when looking for the best split in each decision tree. Default is 'auto', which means `max_features` is set to the square root of the number of features.
+- `max_leaf_nodes` (optional): Grow a tree with a maximum number of leaf nodes. Default is `None`.
+- `min_impurity_decrease` (optional): A node will be split if this split induces a decrease of the impurity greater than or equal to this value. Default is 0.0.
+- `min_impurity_split` (optional): Deprecated and will be removed in future versions.
+- `bootstrap` (optional): Whether to use bootstrap samples for training decision trees. Default is `True`.
+- `oob_score` (optional): Whether to calculate the out-of-bag (OOB) score, which estimates the regression performance on unseen data using the samples not included in the bootstrap samples. Default is `False`.
+- `n_jobs` (optional): The number of CPU cores to use for parallel execution during tree building. Set to `-1` to use all available cores.
+- `random_state` (optional): Seed for the random number generator to ensure reproducibility. Default is `None`.
+- `verbose` (optional): An integer controlling the verbosity of the output.
+- `warm_start` (optional): Whether to reuse the existing fitted trees when calling `fit()` repeatedly. Default is `False`.
+- `ccp_alpha` (optional): Complexity parameter used for Minimal Cost-Complexity Pruning. Default is 0.0.
+- `max_samples` (optional): The maximum number or proportion of samples to use for training each decision tree. Default is `None` (use all samples).
+
+**Attributes:**
+- `n_features_`: The number of features in the input data.
+- `n_outputs_`: The number of outputs (target values) in the regression task.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble regressor to the training data.
+- `predict(X)`: Predict target values for samples in `X`.
+- `score(X, y, sample_weight=None)`: Return the coefficient of determination R^2 of the prediction.
+
+**Example:**
+```python
+from sklearn.datasets import load_boston
+from sklearn.ensemble import RandomForestRegressor
+import numpy as np
+
+# Load the Boston Housing dataset
+boston = load_boston()
+X = boston.data
+y = boston.target
+
+# Create a RandomForestRegressor
+regressor = RandomForestRegressor(n_estimators=100, random_state=42)
+
+# Fit the regressor to the data
+regressor.fit(X, y)
+
+# Predict target values for new data
+new_data = np.array([X[0]])  # Use the first data point for prediction
+predicted_values = regressor.predict(new_data)
+
+# Print the predicted values
+print("Predicted Values:", predicted_values)
+```
+
+In this example, a `RandomForestRegressor` is created with 100 decision trees and trained on the Boston Housing dataset. The ensemble regressor is used to predict target values for new data points. RandomForest is a powerful ensemble technique for regression tasks, capable of handling complex relationships between input features and target values.
