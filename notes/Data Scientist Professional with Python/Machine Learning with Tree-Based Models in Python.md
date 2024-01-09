@@ -551,3 +551,282 @@ print("Predicted Values:", predicted_values)
 ```
 
 In this example, a `RandomForestRegressor` is created with 100 decision trees and trained on the Boston Housing dataset. The ensemble regressor is used to predict target values for new data points. RandomForest is a powerful ensemble technique for regression tasks, capable of handling complex relationships between input features and target values.
+
+---
+## `sklearn.ensemble.AdaBoostClassifier()`
+
+The `AdaBoostClassifier` class in scikit-learn (sklearn) is an ensemble learning method used for classification tasks. AdaBoost (Adaptive Boosting) combines the predictions of multiple individual classifiers (typically decision trees) to create a strong ensemble classifier. It focuses on those training samples that are hard to classify by giving them higher weight during training. AdaBoost iteratively improves the performance of the base classifiers by adjusting the sample weights at each iteration.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.AdaBoostClassifier(base_estimator=None, n_estimators=50, learning_rate=1.0, algorithm='SAMME.R', random_state=None)
+```
+
+**Parameters:**
+- `base_estimator` (optional): The base estimator to use for building individual classifiers. It must support sample weighting. If `None`, it uses a decision tree classifier with a depth of 1 (`sklearn.tree.DecisionTreeClassifier(max_depth=1)`).
+- `n_estimators` (optional): The number of base estimators (sub-classifiers) to create. Default is 50.
+- `learning_rate` (optional): A hyperparameter that scales the contribution of each classifier. Lower values make the ensemble more robust, but may require more estimators. Default is 1.0.
+- `algorithm` (optional): The algorithm to use for updating sample weights at each iteration. Options are 'SAMME' or 'SAMME.R'. Default is 'SAMME.R'.
+- `random_state` (optional): Seed for the random number generator to ensure reproducibility. Default is `None`.
+
+**Attributes:**
+- `base_estimator_`: The fitted base estimator used for creating individual classifiers.
+- `estimators_`: The list of fitted base estimators.
+- `classes_`: The class labels of the target variable.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble classifier to the training data.
+- `predict(X)`: Predict class labels using the ensemble.
+- `predict_proba(X)`: Predict class probabilities using the ensemble.
+- `staged_predict(X)`: Return an iterator over the predictions at each stage.
+- `staged_predict_proba(X)`: Return an iterator over the predicted class probabilities at each stage.
+
+**Example:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create a DecisionTreeClassifier as the base estimator
+base_estimator = DecisionTreeClassifier(max_depth=1)
+
+# Create an AdaBoostClassifier with 50 base estimators
+adaboost_clf = AdaBoostClassifier(base_estimator=base_estimator, n_estimators=50, random_state=42)
+
+# Fit the ensemble classifier to the data
+adaboost_clf.fit(X, y)
+
+# Predict class labels for new data
+new_data = [[5.1, 3.5, 1.4, 0.2]]
+predicted_labels = adaboost_clf.predict(new_data)
+
+# Print the predicted labels
+print("Predicted Labels:", predicted_labels)
+```
+
+In this example, an `AdaBoostClassifier` is created with a decision tree classifier as the base estimator. The ensemble classifier is then trained on the Iris dataset, and the `predict()` method is used to predict class labels for new data points. AdaBoost is a boosting technique that focuses on misclassified samples and combines multiple weak classifiers to create a strong ensemble classifier for classification tasks.
+
+---
+## `sklearn.metrics.roc_auc_score()`
+
+The `roc_auc_score()` function is a part of scikit-learn (sklearn) and is used for evaluating the performance of binary classification models by computing the Area Under the Receiver Operating Characteristic Curve (ROC AUC score). ROC AUC is a commonly used metric for measuring the quality of a binary classification model's predictions. It provides an aggregate measure of the model's ability to distinguish between the two classes across different probability thresholds.
+
+**Function Syntax:**
+```python
+sklearn.metrics.roc_auc_score(y_true, y_score, average='macro', sample_weight=None, max_fpr=None, multi_class='raise', labels=None)
+```
+
+**Parameters:**
+- `y_true`: The true binary labels or ground truth.
+- `y_score`: The target scores or probability estimates for the positive class.
+- `average` (optional): Specifies the averaging strategy when dealing with multi-class problems. Options include 'micro', 'macro', 'weighted', or None. Default is 'macro'.
+- `sample_weight` (optional): An array-like object that assigns weights to individual samples. It is used to compute a weighted ROC AUC score.
+- `max_fpr` (optional): The maximum false positive rate (FPR) to use when computing the partial AUC. Default is None.
+- `multi_class` (optional): Defines how the ROC AUC scores are computed when dealing with multi-class problems. Options include 'raise', 'ovr' (One-vs-Rest), or 'ovo' (One-vs-One). Default is 'raise'.
+- `labels` (optional): The class labels to be considered for computing ROC AUC in multi-class problems. Default is None, which means all unique labels in `y_true` are considered.
+
+**Return Value:**
+- The ROC AUC score, which is a floating-point value between 0 and 1. Higher values indicate better model performance.
+
+**Example:**
+```python
+from sklearn.metrics import roc_auc_score
+import numpy as np
+
+# True binary labels
+y_true = np.array([0, 1, 1, 0, 1, 0])
+
+# Target scores or probability estimates for the positive class
+y_score = np.array([0.2, 0.8, 0.6, 0.3, 0.9, 0.4])
+
+# Compute the ROC AUC score
+roc_auc = roc_auc_score(y_true, y_score)
+
+# Print the ROC AUC score
+print("ROC AUC Score:", roc_auc)
+```
+
+In this example, the `roc_auc_score()` function is used to compute the ROC AUC score for a binary classification problem. The `y_true` array contains the true binary labels (0 or 1), and the `y_score` array contains the probability estimates for the positive class. The ROC AUC score quantifies the model's ability to distinguish between the two classes, with higher scores indicating better discrimination.
+
+---
+## `sklearn.ensemble.GradientBoostingRegressor()`
+
+The `GradientBoostingRegressor` class in scikit-learn (sklearn) is a machine learning model used for regression tasks. Gradient Boosting is an ensemble technique that combines the predictions of multiple weak learners (typically decision trees) to create a strong predictive model. It builds the model in a stage-wise manner, optimizing for the residuals of the previous stage.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.GradientBoostingRegressor(loss='ls', learning_rate=0.1, n_estimators=100, subsample=1.0, criterion='friedman_mse', min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_depth=3, min_impurity_decrease=0.0, min_impurity_split=None, init=None, random_state=None, max_features=None, alpha=0.9, verbose=0, max_leaf_nodes=None, warm_start=False, presort='deprecated', validation_fraction=0.1, n_iter_no_change=None, tol=0.0001, ccp_alpha=0.0)
+```
+
+**Parameters:**
+- `loss` (optional): The loss function to be optimized. Options include 'ls' (least squares, default), 'lad' (least absolute deviation), and 'huber' (a combination of both).
+- `learning_rate` (optional): The learning rate shrinks the contribution of each weak learner. A smaller value makes the model more robust but requires more estimators. Default is 0.1.
+- `n_estimators` (optional): The number of boosting stages (weak learners) to be used. Default is 100.
+- `subsample` (optional): The fraction of samples used for fitting the weak learners. Default is 1.0 (use all samples).
+- `criterion` (optional): The function used to measure the quality of a split in each decision tree. Default is 'friedman_mse'.
+- `min_samples_split` (optional): The minimum number of samples required to split an internal node. Default is 2.
+- `min_samples_leaf` (optional): The minimum number of samples required to be at a leaf node. Default is 1.
+- `min_weight_fraction_leaf` (optional): The minimum weighted fraction of the sum total of weights required to be at a leaf node. Default is 0.0.
+- `max_depth` (optional): The maximum depth of each decision tree. Default is 3.
+- `min_impurity_decrease` (optional): A node will be split if this split induces a decrease of the impurity greater than or equal to this value. Default is 0.0.
+- `init` (optional): An estimator to initialize the ensemble. Default is None.
+- `random_state` (optional): Seed for the random number generator to ensure reproducibility. Default is `None`.
+- `max_features` (optional): The number of features to consider when looking for the best split in each decision tree. Default is None, which means using all features.
+- `alpha` (optional): The alpha-quantile of the huber loss function. Only used if `loss='huber'`. Default is 0.9.
+- `verbose` (optional): An integer controlling the verbosity of the output.
+- `max_leaf_nodes` (optional): Grow a tree with a maximum number of leaf nodes. Default is None.
+- `warm_start` (optional): Whether to reuse the existing fitted trees when calling `fit()` repeatedly. Default is `False`.
+- `presort` (optional): Deprecated and will be removed in future versions.
+- `validation_fraction` (optional): Fraction of training data to set aside as validation set for early stopping. Default is 0.1.
+- `n_iter_no_change` (optional): Number of iterations with no improvement in the validation score to wait before early stopping. Default is None.
+- `tol` (optional): Tolerance for early stopping. Default is 0.0001.
+- `ccp_alpha` (optional): Complexity parameter used for Minimal Cost-Complexity Pruning. Default is 0.0.
+
+**Attributes:**
+- `feature_importances_`: The feature importances of the model.
+- `n_features_`: The number of features in the input data.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble regressor to the training data.
+- `predict(X)`: Predict target values for samples in `X`.
+- `score(X, y, sample_weight=None)`: Return the coefficient of determination R^2 of the prediction.
+
+**Example:**
+```python
+from sklearn.datasets import load_boston
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+# Load the Boston Housing dataset
+boston = load_boston()
+X = boston.data
+y = boston.target
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a GradientBoostingRegressor
+regressor = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, random_state=42)
+
+# Fit the regressor to the training data
+regressor.fit(X_train, y_train)
+
+# Predict target values for the test data
+y_pred
+
+ = regressor.predict(X_test)
+
+# Calculate the mean squared error (MSE) as a measure of performance
+mse = mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
+```
+
+In this example, the `GradientBoostingRegressor` is used for regression on the Boston Housing dataset. The model is trained on the training data and evaluated using mean squared error (MSE) on the test data. Gradient Boosting is a powerful ensemble technique for regression problems, and it combines multiple decision trees to make accurate predictions.
+
+---
+Certainly! Here's the information about the `sklearn.ensemble.GradientBoostingRegressor()` function:
+
+## `sklearn.ensemble.GradientBoostingRegressor()`
+
+The `GradientBoostingRegressor` class in scikit-learn (sklearn) is a machine learning model used for regression tasks. It is part of the ensemble learning methods and builds a predictive model by combining the predictions of multiple individual estimators, typically decision trees. Gradient Boosting is a technique that sequentially fits new models to provide a more accurate prediction.
+
+**Class Constructor:**
+```python
+sklearn.ensemble.GradientBoostingRegressor(
+    loss='ls', 
+    learning_rate=0.1, 
+    n_estimators=100, 
+    subsample=1.0, 
+    criterion='friedman_mse', 
+    min_samples_split=2, 
+    min_samples_leaf=1, 
+    min_weight_fraction_leaf=0.0, 
+    max_depth=3, 
+    min_impurity_decrease=0.0, 
+    min_impurity_split=None, 
+    init=None, 
+    random_state=None, 
+    max_features=None, 
+    alpha=0.9, 
+    verbose=0, 
+    max_leaf_nodes=None, 
+    warm_start=False, 
+    presort='deprecated', 
+    validation_fraction=0.1, 
+    n_iter_no_change=None, 
+    tol=0.0001, 
+    ccp_alpha=0.0
+)
+```
+
+**Parameters:**
+- `loss` (optional): The loss function to be optimized. Options include 'ls' (least squares, default), 'lad' (least absolute deviation), and 'huber' (a combination of both).
+- `learning_rate` (optional): The learning rate shrinks the contribution of each weak learner. A smaller value makes the model more robust but requires more estimators. Default is 0.1.
+- `n_estimators` (optional): The number of boosting stages (weak learners) to be used. Default is 100.
+- `subsample` (optional): The fraction of samples used for fitting the weak learners. Default is 1.0 (use all samples).
+- `criterion` (optional): The function used to measure the quality of a split in each decision tree. Default is 'friedman_mse'.
+- `min_samples_split` (optional): The minimum number of samples required to split an internal node. Default is 2.
+- `min_samples_leaf` (optional): The minimum number of samples required to be at a leaf node. Default is 1.
+- `min_weight_fraction_leaf` (optional): The minimum weighted fraction of the sum total of weights required to be at a leaf node. Default is 0.0.
+- `max_depth` (optional): The maximum depth of each decision tree. Default is 3.
+- `min_impurity_decrease` (optional): A node will be split if this split induces a decrease of the impurity greater than or equal to this value. Default is 0.0.
+- `init` (optional): An estimator to initialize the ensemble. Default is None.
+- `random_state` (optional): Seed for the random number generator to ensure reproducibility. Default is `None`.
+- `max_features` (optional): The number of features to consider when looking for the best split in each decision tree. Default is None, which means using all features.
+- `alpha` (optional): The alpha-quantile of the huber loss function. Only used if `loss='huber'`. Default is 0.9.
+- `verbose` (optional): An integer controlling the verbosity of the output.
+- `max_leaf_nodes` (optional): Grow a tree with a maximum number of leaf nodes. Default is None.
+- `warm_start` (optional): Whether to reuse the existing fitted trees when calling `fit()` repeatedly. Default is `False`.
+- `presort` (optional): Deprecated and will be removed in future versions.
+- `validation_fraction` (optional): Fraction of training data to set aside as validation set for early stopping. Default is 0.1.
+- `n_iter_no_change` (optional): Number of iterations with no improvement in the validation score to wait before early stopping. Default is None.
+- `tol` (optional): Tolerance for early stopping. Default is 0.0001.
+- `ccp_alpha` (optional): Complexity parameter used for Minimal Cost-Complexity Pruning. Default is 0.0.
+
+**Attributes:**
+- `feature_importances_`: The feature importances of the model.
+- `n_features_`: The number of features in the input data.
+
+**Methods:**
+- `fit(X, y, sample_weight=None)`: Fit the ensemble regressor to the training data.
+- `predict(X)`: Predict target values for samples in `X`.
+- `score(X, y, sample_weight=None)`: Return the coefficient of determination R^2 of the prediction.
+
+**Example:**
+```python
+from sklearn.datasets import load_boston
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+# Load the Boston Housing dataset
+boston = load_boston()
+X = boston.data
+y = boston.target
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a GradientBoostingRegressor
+regressor = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, random_state=42)
+
+# Fit the regressor to the training data
+regressor.fit(X_train, y_train)
+
+# Predict target values for the test data
+y_pred = regressor.predict(X_test)
+
+# Calculate the mean squared error (MSE) as a measure of performance
+mse = mean_squared_error(y_test, y_pred)
+print("Mean Squared Error:", mse)
+```
+
+In this example, the `GradientBoostingRegressor` is used for regression on the Boston Housing dataset. The model is trained on the training data and evaluated using mean squared error (MSE) on the test data. Gradient Boosting is a powerful ensemble technique for regression problems, and it combines multiple decision trees to make accurate predictions.
+
+---
