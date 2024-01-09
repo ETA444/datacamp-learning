@@ -830,3 +830,81 @@ print("Mean Squared Error:", mse)
 In this example, the `GradientBoostingRegressor` is used for regression on the Boston Housing dataset. The model is trained on the training data and evaluated using mean squared error (MSE) on the test data. Gradient Boosting is a powerful ensemble technique for regression problems, and it combines multiple decision trees to make accurate predictions.
 
 ---
+## `sklearn.model_selection.GridSearchCV()`
+
+The `GridSearchCV` class in scikit-learn (sklearn) is a tool used for hyperparameter tuning and model selection. It performs an exhaustive search over a specified parameter grid, training and evaluating a machine learning model for each combination of hyperparameters. This is a valuable technique to find the best set of hyperparameters that optimize the performance of a model.
+
+**Class Constructor:**
+```python
+sklearn.model_selection.GridSearchCV(
+    estimator, 
+    param_grid, 
+    scoring=None, 
+    n_jobs=None, 
+    cv=None, 
+    verbose=0, 
+    pre_dispatch='2*n_jobs', 
+    error_score='raise-deprecating', 
+    return_train_score=False
+)
+```
+
+**Parameters:**
+- `estimator`: The machine learning model or pipeline for which you want to perform hyperparameter tuning.
+- `param_grid`: A dictionary or list of dictionaries specifying the hyperparameter grid to search. Each dictionary represents a set of hyperparameters to try.
+- `scoring` (optional): The scoring metric used to evaluate the model. It can be a string or a callable object. Default is None, which uses the estimator's default scorer.
+- `n_jobs` (optional): The number of CPU cores to use for parallel computation. Default is None, which means 1 core.
+- `cv` (optional): The cross-validation strategy to use for evaluation. Default is None, which uses a 5-fold stratified cross-validation.
+- `verbose` (optional): Verbosity level for logging during the search. Default is 0 (no output).
+- `pre_dispatch` (optional): Controls the number of jobs that are dispatched at once. Default is '2*n_jobs', which means twice the number of CPU cores.
+- `error_score` (optional): How to handle errors during the search. Default is 'raise-deprecating'.
+- `return_train_score` (optional): Whether to return the training scores in the results. Default is False.
+
+**Attributes:**
+- `best_estimator_`: The best estimator with the optimized hyperparameters.
+- `best_params_`: The best set of hyperparameters found during the search.
+- `best_score_`: The best cross-validated score.
+- `cv_results_`: A dictionary containing detailed results of the cross-validation search.
+
+**Methods:**
+- `fit(X, y=None, groups=None)`: Fit the grid search cross-validation to the data.
+- `predict(X)`: Predict using the best estimator.
+- `score(X, y=None)`: Return the score of the best estimator on the data.
+- `get_params(deep=True)`: Get parameters of the grid search object.
+
+**Example:**
+```python
+from sklearn.datasets import load_iris
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Define a parameter grid for the Support Vector Classifier (SVC)
+param_grid = {
+    'C': [0.1, 1, 10],
+    'kernel': ['linear', 'rbf', 'poly'],
+    'gamma': [0.1, 1, 'scale', 'auto'],
+}
+
+# Create an SVC classifier
+svc = SVC()
+
+# Create a GridSearchCV object
+grid_search = GridSearchCV(estimator=svc, param_grid=param_grid, cv=5)
+
+# Fit the grid search to the data
+grid_search.fit(X, y)
+
+# Get the best parameters and score
+best_params = grid_search.best_params_
+best_score = grid_search.best_score_
+
+print("Best Parameters:", best_params)
+print("Best Score:", best_score)
+```
+
+In this example, `GridSearchCV` is used to search for the best hyperparameters for a Support Vector Classifier (SVC) on the Iris dataset. The `param_grid` dictionary specifies the hyperparameter combinations to try. The best set of hyperparameters and the corresponding score are printed at the end of the search. This is a powerful technique for finding the hyperparameters that optimize a model's performance.
