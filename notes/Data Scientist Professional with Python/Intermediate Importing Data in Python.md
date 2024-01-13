@@ -250,3 +250,58 @@ for p in paragraphs:
 In this example, the `bs4.BeautifulSoup()` constructor is used to create a BeautifulSoup object (`soup`) from an HTML document (`html_doc`). You can then use various methods on the BeautifulSoup object to navigate, search, and extract information from the document.
 
 Beautiful Soup is a powerful library for parsing and manipulating HTML and XML documents, and its extensive set of methods makes it a versatile tool for web scraping and data extraction. If you have any more questions or need further information, please feel free to ask!
+
+---
+## `json.load()`
+
+In Python, the `json.load()` function is used to parse a JSON (JavaScript Object Notation) file or a JSON string and convert it into a Python object. This function is part of the built-in `json` module, which provides methods for working with JSON data.
+
+**Function Syntax (File Input):**
+```python
+json.load(file, *, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)
+```
+
+**Parameters (File Input):**
+- `file`: A file-like object containing a JSON document or a JSON file's content.
+
+**Function Syntax (String Input):**
+```python
+json.loads(s, *, cls=None, object_hook=None, parse_float=None, parse_int=None, parse_constant=None, object_pairs_hook=None, **kw)
+```
+
+**Parameters (String Input):**
+- `s`: A JSON string to be parsed.
+
+**Return Value:**
+- For file input: Returns a Python object representing the parsed JSON data.
+- For string input: Returns a Python object representing the parsed JSON data.
+
+**Example (File Input):**
+```python
+import json
+
+# Open a JSON file and parse its contents
+with open('data.json', 'r') as json_file:
+    data = json.load(json_file)
+
+# 'data' now contains a Python object representing the JSON data
+```
+
+**Example (String Input):**
+```python
+import json
+
+# A JSON string
+json_string = '{"name": "John", "age": 30, "city": "New York"}'
+
+# Parse the JSON string
+data = json.loads(json_string)
+
+# 'data' now contains a Python object representing the JSON data
+```
+
+The `json.load()` function is commonly used for reading JSON data from files or parsing JSON strings and converting them into Python objects. This allows you to work with JSON data within your Python programs.
+
+If you have any more questions or need further information, please feel free to ask!
+
+---
