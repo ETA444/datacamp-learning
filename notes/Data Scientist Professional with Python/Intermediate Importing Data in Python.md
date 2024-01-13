@@ -305,3 +305,148 @@ The `json.load()` function is commonly used for reading JSON data from files or 
 If you have any more questions or need further information, please feel free to ask!
 
 ---
+## `tweepy.Stream()`
+
+In the Tweepy library, the `tweepy.Stream()` class is used to create and manage a real-time stream of tweets from Twitter. Tweepy is a Python library for accessing the Twitter API, and the `tweepy.Stream()` class is specifically designed for handling Twitter streams, such as the Twitter Streaming API.
+
+**Class Syntax:**
+```python
+tweepy.Stream(auth, listener, **kwargs)
+```
+
+**Parameters:**
+- `auth`: An instance of `tweepy.auth.AuthHandler` or a subclass of it, which represents the authentication credentials for accessing the Twitter API.
+- `listener`: An instance of a custom listener class that you define. This listener class should inherit from `tweepy.streaming.StreamListener` and implement methods to handle incoming tweets and events.
+- `**kwargs`: Additional keyword arguments to customize the behavior of the stream, such as filtering by keywords, locations, languages, and more.
+
+**Methods and Usage:**
+- Once you create a `tweepy.Stream` object, you can start the stream by calling the `filter()` method on it. This method begins listening to the Twitter stream and passes incoming tweets and events to your custom listener class for processing.
+- You can also use the `sample()` method to start a random sample of the Twitter stream or `firehose()` method to start the full Twitter firehose stream (requires special access).
+
+**Example:**
+```python
+import tweepy
+
+# Define authentication credentials
+consumer_key = 'your_consumer_key'
+consumer_secret = 'your_consumer_secret'
+access_token = 'your_access_token'
+access_token_secret = 'your_access_token_secret'
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+# Create a custom listener class that inherits from tweepy.streaming.StreamListener
+class MyStreamListener(tweepy.StreamListener):
+    def on_status(self, status):
+        # Handle incoming tweets here
+        print(status.text)
+
+    def on_error(self, status_code):
+        # Handle errors here
+        if status_code == 420:
+            return False  # Returning False in case of rate limiting
+
+# Create a tweepy.Stream object with authentication and custom listener
+my_listener = MyStreamListener()
+my_stream = tweepy.Stream(auth=auth, listener=my_listener)
+
+# Start the stream and filter tweets containing 'Python'
+my_stream.filter(track=['Python'])
+```
+
+In this example, we first set up authentication credentials using the `tweepy.OAuthHandler` class. We then create a custom listener class `MyStreamListener` that inherits from `tweepy.streaming.StreamListener` and implement methods for handling incoming tweets and errors. Finally, we create a `tweepy.Stream` object, start the stream with filtering for tweets containing the keyword 'Python', and handle incoming tweets using the custom listener.
+
+The `tweepy.Stream` class is a powerful tool for real-time Twitter data analysis and can be used to capture and process tweets in various ways based on your specific requirements.
+
+If you have any more questions or need further information, please feel free to ask!
+
+---
+## `re.search()`
+
+In Python, the `re.search()` function is part of the `re` (regular expressions) module and is used to search for a pattern in a string. It scans the entire string for a match to the specified regular expression pattern and returns a match object if a match is found, or `None` if no match is found.
+
+**Function Syntax:**
+```python
+re.search(pattern, string, flags=0)
+```
+
+**Parameters:**
+- `pattern`: The regular expression pattern to search for in the string.
+- `string`: The input string in which to search for the pattern.
+- `flags` (optional): Flags that control the behavior of the regular expression search.
+
+**Return Value:**
+- If a match is found, it returns a match object, which contains information about the match (e.g., the matched string, starting and ending positions, and more).
+- If no match is found, it returns `None`.
+
+**Example:**
+```python
+import re
+
+# Input string
+text = "Hello, my email is john@example.com and my phone number is 123-456-7890."
+
+# Define a regular expression pattern for finding email addresses
+email_pattern = r'\b\w+@\w+\.\w+\b'
+
+# Search for the email address in the string
+match = re.search(email_pattern, text)
+
+if match:
+    print("Email found:", match.group())
+else:
+    print("Email not found")
+
+# Define a regular expression pattern for finding phone numbers
+phone_pattern = r'\d{3}-\d{3}-\d{4}'
+
+# Search for the phone number in the string
+match = re.search(phone_pattern, text)
+
+if match:
+    print("Phone number found:", match.group())
+else:
+    print("Phone number not found")
+```
+
+In this example, we use `re.search()` to search for an email address and a phone number in the input string `text`. We define regular expression patterns for both email addresses and phone numbers and use `re.search()` to find matches. If a match is found, we print the matched text.
+
+The `re.search()` function is commonly used for pattern matching and searching within strings, making it a powerful tool for tasks like text parsing, data extraction, and validation.
+
+If you have any more questions or need further information, please feel free to ask!
+
+---
+## `.iterrows()`
+
+In Python, particularly in the context of working with data using libraries like pandas, the `.iterrows()` method is used with a DataFrame to iterate through its rows. It returns an iterator that yields pairs of index and Series for each row in the DataFrame.
+
+**Method Syntax:**
+```python
+DataFrame.iterrows()
+```
+
+**Return Value:**
+- An iterator that yields pairs of index and Series, where the index is the row index, and the Series contains the data for that row.
+
+**Example:**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'City': ['New York', 'Los Angeles', 'Chicago']}
+
+df = pd.DataFrame(data)
+
+# Iterate through the rows using .iterrows()
+for index, row in df.iterrows():
+    print(f'Row {index}: Name={row["Name"]}, Age={row["Age"]}, City={row["City"]}')
+```
+
+In this example, we have a sample DataFrame `df`, and we use the `.iterrows()` method to iterate through its rows. For each row, we get the index and a Series containing the data for that row. We then print out the data for each row in the specified format.
+
+It's important to note that while `.iterrows()` is convenient for iterating through rows, it can be relatively slow for large DataFrames because it returns a Series object for each row. In cases where performance is critical, other methods like `.apply()` or vectorized operations may be more efficient.
+
+If you have any more questions or need further information, please feel free to ask!

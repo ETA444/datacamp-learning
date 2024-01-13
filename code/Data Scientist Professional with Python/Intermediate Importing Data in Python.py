@@ -294,39 +294,72 @@ print(pizza_extract)
 
 ### --- Exercise 1 --- ###
 
+# Store credentials in relevant variables
+consumer_key = "nZ6EA0FxZ293SxGNg8g8aP0HM"
+consumer_secret = "fJGEodwe3KiKUnsYJC3VRndj7jevVvXbK2D5EiJ2nehafRgA6i"
+access_token = "1092294848-aHN7DcRP9B4VMTQIhwqOYiB14YkW92fFO8k8EPy"
+access_token_secret = "X4dHmhPfaksHcQ7SCbmZa2oYBBVSD2g8uIHXsp5CTaksx"
 
+# Create your Stream object with credentials
+stream = tweepy.Stream(consumer_key, consumer_secret, access_token, access_token_secret)
+
+# Filter your Stream variable
+stream.filter(track=["clinton", "trump", "sanders", "cruz"])
 
 
 ### --- Exercise 2 --- ###
 
+# Import package
+import json
 
+# String of path to file: tweets_data_path
+tweets_data_path = 'tweets.txt'
+
+# Initialize empty list to store tweets: tweets_data
+tweets_data = []
+
+# Open connection to file
+tweets_file = open(tweets_data_path, "r")
+
+# Read in tweets and store in list: tweets_data
+for line in tweets_file:
+    tweet = json.loads(line)
+    tweets_data.append(tweet)
+
+# Close connection to file
+tweets_file.close()
+
+# Print the keys of the first tweet dict
+print(tweets_data[0].keys())
 
 
 ### --- Exercise 3 --- ###
 
+# Import package
+import pandas as pd
+
+# Build DataFrame of tweet texts and languages
+df = pd.DataFrame(tweets_data, columns=['text', 'lang'])
+
+# Print head of DataFrame
+print(df.head())
 
 
 
 ### --- Exercise 4 --- ###
 
+# Import packages
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
+# Set seaborn style
+sns.set(color_codes=True)
 
-### --- Exercise 5 --- ###
+# Create a list of labels:cd
+cd = ['clinton', 'trump', 'sanders', 'cruz']
 
-
-
-
-### --- Exercise 6 --- ###
-
-
-
-
-### --- Exercise 7 --- ###
-
-
-
-
-### --- Exercise 8 --- ###
-
-
+# Plot the bar chart
+ax = sns.barplot(cd, [clinton, trump, sanders, cruz])
+ax.set(ylabel="count")
+plt.show()
