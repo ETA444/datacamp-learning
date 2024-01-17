@@ -1194,3 +1194,48 @@ In this example, we use PCA to reduce the dimensionality of a dataset with two f
 PCA is commonly used for feature extraction, dimensionality reduction, and data visualization in machine learning and data analysis.
 
 ---
+## `pd.concat()`
+
+In the Pandas library, the `pd.concat()` function is used to concatenate and combine two or more Pandas objects (usually DataFrames or Series) along a particular axis. It allows you to stack or join Pandas objects vertically (along rows) or horizontally (along columns).
+
+**Function Syntax:**
+```python
+pd.concat(objs, axis=0, join='outer', ignore_index=False, keys=None)
+```
+
+**Parameters:**
+- `objs`: A sequence or mapping of Pandas objects (DataFrames or Series) to concatenate.
+- `axis` (optional): Specifies the axis along which to concatenate. Use `axis=0` (default) for vertical concatenation (along rows) and `axis=1` for horizontal concatenation (along columns).
+- `join` (optional): Specifies how to handle overlapping indexes when concatenating. Options include `'outer'` (default), `'inner'`, `'left'`, and `'right'`.
+- `ignore_index` (optional): If True, reset the index of the resulting concatenated object. Default is False.
+- `keys` (optional): Adds a hierarchical index or MultiIndex to the concatenated object.
+
+**Return Value:**
+- A new Pandas object (DataFrame or Series) resulting from the concatenation of the input objects.
+
+**Example (Concatenating DataFrames Vertically):**
+```python
+import pandas as pd
+
+# Create two sample DataFrames
+df1 = pd.DataFrame({'A': ['A0', 'A1', 'A2'],
+                    'B': ['B0', 'B1', 'B2']})
+
+df2 = pd.DataFrame({'A': ['A3', 'A4', 'A5'],
+                    'B': ['B3', 'B4', 'B5']})
+
+# Concatenate vertically (along rows)
+result = pd.concat([df1, df2])
+
+# Display the concatenated DataFrame
+print("Concatenated DataFrame (Vertically):")
+print(result)
+```
+
+In this example, we create two sample DataFrames (`df1` and `df2`) with the same column names and concatenate them vertically using `pd.concat()`. The resulting DataFrame (`result`) contains the rows from both input DataFrames.
+
+You can also concatenate DataFrames horizontally by specifying `axis=1` and ensure proper alignment of indexes and columns using the `join` parameter.
+
+`pd.concat()` is a versatile function commonly used for combining and manipulating data in Pandas when dealing with multiple datasets or parts of a dataset.
+
+---
