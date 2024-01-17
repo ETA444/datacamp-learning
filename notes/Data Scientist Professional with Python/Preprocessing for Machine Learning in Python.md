@@ -661,3 +661,404 @@ In this example, we use `KNeighborsClassifier` to perform k-nearest neighbors cl
 K-nearest neighbors is a simple yet effective classification algorithm that is particularly useful for cases where the decision boundary is nonlinear and complex.
 
 ---
+## `.apply()`
+
+In pandas, the `.apply()` method is used to apply a function along an axis of a DataFrame or Series. It allows you to apply a custom or built-in function to each element, row, or column of the DataFrame, resulting in a new DataFrame or Series.
+
+**Method Syntax (Series):**
+```python
+Series.apply(func, axis=0, raw=False, result_type=None, args=(), **kwds)
+```
+
+**Method Syntax (DataFrame):**
+```python
+DataFrame.apply(func, axis=0, raw=False, result_type=None, args=(), **kwds)
+```
+
+**Parameters:**
+- `func`: The function to apply to each element or column/row. It can be a custom function or a built-in function.
+- `axis` (optional): Specifies whether the function should be applied along the rows (`axis=0`), columns (`axis=1`), or the entire DataFrame (`axis=None` or `axis='index'`).
+- `raw` (optional): If set to `True`, the function receives data as ndarray and can be faster. Default is `False`.
+- `result_type` (optional): Determines the type of the resulting object. Options include `'expand'` (default), `'reduce'`, or `'broadcast'`.
+- `args` (optional): Additional positional arguments passed to the function.
+- `**kwds` (optional): Additional keyword arguments passed to the function.
+
+**Return Value:**
+- A new Series or DataFrame containing the results of applying the function.
+
+**Example (Apply a Function to a Series):**
+```python
+import pandas as pd
+
+# Create a sample Series
+data = pd.Series([1, 2, 3, 4, 5])
+
+# Define a custom function to square each element
+def square(x):
+    return x ** 2
+
+# Apply the function to the Series using .apply()
+result = data.apply(square)
+
+# Display the result
+print("Squared Values:")
+print(result)
+```
+
+**Example (Apply a Function to DataFrame Columns):**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+
+# Define a custom function to calculate the sum of columns
+def sum_columns(column):
+    return column.sum()
+
+# Apply the function to DataFrame columns using .apply()
+result = data.apply(sum_columns, axis=0)
+
+# Display the result
+print("Column Sums:")
+print(result)
+```
+
+In these examples, we use `.apply()` to apply a custom function to a Series and to DataFrame columns. The function is applied element-wise in the case of the Series and column-wise in the case of the DataFrame.
+
+`.apply()` is a versatile method that is frequently used for data transformation, feature engineering, and data cleaning in pandas.
+
+---
+## `sklearn.preprocessing.LabelEncoder()`
+
+In scikit-learn (sklearn), the `LabelEncoder` class is used for encoding categorical labels into numeric labels. It is commonly used when working with machine learning algorithms that require numeric inputs, such as decision trees and support vector machines. `LabelEncoder` assigns a unique integer to each unique label in a categorical variable.
+
+**Class Initialization:**
+```python
+from sklearn.preprocessing import LabelEncoder
+
+label_encoder = LabelEncoder()
+```
+
+**Methods:**
+- `fit(y)`: Fits the encoder to the given labels, discovering the unique labels in the dataset.
+- `transform(y)`: Transforms the input labels into encoded integer labels.
+- `inverse_transform(y)`: Converts encoded integer labels back to their original labels.
+- `fit_transform(y)`: Combines the `fit()` and `transform()` steps into a single operation.
+- `classes_`: An array of unique labels discovered during fitting.
+
+**Example (Label Encoding):**
+```python
+from sklearn.preprocessing import LabelEncoder
+
+# Create a sample list of categorical labels
+labels = ['red', 'green', 'blue', 'blue', 'red']
+
+# Initialize the LabelEncoder
+label_encoder = LabelEncoder()
+
+# Fit and transform the labels into encoded integers
+encoded_labels = label_encoder.fit_transform(labels)
+
+# Display the encoded labels and unique classes
+print("Encoded Labels:", encoded_labels)
+print("Unique Classes:", label_encoder.classes_)
+```
+
+In this example, we use `LabelEncoder` to encode a list of categorical labels into integers. The `fit_transform()` method both fits the encoder to discover unique labels and transforms the labels into integers. The `classes_` attribute contains the mapping between the original labels and their corresponding encoded integers.
+
+`LabelEncoder` is a valuable tool for preprocessing categorical data when working with machine learning models that require numerical inputs. It is commonly used in combination with other data preprocessing techniques.
+
+---
+## `pd.get_dummies()`
+
+In pandas, the `pd.get_dummies()` function is used to perform one-hot encoding on categorical data. One-hot encoding is a technique used to convert categorical variables into a binary matrix where each category is represented as a separate binary column. This transformation is often necessary when working with machine learning algorithms that require numerical inputs.
+
+**Function Syntax:**
+```python
+pd.get_dummies(data, prefix=None, prefix_sep='_', dummy_na=False, columns=None, sparse=False, drop_first=False, dtype=None)
+```
+
+**Parameters:**
+- `data`: The DataFrame or Series containing the categorical data to be one-hot encoded.
+- `prefix` (optional): A string to be added as a prefix to the column names in the resulting DataFrame.
+- `prefix_sep` (optional): The separator to use between the prefix and original column names. Default is `'_'`.
+- `dummy_na` (optional): If set to `True`, it includes an additional column for missing values (NaN). Default is `False`.
+- `columns` (optional): A list of column names to be one-hot encoded. If specified, only those columns are encoded.
+- `sparse` (optional): If set to `True`, it returns a sparse DataFrame. Default is `False`.
+- `drop_first` (optional): If set to `True`, it drops the first category level of each column to avoid multicollinearity. Default is `False`.
+- `dtype` (optional): The data type of the resulting columns. If not specified, it is inferred.
+
+**Return Value:**
+- A DataFrame with one-hot encoded columns.
+
+**Example (One-Hot Encoding of Categorical Data):**
+```python
+import pandas as pd
+
+# Create a sample DataFrame with a categorical column
+data = pd.DataFrame({'Category': ['A', 'B', 'A', 'C', 'B']})
+
+# Perform one-hot encoding using pd.get_dummies()
+encoded_data = pd.get_dummies(data, prefix='Category', prefix_sep='-')
+
+# Display the one-hot encoded DataFrame
+print("One-Hot Encoded Data:")
+print(encoded_data)
+```
+
+In this example, we use `pd.get_dummies()` to perform one-hot encoding on a DataFrame column called "Category." The resulting DataFrame has separate binary columns for each category with a prefix added to the column names.
+
+One-hot encoding is a crucial preprocessing step when dealing with categorical data in machine learning tasks, as it converts non-numeric data into a format that machine learning algorithms can work with.
+
+---
+## `pd.to_datetime()`
+
+In pandas, the `pd.to_datetime()` function is used to convert input data into datetime objects. This function is particularly useful when dealing with date and time data in various formats and allows you to standardize and manipulate datetime values within a DataFrame or Series.
+
+**Function Syntax:**
+```python
+pd.to_datetime(arg, errors='raise', format=None, infer_datetime_format=False, origin='unix', cache=True)
+```
+
+**Parameters:**
+- `arg`: The input data to be converted into datetime. It can be a scalar, a list-like object, or a Series.
+- `errors` (optional): Specifies how to handle parsing errors. Options include `'raise'` (default), `'coerce'`, and `'ignore'`. If set to `'coerce'`, errors will be converted to NaT (Not-a-Time).
+- `format` (optional): A format string specifying the expected datetime format of the input data.
+- `infer_datetime_format` (optional): If set to `True`, the function attempts to infer the datetime format based on the input data. Default is `False`.
+- `origin` (optional): Defines the reference date from which datetime values are calculated. Default is 'unix', which represents the Unix epoch (January 1, 1970).
+- `cache` (optional): If set to `True`, it caches the parsed values, which can improve performance for large datasets. Default is `True`.
+
+**Return Value:**
+- A Series or DataFrame containing datetime objects.
+
+**Example (Converting Strings to Datetime):**
+```python
+import pandas as pd
+
+# Create a sample list of date strings
+dates = ['2022-01-01', '2022-01-02', '2022-01-03']
+
+# Convert the date strings to datetime objects using pd.to_datetime()
+datetime_series = pd.to_datetime(dates)
+
+# Display the datetime Series
+print("Datetime Series:")
+print(datetime_series)
+```
+
+In this example, we use `pd.to_datetime()` to convert a list of date strings into datetime objects. The resulting Series contains datetime values that can be used for various date and time calculations and manipulations.
+
+`pd.to_datetime()` is a versatile function for handling datetime data, and it is especially valuable when working with time series data or date-based analysis.
+
+---
+## `re.search()`
+
+In Python, the `re.search()` function is used for searching a string for a specified pattern using regular expressions (regex). It scans through the input string and looks for any location where the regex pattern matches a substring. If a match is found, `re.search()` returns a match object; otherwise, it returns `None`.
+
+**Function Syntax:**
+```python
+re.search(pattern, string, flags=0)
+```
+
+**Parameters:**
+- `pattern`: The regular expression pattern to search for in the input string.
+- `string`: The input string where the search will be performed.
+- `flags` (optional): Flags that control the behavior of the regex search, such as case-insensitive matching, multi-line mode, and more.
+
+**Return Value:**
+- If a match is found, a match object is returned. If no match is found, `None` is returned.
+
+**Example (Using `re.search()` to Find a Pattern):**
+```python
+import re
+
+# Define the regex pattern
+pattern = r'\d+'  # Match one or more digits
+
+# Input string
+text = 'The price of the product is $20.99.'
+
+# Search for the pattern in the input string
+match = re.search(pattern, text)
+
+# Check if a match was found
+if match:
+    print(f'Match found: {match.group()}')  # Print the matched substring
+else:
+    print('No match found.')
+```
+
+In this example, we use `re.search()` to search for a pattern that matches one or more digits (`\d+`) in the input string. The `match.group()` method is used to retrieve the matched substring if a match is found.
+
+Regular expressions are powerful tools for text pattern matching and manipulation in Python. `re.search()` is one of the functions provided by the `re` module for regex-based searching.
+
+---
+## `.group()`
+
+In Python's `re` module (regular expressions), the `.group()` method is used to retrieve the substring matched by a specific capturing group within a regular expression pattern. Capturing groups are defined using parentheses `(` and `)` in the regex pattern, and they allow you to extract specific parts of a matched text.
+
+**Method Syntax:**
+```python
+match.group([group1, group2, ...])
+```
+
+**Parameters:**
+- `group1, group2, ...` (optional): A list of capturing group numbers or group names. If no arguments are provided, it returns the entire matched substring.
+
+**Return Value:**
+- If one or more group numbers or names are specified, it returns the substrings matched by those capturing groups. If no arguments are provided, it returns the entire matched substring.
+
+**Example (Using `.group()` to Retrieve Captured Substrings):**
+```python
+import re
+
+# Define a regex pattern with capturing groups
+pattern = r'(\d{2})-(\d{2})-(\d{4})'  # Matches dates in the format 'dd-mm-yyyy'
+
+# Input text
+text = 'Date of birth: 25-12-1990'
+
+# Search for the pattern in the text
+match = re.search(pattern, text)
+
+# Check if a match was found
+if match:
+    # Retrieve the entire matched date
+    entire_date = match.group()
+    print(f'Entire Date: {entire_date}')
+    
+    # Retrieve individual date components using group numbers
+    day = match.group(1)
+    month = match.group(2)
+    year = match.group(3)
+    
+    print(f'Day: {day}')
+    print(f'Month: {month}')
+    print(f'Year: {year}')
+```
+
+In this example, we define a regex pattern with capturing groups to match dates in the format 'dd-mm-yyyy'. The `.group()` method is used to retrieve the entire matched date and individual date components (day, month, year) using group numbers (1, 2, 3).
+
+`.group()` is valuable when you want to extract specific parts of a matched text using regular expressions, especially when dealing with complex patterns and structured data.
+
+In regular expressions (regex), the `group(0)` method returns the entire matched substring. It is the default and always available group that represents the entire match. So, when you use `group(0)`, you're asking for the entire matched pattern, not a specific captured group within the pattern.
+
+The reason for this convention is that `group(0)` represents the whole match, and `group(1)`, `group(2)`, etc., represent specific captured groups within parentheses `(...)` in the regex pattern. This allows you to access and extract different parts of a matched pattern when you have defined capturing groups in your regex pattern.
+
+So, when you want to extract the entire matched pattern, you use `group(0)`. If you have capturing groups in your pattern and want to extract specific parts of the match, you would use `group(1)`, `group(2)`, and so on, to access those captured groups.
+
+---
+## `sklearn.feature_extraction.text.TfidfVectorizer()`
+
+In scikit-learn (sklearn), the `TfidfVectorizer` class is used for converting a collection of raw text documents into a matrix of TF-IDF (Term Frequency-Inverse Document Frequency) features. TF-IDF is a numerical statistic that reflects the importance of a term within a document relative to a collection of documents (corpus). This vectorization technique is commonly used in natural language processing and text mining tasks for feature extraction.
+
+**Class Initialization:**
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+tfidf_vectorizer = TfidfVectorizer(input='content', encoding='utf-8', decode_error='strict', strip_accents=None, lowercase=True, preprocessor=None, tokenizer=None, analyzer='word', stop_words=None, token_pattern='(?u)\\b\\w\\w+\\b', ngram_range=(1, 1), max_df=1.0, min_df=1, max_features=None, vocabulary=None, binary=False, dtype=<class 'numpy.float64'>, norm='l2', use_idf=True, smooth_idf=True, sublinear_tf=False)
+```
+
+**Parameters:**
+- `input`: Specifies the input source, such as `'filename'`, `'file'`, `'content'`, or `'string'`.
+- `encoding`: The character encoding used to decode input files.
+- `decode_error`: How to handle decoding errors when reading input files.
+- `strip_accents`: Whether to remove accents and diacritics from text.
+- `lowercase`: Whether to convert text to lowercase before vectorization.
+- `preprocessor`: A custom function for preprocessing text.
+- `tokenizer`: A custom tokenizer function.
+- `analyzer`: Specifies whether to tokenize text by `'word'` or `'char'`.
+- `stop_words`: A list of words to be treated as stop words and ignored.
+- `token_pattern`: A regular expression pattern to match words.
+- `ngram_range`: Specifies the range of n-grams to consider (e.g., `(1, 1)` for unigrams, `(1, 2)` for unigrams and bigrams).
+- `max_df`: Ignores terms that have a document frequency higher than the given threshold.
+- `min_df`: Ignores terms that have a document frequency lower than the given threshold.
+- `max_features`: Limits the number of features (terms) in the output matrix.
+- `vocabulary`: A user-defined vocabulary.
+- `binary`: Whether to use binary values (1 or 0) instead of TF-IDF values.
+- `dtype`: The data type of the output matrix.
+- `norm`: Specifies the normalization method, such as `'l1'`, `'l2'`, or `None`.
+- `use_idf`: Whether to use IDF (Inverse Document Frequency) weighting.
+- `smooth_idf`: Whether to add 1 to document frequencies to prevent division by zero.
+- `sublinear_tf`: Whether to apply sublinear scaling to term frequencies.
+
+**Methods:**
+- `fit(X[, y])`: Learns the vocabulary and IDF weights from the training data.
+- `transform(X)`: Transforms text documents into TF-IDF feature vectors.
+- `fit_transform(X[, y])`: Combines the `fit()` and `transform()` operations into one step.
+- `get_feature_names()`: Returns a list of feature names (terms).
+- `get_params([deep])`: Returns the parameters of the vectorizer.
+- `set_params(**params)`: Sets the parameters of the vectorizer.
+
+**Example (Using `TfidfVectorizer` for Text Vectorization):**
+```python
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Sample text documents
+documents = [
+    "This is the first document.",
+    "This document is the second document.",
+    "And this is the third one.",
+    "Is this the first document?"
+]
+
+# Initialize the TfidfVectorizer
+tfidf_vectorizer = TfidfVectorizer()
+
+# Fit and transform the text documents into TF-IDF feature vectors
+tfidf_matrix = tfidf_vectorizer.fit_transform(documents)
+
+# Display the TF-IDF matrix as a dense array
+print("TF-IDF Matrix (Dense):")
+print(tfidf_matrix.toarray())
+
+# Get the feature names (terms)
+feature_names = tfidf_vectorizer.get_feature_names_out()
+print("Feature Names (Terms):")
+print(feature_names)
+```
+
+In this example, we use `TfidfVectorizer` to convert a collection of text documents into a TF-IDF feature matrix. The resulting matrix represents the importance of each term (word) within each document.
+
+`TfidfVectorizer` is a powerful tool for text feature extraction and is often used in natural language processing tasks, including text classification, document clustering, and information retrieval.
+
+---
+## `.toarray()`
+
+In the context of libraries like NumPy and SciPy, the `.toarray()` method is typically used to convert a sparse matrix into a dense array. Sparse matrices are used to efficiently store and manipulate large matrices that have a significant number of zero or empty entries. Converting a sparse matrix to a dense array means representing the entire matrix with all its values in memory, including the zero or empty entries.
+
+**Method Syntax:**
+```python
+sparse_matrix.toarray()
+```
+
+**Parameters:**
+- None
+
+**Return Value:**
+- Returns a dense NumPy array representation of the sparse matrix.
+
+**Example (Converting a Sparse Matrix to a Dense Array):**
+```python
+import numpy as np
+from scipy.sparse import lil_matrix
+
+# Create a sparse matrix
+sparse_matrix = lil_matrix((3, 3))
+sparse_matrix[0, 1] = 2
+sparse_matrix[2, 0] = 1
+
+# Convert the sparse matrix to a dense array
+dense_array = sparse_matrix.toarray()
+
+# Display the dense array
+print("Dense Array:")
+print(dense_array)
+```
+
+In this example, we create a sparse matrix using SciPy's `lil_matrix` with some non-zero entries. Then, we use the `.toarray()` method to convert the sparse matrix into a dense array, which includes all the zero and non-zero entries.
+
+It's important to note that converting a sparse matrix to a dense array can be memory-intensive, especially for large matrices with many zero entries. Sparse matrices are designed to save memory when most of the entries are zero, and converting them to dense arrays may not be efficient in terms of memory usage.
+
+---

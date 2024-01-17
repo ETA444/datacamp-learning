@@ -123,41 +123,86 @@ print(knn.score(X_test_scaled, y_test))
 
 ### --- Exercise 1 --- ###
 
+# Set up the LabelEncoder object
+enc = LabelEncoder()
 
+# Apply the encoding to the "Accessible" column
+hiking['Accessible_enc'] = enc.fit_transform(hiking['Accessible'])
+
+# Compare the two columns
+print(hiking[['Accessible_enc', 'Accessible']].head())
 
 
 ### --- Exercise 2 --- ###
 
+# Transform the category_desc column
+category_enc = pd.get_dummies(volunteer['category_desc'])
 
+# Take a look at the encoded columns
+print(category_enc.head())
 
 
 ### --- Exercise 3 --- ###
 
+# Use .loc to create a mean column
+running_times_5k["mean"] = running_times_5k.loc[:, 'run1':'run5'].mean(axis=1)
 
+# Take a look at the results
+print(running_times_5k.head())
 
 
 ### --- Exercise 4 --- ###
 
+# First, convert string column to date column
+volunteer["start_date_converted"] = pd.to_datetime(volunteer['start_date_date'])
 
+# Extract just the month from the converted column
+volunteer["start_date_month"] = volunteer["start_date_converted"].dt.month
+
+# Take a look at the converted and new month columns
+print(volunteer[["start_date_month", "start_date_converted"]].head())
 
 
 ### --- Exercise 5 --- ###
 
-
+# Write a pattern to extract numbers and decimals
+def return_mileage(length):
+    
+    # Search the text for matches
+    mile = re.search("\d+.\d+", length)
+    
+    # If a value is returned, use group(0) to return the found value
+    if mile is not None:
+        return float(mile.group(0))
+        
+# Apply the function to the Length column and take a look at both columns
+hiking["Length_num"] = hiking["Length"].apply(return_mileage)
+print(hiking[["Length", "Length_num"]].head())
 
 
 ### --- Exercise 6 --- ###
 
+# Take the title text
+title_text = volunteer["title"]
 
+# Create the vectorizer method
+tfidf_vec = TfidfVectorizer()
+
+# Transform the text into tf-idf vectors
+text_tfidf = tfidf_vec.fit_transform(title_text)
 
 
 ### --- Exercise 7 --- ###
 
+# Split the dataset according to the class distribution of category_desc
+y = volunteer["category_desc"]
+X_train, X_test, y_train, y_test = train_test_split(text_tfidf.toarray(), y, stratify=y, random_state=42)
 
+# Fit the model to the training data
+nb.fit(X_train, y_train)
 
-
-### --- Exercise 8 --- ###
-
+# Print out the model's accuracy
+print(nb.score(X_test, y_test))
 
 
 
