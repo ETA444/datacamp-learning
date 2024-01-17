@@ -49,41 +49,73 @@ print(y_train['category_desc'].value_counts())
 
 ### --- Exercise 1 --- ###
 
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
 
+knn = KNeighborsClassifier()
+
+# Fit the knn model to the training data
+knn.fit(X_train, y_train)
+
+# Score the model on the test data
+print(knn.score(X_test, y_test))
 
 
 ### --- Exercise 2 --- ###
 
+# Print out the variance of the Proline column
+print(wine['Proline'].var())
 
+# Apply the log normalization function to the Proline column
+wine['Proline_log'] = np.log(wine['Proline'])
+
+# Check the variance of the normalized Proline column
+print(wine['Proline_log'].var())
 
 
 ### --- Exercise 3 --- ###
 
+# Import StandardScaler
+from sklearn.preprocessing import StandardScaler
 
+# Create the scaler
+scaler = StandardScaler()
+
+# Subset the DataFrame you want to scale 
+wine_subset = wine[['Ash','Alcalinity of ash', 'Magnesium']]
+
+# Apply the scaler to wine_subset
+wine_subset_scaled = scaler.fit_transform(wine_subset)
 
 
 ### --- Exercise 4 --- ###
 
+# Split the dataset and labels into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
 
+# Fit the k-nearest neighbors model to the training data
+knn = knn.fit(X_train, y_train)
+
+# Score the model on the test data
+print(knn.score(X_test, y_test))
 
 
 ### --- Exercise 5 --- ###
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
 
+# Instantiate a StandardScaler
+scaler = StandardScaler()
 
+# Scale the training and test features
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-### --- Exercise 6 --- ###
+# Fit the k-nearest neighbors model to the training data
+knn.fit(X_train_scaled, y_train)
 
-
-
-
-### --- Exercise 7 --- ###
-
-
-
-
-### --- Exercise 8 --- ###
-
+# Score the model on the test data
+print(knn.score(X_test_scaled, y_test))
 
 
 
