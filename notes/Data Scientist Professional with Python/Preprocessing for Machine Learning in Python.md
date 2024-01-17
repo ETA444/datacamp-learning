@@ -1062,3 +1062,135 @@ In this example, we create a sparse matrix using SciPy's `lil_matrix` with some 
 It's important to note that converting a sparse matrix to a dense array can be memory-intensive, especially for large matrices with many zero entries. Sparse matrices are designed to save memory when most of the entries are zero, and converting them to dense arrays may not be efficient in terms of memory usage.
 
 ---
+## `.corr()`
+
+In the context of data analysis with libraries like Pandas or NumPy, the `.corr()` method is used to calculate the correlation between columns or variables in a DataFrame or between arrays in general. Correlation measures the statistical relationship or dependence between two variables, and it is often used to determine how changes in one variable correspond to changes in another.
+
+**Method Syntax:**
+```python
+DataFrame.corr(method='pearson', min_periods=1)
+```
+
+**Parameters:**
+- `method` (optional): Specifies the correlation method to be used. The common options are `'pearson'` (default), `'kendall'`, and `'spearman'`, representing Pearson, Kendall, and Spearman correlation coefficients, respectively.
+- `min_periods` (optional): Specifies the minimum number of observations required to calculate the correlation. Pairs of variables with fewer observations are filled with NaN. Default is 1.
+
+**Return Value:**
+- Returns a correlation matrix where each entry represents the correlation coefficient between two variables. The matrix is symmetric, and the diagonal elements are always 1 (perfect correlation with themselves).
+
+**Example (Calculating Pearson Correlation):**
+```python
+import pandas as pd
+
+# Create a sample DataFrame
+data = {'A': [1, 2, 3, 4, 5],
+        'B': [2, 3, 4, 5, 6],
+        'C': [5, 4, 3, 2, 1]}
+
+df = pd.DataFrame(data)
+
+# Calculate the Pearson correlation matrix
+correlation_matrix = df.corr(method='pearson')
+
+# Display the correlation matrix
+print("Pearson Correlation Matrix:")
+print(correlation_matrix)
+```
+
+In this example, we create a sample DataFrame with three columns (A, B, C) and then calculate the Pearson correlation matrix using `.corr()`. The resulting matrix represents the pairwise Pearson correlation coefficients between the columns.
+
+Correlation matrices are useful for identifying relationships between variables in a dataset. A positive correlation indicates that as one variable increases, the other tends to increase as well, while a negative correlation indicates that as one variable increases, the other tends to decrease.
+
+---
+## `.extend()`
+
+In Python, the `.extend()` method is used to extend or append elements from an iterable (e.g., a list, tuple, or another iterable) to the end of an existing list. It modifies the original list in place and does not create a new list.
+
+**Method Syntax:**
+```python
+list.extend(iterable)
+```
+
+**Parameters:**
+- `iterable`: An iterable (e.g., a list, tuple, or string) whose elements will be appended to the end of the list.
+
+**Return Value:**
+- None (The method modifies the original list in place and does not return a new list.)
+
+**Example (Using `.extend()` to Append Elements):**
+```python
+# Create a list
+my_list = [1, 2, 3]
+
+# Extend the list with elements from another iterable (list)
+extension = [4, 5, 6]
+my_list.extend(extension)
+
+# Display the modified list
+print("Extended List:")
+print(my_list)
+```
+
+In this example, we have a list `my_list`, and we use the `.extend()` method to append elements from the `extension` list to the end of `my_list`. As a result, `my_list` is modified in place, and it contains all the elements from both lists.
+
+The `.extend()` method is a convenient way to concatenate or combine lists in Python without creating a new list.
+
+---
+## `sklearn.decomposition.PCA()`
+
+In scikit-learn (sklearn), the `PCA` (Principal Component Analysis) class is used for dimensionality reduction and feature extraction. PCA is a technique used to transform a high-dimensional dataset into a lower-dimensional representation while preserving as much of the original variance as possible. It achieves this by finding the principal components (orthogonal directions in the data) and projecting the data onto a reduced-dimensional subspace.
+
+**Class Initialization:**
+```python
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=None, copy=True, whiten=False, svd_solver='auto', tol=0.0, iterated_power='auto', random_state=None)
+```
+
+**Parameters:**
+- `n_components`: The number of principal components to keep. If None (default), it keeps all components.
+- `copy`: Whether to copy the input data (X) or perform in-place operations. Default is True.
+- `whiten`: Whether to whiten the components to have unit variance. Default is False.
+- `svd_solver`: The algorithm to use for singular value decomposition (SVD). Options include 'auto', 'full', 'arpack', 'randomized', and 'lobpcg'.
+- `tol`: Tolerance for singular values. Default is 0.0.
+- `iterated_power`: Number of iterations for the power method SVD solver. Default is 'auto'.
+- `random_state`: Seed for the random number generator. Default is None.
+
+**Methods:**
+- `fit(X, y=None)`: Fit the PCA model to the input data X.
+- `transform(X)`: Transform X into the reduced-dimensional space using the learned PCA components.
+- `fit_transform(X, y=None)`: Fit the PCA model to X and transform X in a single step.
+- `inverse_transform(X)`: Transform X back to the original feature space.
+- `components_`: Returns the principal components (eigenvectors) sorted by explained variance.
+- `explained_variance_`: Returns the explained variance of each component.
+- `explained_variance_ratio_`: Returns the explained variance ratio of each component.
+- `singular_values_`: Returns the singular values of the components.
+
+**Example (Using PCA for Dimensionality Reduction):**
+```python
+from sklearn.decomposition import PCA
+import numpy as np
+
+# Create a sample dataset with 2 features
+data = np.array([[1, 2],
+                 [2, 3],
+                 [5, 6],
+                 [8, 9],
+                 [10, 11]])
+
+# Initialize PCA with 1 component
+pca = PCA(n_components=1)
+
+# Fit PCA to the data and transform it
+reduced_data = pca.fit_transform(data)
+
+# Display the reduced data
+print("Reduced Data:")
+print(reduced_data)
+```
+
+In this example, we use PCA to reduce the dimensionality of a dataset with two features down to one principal component. The `fit_transform()` method is used to fit the PCA model to the data and transform it into the reduced-dimensional space.
+
+PCA is commonly used for feature extraction, dimensionality reduction, and data visualization in machine learning and data analysis.
+
+---
