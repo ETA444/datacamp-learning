@@ -149,8 +149,10 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
-    "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
     "notes/Data Scientist Professional with Python/Developing Python Packages.md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages.md.part",
+    "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
     "code/Data Scientist Professional with Python/Developing Python Packages.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA25-Preprocessing_for_Machine_Learning_in_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA25-Preprocessing_for_Machine_Learning_in_Python.pdf.opdownload",
@@ -162,7 +164,6 @@
     "code/Data Scientist Professional with Python/Intermediate Importing Data in Python.py",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA23-Machine_Learning_with_Tree-Based_Models_in_Python.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA23-Machine_Learning_with_Tree-Based_Models_in_Python.pdf.opdownload",
-    "code/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.py",
     "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
     "notes/Data Scientist Professional with Python/Supervised Learning with scikit-learn.md",
     "notes/Data Scientist Professional with Python/Hypothesis Testing in Python.md",
@@ -193,7 +194,6 @@
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "notes/Other/start-quiz.py functions.md",
     "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-    "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "Other/start-quiz.py functions.md"
+    "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md"
   ]
 }
