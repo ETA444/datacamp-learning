@@ -518,3 +518,155 @@ Choose from 1, 2, 3 [1]: 3
 ...
 create_author_file [y]: y
 ```
+
+
+# Version number and history
+
+## CONTRIBUTING.md
+- Either a markdown or reStructured-Text file
+- Invites other developers to work on your package
+- Tells them how to get started
+
+## HISTORY.md
+- Known as history, changelog or release notes
+- Tells users what has changed between versions
+#### Example Format for History file
+```markdown
+# History
+
+## 0.3.0
+### Changed
+- Regression fitting sped up using NumPy...
+### Deprecated
+- Support ofr Python 3.5 has ended.
+- `regression.regression` module removed.
+
+## 0.2.1
+### Fixed
+- Fixed bug causing intercepts of zero.
+
+## 0.2.0
+### Added
+- Multiple linear regression now available in new `regression.multiple_regression` module.
+```
+- Section for each released version
+- Bullet points of the important changes
+- Subsections for
+	- Improvements
+	- New additions
+	- Bugs that have been fixed
+	- Deprecations
+
+## Version number
+- Increase version number when ready for new release
+- Cannot upload to PyPI a version number that has previously been used
+
+### Changes to make each version
+There are two places in the package where you need to update the version number:
+- The `setup.py` file:
+```python
+# Import required functions
+from setuptools import setup, find_packages
+
+# Call setup function
+setup(
+	  # ...
+	  version = '0.1.1', # <------ here
+	  # ...
+)
+```
+- The top-level source `_ _ init _ _ .py` file:
+```python
+"""
+Example title
+====================================
+
+mypackage is a ...
+"""
+__version__ = '0.1.1' # <------ here
+```
+
+### Using `bumpversion` to make the changes
+`bumpversion` is a convenient tool to update all package version numbers
+
+**To run it, go to the top-level of the repository and run `bumpversion`:**
+- Major number (X.0.0)
+```terminal
+bumpversion major
+```
+- Minor number (0.X.0)
+```terminal
+bumpversion minor
+```
+- Patch number (0.0.X)
+```terminal
+bumpversion patch
+```
+
+# Makefiles and classifiers
+
+## Classifiers
+Classifiers are metadata for your package found in the `setup.py` file under `classifiers = `, which is a list of various metadata placeholders, such as:
+```python
+setup(
+	  # ...
+	  classifiers = [
+		  'Development Status :: 2 - Pre-Alpha',
+		  'Intended Audience :: Developers',
+		  'License :: OSI Approved :: ...',
+		  'Natural Language :: English',
+		  'Programming Language :: Python :: 3',
+		  'Programming Language :: Python :: 3.6'
+	  ],
+	  # ...
+)
+```
+- Users can search for package on PyPI and when they filter for various classifiers your package will be listed at the appropriate ones.
+- You should include:
+	- Package status
+	- Your intended audience
+	- License type
+	- Language
+	- Versions of Python supported
+- Lots more classifiers exist: [https://pypi.org/classifiers](https://pypi.org/classifiers)
+## What are `Makefile`'s for?
+Used to automate parts of building your package.
+```markdown
+mypackage/
+...
+|-- Makefile
+```
+
+### Inside the `Makefile`
+Inside the `Makefile` you add various functions that would be used from the terminal. 
+- These are similar to modules which are placeholders for a chain of terminal functions.
+```Makefile
+...
+dist: ## builds source and wheel package
+	python3 setup.py sdist bdist_wheel
+
+clean-build: ## remove build artifacts
+	rm -fr build/
+	rm -fr dist/
+	rm -fr .eggs/
+
+test: ## run tests quickly using pytest
+	pytest
+
+release: dist ## package and upload a release
+	twine upload dist/*
+```
+
+### How do I use the `Makefile`?
+To use the `Makefile` navigate to the top-level of the repository and in terminal type:
+```terminal
+make <function-name>
+```
+- The function name is any of the functions you created inside the `Makefile`.
+- You can also get a summary of all the functions in the `Makefile`, using:
+```terminal
+make help
+...
+dist: builds source and wheel package
+...
+```

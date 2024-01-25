@@ -149,8 +149,9 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
-    "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
     "notes/Data Scientist Professional with Python/Developing Python Packages.md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
     "notes/Data Scientist Professional with Python/Developing Python Packages.md.part",
     "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
     "code/Data Scientist Professional with Python/Developing Python Packages.py",
@@ -192,8 +193,6 @@
     "notes/Data Scientist Professional with Python/Data Communication Concepts.md",
     "notes/Data Scientist Professional with Python/Introduction to Importing Data in Python.md",
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "notes/Other/start-quiz.py functions.md",
-    "Data Scientist Professional with Python/Working with Categorical Data in Python.md",
-    "Data Scientist Professional with Python/Exploratory Data Analysis in Python.md"
+    "notes/Other/start-quiz.py functions.md"
   ]
 }
