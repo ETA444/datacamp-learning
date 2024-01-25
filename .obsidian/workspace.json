@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1a2fce333b0331a4",
@@ -149,9 +148,8 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
-    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
-    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
     "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
     "notes/Data Scientist Professional with Python/Developing Python Packages.md.part",
     "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
     "code/Data Scientist Professional with Python/Developing Python Packages.py",

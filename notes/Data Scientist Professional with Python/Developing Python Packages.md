@@ -670,3 +670,18 @@ make help
 dist: builds source and wheel package
 ...
 ```
+
+# Recap
+- Modules vs subpackages vs packages
+- Package structure and `_ _ init _ _ .py`
+- Absolute and relative imports
+- Documentation with `pyment`
+- Code style with `flake8`
+- Making your package installable with `setup.py`
+- Dependencies with `install_requires` and `requirements.txt`
+- Supporting files like `LICENSE`, `README.md`, `CONTRIBUTING.md` and `HISTORY.md`
+- Building and uploading distributions to PyPI with `twine`
+- Testing with `pytest` and `tox`
+- Using package templates with `cookiecutter`
+- Efficient package care with `Makefile`'s
+
