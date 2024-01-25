@@ -224,3 +224,297 @@ twine upload -r testpypi dist/*
 ```
 
 ---
+# Testing your package 
+
+## Using `assert`
+Writing test functions utilizing `assert` statements is a good way to keep your code in check.
+
+```python
+def get_ends(element):
+	"""Get the first and last element in a list."""
+	return element[0], element[-1]
+
+def test_get_ends():
+	assert get_ends([1,5,39,0]) == (1,0)
+```
+
+## Organizing tests inside your package
+
+```markdown
+mypackage/
+|-- mypackage 
+|-- tests     <- tests directory
+|-- setup.py
+|-- LICENSE
+|-- MANIFEST.in
+```
+
+The **best way to structure** the `../tests/` directory is to mirror the structure of the source code directory (`../mypackage/`).
+
+- **Test dir:**
+```markdown
+mypackage/tests/
+|-- _ _ init _ _ .py
+|-- mysubpackage
+|   |-- _ _ init _ _ .py
+|   |-- test_module1.py
+|   |-- test_module2.py
+...
+```
+- **Code dir:**
+```markdown
+mypackage/mypackage/
+|-- _ _ init _ _ .py
+|-- mysubpackage
+|   |-- _ _ init _ _ .py
+|   |-- module1.py
+|   |-- module2.py
+...
+```
+
+## Inside a Test module file
+The test module script mirrors the source code module script similarly to the directory structure.
+
+- **Inside `test_module1.py`**
+	- Below we use the example with 3 simple functions to find the maximum & minimum.
+```python
+from mypackage.mysubpackage.module1 import (
+	find_max, 
+	find_min
+)
+
+def test_find_max(x):
+	assert find_max([1,2,3,4]) == 4
+
+def test_find_min(x):
+	assert find_min([1,2,3,4]) == 1
+```
+- **Inside `module1.py`**
+```python
+def find_max(x):
+	# ...
+	return(x_max)
+
+def find_min(x):
+	# ...
+	return(x_min)
+```
+
+## Running tests with `pytest`
+To run tests we use `pytest` command in the terminal while our current directory is the top level directory of our package.
+```terminal
+pytest
+```
+- `pytest` looks inside the `test` directory
+- It looks for modules and functions starting with `test_` like `test_module1.py` & `test_find_max()`.
+
+## Testing multiple versions of Python
+
+This `setup.py` allows any version of Python from version 2.7 upwards.
+```python
+from setuptools import setup, find_packages
+
+setup(
+	  # ...
+	  python_requires = '>=2.7',
+	  # ...
+)
+```
+
+**To test these Python versions you must:**
+- Install all these Python versions
+- Run `tox`
+
+### What is `tox`?
+- Designed to run tests with multiple versions of Python
+
+**To configure tox:**
+- Create a **configuration file** - `tox.ini`
+```markdown
+mypackage/
+|-- mypackage
+|   |-- ...
+|-- tests
+|   |-- ...
+|-- setup.py
+|-- LICENSE
+|-- MANIFEST.in
+|-- tox.ini <--- configuration file
+```
+
+**Inside the file:**
+```tox
+[tox] <- these are called headings
+envlist = py27, py35, py36, py37
+
+[testenv]
+deps = pytest
+commands = 
+	pytest
+	... <- shell commands you need tox to run
+```
+- Headings are surrounded by square brackets, like so: `[...]`
+- To test Python version X.Y add `pyXY` to `envlist`.
+	- Python versions you want to test need to already be installed on your machine.
+- The `commands` parameter lists the terminal commands `tox` will run.
+	- The `commands` list can be any commands which will run from the terminal, like `ls`, `cd`, `echo` etc.
+
+**To run `tox`**
+Use the terminal navigating to the top-level directory and run:
+```terminal
+tox
+```
+
+# Keeping your package stylish
+
+## Introducing `flake8`
+- Standard Python style is described in *PEP8*
+- A style guide dictates how code should be laid out
+While:
+- `pytest` is used to find bugs
+- `flake8` is used to find styling mistakes
+
+### Running `flake8`
+`flake8` is a static code checker - meaning that it reads the code but doesn't run it.
+- To run `flake8` in terminal:
+```terminal
+flake8 features.py
+```
+- It would print a series of style improvement suggestions, for example:
+```terminal
+features.py:2:1: F401 'math' imported but unused
+..
+```
+- The format of the output above is as follows:
+```terminal
+<filename>:<line number>:<character number>: <error code> <description>
+```
+
+#### Ignoring violations
+
+##### Using comments in the code
+- For exceptions of `flake8` use `# noqa`, this will make the style checker ignore the line, e.g.:
+```python
+quadratic_1 = 6 * x**2 + 2*x + 4 # noqa
+```
+- In order to ignore a particular type of styling violation we still use `# noqa` but we specify the violation code we want to ignore, like so:
+```python
+quadratic_1 = 6 * x**2 + 2*x + 4 # noqa: E222
+```
+
+##### Using the terminal
+If you want to avoid putting comments in your code, you can also instruct `flake8` through the terminal, like so:
+- **Tell it what to ignore with `--ignore`**:
+```terminal
+flake8 --ignore E222 quadratic.py
+```
+- **Ask it what to look for with `--select`:
+```terminal
+flake8 --select F401,F841 features.py
+```
+
+##### Using `setup.cfg`
+Create a `setup.cfg` file in the top level of the repository.
+```markdown
+mypackage/
+|-- mypackage
+|   |-- _ _ init _ _ .py
+|   |-- mysubpackage
+|   |   |-- _ _ init _ _ .py
+|   |   |-- module1.py
+|   |   |-- module2.py
+|-- tests
+|   |-- _ _ init _ _ .py
+|   |-- mysubpackage
+|   |   |-- _ _ init _ _ .py
+|   |   |-- test_module1.py
+|   |   |-- test_module2.py
+|-- setup.py
+|-- setup.cfg    <---------
+|-- README.md
+|-- LICENSE
+|-- MANIFEST.in
+|-- tox.ini
+```
+- **Inside the config file:**
+	- You can ignore an error code altogether.
+	- You can exclude files from QA.
+	- You can ignore an error in a specific file.
+```setup
+[flake8]
+
+ignore = E302
+exclude = setup.py
+
+per-file-ignores =
+	mypackage/mysubpackage/module1.py: E222
+```
+
+###### Always use the least amount of filtering
+In conclusion you should always use the **least filtering possible.**
+1. Most preferred is to **only filter out a specific code on a specific line**: `# noqa : <code>`.
+2. If that doesn't cut it, **completely exclude this line** by using `# noqa`.
+3. If you need more global filtering, start with **specific code file ignores** `per-file-ignores` in the `setup.cfg` file.
+4. Least preferred is to use **global commands** in the `setup.cfg` file: `ignore` and `exclude`.
+
+
+# Faster package development with templates
+The package file tree gets quite complicated due to all the extra files you need beside your source code:
+```markdown
+mypackage/
+|-- mypackage
+|   |-- _ _ init _ _ .py
+|   |-- mysubpackage
+|   |   |-- _ _ init _ _ .py
+|   |   |-- module1.py
+|   |   |-- module2.py
+|-- tests
+|   |-- _ _ init _ _ .py
+|   |-- mysubpackage
+|   |   |-- _ _ init _ _ .py
+|   |   |-- test_module1.py
+|   |   |-- test_module2.py
+|-- setup.py
+|-- setup.cfg
+|-- README.md
+|-- LICENSE
+|-- MANIFEST.in
+|-- tox.ini
+```
+
+## Templates /w `cookiecutter`
+To avoid having to manually create all of these files we can use `cookiecutter` to make these files for us.
+- Can be used to create empty Python packages
+- Create all the additional files your package needs
+
+**In order to use `cookiecutter` you run it from terminal, like so:**
+```terminal
+cookiecutter <template-url>
+```
+- The template URL points towards the template you want to use, the **standard Python package template** is this:
+```terminal
+cookiecutter https://github.com/audreyr/cookiecutter-pypackage
+```
+- You can find more templates [here](https://cookiecutter.readthedocs.io/en/1.7.2/README.html#a-pantry-full-of-cookiecutters)
+
+### Running `cookiecutter`
+When you run `cookiecutter` you'll be prompted with a few questions, such as:
+- Full name of package creator:
+```terminal
+full_name [Audrey Roy Greenfeld]:
+```
+- As well as other information, such as email, github_username, project_name, project_slug
+```terminal
+...
+use_pytest [n]: y
+use_pypi_deployment_with_travis [y]: n
+add_pyup_badge [n]: n
+...
+Select command_line_interface:
+1 - Click
+2 - Argparse
+3 - No command-line interface
+Choose from 1, 2, 3 [1]: 3
+...
+create_author_file [y]: y
+```

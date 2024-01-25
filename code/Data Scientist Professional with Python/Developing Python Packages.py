@@ -291,21 +291,84 @@ include README.md
 
 ### --- Exercise 1 --- ###
 
+from impyrial.length.core import (
+    inches_to_feet,
+    inches_to_yards
+)
 
+# Define tests for inches_to_feet function
+def test_inches_to_feet():
+    # Check that 12 inches is converted to 1.0 foot
+    assert inches_to_feet(12) == 1.0
+    # Check that 2.5 feet is converted to 30.0 inches
+    assert inches_to_feet(2.5, reverse=True) == 30.0
 
 
 ### --- Exercise 2 --- ###
+
+"""Conversions between inches and larger imperial length units"""
+INCHES_PER_FOOT = 12.0  # 12.0 inches in a foot
+INCHES_PER_YARD = INCHES_PER_FOOT * 3.0  # 3 feet in a yard
+
+UNITS = ("in", "ft", "yd")
+
+
+def inches_to_feet(x, reverse=False):
+    """Convert lengths between inches and feet.
+    Parameters
+    ----------
+    x : array_like
+        Lengths in feet.
+    reverse : bool, optional
+        If this is set to true this function converts from feet to inches
+        instead of the default behaviour of inches to feet.
+    Returns
+    -------
+    ndarray
+        An array of converted lengths with the same shape as `x`. If `x` is a
+        0-d array, then a scalar is returned.
+    """
+    if reverse:
+        return x * INCHES_PER_FOOT
+    else:
+        return x / INCHES_PER_FOOT
 
 
 
 
 ### --- Exercise 3 --- ###
 
+""" tox.ini
+
+[tox]
+envlist = py27, py36
+
+[testenv]
+deps =  
+	pytest
+commands =
+	pytest
+
+
+"""
+
 
 
 
 ### --- Exercise 4 --- ###
 
+from setuptools import setup, find_packages
+
+# Add install requirements
+setup(
+    author="ETA444",
+    description="A package for converting imperial lengths and weights.",
+    name="impyrial",
+    packages=find_packages(include=["impyrial", "impyrial.*"]),
+    version="0.1.0",
+    install_requires=['numpy>=1.10', 'pandas'],
+    python_requires="==3.6.*"
+)
 
 
 
@@ -313,20 +376,58 @@ include README.md
 
 
 
+"""flake8 absolute.py
+
+absolute.py:3:1: E302 expected 2 blank lines, found 1
+absolute.py:5:11: E225 missing whitespace around operator
+absolute.py:5:14: E701 multiple statements on one line (colon)
+absolute.py:7:5: W191 indentation contains tabs
+absolute.py:7:5: E101 indentation contains mixed spaces and tabs
+
+"""
+
+
+def absolute_value(num):
+    """Return the absolute value of the number"""
+    if num >= 0:
+        return num
+    else:
+        return -num
+
+
 
 ### --- Exercise 6 --- ###
 
+"""flake8 pythagoras.py
 
+pythagoras.py:6:5: E741 ambiguous variable name 'l'
+pythagoras.py:6:17: E201 whitespace after '('
+pythagoras.py:6:37: E202 whitespace before ')'
+
+"""
+
+import numpy as np
+
+
+def calculate_hypotenuse(side1, side2):
+    """Calculate the length of the hypotenuse."""
+    l = np.sqrt(side1**2 + side2**2)  # noqa: E741
+    return l
 
 
 ### --- Exercise 7 --- ###
 
+""""setup.cfg
+[flake8]
+
+per-file-ignores =
+    impyrial/__init__.py: F401
+        
+
+exclude = tests/*
 
 
-
-### --- Exercise 8 --- ###
-
-
+"""
 
 
 ## Chapter 4
