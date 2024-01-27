@@ -113,3 +113,94 @@ Each business unit, geography or department have their own data functions.
 ### Hybrid
 Infrastructure, definitions, methods and tooling are centralized, while application and prototyping decentralized.
 
+
+# Prediction vs. Inference dilemma
+
+
+## Inference vs. Prediction models
+
+1. **Inference/Causal models**: The goal is to **understand the drivers of a business outcome**.
+	- Inference focused models are interpretable.
+	- **Less accurate** than prediction models.
+2. **Prediction models:** The prediction itself is the main goal.
+	- Are not easily interpretable (work like "black-boxes").
+	- Much **more accurate** than inference models.
+
+### Start with the business question
+- "What are the main **drivers** of fraud?"
+	- **Inference model** is suitable.
+- "**How much** conditions X impact ...?"
+	- **Inference model** is suitable.
+- **Which** transactions are likely fraudulent?
+	- **Prediction model** is suitable.
+- "Is the patient **at risk** of ...?"
+	- **Prediction model** is suitable.
+
+
+# Inference (causal) models
+
+## What is causality?
+- Identify causal relationship of how much certain actions affect an outcome of interest
+- Answers the "why?" questions
+- Optimizes for model interpretability vs. performance
+- Models try to detect patterns in observed data (observational) and draw causal conclusions
+
+## Experiments vs. observations
+- Experiments are designed and causal conclusions are guaranteed e.g. in A/B tests
+- When experiments are impossible (unethical, too expensive, both) - the models are used(also called observational studies) to calculate effect of certain inputs on desired outcomes
+- Experiments are always preferred over observational studies whenever possible
+
+### Best practices
+1. Do experiments whenever possible
+2. If running experiments all the time is too expensive, run them periodically and use it as benchmark
+3. If there is no way to run experiments, build a causal model. This will require an advanced methodology.
+
+# Prediction models
+
+## Supervised vs. Unsupervised learning
+
+- **Supervised models**
+	- **Classification**: Predicting **class/type** of an outcome.
+		- Churn, cancellation, fraud, purchase, etc.
+	- **Regression**: Predicting **quantity** of an outcome.
+		- Dollars spent, hours played
+- **Unsupervised models**
+	- **Clustering:** grouping observations into similar groups or clusters
+		- Customer or market segmentation
+
+### Supervised learning types
+
+#### Classification
+Target variable is categorical (discrete).
+- Will the customer cancel a service?
+- Is this transaction fraudelent?
+- What is the profession of this user?
+
+#### Regression 
+Target variable is continuous (amount of outcome).
+- Number of product purchases next month
+- Number of gaming hours next year
+- Dollars spent on insurance
+
+#### Data collection
+Machine learning teams should collect all available data to predict desired outcome with the highest degree of accuracy, e.g. in case of purchase prediction:
+- Customer information
+- Purchase history, cancellations, order amount
+- Browsing history, logs, errors
+- Device details and location
+- Product/service usage frequency
+- ...
+
+### Unsupervised learning types
+
+#### Clustering
+Grouping observations into similar groups or clusters
+- Customer or market segmentation
+
+#### Anomaly detection
+Detecting which observation fall out of the discovered "regular pattern" and use it as an input in supervised learning or a business input.
+
+#### Recommender engines
+Recommending products or services to customers based on their similarity to other customers
+- Netflix movie recommendation etc.
+
