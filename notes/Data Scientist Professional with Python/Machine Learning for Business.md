@@ -204,3 +204,138 @@ Detecting which observation fall out of the discovered "regular pattern" and use
 Recommending products or services to customers based on their similarity to other customers
 - Netflix movie recommendation etc.
 
+
+# Business requirements
+
+## Scoping business needs
+
+1. **What is the business situation?**
+   - The company plans to expand to new markets.
+
+2. **What is the business opportunity and how big is it?**
+   - Identify the right markets with the biggest demand.
+
+3. **What are the business actions we will take?**
+   - Prioritize and invest more in the markets with higher predicted demand.
+
+### Business Scope - Fraud Example
+
+1. **Situation** 
+   - The fraud rate has started increasing.
+
+2. **Opportunity**
+   - Reduce fraud rate by X%, resulting in Y USD savings.
+
+3. **Action**
+   - Work on improving the fraud detection system.
+   - Reduce fraud drivers.
+   - Manually review transactions at risk.
+
+### Business scope - churn example
+
+1. **Situation**
+   - The customers started to churn more.
+
+2. **Opportunity**
+   - Reduce churn rate by X%, resulting in Y USD revenue saved.
+
+3. **Action**
+   - Work on identifying and improving churn drivers (website errors, too much/little advertising, customer service issues, etc.).
+   - Identify customers at risk.
+   - Introduce retention campaigns.
+
+## Business situation
+
+### Asking the right questions
+
+Always **start with Inference questions**.
+- **Inference Questions:**
+	1. **Why has churn started increasing?**
+	2. **Which information indicates a potential transaction fraud?**
+	3. **How are our most valuable customers different from others?**
+
+Build on inference question to **define prediction questions**.
+- **Prediction Questions (Building on Inference):**
+	1. **Can we identify customers at risk of churning?**
+	2. **Can we flag potentially risky transactions?**
+	3. **Can we predict early on which customers are likely to become highly valuable?**
+
+
+## Business opportunity
+
+### **Opportunity Assessment:**
+
+- **Size up the opportunity:** Determine the potential impact of addressing the identified outcome drivers.
+- Once you know the drivers of the outcome, how much will it cost changing them, and what will be the value of doing that?
+- Finally, how do you know if you can affect the predicted outcome? (hint - experiments, experiments, and more experiments)
+
+
+## Actionable machine learning
+
+Finally, how do you know if you can affect the predicted outcome? (hint - experiments, experiments, and more experiments)
+
+1. **First, look at historical levels (churn, fraud, # of high-value customers):** Understand the baseline historical data to gauge the current state.
+
+2. **Run experiments (e.g. target customers at risk with a discount, manually review top 10% riskiest transactions):** Implement experiments to test interventions.
+
+3. **Repeat experiments multiple times, see if you get a repeated pattern of desired results:** Assess the consistency and effectiveness of the interventions.
+
+4. **If yes, use that to calculate opportunity and make a decision if it's a worthwhile investment:** Measure the impact of the experiments to quantify the opportunity and determine if it's worth pursuing.
+
+5. **If no:**
+   - **Collect more data:** Gather additional data to gain deeper insights.
+   - **Qualitative research:** Conduct qualitative research to understand underlying issues.
+   - **Narrow down the business question:** Refine the research question to pinpoint specific areas of improvement.
+
+# Model training
+
+## **Model Training Process**
+
+Machine learning models undergo a structured training process to ensure their effectiveness and generalizability. This process typically involves three critical stages: building the model on the training dataset, assessing intermediate performance on the validation dataset, and finally, measuring the model's final performance on the test dataset.
+
+#### **Building the Model on the Training Dataset**
+
+   During the initial phase, the machine learning model is constructed using a designated training dataset. This dataset consists of labeled examples where the model learns to recognize patterns, relationships, and features that are relevant to the problem it aims to solve. The model adjusts its parameters iteratively to minimize the difference between its predictions and the actual outcomes in the training data. This phase continues until the model reaches a point where it performs well on the training data but has not yet been fine-tuned for generalization.
+
+#### **Intermediate Performance Measured on the Validation Dataset**
+
+   Once the model is trained on the training dataset, it is crucial to assess its intermediate performance using a separate dataset called the validation dataset. This step is essential to prevent overfitting, where the model becomes too specialized to the training data and fails to generalize to unseen data. The validation dataset helps monitor the model's ability to generalize to new, unseen examples. By evaluating its performance on the validation data, we can make adjustments to the model's hyperparameters and architecture, optimizing it for better generalization.
+
+#### **Final Performance Measured on the Test Dataset**
+
+   After refining the model through multiple iterations on the validation dataset, the final performance evaluation is conducted using a separate and untouched dataset known as the test dataset. This dataset serves as a true benchmark of the model's generalization capabilities. By assessing the model on this independent dataset, we can confidently gauge its ability to make accurate predictions on new, real-world data. The test dataset is crucial for estimating how well the model will perform in practical applications and provides a reliable measure of its overall effectiveness.
+
+In summary, the model training process involves a sequential progression from building the model on the training data to fine-tuning it based on intermediate performance on the validation dataset, and ultimately, measuring its final performance on the test dataset. This structured approach ensures that machine learning models not only perform well on familiar data but also maintain their accuracy and reliability when faced with new and unseen information.
+
+## Model performance measurement
+
+### Types
+There are two key supervised learning metrics:
+1. **Accuracy** which is a metric that tells us how well our model classifies the data. (**classification performance**)
+	- Accuracy,  recall, precision
+2. **Error** which is a metric that tells us how far our predictions are from the real values. (**regression performance**)
+
+#### Accuracy, Precision and recall
+Accuracy looks at overall correctness, precision emphasizes minimizing false positives, and recall emphasizes capturing all true positives. 
+
+These metrics help evaluate different aspects of a model's performance depending on the specific goals and constraints of a task.
+
+- **Accuracy:** Accuracy measures the overall correctness of predictions made by a model. It's the ratio of correctly predicted instances to the total number of instances. High accuracy means the model gets most predictions right but may not be suitable for imbalanced datasets.
+
+- **Precision:** Precision focuses on the accuracy of positive predictions. It measures the ratio of true positive predictions (correctly predicted positives) to all positive predictions made by the model. High precision indicates a low rate of false positive errors.
+
+- **Recall:** Recall, also known as sensitivity or true positive rate, measures the model's ability to capture all actual positive instances. It's the ratio of true positive predictions to all actual positive instances. High recall indicates a low rate of false negatives, ensuring that most positive cases are correctly identified.
+
+##### Optimizing for Precision vs. Recall
+The choice of whether to optimize a churn prediction model for precision or recall depends on the cost associated with false positives (Type I errors) and false negatives (Type II errors) and the potential impact of those errors on your business.
+
+1. **Optimizing for Precision:**
+   - If the action to prevent churn is costly (e.g., offering expensive customer incentives), you want to ensure that you are targeting the right customers who are truly at risk of churning.
+   - In this scenario, you should optimize your model for precision, which means minimizing false positives. A high precision model is conservative in making positive predictions, so the customers it identifies as at risk are more likely to be actual churners.
+   - By optimizing for precision, you may reduce the cost associated with offering incentives to customers who are not likely to churn. However, you may miss some potential churners (higher false negatives).
+
+2. **Optimizing for Recall:**
+   - If it is very costly to miss a churned customer (e.g., the long-term revenue loss from a churned customer is substantial), you want to ensure that your model captures as many true churners as possible.
+   - In this case, you should optimize your model for recall, which means minimizing false negatives. A high recall model is more aggressive in making positive predictions, ensuring that fewer actual churners are missed.
+   - By optimizing for recall, you reduce the risk of missing high-value customers who are at risk of churning. However, you may end up offering incentives to some customers who may not have churned (higher false positives).
+
