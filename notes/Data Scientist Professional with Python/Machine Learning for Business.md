@@ -339,3 +339,77 @@ The choice of whether to optimize a churn prediction model for precision or reca
    - In this case, you should optimize your model for recall, which means minimizing false negatives. A high recall model is more aggressive in making positive predictions, ensuring that fewer actual churners are missed.
    - By optimizing for recall, you reduce the risk of missing high-value customers who are at risk of churning. However, you may end up offering incentives to some customers who may not have churned (higher false positives).
 
+
+# Machine learning mistakes
+
+Common mistakes in machine learning are:
+- Running machine learning off the bat
+- Not enough data
+- Target variable definition is wrong
+	- What are we predicting?
+	- Can we observe it?
+		- Contractual churn - customer terminated the premium credit card
+		- Non-contractual churn - customer started using another grocery store
+- Late testing and no impact
+- Feature selection
+	- Inference (what **affects** the target variable?)
+		- Choose variables that you can control (website latency, price, delivery, etc.)
+		- Business has to be involved in feature selection
+	- Prediction (can we **estimate** the target variable value in the future?)
+		- Start with readily available data
+		- Start with a simple model
+		- Introduce new features iteratively
+
+# Communication management
+
+## Working groups
+Schedule recurring meetings to track progress and define the following:
+- Define the business requirements
+- Review machine learning model and business products
+- Inference vs. prediction
+- Baseline model results & outline model updates
+- Market testing
+- Discuss possible production and implementation
+
+## Business requirements
+1. What is the business **situation**?
+	- Churn rate has started increasing
+2. What is the business **opportunity** and how big is it?
+	- Reduce churn from X% to Y%
+3. What are the business **actions** we will take?
+	- Run retention campaigns targeting customers at risk
+
+
+## Model performance and improvements
+Identify what is the tolerance for model mistakes (remember all models are wrong):
+- **Classification**
+	- Which class is more expensive to misclassify?
+		- Example: it's likely more expensive to mis-classify fraud as non-fraud than vice versa.
+- **Regression**
+	- What is the error tolerance for prediction?
+		- Example: in demand prediction the company will have to buy more inventory than needed if the model error is high
+
+
+# Machine learning in production
+
+## Production systems
+Production system is live, customer facing and business critical.
+- Customer Relationship Management (CRM)
+	- Example: predicted churn triggers automatic emails
+- Fraud detection
+	- Example: predicted fraud probability automatically triggers transaction block and requests a manual review
+- Online banking platform
+	- Example: recommended products shown on the customer's online banking profile
+- Autonomous cars
+	- Example: autonomous cars use ML in many ways, one example is predicted collision kicks off automatic initiation of brakes and collision avoidance steps.
+
+## Staffing
+ML requires various job roles to be made, trained, tested and implemented.
+
+- **Prototype ML**
+	- Data Scientists
+	- ML Engineers
+- **ML in production**
+	- Software engineers
+	- Data engineers
+	- Infrastructure owners

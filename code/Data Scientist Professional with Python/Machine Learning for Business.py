@@ -17,5 +17,4 @@
 
 ## Chapter 4
 
-
-
+# No coding exercises in this chapter.
