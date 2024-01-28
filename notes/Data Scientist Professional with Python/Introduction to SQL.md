@@ -82,3 +82,188 @@ Data types differ in space and storage requirements depending on how long they a
 - **VARCHAR:** used for storing "strings" or a sequence of characters such as letters or punctuation like the names field
 - **INT:** used for integers or whole numbers, such as the years in the member_year column
 - **NUMERIC:** stores "floats" or numbers that include a fractional part, such as the $2.05 Jasmin owes in fines
+
+
+# Introducing queries 
+
+## Keywords
+
+Keywords are reserved words for operations.
+
+These are some of the most common SQL keywords:
+
+1. **SELECT:**
+   - Used to retrieve data from one or more tables.
+   ```sql
+   SELECT column1, column2 FROM your_table;
+   ```
+
+2. **FROM:**
+   - Specifies the table from which to retrieve data.
+   ```sql
+   SELECT column1, column2 FROM your_table;
+   ```
+
+3. **WHERE:**
+   - Filters data based on specified conditions.
+   ```sql
+   SELECT column1, column2 FROM your_table WHERE condition;
+   ```
+
+4. **ORDER BY:**
+   - Sorts the result set in ascending or descending order.
+   ```sql
+   SELECT column1, column2 FROM your_table ORDER BY column1 ASC;
+   ```
+
+5. **GROUP BY:**
+   - Groups rows that have the same values into summary rows.
+   ```sql
+   SELECT column1, COUNT(*) FROM your_table GROUP BY column1;
+   ```
+
+6. **HAVING:**
+   - Filters the results of a GROUP BY clause based on specified conditions.
+   ```sql
+   SELECT column1, COUNT(*) FROM your_table GROUP BY column1 HAVING COUNT(*) > 1;
+   ```
+
+7. **INSERT INTO:**
+   - Adds new records to a table.
+   ```sql
+   INSERT INTO your_table (column1, column2) VALUES (value1, value2);
+   ```
+
+8. **UPDATE:**
+   - Modifies existing records in a table.
+   ```sql
+   UPDATE your_table SET column1 = value1 WHERE condition;
+   ```
+
+9. **DELETE:**
+   - Removes records from a table based on specified conditions.
+   ```sql
+   DELETE FROM your_table WHERE condition;
+   ```
+
+10. **JOIN:**
+    - Combines rows from two or more tables based on related columns.
+    ```sql
+    SELECT column1, column2 FROM table1 INNER JOIN table2 ON table1.column = table2.column;
+    ```
+
+11. **DISTINCT:**
+    - Returns unique values in a specified column.
+    ```sql
+    SELECT DISTINCT column1 FROM your_table;
+    ```
+
+12. **AS:**
+    - Renames a column or table using an alias.
+    ```sql
+    SELECT column1 AS new_name FROM your_table;
+    ```
+
+13. **COUNT:**
+    - Returns the number of rows in a result set or the number of occurrences of a value in a column.
+    ```sql
+    SELECT COUNT(*) FROM your_table;
+    ```
+
+
+## Writing queries
+
+### Aliasing
+
+In SQL you can use what is called aliasing to rename columns within your query and output.
+
+```sql
+SELECT 
+	name AS first_name, 
+	year_hired
+FROM 
+	employees;
+```
+
+
+### Selecting DISTINCT records
+
+You can select only unique values in a column by using the `DISTINCT` keyword along with `SELECT`.
+
+```sql
+SELECT DISTINCT
+	year_hired
+FROM
+	employees;
+```
+
+#### Unique combinations of multiple fields
+
+To select unique combinations of multiple fields you use `DISTINCT` on multiple fields in the query:
+```sql
+SELECT DISTINCT
+	dept_id,
+	year_hired
+FROM
+	employees;
+```
+
+
+## Views
+
+**Views** are virtual tables that are the result of a saved SQL `SELECT` statement.
+- When accessed, views automatically update in response to updates in the underlying data.
+- Views are not saved in the database but serve as saved queries to specific information.
+
+**To create a view:**
+```sql
+-- Create a view/virtual table: employee_hire_year
+CREATE VIEW employee_hire_year AS
+SELECT
+	id,
+	name,
+	year_hired
+FROM
+	employees;
+```
+
+
+# SQL flavors
+
+There are various variations of SQL.
+- Both free and paid
+- All used with relational databases
+- Vast majority of keywords are the same
+- All must follow universal standards
+- Only additional keywords define the variations, not a difference in the basic syntax
+
+## Two popular SQL flavors
+
+### PostgreSQL
+- Free and open-source relational database system
+- Created at the University of California, Berkeley
+- "PostgreSQL" refers to both the PostgreSQL database system and the associated SQL variation
+
+### SQL Server / T-SQL
+- Has free and paid versions
+- Created by Microsoft
+- T-SQL is Microsoft's SQL flavor, used with SQL Server databases
+
+### Comparing the two
+
+#### Limiting the output to *n* rows
+- PostgreSQL: **LIMIT *n***
+```sql
+SELECT 
+	id,
+	name
+FROM employees
+LIMIT 2;
+```
+- SQL Server: SELECT **TOP(*n*)**
+```sql
+SELECT TOP(2)
+	id,
+	name
+FROM employees;
+```
