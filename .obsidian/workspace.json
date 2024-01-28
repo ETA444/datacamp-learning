@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to SQL.md"
+                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md"
               }
             }
           }
@@ -149,9 +149,13 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
+    "code/Data Scientist Professional with Python/Intermediate SQL.sql",
+    "notes/Data Scientist Professional with Python/Introduction to SQL.md",
+    "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA28-Introduction_to_SQL.pdf",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA28-Introduction_to_SQL.pdf.opdownload",
     "code/Data Scientist Professional with Python/code-file-template.txt",
     "notes/Data Scientist Professional with Python/Machine Learning for Business.md",
-    "notes/Data Scientist Professional with Python/Introduction to SQL.md",
     "code/Data Scientist Professional with Python/Introduction to SQL.sql",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA27-Machine_Learning_for_Business.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA27-Machine_Learning_for_Business.pdf.opdownload",
@@ -166,11 +170,8 @@
     "notes/Data Scientist Professional with Python/Developing Python Packages.md",
     "notes/Data Scientist Professional with Python/Machine Learning for Business",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA26-Developing_Python_Packages.pdf",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA26-Developing_Python_Packages.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
-    "notes/Data Scientist Professional with Python/Developing Python Packages.md.part",
     "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
-    "code/Data Scientist Professional with Python/Developing Python Packages.py",
     "notes/Data Scientist Professional with Python/Intermediate Importing Data in Python.md",
     "notes/Data Scientist Professional with Python/Machine Learning with Tree-Based Models in Python.md",
     "notes/Data Scientist Professional with Python/Unsupervised Learning in Python.md",
@@ -193,7 +194,6 @@
     "images/Pasted image 20230720151117.png",
     "images/Pasted image 20230720150823.png",
     "images/Pasted image 20230720150816.png",
-    "images/Pasted image 20230720150814.png",
-    "notes/Data Scientist Professional with Python/Data Communication Concepts.md"
+    "images/Pasted image 20230720150814.png"
   ]
 }
