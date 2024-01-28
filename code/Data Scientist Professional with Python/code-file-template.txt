@@ -1,0 +1,398 @@
+# Code Exercises from Unsupervised Learning in Python #
+
+## Chapter 1
+
+### --- Exercise 1 --- ###
+
+
+
+
+### --- Exercise 2 --- ###
+
+
+
+
+### --- Exercise 3 --- ###
+
+
+
+
+### --- Exercise 4 --- ###
+
+
+
+
+### --- Exercise 5 --- ###
+
+
+
+
+### --- Exercise 6 --- ###
+
+
+
+
+### --- Exercise 7 --- ###
+
+
+
+
+### --- Exercise 8 --- ###
+
+
+
+
+## Chapter 2
+
+### --- Exercise 1 --- ###
+
+
+
+
+### --- Exercise 2 --- ###
+
+
+
+
+### --- Exercise 3 --- ###
+
+
+
+
+### --- Exercise 4 --- ###
+
+
+
+
+### --- Exercise 5 --- ###
+
+
+
+
+### --- Exercise 6 --- ###
+
+
+
+
+### --- Exercise 7 --- ###
+
+
+
+
+### --- Exercise 8 --- ###
+
+
+
+
+## Chapter 3
+
+### --- Exercise 1 --- ###
+
+
+
+
+### --- Exercise 2 --- ###
+
+
+
+
+### --- Exercise 3 --- ###
+
+
+
+
+### --- Exercise 4 --- ###
+
+
+
+
+### --- Exercise 5 --- ###
+
+
+
+
+### --- Exercise 6 --- ###
+
+
+
+
+### --- Exercise 7 --- ###
+
+
+
+
+### --- Exercise 8 --- ###
+
+
+
+
+## Chapter 4
+
+### --- Exercise 1 --- ###
+
+
+
+
+### --- Exercise 2 --- ###
+
+
+
+
+### --- Exercise 3 --- ###
+
+
+
+
+### --- Exercise 4 --- ###
+
+
+
+
+### --- Exercise 5 --- ###
+
+
+
+
+### --- Exercise 6 --- ###
+
+
+
+
+### --- Exercise 7 --- ###
+
+
+
+
+### --- Exercise 8 --- ###
+
+
+
+
+# SQL Template #
+
+/* Code Exercises from Introduction to SQL */
+
+-- Chapter 1
+
+-- -- Exercise 1
+
+
+
+
+
+-- -- Exercise 2
+
+
+
+
+
+-- -- Exercise 3
+
+
+
+
+
+-- -- Exercise 4
+
+
+
+
+
+-- -- Exercise 5
+
+
+
+
+
+-- -- Exercise 6
+
+
+
+
+
+-- -- Exercise 7
+
+
+
+
+
+-- -- Exercise 8
+
+
+
+
+
+-- -- Exercise 9
+
+
+
+
+
+-- Chapter 2
+
+-- -- Exercise 1
+
+
+
+
+
+-- -- Exercise 2
+
+
+
+
+
+-- -- Exercise 3
+
+
+
+
+
+-- -- Exercise 4
+
+
+
+
+
+-- -- Exercise 5
+
+
+
+
+
+-- -- Exercise 6
+
+
+
+
+
+-- -- Exercise 7
+
+
+
+
+
+-- -- Exercise 8
+
+
+
+
+
+-- -- Exercise 9
+
+
+
+
+
+-- Chapter 3
+
+-- -- Exercise 1
+
+
+
+
+
+-- -- Exercise 2
+
+
+
+
+
+-- -- Exercise 3
+
+
+
+
+
+-- -- Exercise 4
+
+
+
+
+
+-- -- Exercise 5
+
+
+
+
+
+-- -- Exercise 6
+
+
+
+
+
+-- -- Exercise 7
+
+
+
+
+
+-- -- Exercise 8
+
+
+
+
+
+-- -- Exercise 9
+
+
+
+
+
+-- Chapter 4
+
+-- -- Exercise 1
+
+
+
+
+
+-- -- Exercise 2
+
+
+
+
+
+-- -- Exercise 3
+
+
+
+
+
+-- -- Exercise 4
+
+
+
+
+
+-- -- Exercise 5
+
+
+
+
+
+-- -- Exercise 6
+
+
+
+
+
+-- -- Exercise 7
+
+
+
+
+
+-- -- Exercise 8
+
+
+
+
+
+-- -- Exercise 9
+
+
+
+
+
