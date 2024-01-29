@@ -507,3 +507,186 @@ If we were to use floats we would get a precise output:
 SELECT (4.0/3.0);
 -- returns: |1.333...|
 ```
+
+
+# Sorting results
+
+## `ORDER BY`
+Used to sort results on one or more fields.
+- Sorts in ascending order by default
+```sql
+SELECT
+	title,
+	budget
+FROM 
+	films
+ORDER BY budget;
+```
+- We can use `ASC` to explicitly say it is in ascending order for better code readability:
+```sql
+SELECT
+	title,
+	budget
+FROM 
+	films
+ORDER BY budget ASC;
+```
+- We can also use `DESC` to sort in descending order:
+```sql
+SELECT
+	title,
+	budget
+FROM 
+	films
+ORDER BY budget DESC;
+```
+- We can improve our query by removing `null` values:
+```sql
+SELECT
+	title,
+	budget
+FROM 
+	films
+WHERE budget IS NOT NULL
+ORDER BY budget;
+```
+
+### Ordering by multiple fields
+
+When using `ORDER BY` on multiple fields the order is:
+- `ORDER BY field_one, field_two`
+- Think of `field_two` as a tie-breaker
+- We can utilize `ASC` and `DESC` to sort in different orders per field
+
+### Order of execution
+```sql 
+SELECT                     -- 3
+	title,
+	budget
+FROM                       -- 1 
+	films
+WHERE budget IS NOT NULL   -- 2
+ORDER BY budget            -- 4
+LIMIT 10;                  -- 5
+```
+
+
+# Grouping data
+
+## `GROUP BY`
+We can use `GROUP BY` to group our data by a specific field.
+```SQL
+SELECT
+	certification,
+	COUNT(title) AS title_count
+FROM
+	films
+GROUP BY certification;
+```
+- Note we cannot add fields in the `SELECT` which are not either in the `GROUP BY` or in an aggregate function.
+
+We can also `GROUP BY` multiple fields:
+```sql
+SELECT
+	certification,
+	language,
+	COUNT(title) AS title_count
+FROM
+	films
+GROUP BY
+	certification,
+	language;
+```
+
+We can combine `GROUP BY` with `ORDER BY`:
+```SQL
+SELECT
+	certification,
+	COUNT(title) AS title_count
+FROM 
+	films
+GROUP BY 
+	certification
+ORDER BY
+	title_count DESC;
+```
+
+### Order of execution
+```sql
+SELECT                                     -- 3
+	certification,
+	COUNT(title) AS title_count
+FROM                                       -- 1
+	films
+GROUP BY                                   -- 2
+	certification
+ORDER BY                                   -- 4
+	title_count DESC
+LIMIT 10;                                  -- 5
+```
+
+# Filtering grouped data
+
+## `HAVING`
+We can conditionally filter our data by using `HAVING`
+```SQL
+SELECT
+	release_year,
+	COUNT(title) AS title_count
+FROM 
+	films
+GROUP BY
+	release_year
+HAVING
+	COUNT(title) > 10;
+```
+
+### Order of execution
+```SQL
+SELECT                                        -- 5
+	certification,
+	COUNT(title) AS title_count
+FROM                                          -- 1
+	films
+WHERE                                         -- 2
+	certification IN ('G', 'PG', 'PG-13')
+GROUP BY                                      -- 3
+	certification
+HAVING                                        -- 4
+	COUNT(title) > 500
+ORDER BY                                      -- 6
+	title_count DESC
+LIMIT 3;                                      -- 7
+```
+
+### `HAVING` vs `WHERE`
+`WHERE` filters individual records, `HAVING` filters grouped records.
+
+Business questions examples:
+- What films were released in the year 2000?
+	- To answer this question we do not need grouping.
+```SQL
+SELECT
+	title,
+	certification,
+	release_year
+FROM 
+	films
+WHERE
+	release_year = 2000
+ORDER BY
+	title;
+```
+- In what years was the average film duration over two hours?
+	- This question does require grouping.
+```SQL
+SELECT
+	release_year,
+	AVG(duration) AS avg_duration
+FROM
+	films
+GROUP BY 
+	release_year
+HAVING 
+	AVG(duration) > 120;
+```
