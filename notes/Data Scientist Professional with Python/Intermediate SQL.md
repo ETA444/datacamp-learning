@@ -415,3 +415,95 @@ WHERE birthdate IS NOT NULL;
 ```
 
 
+# Summarizing data
+
+To summarize data in SQL we use **aggregate functions.**
+- Aggregate functions return a single value
+- Most common aggregate functions:
+	- `AVG()`, `SUM()`, `MIN()`, `MAX()`, `COUNT()`
+
+We can for example:
+- Get the mean budget in our table:
+```sql 
+SELECT 
+	AVG(budget)
+FROM 
+	films;
+```
+- Get the total budget of all films in our table:
+```sql
+SELECT 
+	SUM(budget)
+FROM 
+	films;
+```
+- Get the lowest budget:
+```sql
+SELECT
+	MIN(budget)
+FROM
+	films;
+```
+- Get the highest budget:
+```sql
+SELECT
+	MAX(budget)
+FROM
+	films;
+```
+
+Note that `AVG()` and `SUM()` only work with **numerical data**, while `COUNT()`, `MIN()`, `MAX()` work with various data types.
+
+For **non-numerical data** the logic is as follows:
+- `MIN()` <-> `MAX()`; this could be:
+	- Minimum <-> Maximum
+	- Lowest <-> Highest
+	- A <-> Z: running these on strings will be interpreted alphabetically
+	- 1715 <-> 2022
+
+# Summarizing subsets
+
+## Using `WHERE` with aggregate functions
+- `AVG()`
+```SQL
+SELECT 
+	AVG(budget) AS avg_budget
+FROM
+	films
+WHERE
+	release_year >= 2010;
+```
+
+## `ROUND()`
+```SQL
+SELECT
+	ROUND(AVG(budget), 2) AS avg_budget
+FROM
+	films
+WHERE
+	release_year >= 2010;
+```
+
+# Aliasing and arithmetic
+
+In SQL, we can use arithmetic to execute calculations, such as `+`, `-`, `*` and `/`.
+```sql
+SELECT (3+1);
+
+SELECT (3/3);
+
+SELECT (12*3);
+
+SELECT (2-1);
+```
+
+Note that SQL assumes that if we use INT in our operation, we want an INT back. So for example this operation would return 1, not the precise answer:
+```sql
+SELECT (4/3);
+-- returns: |1|
+```
+If we were to use floats we would get a precise output:
+```sql
+SELECT (4.0/3.0);
+-- returns: |1.333...|
+```
