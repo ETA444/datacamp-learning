@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md"
+                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md"
               }
             }
           }
@@ -149,8 +149,12 @@
   },
   "active": "853ec31cba0fbd5b",
   "lastOpenFiles": [
-    "notes/Data Scientist Professional with Python/Introduction to SQL.md",
     "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+    "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
+    "code/Data Scientist Professional with Python/Joining Data in SQL.sql",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA29-Intermediate_SQL.pdf",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA29-Intermediate_SQL.pdf.opdownload",
+    "notes/Data Scientist Professional with Python/Introduction to SQL.md",
     "code/Data Scientist Professional with Python/Intermediate SQL.sql",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA28-Introduction_to_SQL.pdf",
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA28-Introduction_to_SQL.pdf.opdownload",
@@ -162,13 +166,10 @@
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "images/Pasted image 20240125172906.png",
     "notes/Data Scientist Professional with Python/Machine Learning for Business (conflicted).md",
-    "notes/Data Scientist Professional with Python/Machine Learning for Business.md.part",
-    "code/Data Scientist Professional with Python/Machine Learning for Business.py",
     "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
     "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
     "notes/Data Scientist Professional with Python/Developing Python Packages.md",
-    "notes/Data Scientist Professional with Python/Machine Learning for Business",
     "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
     "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
     "notes/Data Scientist Professional with Python/Intermediate Importing Data in Python.md",
