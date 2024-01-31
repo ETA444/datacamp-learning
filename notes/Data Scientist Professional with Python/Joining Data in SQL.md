@@ -136,3 +136,90 @@ INNER JOIN right_table AS r
 	ON l.id = r.id
 	AND l.date = r.date;
 ```
+
+
+# OUTER JOINS
+## `LEFT` and `RIGHT JOIN`s
+
+### `LEFT JOIN`
+
+`LEFT JOIN` will return all records in the left table, and those records in the right table that match on the joining field provided.
+
+#### Syntax
+```SQL
+-- Suppose we want all prime ministers and all presidents for countries that have them:
+SELECT
+	p1.country,
+	prime_minister,
+	president
+FROM prime_ministers AS p1
+LEFT JOIN presidents AS p2
+	USING(country);
+```
+- `LEFT JOIN` can also be written as `LEFT OUTER JOIN`.
+
+### `RIGHT JOIN`
+
+`RIGHT JOIN` will return all records in the right table, and those records in the left table that match on the joining field provided.
+
+#### Syntax
+```SQL
+-- Suppose we want all prime ministers and all presidents for countries that have them:
+SELECT *
+FROM table1 AS t1
+RIGHT JOIN table2 AS t2
+	USING(country);
+```
+- `RIGHT JOIN` can also be written as `RIGHT OUTER JOIN`.
+
+## `FULL JOIN`s
+
+A `FULL JOIN` combines a `LEFT JOIN` and a `RIGHT JOIN`.
+
+### Syntax
+```sql
+SELECT
+	l.id AS l_id,
+	r.id AS r_id,
+	l.val AS l_val,
+	r.val AS r_val
+FROM left_table AS l
+FULL JOIN right_table AS r
+	USING(id);
+```
+- `FULL JOIN` can also be written as `FULL OUTER JOIN`.
+
+# `CROSS JOIN`s
+
+`CROSS JOIN` creates all possible combinations of two tables.
+
+## Syntax
+In contrast to other type of joins, we do not specify `ON` when using `CROSS JOIN`:
+```SQL
+SELECT
+	id1,
+	id2
+FROM table1
+CROSS JOIN table2;
+```
+
+
+# Self joins
+- **Self joins** are tables joined with themselves
+- They can be used to compare parts of the same table
+
+## Syntax
+There is no syntax called `SELF JOIN`, we use other joins to achieve the self join.
+```sql
+SELECT
+	p1.country AS country1,
+	p2.country AS country2,
+	p1.continent
+FROM prime_ministers AS p1
+INNER JOIN prime_minister AS p2
+	ON p1.continent = p2.continent
+		AND p1.country <> p2.country;
+```
+
+
+#
