@@ -222,4 +222,189 @@ INNER JOIN prime_minister AS p2
 ```
 
 
-#
+# Set theory for SQL Joins
+
+## Venn diagrams and set theory
+### `UNION` diagram
+- `UNION` takes two tables as input, and returns all records from both tables (without duplicating records occurring in both)
+```sql
+-- Table 1: TableA
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+| 3  | ValueA3 |
+| 6  | ValueA6 |  -- Same record as in TableB
+
+-- Table 2: TableB
+| id | columnB |
+|----|---------|
+| 1  | ValueB1 |
+| 4  | ValueB4 |
+| 5  | ValueB5 |
+| 6  | ValueA6 |  -- Same record as in TableA
+
+-- UNION Result
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+| 3  | ValueA3 |
+| 4  | ValueB4 |
+| 5  | ValueB5 |
+| 6  | ValueA6 | -- Only one is kept
+```
+#### Syntax: `UNION`
+```sql
+SELECT *
+FROM table1
+UNION
+SELECT *
+FROM table2
+```
+
+### `UNION ALL` diagram
+- `UNION ALL` takes two tables and returns all records from both tables, **including duplicates**.
+```sql
+-- Table 1: TableA
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+| 3  | ValueA3 |
+| 6  | ValueA6 |  -- Same record as in TableB
+
+-- Table 2: TableB
+| id | columnB |
+|----|---------|
+| 1  | ValueB1 |
+| 4  | ValueB4 |
+| 5  | ValueB5 |
+| 6  | ValueA6 |  -- Same record as in TableA
+
+-- UNION Result
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+| 3  | ValueA3 |
+| 4  | ValueB4 |
+| 5  | ValueB5 |
+| 6  | ValueA6 | -- Both are kept
+| 6  | ValueA6 | -- Both are kept
+```
+#### Syntax: `UNION ALL`
+```sql
+SELECT *
+FROM table1
+UNION ALL
+SELECT *
+FROM table2
+```
+
+### Notes
+- Both `UNION` and `UNION ALL` are used to **stack** data vertically, this is a fundamental difference from `JOIN`s.
+- `UNION` and `UNION ALL` are called set operators.
+- When using these we:
+	- Need the same field data types
+	- Retain field names from the left tables regardless of aliases
+
+#### Example
+```sql
+SELECT
+	monarch as leader,
+	country
+FROM monarchs
+UNION
+SELECT
+	prime_minister, -- this will go under leader
+	country
+FROM prime_ministers
+ORDER BY
+	country,
+	leader
+LIMIT 10;
+```
+
+
+# At the `INTERSECT`
+
+The `INTERSECT` set operator in SQL retrieves the common rows that appear in the result sets of two or more SELECT statements, effectively returning only the overlapping rows shared between the result sets. It is used to find the intersection of data sets, ensuring that only rows present in all specified SELECT statements are included in the final result.
+
+Here's a simple example using two tables and the `INTERSECT` set operator:
+
+```sql
+-- Table 1: TableA
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+| 3  | ValueA3 |
+
+-- Table 2: TableB
+| id | columnB |
+|----|---------|
+| 2  | ValueB2 |
+| 3  | ValueA3 |
+| 4  | ValueB4 |
+
+-- INTERSECT Result
+| id | columnA |
+|----|---------|
+| 3  | ValueA3 |
+```
+- `TableA` and `TableB` have commonality on the `id` column.
+- The `INTERSECT` operation returns the rows that are common to both tables, based on the `id` column.
+- The result includes only the row where `id = 3` because it is the only row present in both `TableA` and `TableB`.
+
+This demonstrates how `INTERSECT` helps find the commonality between two sets of data, allowing you to identify rows that exist in both result sets.
+
+## Syntax: `INTERSECT`
+```sql
+SELECT id, columnA
+FROM TableA
+INTERSECT
+SELECT id, columnB
+FROM TableB;
+```
+
+# `EXCEPT`
+
+The `EXCEPT` set operator in SQL is used to retrieve the distinct rows from the result set of the first SELECT statement that do not appear in the result set of the second SELECT statement. It effectively subtracts the rows from the second result set, providing a set difference and highlighting the unique elements in the first result set.
+
+Here's a simple example using two tables and the `EXCEPT` set operator:
+
+```sql
+-- Table 1: TableA
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 | -- both id and columnA unique
+| 2  | ValueA2 | -- columnA values unique
+| 3  | ValueA3 | -- Exists in both tables
+
+-- Table 2: TableB
+| id | columnB |
+|----|---------|
+| 2  | ValueB2 |
+| 3  | ValueA3 | -- Exists in both tables
+| 4  | ValueB4 | 
+
+-- EXCEPT Result
+| id | columnA |
+|----|---------|
+| 1  | ValueA1 |
+| 2  | ValueA2 |
+```
+
+This illustrates how `EXCEPT` helps identify the unique rows in the first result set that do not have corresponding entries in the second result set.
+
+## Syntax
+```sql
+SELECT id, columnA
+FROM TableA
+EXCEPT
+SELECT id, columnB
+FROM TableB;
+```
+
+This query uses the `EXCEPT` set operator to retrieve the distinct rows from the `TableA` result set that do not appear in the `TableB` result set. It returns the rows that are unique to `TableA`.
