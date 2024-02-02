@@ -460,55 +460,175 @@ ORDER BY name;
 
 -- -- Exercise 1
 
+-- Select country code for countries in the Middle East
+SELECT code
+FROM countries
+WHERE region = 'Middle East';
 
+-- Select unique language names
+SELECT 
+    DISTINCT name
+FROM languages
+-- Order by the name of the language
+ORDER BY name ASC;
 
+-- Combine the two queries above
+SELECT 
+    DISTINCT name
+FROM languages
+-- Add syntax to use bracketed subquery below as a filter
+WHERE code IN
+    (SELECT code
+    FROM countries
+    WHERE region = 'Middle East')
+ORDER BY name ASC;
 
 
 -- -- Exercise 2
 
+-- Select code and name of countries from Oceania
+SELECT
+    code,
+    name
+FROM countries
+WHERE
+    continent = 'Oceania';
 
-
+-- Filter for countries not included in the bracketed subquery
+SELECT code, name
+FROM countries
+WHERE continent = 'Oceania'
+  AND code NOT IN
+    (SELECT code
+    FROM currencies);
 
 
 -- -- Exercise 3
 
+-- Select average life_expectancy from the populations table
+SELECT
+    AVG(life_expectancy)
+FROM populations
+-- Filter for the year 2015
+WHERE year = 2015
 
-
+-- Filter for only those populations where life expectancy is 1.15 times higher than average
+SELECT *
+FROM populations
+WHERE 
+  life_expectancy > 1.15 * (
+    SELECT AVG(life_expectancy)
+    FROM populations
+    WHERE year = 2015) 
+    AND year = 2015;
 
 
 -- -- Exercise 4
 
-
+-- Select relevant fields from cities table
+-- Filter using a subquery on the countries table
+SELECT
+    name,
+    country_code,
+    urbanarea_pop
+FROM cities
+WHERE name IN (
+    SELECT capital
+    FROM countries
+)
+ORDER BY urbanarea_pop DESC;
 
 
 
 -- -- Exercise 5
 
+SELECT
+    countries.name AS country,
+    COUNT(cities.name) AS cities_num
+FROM countries
+LEFT JOIN cities 
+    ON countries.code = cities.country_code
+GROUP BY countries.name
+ORDER BY
+    cities_num DESC,
+    country ASC
+LIMIT(9);
 
+SELECT countries.name AS country,
+-- Subquery that provides the count of cities   
+  (SELECT COUNT(name)
+   FROM cities
+   WHERE countries.code = cities.country_code) AS cities_num
+FROM countries
+ORDER BY cities_num DESC, country
+LIMIT 9;
 
 
 
 -- -- Exercise 6
 
 
+-- My solution:
+SELECT
+    code,
+    COUNT(name) AS lang_num,
+    (SELECT 
+        local_name
+    FROM countries
+    WHERE countries.code = languages.code)
+FROM languages
+GROUP BY code
+ORDER BY lang_num DESC;
 
+-- Their solution:
+SELECT
+  countries.local_name,
+  sub.lang_num
+FROM 
+  countries,
+  (SELECT code, COUNT(*) AS lang_num
+  FROM languages
+  GROUP BY code) AS sub
+-- Where codes match
+WHERE countries.code = sub.code
+ORDER BY lang_num DESC;
 
 
 -- -- Exercise 7
 
-
-
+SELECT
+  code,
+  inflation_rate,
+  unemployment_rate
+FROM economies
+WHERE year = 2015 
+  AND code NOT IN (
+    SELECT code
+    FROM countries
+    WHERE 
+      gov_form LIKE '%Monarchy%'
+      OR gov_form LIKE '%Republic%'
+  )
+ORDER BY inflation_rate;
 
 
 -- -- Exercise 8
 
-
-
-
-
--- -- Exercise 9
-
-
-
-
-
+SELECT
+    name,
+    country_code,
+    city_proper_pop,
+    metroarea_pop,
+    (city_proper_pop / metroarea_pop * 100) AS city_perc
+FROM cities
+WHERE 
+    name IN (
+        SELECT capital
+        FROM countries
+        WHERE
+            continent LIKE '%Europe%'
+            OR continent LIKE '%America%'
+    ) 
+    AND metroarea_pop IS NOT NULL
+ORDER BY city_perc DESC
+LIMIT(10);

@@ -408,3 +408,105 @@ FROM TableB;
 ```
 
 This query uses the `EXCEPT` set operator to retrieve the distinct rows from the `TableA` result set that do not appear in the `TableB` result set. It returns the rows that are unique to `TableA`.
+
+# Subquerying with semi joins and anti joins
+
+## Semi join
+A **semi join** chooses records in the first table where a condition is met in the second table.
+
+### Example
+Imagine we want to keep records in our `countries` table of countries that have become independent before 1800. However this information is in another table, this is where a semi join subquery comes handy:
+```SQL
+SELECT
+	president,
+	country,
+	continent
+FROM countries
+WHERE country IN (
+	SELECT country
+	FROM states
+	WHERE indep_year < 1800);
+```
+
+## Anti join
+A **anti join** chooses records in the first table where a condition is not met in the second table.
+
+### Example
+```sql
+SELECT
+	president,
+	country,
+	continent
+FROM countries
+WHERE country NOT IN ( -- < notice `NOT IN`
+	SELECT country
+	FROM states
+	WHERE indep_year < 1800);
+```
+
+
+# Subqueries inside `WHERE` and `SELECT`
+
+## Subqueries inside `WHERE`
+- All semi joins and anti joins we have seen included a subquery in `WHERE` (using `IN` and `NOT IN`)
+- `WHERE` is the most common place for subqueries
+```SQL
+SELECT *
+FROM table1
+WHERE year IN (2010,2011,2012);
+```
+
+## Subqueries inside `SELECT`
+```sql
+-- Summarizing a count of monarchs per continent using information from two tables
+SELECT
+	DISTINCT continent,
+	(SELECT COUNT(*)
+	FROM monarchs
+	WHERE states.continent = monarch.continent AS monarch_count)
+FROM states;
+```
+
+
+# Subqueries inside `FROM`
+```SQL
+-- Query to return continents with monarchs and the year the most recent country gained independence
+
+SELECT
+	DISTINCT monarchs.continent,
+	sub.most_recent
+FROM
+	monarchs,
+	(SELECT
+		continent,
+		MAX(indep_year) AS most_recent
+	FROM
+		states
+	GROUP BY 
+		continent) AS sub
+WHERE monarchs.continent = sub.continent
+ORDER BY continent;
+```
+
+
+# Recap
+
+## Types of joins
+1. `INNER JOIN` / `JOIN`
+2. Outer joins:
+	1. `LEFT JOIN`
+	2. `RIGHT JOIN`
+	3. `FULL JOIN`
+3. `CROSS JOIN`
+4. Semi join / anti join
+5. Self join
+
+## Set operations
+1. `UNION` and `UNION ALL`
+2. `INTERSECT`
+3. `EXCEPT`
+
+## Types of basic subqueries
+1. Inside `SELECT` clause
+2. Inside `WHERE` clause
+3. Inside `FROM` clause
