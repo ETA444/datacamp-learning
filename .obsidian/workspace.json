@@ -8,24 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "853ec31cba0fbd5b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "e3065aaa6cc281d5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Intermediate SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
+                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Joining Data in SQL.md"
+                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md"
               }
             }
           }
@@ -159,10 +147,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "853ec31cba0fbd5b",
+  "active": "e3065aaa6cc281d5",
   "lastOpenFiles": [
+    "code/Data Scientist Professional with Python/Introduction to Git.py",
     "notes/Data Scientist Professional with Python/Intermediate SQL.md",
     "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
+    "notes/Data Scientist Professional with Python/Introduction to Git.md",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA30-Joining_Data_in_SQL.pdf",
+    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA30-Joining_Data_in_SQL.pdf.opdownload",
     "notes/Data Scientist Professional with Python/Joining Data in SQL (conflicted).md",
     "notes/Data Scientist Professional with Python/Joining Data in SQL.md.part",
     "code/Data Scientist Professional with Python/Joining Data in SQL.sql",
@@ -174,8 +166,6 @@
     "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA28-Introduction_to_SQL.pdf.opdownload",
     "code/Data Scientist Professional with Python/code-file-template.txt",
     "notes/Data Scientist Professional with Python/Machine Learning for Business.md",
-    "code/Data Scientist Professional with Python/Introduction to SQL.sql",
-    "statements-of-accomplishment/Data Scientist Professional with Python/DSinP-SOA27-Machine_Learning_for_Business.pdf",
     "notes/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
     "images/Pasted image 20240125172906.png",
     "notes/Data Scientist Professional with Python/Machine Learning for Business (conflicted).md",
@@ -196,8 +186,6 @@
     "code/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "code/Data Scientist Professional with Python/Introduction to Importing Data in Python [conflicted].md",
     "code/Data Scientist Professional with Python/Exploratory Data Analysis in Python.md",
-    "code/Data Scientist Professional with Python/Data Communication Concepts.md",
-    "code/Data Scientist Professional with Python/Cleaning Data in Python.md",
     "images/Pasted image 20230720172955.png",
     "images/Pasted image 20230720172557.png",
     "images/Pasted image 20230720171258.png",
