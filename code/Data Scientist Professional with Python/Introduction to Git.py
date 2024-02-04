@@ -221,42 +221,103 @@ $ git commit -m "Restoring version from commit e39ecc8"
 
 ### --- Exercise 1 --- ###
 
+""" 
 
+Display all settings
+$ git config --list
+
+Change the email address to I_love_Git@datacamp.com.
+$ git config --global user.email I_love_Git@datacamp.com
+
+Check the global settings to see if the update has been made.
+$ git config --global --list
+"""
 
 
 ### --- Exercise 2 --- ###
 
+"""
+Create an alias for the global command used to check the state of files, calling it st.
+$ git config --global alias.st "status"
 
+Run the new alias command to confirm it works
+$ git st
+
+"""
 
 
 ### --- Exercise 3 --- ###
 
+"""
+Edit summary_statistics.txt and add the following text:
+ "Mean age is 32 years old, with a standard deviation of 6.72".
+$ echo "Mean age is 32 years old, with a standard deviation of 6.72" >> summary_statistics.txt
+
+Add summary_statistics.txt to the staging area.
+$ git add summary_statistics.txt
+
+Make a commit with the log message "Adding age summary statistics".
+$ git commit -m "Adding age summary statistics"
+
+Create a new branch called report.
+$ git checkout -b report
+"""
 
 
 
 ### --- Exercise 4 --- ###
 
-
+"""
+How many branches are there in the repo
+$ git branch
+"""
 
 
 ### --- Exercise 5 --- ###
 
-
+"""
+Execute a command to compare the 
+alter-report-title and summary-statistics branches.
+$ git diff alter-report-title summary-statistics
+"""
 
 
 ### --- Exercise 6 --- ###
 
+"""
+Switch to the report branch
+$ git checkout report
 
+Add "80% of participants were 
+male, compared to the industry average of 
+67%." to the end of report.md.
+$ echo "80% of participants were male, compared to the industry average of 67%." >> report.md
+
+Place report.md into the staging area.
+$ git add report.md
+
+Make a commit with the log message "Add gender summary in report".
+$ git commit -m "Add gender summary in report"
+"""
 
 
 ### --- Exercise 7 --- ###
 
+"""
+Merge the report branch into the main branch.
+$ git merge report main
 
+"""
 
 
 ### --- Exercise 8 --- ###
 
-
+"""
+Edit report.md, removing content from
+the summary_statistics branch along
+with any Git conflict syntax.
+$ nano report.md
+"""
 
 
 ## Chapter 4

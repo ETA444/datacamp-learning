@@ -258,3 +258,182 @@ git clean -n
 git clean -f
 ```
 
+
+# Configuring Git
+Git has customizable settings to speed up or improve how we work.
+
+## Levels of settings
+To access a list of customizable settings we use:
+- `git config --list`
+
+Git has three levels of settings:
+1. `--local`: settings for one specific project
+2. `--global`: settings for all of our projects
+3. `--system`: settings for every user on this computer
+
+### What can we configure
+```shell
+git config --list
+```
+```output
+user.email=repl@datacamp.com
+user.name=Rep Loop
+core.editor=nano
+...
+```
+- `user.email` and `user.name` are needed by some commands, so setting these saves time.
+	- Both of these are global settings
+
+### Changing our settings
+We can use the following syntax to modify settings:
+```shell
+git config --global user.name User1
+
+git config --global user.name 'User 1' # if spaces
+
+git config --global user.email user1@email.com
+```
+
+### Using an alias
+- Set up an alias through global settings
+- Typically used to shorten a command
+
+For example to create an alias for committing files by executing `ci`:
+```shell
+git config --global alias.ci `commit -m`
+```
+We can now commit files using:
+```shell
+git ci 'Commit msg'
+```
+
+#### Creating a custom alias
+- We can create an alias for any command
+
+For example, if we often unstage files we can create:
+```shell
+git config --global alias.unstage 'reset HEAD'
+```
+
+### Tracking aliases
+Git helps us track our aliases in the `.gitconfig` file.
+
+We can access it like this:
+```shell
+git config --global --list
+```
+```output
+alias.ci=commit -m
+alias.unstage=reset HEAD
+```
+
+## Ignoring certain files
+We can instruct git to ignore specific files using the `.gitignore` file.
+
+For example, we could ignore any files with ext `.log`:
+```gitignore
+*.log
+```
+- Commonly ignored files: APIs, credentials, system files, software dependencies.
+
+
+# Branches
+Git uses **branches** to systematically track multiple versions of files.
+- In different branches some files might be the same while others different, others don't exist
+
+## Source and destination
+When merging two branches:
+- the commits are called parent commits
+	- `source` - the branch we want to merge **from**
+	- `destination` - the branch we want to merge **into**
+
+## Identifying branches
+We use `git branch` to see the branches in our repo.
+```shell
+git branch
+```
+```output
+  alter-report-title
+  main
+* summary-statistics
+```
+- * = current branch
+
+- **To create a new branch:** `git checkout -b branchname`
+```shell
+git checkout -b report
+```
+
+- **To see the difference between branches:**
+```shell
+git diff main summary-statistics
+```
+
+
+# Working with branches
+
+## Why do we need to switch branches?
+
+A branch in a Git repository is like a separate line of development. It allows you to work on new features, bug fixes, or experiments without affecting the main or default branch (often called `main` or `master`).
+- You can make changes in a branch, experiment, and make sure everything works as expected. If you're satisfied with your work, you can then merge the changes from your branch into the main branch, making those changes part of the official project.
+
+So, branches provide a way to isolate different streams of work, making it easier to manage changes and collaborate with others in a controlled manner. They also allow you to experiment without immediately affecting the main project, and once you're confident in your changes, you can integrate them back into the main branch.
+
+- Common to work on different components of a project simultaneously
+- Allows us to keep making progress concurrently
+
+### Switching branches
+- `git checkout -b new_branch` to create a new branch
+
+To switch branches, we use `checkout` but without a flag:
+```shell
+git checkout other_branch
+```
+
+### Why do we merge branches?
+- `main` = ground truth
+- Each branch should be for a specific task
+- Once the task is complete we should merge our changes into `main`
+
+#### Merging branches
+```shell
+git merge source destination
+# example test into main
+git merge test main
+```
+
+# Handling conflict
+
+# Branch Conflicts and Best Practices
+
+## Branch Conflicts
+
+In Git, a conflict between branches occurs when changes made in one branch conflict with changes made in another branch. This often happens when both branches modify the same part of a file, leading Git to be unsure of which changes to incorporate.
+
+## Best Practices to Avoid Conflicts
+
+1. **Frequent Pulls:**
+   - Regularly pull the latest changes from the main branch to your working branch to stay updated with the latest modifications.
+
+2. **Small, Focused Commits:**
+   - Break your work into small, focused commits. This reduces the chances of conflicting changes in a single commit.
+
+3. **Communication:**
+   - Communicate with your team to understand ongoing changes and coordinate efforts to minimize conflicts.
+
+4. **Use Feature Branches:**
+   - Create feature branches for specific tasks. This isolates your changes from the main branch until you're ready to merge.
+
+5. **Testing:**
+   - Test your changes thoroughly before merging. This helps catch issues early and reduces the chances of conflicts.
+
+6. **Git Pull with Rebase:**
+   - Instead of a standard `git pull`, consider using `git pull --rebase`. This integrates changes from the main branch more smoothly.
+
+7. **Git Merge Strategies:**
+   - Explore and understand different Git merge strategies, such as fast-forward, recursive, or octopus, and choose the one that suits your workflow.
+
+8. **Merge Locally First:**
+   - Merge the main branch into your feature branch locally before pushing changes. Resolve any conflicts locally to avoid pushing conflicted changes.
+
+By following these best practices, you can minimize the likelihood of conflicts between branches and streamline your collaborative development process.
