@@ -324,39 +324,119 @@ $ nano report.md
 
 ### --- Exercise 1 --- ###
 
+"""
+Create a Git repo called anxiety_workplace 
+in your current directory.
+$ git init anxiety_workplace
 
+Move into the new directory
+$ git anxiety_workplace
+
+Create a file called todo.txt containing 
+the following text: "TODO: Recap on existing research.".
+$ echo "TODO: Recap on existing research." > todo.txt
+
+"""
 
 
 ### --- Exercise 2 --- ###
 
+"""
+Turn your project into a git repo
+$ git init
+
+"""
 
 
 
 ### --- Exercise 3 --- ###
 
+"""
+Clone /home/john/repo, naming the cloned repo as john_anxiety_project.
+$ git clone /home/john/repo john_anxiety_project
+
+"""
 
 
 
 ### --- Exercise 4 --- ###
 
+"""
+Add the name john for the /home/john/repo repo
+$ git remote add john /home/john/repo
+
+List all remotes including their URL(s).
+$ git remote -v
+"""
 
 
 
 ### --- Exercise 5 --- ###
 
+"""
+Run a command to find out the name(s) of remote 
+repos linked to your project.
+$ git remote -v
+
+Gather contents from the remote origin repo
+into your local main branch.
+$ git fetch origin main
+
+Compare the remote repo with your local main branch.
+$ git diff origin main
+"""
 
 
 
 ### --- Exercise 6 --- ###
 
+"""
+Use a single command to fetch and merge 
+the origin repo into your local main branch.
+$ git pull origin main
+
+Append "No existing mental health diagnosis."
+to the end of protocol.md.
+$ echo "No existing mental health diagnosis." >> protocol.md
+
+Add protocol.md to the staging area
+$ git add protocol.md
+
+Make a commit with the log message
+"Updating eligibility criteria".
+$ git commit -m "Updating eligibility criteria"
+
+"""
 
 
 
 ### --- Exercise 7 --- ###
 
+"""
+Add the two updated files to the staging area.
+$ git add .
+
+Save changes with the log message
+"Budget inaccuracy added to the issue log and report".
+$ git commit -m "Budget inaccuracy added to the issue log and report"
+
+Update the origin remote with changes made in your local main branch
+$ git push origin main
+"""
 
 
 
 ### --- Exercise 8 --- ###
 
+"""
+Send changes in the local repo's main
+branch to the remote repo called origin.
+$ git push origin main
 
+Pull origin into the local main branch,
+entering a message of your choice inside the text editor.
+$ git pull origin main
+
+Try again to update the remote with changes made in the local main.
+$ git push origin main
+"""

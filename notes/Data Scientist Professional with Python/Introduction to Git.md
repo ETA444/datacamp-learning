@@ -437,3 +437,132 @@ In Git, a conflict between branches occurs when changes made in one branch confl
    - Merge the main branch into your feature branch locally before pushing changes. Resolve any conflicts locally to avoid pushing conflicted changes.
 
 By following these best practices, you can minimize the likelihood of conflicts between branches and streamline your collaborative development process.
+
+
+# Creating repos
+
+## New repo from scratch
+```shell
+# create the repo
+git init repo_name
+# change current dir to repo dir
+cd repo_name
+# check repo status 
+git status
+```
+
+## Converting existing project
+```shell
+# run git init in the current directory
+git init
+```
+
+# Working with remotes
+
+## Remote repos
+A **remote repo** is a repo in the cloud, i.e. hosted on a repo hosting service such as [GitHub](github.com).
+- Everything is backed up
+- Collaboration
+
+
+## Cloning repo's
+### Cloning locally
+```shell
+# basic syntax
+git clone path-to-project-directory
+# example
+git clone /repo/project/dir
+# example: with new name for repo
+git clone /repo/project/dir new_name
+```
+
+### Cloning a remote
+Remote repos are stored in an online hosting service e.g., GitHub, Bitbucket, or Gitlab.
+```shell
+git clone [URL]
+```
+
+For example:
+```shell
+git clone https://github.com/datacamp/project
+```
+
+## Identifying a remote
+- When cloning a repo Git remembers where the original was
+- Git stores a remote **tag** in the new repo's configuration
+```shell
+git remote
+```
+
+### Getting more information `-v`
+Adding the `-v` flag we trigger a verbose output:
+```shell
+git remote -v
+```
+
+
+## Creating a remote
+```shell
+git remote add george https://github.com/george_datacamp/repo
+```
+
+# Gathering from a remote
+## Fetching from a remote
+```shell
+git fetch repo_name branch_name
+```
+
+### Synchronizing content
+```shell
+git merge repo_name branch_name
+```
+
+### Pulling
+However, Git combines these two commands into a single command called `pull`:
+```shell
+git pull repo_name branch_name
+```
+
+# Pushing to a remote
+When we want to bring our local changes to the remote, we use `push`.
+- First we save changes locally
+- Then we `push`:
+```shell
+git push remote_repo_name local_branch
+```
+
+## Push/Pull Workflow
+
+### Push Workflow:
+
+1. **Commit Changes:**
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   ```
+
+2. **Push to Remote:**
+   ```bash
+   git push origin branch_name
+   ```
+
+### Pull Workflow:
+
+1. **Fetch Changes from Remote:**
+   ```bash
+   git fetch origin
+   ```
+
+2. **Merge Changes into Local Branch:**
+   ```bash
+   git merge origin/branch_name
+   ```
+
+   or, for a cleaner history:
+
+   ```bash
+   git pull origin branch_name
+   ```
+
+# Git Cheat Sheet
+Access the Git Cheat Sheet on [Datacamp](https://www.datacamp.com/cheat-sheet/git-cheat-sheet).
