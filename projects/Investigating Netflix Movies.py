@@ -1,3 +1,5 @@
+# Code for Datacamp Project: "Investigating Netflix Movies"
+
 # Importing pandas and matplotlib
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -49,7 +51,7 @@ def explore_df(df, method):
 print(explore_df.__doc__)
 
 # Get to know the data
-exploreDF(netflix_df, "all")
+explore_df(netflix_df, "all")
 
 # Tasks:
 
