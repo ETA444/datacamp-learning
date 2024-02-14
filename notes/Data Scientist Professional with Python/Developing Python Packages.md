@@ -1,6 +1,6 @@
 
 # Function and Class Documentation
-## 'pyment -w -o numpydoc *file*'
+## `pyment -w -o numpydoc *file*`
 
 **Pyment** is a tool used to generate template docstrings for *functions and classes*. 
 - **Ran from the terminal:** It is ran from the terminal as shown below.
