@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "1a2fce333b0331a4",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md",
+                "file": "notes/Data Scientist Professional with Python/Developing Python Packages.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md",
+                "file": "notes/Data Scientist Professional with Python/Developing Python Packages.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "notes/Data Scientist Professional with Python/Introduction to Git.md"
+                "file": "notes/Data Scientist Professional with Python/Developing Python Packages.md"
               }
             }
           }
@@ -147,8 +146,47 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e3065aaa6cc281d5",
+  "floating": {
+    "id": "2fcac920f9ccd94c",
+    "type": "floating",
+    "children": [
+      {
+        "id": "eb3e429acb2c8a97",
+        "type": "window",
+        "children": [
+          {
+            "id": "76382f6b8f2dfa97",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "8f44953e34076c37",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "notes/Data Scientist Professional with Python/Developing Python Packages.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 796,
+        "y": 202,
+        "width": 1025,
+        "height": 801,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "8f44953e34076c37",
   "lastOpenFiles": [
+    "notes/Data Scientist Professional with Python/Introduction to Git.md",
+    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
     "projects/Analyzing Student Mental Health.sql",
     "projects/Predicting Movie Rental Durations.py",
     "projects/Clustering Antarctic Penguin Species.py",
@@ -159,11 +197,9 @@
     "projects/Customer Analytics Preparing Data for Modeling.py",
     "projects/Analyzing Crime In Los Angeles.py",
     "projects/Visualizing the History of Nobel Prize Winners.py",
-    "projects/Exploring NYC Public School Test Result Scores.py",
     "notes/Data Scientist Professional with Python/Introduction to Git (conflicted).md",
     "notes/Data Scientist Professional with Python/Intermediate SQL.md",
     "notes/Data Scientist Professional with Python/Joining Data in SQL.md",
-    "notes/Data Scientist Professional with Python/Introduction to Git.md",
     "notes/Data Scientist Professional with Python/Joining Data in SQL (conflicted).md",
     "notes/Data Scientist Professional with Python/Introduction to SQL.md",
     "notes/Data Scientist Professional with Python/Machine Learning for Business.md",
@@ -173,7 +209,6 @@
     "notes/Data Scientist Professional with Python/Introduction to Regression with statsmodels in Python.md",
     "notes/Data Scientist Professional with Python/Working with Categorical Data in Python.md",
     "notes/Data Scientist Professional with Python/Working with Dates and Times in Python.md",
-    "notes/Data Scientist Professional with Python/Developing Python Packages.md",
     "notes/Data Scientist Professional with Python/Developing Python Packages (conflicted).md",
     "notes/Data Scientist Professional with Python/Preprocessing for Machine Learning in Python.md",
     "notes/Data Scientist Professional with Python/Intermediate Importing Data in Python.md",
